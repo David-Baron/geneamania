@@ -2,7 +2,7 @@
 
 include_once('parametres.php');
 
-// On est sur une page d'information, les fichiers de langues et autres sont dans un rÈpertoire parallËle
+// On est sur une page d'information, les fichiers de langues et autres sont dans un r√©pertoire parall√®le
 $deb = '';
 /*$suffixe_info = '_Info.php';
 if (strpos(my_self(),$suffixe_info) !== false) {
@@ -10,36 +10,40 @@ if (strpos(my_self(),$suffixe_info) !== false) {
 }
 */
 $langue = 'FR';
-$fic_lang = $deb.$rep_lang.'/lang_'.$langue.'.php';
+$fic_lang = $deb . $rep_lang . '/lang_' . $langue . '.php';
 if (file_exists($fic_lang)) include($fic_lang);
-$fic_lang_part = $deb.$rep_lang.'/lang_'.$langue.'_part.php';
+$fic_lang_part = $deb . $rep_lang . '/lang_' . $langue . '_part.php';
 if (file_exists($fic_lang_part)) include($fic_lang_part);
 
 $is_windows = substr(php_uname(), 0, 7) == "Windows" ? true : false;
 
 include_once($fic_icones);
 
-$ListeMoisRev = Array("vend&eacute;miaire",     //1
-						"brumaire", "frimaire", "niv&ocirc;se",
-						"pluvi&ocirc;se", "vent&ocirc;se", "germinal",
-						"flor&eacute;al", "prairial", "messidor",
-						"thermidor", "fructidor",
-						"sanculottides");         //13
-$Mois_Lib_rev_h = Array("vendÈmiaire","brumaire","frimaire","nivÙse",
-                     "pluviÙse","ventÙse","germinal",
-                     "florÈal","prairial","messidor","thermidor",
-                     "fructidor","sanculottides");
+$ListeMoisRev = array(
+	"vend√©miaire",     //1
+	"brumaire", "frimaire", "niv√¥se",
+	"pluvi√¥se", "vent√¥se", "germinal",
+	"flor√©al", "prairial", "messidor",
+	"thermidor", "fructidor",
+	"sanculottides"
+);         //13
+$Mois_Lib_rev_h = array(
+	"vend√©miaire", "brumaire", "frimaire", "niv√¥se",
+	"pluvi√¥se", "vent√¥se", "germinal",
+	"flor√©al", "prairial", "messidor", "thermidor",
+	"fructidor", "sanculottides"
+);
 
-$ListeAnneesRev = Array('I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV');
+$ListeAnneesRev = array('I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV');
 
-// Mois rÈvolutionnaires abrÈgÈs sous la forme de 3 lettres
+// Mois r√©volutionnaires abrÔøΩgÔøΩs sous la forme de 3 lettres
 $MoisRevAbr = "-BRUFLOFRIFRUGERMESNIVPLUPRATHEVNDVNTCOM";
 
 // Sous forme de 4 lettres
 $MoisRevAbr4 = 'VENDBRUMFRIMNIVOPLUVVENTGERMFLORPRAIMESSTHERFRUCSANC';
 
 $Natures_Docs = array(
-	"HTM" => $LG_html_file ,
+	"HTM" => $LG_html_file,
 	"IMG" => $LG_image_file,
 	"PDF" => $LG_pdf_file,
 	"TXT" => $LG_text_file,
@@ -47,51 +51,56 @@ $Natures_Docs = array(
 	"VID" => $LG_video_file
 );
 
-// // Connexion ‡ la base de donnÈes
+// // Connexion √† la base de donn√©es
 // function xconnexion($plantage="oui") {
-	// global $db,$util,$mdp,$serveur,$ndb,$nutil,$nmdp,$nserveur;
-	// $db      = $ndb;
-	// $util    = $nutil;
-	// $mdp     = $nmdp;
-	// $serveur = $nserveur;
-	// $mysqli = new mysqli($serveur, $util, $mdp, $db);
-	// $linkid = true;
-	// if ($plantage == "oui") {
-		// if ($mysqli->connect_errno) {
-			// $linkid = false;
-			// echo "Echec de la connexion ‡ MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
-		// }
-	// }
-	// return $linkid;
+// global $db,$util,$mdp,$serveur,$ndb,$nutil,$nmdp,$nserveur;
+// $db      = $ndb;
+// $util    = $nutil;
+// $mdp     = $nmdp;
+// $serveur = $nserveur;
+// $mysqli = new mysqli($serveur, $util, $mdp, $db);
+// $linkid = true;
+// if ($plantage == "oui") {
+// if ($mysqli->connect_errno) {
+// $linkid = false;
+// echo "Echec de la connexion √† MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+// }
+// }
+// return $linkid;
 // }
 
 // S'agit-il dune page d'information ?
-function is_info() {
+function is_info()
+{
 	global $suffixe_info;
-	if (strpos(my_self(),$suffixe_info) !== false) 
+	if (strpos(my_self(), $suffixe_info) !== false)
 		return true;
 	else
 		return false;
 }
 
-function nom_table($table) {
-  global $pref_tables;
-  return $pref_tables.$table;
+function nom_table($table)
+{
+	global $pref_tables;
+	return $pref_tables . $table;
 }
 
 // Ecrit une ligne dans un fichier texte
-function ecrire($fic,$texte) {
+function ecrire($fic, $texte)
+{
 	global $_fputs, $cr;
-	$_fputs($fic, $texte.$cr);
+	$_fputs($fic, $texte . $cr);
 }
 
 // Redimensionnemnt d'une image pour l'affichage
 // Conserve le rapport hauteur / largeur
-function redimage2($img_src,&$hauteur,&$largeur) {
+function redimage2($img_src, &$hauteur, &$largeur)
+{
 	// Lit les dimensions de l'image
 	//echo '<!-- '.$img_src.' -->';
 	$size = GetImageSize($img_src);
-	$src_w = $size[0]; $src_h = $size[1];
+	$src_w = $size[0];
+	$src_h = $size[1];
 	//echo '<!-- w :'.$src_w.' -->';
 	//echo '<!-- h :'.$src_h.' -->';
 	// Calcule le facteur de zoom mini
@@ -99,128 +108,131 @@ function redimage2($img_src,&$hauteur,&$largeur) {
 	$zoom_w = $largeur / $src_w;
 	$zoom = min($zoom_h, $zoom_w);
 	// Calcule les dimensions finales en fonction du facteur de zoom mini
-	$hauteur = $zoom < 1 ? round($src_h*$zoom) : $src_h;
-	$largeur = $zoom < 1 ? round($src_w*$zoom) : $src_w;
+	$hauteur = $zoom < 1 ? round($src_h * $zoom) : $src_h;
+	$largeur = $zoom < 1 ? round($src_w * $zoom) : $src_w;
 }
 
-// Affiche une image redimensionnÈe sur laquelle on peut cliquer
-// Affichage d'un message d'erreur si le fichier n'est pas trouvÈ
-function Aff_Img_Redim_Lien($image,$largeur,$hauteur,$id="idimg") {
-	global $chemin_images,$Icones;
+// Affiche une image redimensionn√©e sur laquelle on peut cliquer
+// Affichage d'un message d'erreur si le fichier n'est pas trouv√©
+function Aff_Img_Redim_Lien($image, $largeur, $hauteur, $id = "idimg")
+{
+	global $chemin_images, $Icones;
 	if (file_exists($image)) {
-		redimage2($image,$hauteur,$largeur);
+		redimage2($image, $hauteur, $largeur);
 		$texte = 'Cliquez sur l\'image pour l\'agrandir ';
-		echo '<a href="'.$image.'" target="_blank"><img id="'.$id.'" src="'.$image.'" '.
-			'border="0" alt="'.$texte.'" title="'.$texte.'" '.
-			'width="'.$largeur.'" height="'.$hauteur.'"/></a>';
-	}
-	else {
-		echo '<img id="ImageAbs'.$id.'" src="'.$chemin_images.$Icones['warning'].'" alt="Image non trouv&eacute;e">'.
-		     '&nbsp;Image '.$image.' non trouv&eacute;e';
+		echo '<a href="' . $image . '" target="_blank"><img id="' . $id . '" src="' . $image . '" ' .
+			'border="0" alt="' . $texte . '" title="' . $texte . '" ' .
+			'width="' . $largeur . '" height="' . $hauteur . '"/></a>';
+	} else {
+		echo '<img id="ImageAbs' . $id . '" src="' . $chemin_images . $Icones['warning'] . '" alt="Image non trouv√©e">' .
+			' Image ' . $image . ' non trouv√©e';
 	}
 }
 
-function Ret_Romain($Annee) {
+function Ret_Romain($Annee)
+{
 	global $ListeAnneesRev;
 	if ($Annee <= count($ListeAnneesRev)) {
-		if ($Annee != 0) return $ListeAnneesRev[$Annee-1];
+		if ($Annee != 0) return $ListeAnneesRev[$Annee - 1];
 		else return '?';
-	}
-	else {
+	} else {
 		return "???";
 	}
 }
 
-function Age_Mois($date_ref,$date_fin) {
+function Age_Mois($date_ref, $date_fin)
+{
 	$retour = '';
 	if ((strlen($date_ref) == 10) and (strlen($date_fin) == 10)) {
 		if (($date_ref[9] == 'L') and ($date_fin[9] == 'L')) {
-			$date1 = intval(substr($date_ref,0,4))*12+intval(substr($date_ref,4,2));
-			$date2 = intval(substr($date_fin,0,4))*12+intval(substr($date_fin,4,2));
-			if (substr($date_fin,6,2) < substr($date_ref,6,2)) {
+			$date1 = intval(substr($date_ref, 0, 4)) * 12 + intval(substr($date_ref, 4, 2));
+			$date2 = intval(substr($date_fin, 0, 4)) * 12 + intval(substr($date_fin, 4, 2));
+			if (substr($date_fin, 6, 2) < substr($date_ref, 6, 2)) {
 				--$date2;
 			}
-    		$retour = intval($date2-$date1);
-  		}
+			$retour = intval($date2 - $date1);
+		}
 	}
 	return $retour;
 }
 
-// DÈcompose un nombre de mois en annÈes / mois
-function Decompose_Mois($mois) {
+// D√©compose un nombre de mois en ann√©es / mois
+function Decompose_Mois($mois)
+{
 	if ($mois != '') {
 		$an = floor($mois / 12);
 		if ($an > 0) {
-			$xan = $an.' an'.pluriel($an);
-		}
-		else $xan = '';
+			$xan = $an . ' an' . pluriel($an);
+		} else $xan = '';
 		$m  = $mois % 12;
 		if ($m > 0) {
-			$xm = $m.' mois';
-			if ($an > 0) $xm = ' et '.$xm;
-		}
-		else $xm = '';
-		return $xan.$xm;
-	}
-	else return '';
+			$xm = $m . ' mois';
+			if ($an > 0) $xm = ' et ' . $xm;
+		} else $xm = '';
+		return $xan . $xm;
+	} else return '';
 }
 
-function Age_Annees_Mois($date_ref,$date_fin) {
-	if ((strlen($date_ref)==10) and (strlen($date_fin)==10) and ($date_ref[9] == 'L') and ($date_fin[9] == 'L')) {
-		$mois = Age_Mois($date_ref,$date_fin);
+function Age_Annees_Mois($date_ref, $date_fin)
+{
+	if ((strlen($date_ref) == 10) and (strlen($date_fin) == 10) and ($date_ref[9] == 'L') and ($date_fin[9] == 'L')) {
+		$mois = Age_Mois($date_ref, $date_fin);
 		$x = Decompose_Mois($mois);
 		return $x;
-	}
-	else return '';
+	} else return '';
 }
 
-function lect_sql($sql) {
+function lect_sql($sql)
+{
 	global $aff_req, $connexion, $nb_req_ex;
 	if (!isset($nb_req_ex)) $nb_req_ex = 0;
 	$nb_req_ex++;
-	if ($aff_req) echo 'Requ&ecirc;te : '.$sql.'<br />';
+	if ($aff_req) echo 'Requ√™te : ' . $sql . '<br />';
 	try {
 		$res = $connexion->query($sql);
-	} catch(PDOException $ex) {
+	} catch (PDOException $ex) {
 		$err = $ex->getMessage();
-		echo 'Requ&ecirc;te en erreur : '.$sql.'<br />';
-		echo $err.'<br />';
-		if (strpos($err,'exist') !== false) {
-			echo 'Avez-vous bien suivi la procÈdure <a href="install.php">d\'installation</a>,&nbsp;<a href="lisezmoi.html">Cf. lisezmoi.html</a> ?';
+		echo 'Requ√™te en erreur : ' . $sql . '<br />';
+		echo $err . '<br />';
+		if (strpos($err, 'exist') !== false) {
+			echo 'Avez-vous bien suivi la procÔøΩdure <a href="install.php">d\'installation</a>, <a href="lisezmoi.html">Cf. lisezmoi.html</a> ?';
 		}
 	}
 	return $res;
 }
 
-function maj_sql($sql,$plantage=true) {
+function maj_sql($sql, $plantage = true)
+{
 	global $aff_req, $connexion, $enr_mod, $err;
-	if ($aff_req) echo 'Requ&ecirc;te : '.$sql.'<br />';
+	if ($aff_req) echo 'Requ√™te : ' . $sql . '<br />';
 	try {
 		$modif = $connexion->prepare($sql);
 		$res = $modif->execute();
 		$enr_mod = $modif->rowCount();
-	} catch(PDOException $e) {
+	} catch (PDOException $e) {
 		$res = false;
 		$err = $e->getMessage();
-		echo 'Requ&ecirc;te en erreur : '.$sql.'<br />';
-		echo $err.'<br />';
+		echo 'Requ√™te en erreur : ' . $sql . '<br />';
+		echo $err . '<br />';
 		if ($plantage) die;
 	}
 	return $res;
 }
 
 
-/* Retourne le contenu d'un champ caractËres avec interprÈtation */
-function Champ_car(&$enreg,$champ) {
+/* Retourne le contenu d'un champ caract√®res avec interpr√©tation */
+function Champ_car(&$enreg, $champ)
+{
 	$enreg[$champ] = my_html($enreg[$champ]);
 }
 
-// Codage des champs de type caractËre
-function Champs_car($res,$enreg) {
+// Codage des champs de type caract√®re
+function Champs_car($res, $enreg)
+{
 	$enreg2 = $enreg;
 
-	foreach($enreg as $key => $value)
-		echo $key.' ==> '.$value.'<br />';
+	foreach ($enreg as $key => $value)
+		echo $key . ' ==> ' . $value . '<br />';
 
 	while ($finfo = $res->fetch_field()) {
 		$type = $finfo->type;
@@ -228,85 +240,120 @@ function Champs_car($res,$enreg) {
 		if ($type == 'string')
 			$enreg2[$name] = my_html($enreg2[$name]);
 	}
-  return $enreg2;
+	return $enreg2;
 }
 
-/* Retourne un libellÈ en fonction du sexe */
-function Lib_sexe($libelle,$Sexe) {
+/* Retourne un libell√© en fonction du sexe */
+function Lib_sexe($libelle, $Sexe)
+{
 	switch ($Sexe) {
-		case 'm' : $LeLib = $libelle; break;
-		case 'f' : $LeLib = $libelle."e"; break;
-		default  : $LeLib = $libelle."(e)"; break;
+		case 'm':
+			$LeLib = $libelle;
+			break;
+		case 'f':
+			$LeLib = $libelle . "e";
+			break;
+		default:
+			$LeLib = $libelle . "(e)";
+			break;
 	}
 	return $LeLib;
 }
 
-function pluriel($nb) {
+function pluriel($nb)
+{
 	$plu = '';
 	if ($nb > 1) $plu = 's';
 	return $plu;
 }
 
-// Le nombre en paramËtre demande-t-il le pluriel ?
-function is_pluriel($nb) {
+// Le nombre en param√®tre demande-t-il le pluriel ?
+function is_pluriel($nb)
+{
 	$ret = false;
 	if ($nb > 1) $ret = true;
 	return $ret;
 }
-// Retourne la prÈcision d'une date, stockÈe en position 9
-function Etent_Precision($LaDate) {
+// Retourne la pr√©cision d'une date, stock√©e en position 9
+function Etent_Precision($LaDate)
+{
 	global $Affiche_Annee, $Environnement, $est_cnx, $LG_year, $LG_day;
 	$ret = '';
 	if (($Affiche_Annee == 'O') and ($Environnement == 'I') and (!$est_cnx)) {
 		switch ($LaDate[9]) {
-			case 'E' : $ret = $LG_year['ca']; break;
-			case 'L' : $ret = $LG_year['on']; break;
-			case 'A' : $ret = $LG_year['bf']; break;
-			case 'P' : $ret = $LG_year['af']; break;
+			case 'E':
+				$ret = $LG_year['ca'];
+				break;
+			case 'L':
+				$ret = $LG_year['on'];
+				break;
+			case 'A':
+				$ret = $LG_year['bf'];
+				break;
+			case 'P':
+				$ret = $LG_year['af'];
+				break;
 		}
-	}
-	else {
+	} else {
 		switch ($LaDate[9]) {
-			case 'E' : $ret = $LG_day['ca']; break;
-			case 'L' : $ret = $LG_day['on']; break;
-			case 'A' : $ret = $LG_day['bf']; break;
-			case 'P' : $ret = $LG_day['af']; break;
+			case 'E':
+				$ret = $LG_day['ca'];
+				break;
+			case 'L':
+				$ret = $LG_day['on'];
+				break;
+			case 'A':
+				$ret = $LG_day['bf'];
+				break;
+			case 'P':
+				$ret = $LG_day['af'];
+				break;
 		}
 	}
-	return my_html($ret).' ';
+	return my_html($ret) . ' ';
 }
 
 // Retourne une date pour un export CSV
-function Retourne_Date_CSV($la_date) {
+function Retourne_Date_CSV($la_date)
+{
 	$ret = '';
 	if (strlen($la_date) == 10) {
 		switch ($la_date[9]) {
-			case 'E' : $pre = 'ca'; break;
-			case 'L' : $pre = 'le'; break;
-			case 'A' : $pre = 'avant le'; break;
-			case 'P' : $pre = 'aprËs le'; break;
-			default  : $pre = ''; break;
+			case 'E':
+				$pre = 'ca';
+				break;
+			case 'L':
+				$pre = 'le';
+				break;
+			case 'A':
+				$pre = 'avant le';
+				break;
+			case 'P':
+				$pre = 'aprÔøΩs le';
+				break;
+			default:
+				$pre = '';
+				break;
 		}
-		$ret = $pre . ';' . substr($la_date,6,2). '/' . substr($la_date,4,2). '/' . substr($la_date,0,4) . ';' . substr($la_date,8,1);
-	}
-	else $ret = ';;';
+		$ret = $pre . ';' . substr($la_date, 6, 2) . '/' . substr($la_date, 4, 2) . '/' . substr($la_date, 0, 4) . ';' . substr($la_date, 8, 1);
+	} else $ret = ';;';
 	return $ret;
 }
 
 /* Lit l'environnement en cours : Local ou Internet */
-function Lit_Env() {
-	global $db,$linkid,
-		$Lettre_B,$Image_Fond,$coul_fond_table,
-		$Environnement,$Nom,$Version,$Adresse_Mail,
+function Lit_Env()
+{
+	global $db, $linkid,
+		$Lettre_B, $Image_Fond, $coul_fond_table,
+		$Environnement, $Nom, $Version, $Adresse_Mail,
 		$Image_Arbre_Asc, $Affiche_Mar_Arbre_Asc,
-		$Affiche_Annee,$Comportement,
-		$Degrade,$Image_Barre,$Modif_Site,
-		$Coul_Lib,$Coul_Val,$Coul_Bord,$Coul_Paires,$Coul_Impaires,
+		$Affiche_Annee, $Comportement,
+		$Degrade, $Image_Barre, $Modif_Site,
+		$Coul_Lib, $Coul_Val, $Coul_Bord, $Coul_Paires, $Coul_Impaires,
 		$Pivot_Masquage,
-		$Image_Index,$font_pdf, $coul_pdf,
+		$Image_Index, $font_pdf, $coul_pdf,
 		$Base_Vide,
-		$connexion, $def_enc
-		;
+		$connexion, $def_enc;
 	$Acces = 0;
 	include('connexion_inc.php');
 	if ($ndb != '') {
@@ -315,7 +362,7 @@ function Lit_Env() {
 		$mdp     = $nmdp;
 		$serveur = $nserveur;
 		$aj_charset = '';
-		if ($def_enc == 'UTF-8') 
+		if ($def_enc == 'UTF-8')
 			$aj_charset = ';charset=utf8';
 		try {
 			$connexion = new PDO("mysql:host=$serveur;dbname=$db$aj_charset", $util, $mdp);
@@ -328,13 +375,13 @@ function Lit_Env() {
 			//$con = mysql_connect('localhost', 'user', 'pass');
 			//mysql_select_db('encoding_test', $con);
 			//mysql_set_charset('utf8', $con);			$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  // Affiche les erreurs ...
-			if ($res = lect_sql('select * from '.nom_table('general'))) {
+			if ($res = lect_sql('select * from ' . nom_table('general'))) {
 				if ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
 					$Acces = 1;
 					$Lettre_B = $enreg['Lettre_B'];
-					if ($Lettre_B != '') $Lettre_B = 'lettres/'.$Lettre_B;
+					if ($Lettre_B != '') $Lettre_B = 'lettres/' . $Lettre_B;
 					else                 $Lettre_B = '-';
-					$Image_Fond = 'fonds/'.$enreg['Image_Fond'];
+					$Image_Fond = 'fonds/' . $enreg['Image_Fond'];
 					$coul_fond_table = $enreg['Coul_Fond_Table'];
 					$Nom = $enreg['Nom'];
 					$Version = $enreg['Version'];
@@ -346,7 +393,7 @@ function Lit_Env() {
 					$Comportement = $enreg['Comportement'];
 					$Degrade = $enreg['Degrade'];
 					$Image_Barre = $enreg['Image_Barre'];
-					if ($Image_Barre != '') $Image_Barre = 'fonds_barre/'.$Image_Barre;
+					if ($Image_Barre != '') $Image_Barre = 'fonds_barre/' . $Image_Barre;
 					$Modif_Site = $enreg['Date_Modification'];
 					$Coul_Lib = $enreg['Coul_Lib'];
 					$Coul_Val = $enreg['Coul_Val'];
@@ -357,24 +404,23 @@ function Lit_Env() {
 					if (isset($enreg['Image_Index'])) $Image_Index = $enreg['Image_Index'];
 					if (isset($enreg['Font_Pdf'])) $font_pdf = $enreg['Font_Pdf'];
 					if (isset($enreg['Coul_PDF'])) $coul_pdf = $enreg['Coul_PDF'];
-					if (isset($enreg['Base_Vide']))$Base_Vide = $enreg['Base_Vide'];
+					if (isset($enreg['Base_Vide'])) $Base_Vide = $enreg['Base_Vide'];
 				}
 			}
+		} catch (PDOException $ex) {
+			echo 'Echec de la connexion !' . $ex->getMessage();
+			echo 'V√©rifiez votre connexion via la page <a href="install.php">d\'installation</a>.<br />';
 		}
-		catch(PDOException $ex) {
-			echo 'Echec de la connexion !'.$ex->getMessage();
-			echo 'V&eacute;rifiez votre connexion via la page <a href="install.php">d\'installation</a>.<br />';
-		}
-	}
-	else {
-		echo 'Fichier de connexion non trouv&eacute;<br />';
+	} else {
+		echo 'Fichier de connexion non trouv√©<br />';
 	}
 	return $Acces;
 }
 
-// InsËre le bas de page
-function Insere_Bas($compl_entete) {
-	echo '<table cellpadding="0" width="100%">'."\n";
+// Ins√®re le bas de page
+function Insere_Bas($compl_entete)
+{
+	echo '<table cellpadding="0" width="100%">' . "\n";
 	echo '<tr>';
 	echo '<td align="right">';
 	if ($compl_entete != '') {
@@ -382,53 +428,55 @@ function Insere_Bas($compl_entete) {
 	}
 	$x = Affiche_Icones_Standard();
 	echo '</tr>';
-	echo '</table>'."\n";
+	echo '</table>' . "\n";
 }
 
-function Insere_Haut_texte ($titre) {
-	echo '</head>'."\n";
-	echo '<body vlink="#0000ff" link="#0000ff">'."\n";
-	echo '<table cellpadding="0" width="100%">'."\n";
-	echo '<tr>'."\n";
-	echo '<td align="center"><b>'.StripSlashes($titre).'</b></td>'."\n";
-	echo '</tr>'."\n";
-	echo '</table>'."\n";
+function Insere_Haut_texte($titre)
+{
+	echo '</head>' . "\n";
+	echo '<body vlink="#0000ff" link="#0000ff">' . "\n";
+	echo '<table cellpadding="0" width="100%">' . "\n";
+	echo '<tr>' . "\n";
+	echo '<td align="center"><b>' . StripSlashes($titre) . '</b></td>' . "\n";
+	echo '</tr>' . "\n";
+	echo '</table>' . "\n";
 }
 
-function Ligne_Body($aff_manuel=true) {
+function Ligne_Body($aff_manuel = true)
+{
 	global $chemin_images, $Image_Fond, $Icones, $offset_info;
 	$nom_manuel = 'Geneamania.pdf';
 	if (is_info()) {
-		$chemin = $offset_info.$chemin_images.$Image_Fond;
-		$chemin_manuel = $offset_info.$nom_manuel;
+		$chemin = $offset_info . $chemin_images . $Image_Fond;
+		$chemin_manuel = $offset_info . $nom_manuel;
 	} else {
-		$chemin = $chemin_images.$Image_Fond;
+		$chemin = $chemin_images . $Image_Fond;
 		$chemin_manuel = $nom_manuel;
 	}
 	if (($Image_Fond != 'fonds/-') and (file_exists($chemin))) {
-		echo '<body vlink="#0000ff" link="#0000ff" background="'.$chemin.'">'."\n";
-	}
-	else
-		echo '<body vlink="#0000ff" link="#0000ff">'."\n";
+		echo '<body vlink="#0000ff" link="#0000ff" background="' . $chemin . '">' . "\n";
+	} else
+		echo '<body vlink="#0000ff" link="#0000ff">' . "\n";
 	if ($aff_manuel) {
-		//echo Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Geneamania.pdf" target="_blank"','manuel',my_html('manuel GÈnÈamania')) . '<br />';
-		echo Affiche_Icone_Lien('href="'.$chemin_manuel.'" target="_blank"','manuel',my_html('manuel GÈnÈamania')) . '<br />';
+		//echo Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Geneamania.pdf" target="_blank"','manuel',my_html('manuel G√©n√©amania')) . '<br />';
+		echo Affiche_Icone_Lien('href="' . $chemin_manuel . '" target="_blank"', 'manuel', my_html('manuel G√©n√©amania')) . '<br />';
 	}
 }
 
-function Insere_Haut($titre,$compl_entete,$page,$param) {
+function Insere_Haut($titre, $compl_entete, $page, $param)
+{
 	global $chemin_images, $Image_Fond, $Insert_Compteur, $Environnement, $connexion;
-	echo '</head>'."\n";
+	echo '</head>' . "\n";
 	Ligne_Body(false);
-	echo '<table cellpadding="0" width="100%">'."\n";
-	echo '<tr>'."\n";
+	echo '<table cellpadding="0" width="100%">' . "\n";
+	echo '<tr>' . "\n";
 	echo '<td width="15%">';
-	aff_menu('D',$_SESSION['niveau']);
+	aff_menu('D', $_SESSION['niveau']);
 	echo '</td>';
-	// Version avec titre sur la mÍme ligne que les icones
-	echo '<td align="center">'."\n";
-	echo '<h1>'.StripSlashes($titre).'</h1>'."\n";
-	echo '</td>'."\n";
+	// Version avec titre sur la m√™me ligne que les icones
+	echo '<td align="center">' . "\n";
+	echo '<h1>' . StripSlashes($titre) . '</h1>' . "\n";
+	echo '</td>' . "\n";
 	echo '<td align="right">';
 	if ($compl_entete != '') echo $compl_entete;
 	Affiche_Icones_Standard();
@@ -444,42 +492,54 @@ function Insere_Haut($titre,$compl_entete,$page,$param) {
 		$adr_ip = getenv("REMOTE_ADDR");
 		$origin = AddSlashes(getenv("HTTP_REFERER"));
 		if ($Insert_Compteur) {
-			$entry = 'INSERT INTO '.nom_table('compteurs').' (date_acc,page,origine,adresse,parametres) '.
-					"VALUES('".date("Y-m-d H:i:s")."','".$page."','".$origin."','".$adr_ip."','".$param."')";
+			$entry = 'INSERT INTO ' . nom_table('compteurs') . ' (date_acc,page,origine,adresse,parametres) ' .
+				"VALUES('" . date("Y-m-d H:i:s") . "','" . $page . "','" . $origin . "','" . $adr_ip . "','" . $param . "')";
 			try {
 				$res = $connexion->exec($entry);
-			} catch(PDOException $ex) {
-				echo 'Requ&ecirc;te en erreur : '.$entry.'<br />';
-				echo $ex->getMessage().'<br />';
+			} catch (PDOException $ex) {
+				echo 'Requ√™te en erreur : ' . $entry . '<br />';
+				echo $ex->getMessage() . '<br />';
 			}
 		}
 	}
 }
 
-function Affiche_Icones_Standard() {
-  global $chemin_images,$Icones;
-  //echo '<a href="javascript:history.back()"><img src="'.$chemin_images.$Icones['previous'].'" alt="Page pr&eacute;c&eacute;dente" title="Page pr&eacute;c&eacute;dente" border="0"/></a>'."\n";
-  echo '<a href="'.Get_Adr_Base_Ref().'index.php"><img src="'.$chemin_images.$Icones['home'].'" alt="Accueil" title="Accueil" border="0"/></a>'."\n";
-  echo "</td>\n";
+function Affiche_Icones_Standard()
+{
+	global $chemin_images, $Icones;
+	//echo '<a href="javascript:history.back()"><img src="'.$chemin_images.$Icones['previous'].'" alt="Page pr√©c√©dente" title="Page pr√©c√©dente" border="0"/></a>'."\n";
+	echo '<a href="' . Get_Adr_Base_Ref() . 'index.php"><img src="' . $chemin_images . $Icones['home'] . '" alt="Accueil" title="Accueil" border="0"/></a>' . "\n";
+	echo "</td>\n";
 }
 
-//	Constitution du libellÈ du niveau des droits utilisateur
-function libelleNiveau($niveau) {
+//	Constitution du libell√© du niveau des droits utilisateur
+function libelleNiveau($niveau)
+{
 	switch ($niveau) {
-		case 'I' : $libelle = 'Invit&eacute;'; break;
-		case 'P' : $libelle = 'Privil&eacute;gi&eacute;'; break;
-		case 'C' : $libelle = 'Contributeur'; break;
-		case 'G' : $libelle = 'Gestionnaire'; break;
-		default:   $libelle = '';
+		case 'I':
+			$libelle = 'Invit√©';
+			break;
+		case 'P':
+			$libelle = 'Privil√©gi√©';
+			break;
+		case 'C':
+			$libelle = 'Contributeur';
+			break;
+		case 'G':
+			$libelle = 'Gestionnaire';
+			break;
+		default:
+			$libelle = '';
 	}
 	return $libelle;
 }
 
-//	----- ContrÙle du niveau de l'utilisateur
-//			Il faut avoir le niveau requis pour accÈder ‡ ce script
-//			Le paramËtre niveauRequis doit contenir G (gestionnaire), C (contributeur), P (privilÈgiÈ) ou I (invitÈ)
-function controle_utilisateur($niveauRequis) {
-	//	C"est le premier appel au contrÙle => droits d'invitÈ anonyme
+//	----- Contr√¥le du niveau de l'utilisateur
+//			Il faut avoir le niveau requis pour acc√©der √† ce script
+//			Le param√®tre niveauRequis doit contenir G (gestionnaire), C (contributeur), P (privil√©gi√©) ou I (invit√©)
+function controle_utilisateur($niveauRequis)
+{
+	//	C"est le premier appel au contr√¥le => droits d'invit√© anonyme
 	if (!isset($_SESSION['niveau'])) {
 		$_SESSION['nomUtilisateur']  = 'Anonyme';
 		$_SESSION['utilisateur']     = 'Anonyme';
@@ -490,125 +550,148 @@ function controle_utilisateur($niveauRequis) {
 		$_SESSION['estContributeur'] = false;
 		$_SESSION['estGestionnaire'] = false;
 	}
-	//	vÈrification que les droits de l'utilisateur permettent d'accÈder ‡ la page demandÈe
+	//	v√©rification que les droits de l'utilisateur permettent d'acc√©der √† la page demand√©e
 	$num_niveau = 0;
 	$val_ret = false;
 	switch ($_SESSION['niveau']) {
-		case 'I' : $num_niveau = 1; break;
-		case 'P' : $num_niveau = 3; break;
-		case 'C' : $num_niveau = 5; break;
-		case 'G' : $num_niveau = 9; break;
+		case 'I':
+			$num_niveau = 1;
+			break;
+		case 'P':
+			$num_niveau = 3;
+			break;
+		case 'C':
+			$num_niveau = 5;
+			break;
+		case 'G':
+			$num_niveau = 9;
+			break;
 	}
-	switch ($niveauRequis){
-		case 'I' : if ($num_niveau >= 1) $val_ret = true; break;
-		case 'P' : if ($num_niveau >= 3) $val_ret = true; break;
-		case 'C' : if ($num_niveau >= 5) $val_ret = true; break;
-		case 'G' : if ($num_niveau >= 9) $val_ret = true; break;
+	switch ($niveauRequis) {
+		case 'I':
+			if ($num_niveau >= 1) $val_ret = true;
+			break;
+		case 'P':
+			if ($num_niveau >= 3) $val_ret = true;
+			break;
+		case 'C':
+			if ($num_niveau >= 5) $val_ret = true;
+			break;
+		case 'G':
+			if ($num_niveau >= 9) $val_ret = true;
+			break;
 	}
 	return $val_ret;
 }
 
-// Ecrit les balises meta de l'entÍte
-function Ecrit_meta($titre,$cont,$mots,$index_follow='IF') {
-	global $HTTP_REFERER,$Horigine, $avec_js, $chemin_images, $Image_Barre, $Images,
-		$Coul_Lib,$Coul_Val,$Coul_Bord,$Coul_Paires,$Coul_Impaires,$coul_fond_table;
-	echo '<title>'.my_html($titre).'</title>'."\n";
-	echo '<meta name="description" content="'.$cont.'"/>'."\n";
-	echo '<meta name="keywords" content="GÈnÈalogie, Genealogy, G&eacute;n&eacute;alogie, gratuit, logiciel, Geneamania, GÈnÈamania, G&eacute;n&eacute;amania';
-	if ($mots != '') echo ', '.$mots;
-	echo '"/>'."\n";
-	echo '<meta name="owner" content="support@geneamania.net"/>'."\n";
-	echo '<meta name="author" content="Jean-Luc Servin"/>'."\n";
-	echo '<meta http-equiv="content-LANGUAGE" content="French"/>'."\n";
-	echo '<meta http-equiv="content-TYPE" content="text/html; charset=iso-8859-1"/>'."\n";
+// Ecrit les balises meta de l'ent√™te
+function Ecrit_meta($titre, $cont, $mots, $index_follow = 'IF')
+{
+	global $HTTP_REFERER, $Horigine, $avec_js, $chemin_images, $Image_Barre, $Images,
+		$Coul_Lib, $Coul_Val, $Coul_Bord, $Coul_Paires, $Coul_Impaires, $coul_fond_table;
+	echo '<title>' . my_html($titre) . '</title>' . "\n";
+	echo '<meta name="description" content="' . $cont . '"/>' . "\n";
+	echo '<meta name="keywords" content="G√©n√©alogie, Genealogy, G√©n√©alogie, gratuit, logiciel, Geneamania, G√©n√©amania, G√©n√©amania';
+	if ($mots != '') echo ', ' . $mots;
+	echo '"/>' . "\n";
+	echo '<meta name="owner" content="support@geneamania.net"/>' . "\n";
+	echo '<meta name="author" content="Jean-Luc Servin"/>' . "\n";
+	echo '<meta http-equiv="content-LANGUAGE" content="French"/>' . "\n";
+	// echo '<meta http-equiv="content-TYPE" content="text/html; charset=iso-8859-1"/>' . "\n";
+	echo '<meta http-equiv="content-TYPE" content="text/html; charset=UTF-8"/>' . "\n";
 	// Balises index et follow pour restreindre les robots ==> NOINDEX, NOFOLLOW
 	if ($index_follow != 'IF') {
 		$p1 = '';
 		$p2 = '';
 		if ($index_follow[0] == 'N') $p1 = 'NO';
 		if ($index_follow[1] == 'N') $p2 = 'NO';
-	  	echo '<meta name="robots" content="'.$p1.'INDEX, '.$p2.'FOLLOW"/>'."\n";
+		echo '<meta name="robots" content="' . $p1 . 'INDEX, ' . $p2 . 'FOLLOW"/>' . "\n";
 	}
-	echo '<meta name="REVISIT-AFTER" content="7 days"/>'."\n";
-	include ('divers_styles.css');
+	echo '<meta name="REVISIT-AFTER" content="7 days"/>' . "\n";
+	include('divers_styles.css');
 
-  if (isset($_SERVER['HTTP_REFERER']))
-    $HTTP_REFERER = $_SERVER['HTTP_REFERER'];
-  // La premiËre fois, Horigine n'est pas renseignÈe...
-  if ($Horigine == '') $Horigine = $HTTP_REFERER;
-  if ($Horigine == '') $Horigine = Get_Adr_Base_Ref().'index.php';
+	if (isset($_SERVER['HTTP_REFERER']))
+		$HTTP_REFERER = $_SERVER['HTTP_REFERER'];
+	// La premi√®re fois, Horigine n'est pas renseign√©e...
+	if ($Horigine == '') $Horigine = $HTTP_REFERER;
+	if ($Horigine == '') $Horigine = Get_Adr_Base_Ref() . 'index.php';
 
-  // Cet indicateur permet de d'intÈgrer ou non le js
-  // Lors de la mise ‡ jour suite ‡ une saisie, l'intÈgration du js peut provoquer une erreur Cannot modify header information sur la commande header...
-  // Par dÈfaut, on demande le javascript
-  if (!isset($avec_js)) $avec_js = 1;
-  // Pas de javascript sur les pages d'information
-  if (is_info()) {
-  //if (strpos(my_self(),$suffixe_info) !== false) {
-  	$avec_js = false;
-  }
-  if ($avec_js) include('monSSG.js');
-  return 0;
+	// Cet indicateur permet de d'int√©grer ou non le js
+	// Lors de la mise √† jour suite √† une saisie, l'int√©gration du js peut provoquer une erreur Cannot modify header information sur la commande header...
+	// Par d√©faut, on demande le javascript
+	if (!isset($avec_js)) $avec_js = 1;
+	// Pas de javascript sur les pages d'information
+	if (is_info()) {
+		//if (strpos(my_self(),$suffixe_info) !== false) {
+		$avec_js = false;
+	}
+	if ($avec_js) include('monSSG.js');
+	return 0;
 }
 
 /* Etend une date */
-function Etend_date($LaDate, $forcage=false) {
-	global $Mois_Lib,$ListeMoisRev,$ListeAnneesRev,$Affiche_Annee, $Environnement, $est_cnx,
-			$Premium, $Pivot_Masquage, $SiteGratuit, $langue, $LG_first;
+function Etend_date($LaDate, $forcage = false)
+{
+	global $Mois_Lib, $ListeMoisRev, $ListeAnneesRev, $Affiche_Annee, $Environnement, $est_cnx,
+		$Premium, $Pivot_Masquage, $SiteGratuit, $langue, $LG_first;
 	$long_date = strlen($LaDate);
 	if (($LaDate != '') and ($long_date == 10)) {
 		$date_retour = $LaDate;
-		$annee = substr($LaDate,0,4);
-		// Date grÈgorienne classique e.g. 19330302GL
+		$annee = substr($LaDate, 0, 4);
+		// Date gr√©gorienne classique e.g. 19330302GL
 		if ($LaDate[8] == 'G') {
 			$precision = Etent_Precision($LaDate);
-			$annee = substr($LaDate,0,4);
+			$annee = substr($LaDate, 0, 4);
 			if (($Affiche_Annee == 'O') and ($Environnement == 'I') and (!$est_cnx)) {
-				$date_retour = $precision.' '.$annee;
-			}
-			else {
-				$LeJour = substr($LaDate,6,2);
-				$LeMois = intval(substr($LaDate,4,2));
+				$date_retour = $precision . ' ' . $annee;
+			} else {
+				$LeJour = substr($LaDate, 6, 2);
+				$LeMois = intval(substr($LaDate, 4, 2));
 				if (($LaDate[9] == 'E') and ($LeJour == '01') and ($LeMois == '01')) {
-					$date_retour = $precision.' '.$annee;
-				}
-				else {
+					$date_retour = $precision . ' ' . $annee;
+				} else {
 					if ($LeJour == '01') $LeJour = $LG_first;
 					else {
-						if ($LeJour[0] == '0') $LeJour = substr($LeJour,1,1);
+						if ($LeJour[0] == '0') $LeJour = substr($LeJour, 1, 1);
 					}
 					switch ($langue) {
-						case 'FR' : $date_retour = $precision.$LeJour.' '.$Mois_Lib[$LeMois-1].' '.$annee; break;
-						case 'GB' : $date_retour = $precision.$LeJour.' of '.$Mois_Lib[$LeMois-1].' of '.$annee; break;
-						default: $date_retour = $precision.$LeJour.' '.$Mois_Lib[$LeMois-1].' '.$annee; break;
+						case 'FR':
+							$date_retour = $precision . $LeJour . ' ' . $Mois_Lib[$LeMois - 1] . ' ' . $annee;
+							break;
+						case 'GB':
+							$date_retour = $precision . $LeJour . ' of ' . $Mois_Lib[$LeMois - 1] . ' of ' . $annee;
+							break;
+						default:
+							$date_retour = $precision . $LeJour . ' ' . $Mois_Lib[$LeMois - 1] . ' ' . $annee;
+							break;
 					}
 				}
 			}
-    	}
-		// Date rÈvolutionnaire classique e.g. 17950821RL
+		}
+		// Date r√©volutionnaire classique e.g. 17950821RL
 		// Il faut faire la conversion inverse...
 		if ($LaDate[8] == 'R') {
 			// Calcul du nombre de jours de la date
-			$jd = gregoriantojd(substr($LaDate,4,2),substr($LaDate,6,2),substr($LaDate,0,4));
-			// On passe en date rÈvolutionnaire
-			$resu=jdtofrench($jd);
-			// On Ètend la date rÈvolutionnaire
-			$S1 = strpos($resu,'/');
-			$S2 = strrpos($resu,'/');
-			$LeMois = intval(substr($resu,0,$S1));
-			$LeJour = substr($resu,$S1+1,$S2-$S1-1);
+			$jd = gregoriantojd(substr($LaDate, 4, 2), substr($LaDate, 6, 2), substr($LaDate, 0, 4));
+			// On passe en date r√©volutionnaire
+			$resu = jdtofrench($jd);
+			// On √©tend la date r√©volutionnaire
+			$S1 = strpos($resu, '/');
+			$S2 = strrpos($resu, '/');
+			$LeMois = intval(substr($resu, 0, $S1));
+			$LeJour = substr($resu, $S1 + 1, $S2 - $S1 - 1);
 			if ($LeJour == '1') $LeJour = '1er';
-			$LAnnee = substr($resu,$S2+1,2);
+			$LAnnee = substr($resu, $S2 + 1, 2);
 			// On repasse en chiffres romains
 			$LAnnee = Ret_Romain($LAnnee);
 			if (($Affiche_Annee == 'O') and ($Environnement == 'I') and (!$est_cnx))
-				$date_retour = Etent_Precision($LaDate)." l'an ".$LAnnee;
+				$date_retour = Etent_Precision($LaDate) . " l'an " . $LAnnee;
 			else {
-				if ($LeMois != 0) $date_retour = Etent_Precision($LaDate).$LeJour.' '.$ListeMoisRev[$LeMois-1]." de l'an ".$LAnnee;
-				else $date_retour = Etent_Precision($LaDate).$LeJour.' ? '." de l'an ".$LAnnee;
+				if ($LeMois != 0) $date_retour = Etent_Precision($LaDate) . $LeJour . ' ' . $ListeMoisRev[$LeMois - 1] . " de l'an " . $LAnnee;
+				else $date_retour = Etent_Precision($LaDate) . $LeJour . ' ? ' . " de l'an " . $LAnnee;
 			}
 		}
-		// Masquage des dates rÈcentes en option
+		// Masquage des dates r√©centes en option
 		if (!$forcage) {
 			if ($Environnement == 'I') {
 				if (!$est_cnx) {
@@ -621,14 +704,14 @@ function Etend_date($LaDate, $forcage=false) {
 			}
 		}
 		return $date_retour;
-  	}
-	else {
+	} else {
 		return $LaDate;
 	}
 }
 
-// Fonction Ètendue d'affichage de date avec conversion des dates rÈvolutionnares
-function Etend_date_2($LaDate, $forcage=false) {
+// Fonction √©tendue d'affichage de date avec conversion des dates r√©volutionnares
+function Etend_date_2($LaDate, $forcage = false)
+{
 	global $aff_rev, $chemin_images, $Icones;
 	$LaDate2 = Etend_date($LaDate);
 	$long_date = strlen($LaDate);
@@ -636,43 +719,50 @@ function Etend_date_2($LaDate, $forcage=false) {
 		if ($LaDate[8] == 'R') {
 			$LaDate[8] = 'G';
 			switch ($aff_rev) {
-				case 'I' : 	$texte_image = Etend_date($LaDate);
-							$LaDate2 .= '&nbsp;<img src="'.$chemin_images.$Icones['arrange']
-								.'" alt="'.$texte_image.'" title="'.$texte_image.'" border="0" />';
-							break;
-				case 'P' : $LaDate2 .= ' ('.Etend_date($LaDate).')'; break;
-				default  : break;
+				case 'I':
+					$texte_image = Etend_date($LaDate);
+					$LaDate2 .= ' <img src="' . $chemin_images . $Icones['arrange']
+						. '" alt="' . $texte_image . '" title="' . $texte_image . '" border="0" />';
+					break;
+				case 'P':
+					$LaDate2 .= ' (' . Etend_date($LaDate) . ')';
+					break;
+				default:
+					break;
 			}
 		}
 	}
 	return $LaDate2;
 }
 
-function Etend_Date_Inv($LaDate) {
+function Etend_Date_Inv($LaDate)
+{
 	global $Mois_Lib;
-	$s1 = strpos($LaDate,'/',1);
-	$s2 = strpos($LaDate,'/',$s1+1);
-	$j  = substr($LaDate,$s1+1,$s2-$s1-1);
-	$mois = substr($LaDate,0,$s1);
-	$a  = substr($LaDate,$s2+1,4);
+	$s1 = strpos($LaDate, '/', 1);
+	$s2 = strpos($LaDate, '/', $s1 + 1);
+	$j  = substr($LaDate, $s1 + 1, $s2 - $s1 - 1);
+	$mois = substr($LaDate, 0, $s1);
+	$a  = substr($LaDate, $s2 + 1, 4);
 	//echo "Dans date inv : ".$LaDate."==>".$s1."-".$s2."=".$j."-".$mois."-".$a."<br />";
-	$retour = $j." ".$Mois_Lib[intval($mois)-1]." ".$a;
+	$retour = $j . " " . $Mois_Lib[intval($mois) - 1] . " " . $a;
 	return $retour;
 }
 
-function Etend_Jour($Num_Jour) {
+function Etend_Jour($Num_Jour)
+{
 	global $JourFr;
 	return $JourFr[$Num_Jour];
 }
 
 //--------------------------------------------------------------------------
-// Retourne le pËre et la mËre : code retour 1 : trouvÈ, 0 : sinon
+// Retourne le p√®re et la m√®re : code retour 1 : trouv√©, 0 : sinon
 //--------------------------------------------------------------------------
-function Get_Parents($enfant,&$Pere,&$Mere,&$Rang) {
+function Get_Parents($enfant, &$Pere, &$Mere, &$Rang)
+{
 	$Pere = 0;
 	$Mere = 0;
 	$Rang = 0;
-	$sql = 'select Pere, Mere, Rang from '.nom_table('filiations').' where Enfant = '.$enfant.' limit 1';
+	$sql = 'select Pere, Mere, Rang from ' . nom_table('filiations') . ' where Enfant = ' . $enfant . ' limit 1';
 	if ($res = lect_sql($sql)) {
 		if ($parents = $res->fetch(PDO::FETCH_NUM)) {
 			$Pere = $parents[0];
@@ -684,169 +774,192 @@ function Get_Parents($enfant,&$Pere,&$Mere,&$Rang) {
 	}
 	if (($Pere != 0) or ($Mere != 0)) {
 		return 1;
-	}
-	else
+	} else
 		return 0;
 }
 
 //--------------------------------------------------------------------------
 // Teste si un nombre est pair
 //--------------------------------------------------------------------------
-function pair($var) {
-  return (($var & 1) == 0);
+function pair($var)
+{
+	return (($var & 1) == 0);
 }
 
 //--------------------------------------------------------------------------
 // Teste si un nombre est impair
 //--------------------------------------------------------------------------
-function impair($var) {
+function impair($var)
+{
 	return ($var % 2 == 1);
 }
 
-function Get_Adr_Base_Ref() {
-	global $Environnement,$RepGenSiteLoc,$RepGenSiteInt;
-	if ($Environnement == 'I') return $RepGenSiteInt ;
+function Get_Adr_Base_Ref()
+{
+	global $Environnement, $RepGenSiteLoc, $RepGenSiteInt;
+	if ($Environnement == 'I') return $RepGenSiteInt;
 	else return $RepGenSiteLoc;
 }
 
 // Donne le chemin de la font en fonction de l'environnement
-function Get_Font() {
-	global $Environnement,$FontLoc,$FontInt;
+function Get_Font()
+{
+	global $Environnement, $FontLoc, $FontInt;
 	if ($Environnement == 'I') return $FontInt;
 	else return $FontLoc;
 }
 
-function Ins_Ref_Pers($Reference,$new_window=false) {
+function Ins_Ref_Pers($Reference, $new_window = false)
+{
 	$target = '';
 	if ($new_window) $target = ' target="_blank"';
-	return 'href="'.Get_Adr_Base_Ref().'Fiche_Fam_Pers.php?Refer='.$Reference.'"'.$target;
+	return 'href="' . Get_Adr_Base_Ref() . 'Fiche_Fam_Pers.php?Refer=' . $Reference . '"' . $target;
 }
 
-// Appelle l'Èdition d'une personne
-function Ins_Edt_Pers($Reference,$new_window=false) {
+// Appelle l'√©dition d'une personne
+function Ins_Edt_Pers($Reference, $new_window = false)
+{
 	$target = '';
 	if ($new_window) $target = ' target="_blank"';
-	return 'href="'.Get_Adr_Base_Ref().'Edition_Personne.php?Refer='.$Reference.'"'.$target;
+	return 'href="' . Get_Adr_Base_Ref() . 'Edition_Personne.php?Refer=' . $Reference . '"' . $target;
 }
 
-// Appelle l'Èdition d'une union
-function Ins_Edt_Union($Reference,$Personne=0,$us='n') {
-  return 'href="'.Get_Adr_Base_Ref().'Edition_Union.php?Reference='.$Reference.'&amp;Personne='.$Personne.'&amp;us='.$us.'"';
+// Appelle l'√©dition d'une union
+function Ins_Edt_Union($Reference, $Personne = 0, $us = 'n')
+{
+	return 'href="' . Get_Adr_Base_Ref() . 'Edition_Union.php?Reference=' . $Reference . '&amp;Personne=' . $Personne . '&amp;us=' . $us . '"';
 }
 
-// Appelle l'Èdition d'une filiation
-function Ins_Edt_Filiation($Reference) {
-  return 'href="'.Get_Adr_Base_Ref().'Edition_Filiation.php?Refer='.$Reference.'"';
+// Appelle l'√©dition d'une filiation
+function Ins_Edt_Filiation($Reference)
+{
+	return 'href="' . Get_Adr_Base_Ref() . 'Edition_Filiation.php?Refer=' . $Reference . '"';
 }
 
 // Appel de la page fiche couple de type texte
-function Ins_Ref_Fam($Reference,$sortie="H") {
-	if ($sortie == 'H') return 'href="'.Get_Adr_Base_Ref().'Fiche_Couple_txt.php?Reference='.$Reference.'"';
-	else return 'href="'.Get_Adr_Base_Ref().'Fiche_Couple_txt.php?Reference='.$Reference.'&amp;pdf=O"';
+function Ins_Ref_Fam($Reference, $sortie = "H")
+{
+	if ($sortie == 'H') return 'href="' . Get_Adr_Base_Ref() . 'Fiche_Couple_txt.php?Reference=' . $Reference . '"';
+	else return 'href="' . Get_Adr_Base_Ref() . 'Fiche_Couple_txt.php?Reference=' . $Reference . '&amp;pdf=O"';
 }
 
 // Appel de la page fiche individuelle de type texte
-function Ins_Ref_Indiv($Reference,$sortie="H") {
-	if ($sortie == 'H') return 'href="'.Get_Adr_Base_Ref().'Fiche_Indiv_txt.php?Reference='.$Reference.'"';
-	else return 'href="'.Get_Adr_Base_Ref().'Fiche_Indiv_txt.php?Reference='.$Reference.'&amp;pdf=O"';
+function Ins_Ref_Indiv($Reference, $sortie = "H")
+{
+	if ($sortie == 'H') return 'href="' . Get_Adr_Base_Ref() . 'Fiche_Indiv_txt.php?Reference=' . $Reference . '"';
+	else return 'href="' . Get_Adr_Base_Ref() . 'Fiche_Indiv_txt.php?Reference=' . $Reference . '&amp;pdf=O"';
 }
 
-function Ins_Ref_Arbre($Reference) {
-	return 'href="'.Get_Adr_Base_Ref().'Arbre_Asc_Pers.php?Refer='.$Reference.'"';
+function Ins_Ref_Arbre($Reference)
+{
+	return 'href="' . Get_Adr_Base_Ref() . 'Arbre_Asc_Pers.php?Refer=' . $Reference . '"';
 }
 
-function Ins_Ref_Arbre_Desc($Reference) {
-	return 'href="'.Get_Adr_Base_Ref().'Arbre_Desc_Pers.php?Refer='.$Reference.'"';
+function Ins_Ref_Arbre_Desc($Reference)
+{
+	return 'href="' . Get_Adr_Base_Ref() . 'Arbre_Desc_Pers.php?Refer=' . $Reference . '"';
 }
 
-function Ins_Ref_Images($Reference,$Type_Ref) {
-  return 'href="'.Get_Adr_Base_Ref().'Liste_Images.php?Refer='.$Reference.'&amp;Type_Ref='.$Type_Ref.'"';
+function Ins_Ref_Images($Reference, $Type_Ref)
+{
+	return 'href="' . Get_Adr_Base_Ref() . 'Liste_Images.php?Refer=' . $Reference . '&amp;Type_Ref=' . $Type_Ref . '"';
 }
 
 // Affiche l'icone vers la chronologie d'une personne
-function Lien_Chrono_Pers($Reference) {
-	return Affiche_Icone_Lien('href="appelle_chronologie_personne.php?Refer='.$Reference.'"','time_line',LG_FFAM_CHRONOLOGIE)."\n";
+function Lien_Chrono_Pers($Reference)
+{
+	return Affiche_Icone_Lien('href="appelle_chronologie_personne.php?Refer=' . $Reference . '"', 'time_line', LG_FFAM_CHRONOLOGIE) . "\n";
 }
 
-// RÈfÈrence des images pour un ÈvËnement
-function Ins_Ref_ImagesE($Reference) {
-  return Ins_Ref_Images($Reference,'E');
+// R√©f√©rence des images pour un √©v√®nement
+function Ins_Ref_ImagesE($Reference)
+{
+	return Ins_Ref_Images($Reference, 'E');
 }
 
-// RÈfÈrence des images pour une personne
-function Ins_Ref_ImagesP($Reference) {
-  return Ins_Ref_Images($Reference,'P');
+// R√©f√©rence des images pour une personne
+function Ins_Ref_ImagesP($Reference)
+{
+	return Ins_Ref_Images($Reference, 'P');
 }
 
-// RÈfÈrence des images pour une ville
-function Ins_Ref_ImagesV($Reference) {
-  return Ins_Ref_Images($Reference,"V");
+// R√©f√©rence des images pour une ville
+function Ins_Ref_ImagesV($Reference)
+{
+	return Ins_Ref_Images($Reference, "V");
 }
 
-// RÈfÈrence des images pour une union
-function Ins_Ref_ImagesU($Reference) {
-  return Ins_Ref_Images($Reference,"U");
+// R√©f√©rence des images pour une union
+function Ins_Ref_ImagesU($Reference)
+{
+	return Ins_Ref_Images($Reference, "U");
 }
 
-function Presence_Images($Reference,$Type_Ref) {
+function Presence_Images($Reference, $Type_Ref)
+{
 	$cond_sup = '';
 	if ($_SESSION['niveau'] == 'I') $cond_sup = ' and Diff_Internet_Img = "O"';
-	$sql = 'select ident_image from '.nom_table('images').
-			' where Reference = '.$Reference.
-			' and Type_Ref = "'.$Type_Ref.'"'.
-			$cond_sup.
-			' limit 1';
+	$sql = 'select ident_image from ' . nom_table('images') .
+		' where Reference = ' . $Reference .
+		' and Type_Ref = "' . $Type_Ref . '"' .
+		$cond_sup .
+		' limit 1';
 	$res = lect_sql($sql);
 	if ($row = $res->fetch(PDO::FETCH_NUM)) return true;
 	else return false;
 }
 
-// PrÈsence d'images pour une personne
-function Presence_ImagesP($Reference) {
-  return Presence_Images($Reference,'P');
+// Pr√©sence d'images pour une personne
+function Presence_ImagesP($Reference)
+{
+	return Presence_Images($Reference, 'P');
 }
 
-// PrÈsence d'images pour une ville
-function Presence_ImagesV($Reference) {
-  return Presence_Images($Reference,'V');
+// Pr√©sence d'images pour une ville
+function Presence_ImagesV($Reference)
+{
+	return Presence_Images($Reference, 'V');
 }
 
-// PrÈsence d'images pour une union
-function Presence_ImagesU($Reference) {
-  return Presence_Images($Reference,'U');
+// Pr√©sence d'images pour une union
+function Presence_ImagesU($Reference)
+{
+	return Presence_Images($Reference, 'U');
 }
 
-// Retourne le libellÈ d'une subdivision
-function lib_subdivision($num_subdivision,$html='O') {
+// Retourne le libell√© d'une subdivision
+function lib_subdivision($num_subdivision, $html = 'O')
+{
 	global $Z_Mere;
 	$lib = '';
 	$Z_Mere = 0;
 	if ($num_subdivision != 0) {
-		$sql = 'select Nom_Subdivision, Zone_Mere from '.nom_table('subdivisions').' where identifiant_zone = '.$num_subdivision.' limit 1';
+		$sql = 'select Nom_Subdivision, Zone_Mere from ' . nom_table('subdivisions') . ' where identifiant_zone = ' . $num_subdivision . ' limit 1';
 		if ($res = lect_sql($sql)) {
 			if ($enr = $res->fetch(PDO::FETCH_NUM)) {
 				if ($html == 'O') $lib = my_html($enr[0]);
 				else $lib = $enr[0];
-			$Z_Mere = $enr[1];
+				$Z_Mere = $enr[1];
 			}
-		$res->closeCursor();
+			$res->closeCursor();
 		}
 	}
 	return $lib;
 }
 
-/* Retourne le libellÈ d'une ville */
-function lib_ville($num_ville,$html='O') {
-	global $Z_Mere,$Lat_V, $Long_V, $memo_num_ville, $lib_req_ville;
+/* Retourne le libell√© d'une ville */
+function lib_ville($num_ville, $html = 'O')
+{
+	global $Z_Mere, $Lat_V, $Long_V, $memo_num_ville, $lib_req_ville;
 	if (!isset($memo_num_ville)) $memo_num_ville = -1;
-	//echo 'MÈmoire 1 : '.number_format(memory_get_usage(), 0, ',', ' ') . "\n";
+	//echo 'M√©moire 1 : '.number_format(memory_get_usage(), 0, ',', ' ') . "\n";
 	if ($num_ville != $memo_num_ville) {
 		$lib = '';
 		$Z_Mere = 0;
 		$Lat_V = 0;
 		$Long_V = 0;
 		if ($num_ville != 0) {
-			$sql = 'select nom_ville, Zone_Mere, Latitude, Longitude from '.nom_table('villes').' where identifiant_zone = '.$num_ville.' limit 1';
+			$sql = 'select nom_ville, Zone_Mere, Latitude, Longitude from ' . nom_table('villes') . ' where identifiant_zone = ' . $num_ville . ' limit 1';
 			if ($res = lect_sql($sql)) {
 				if ($enr = $res->fetch(PDO::FETCH_NUM)) {
 					if ($html == 'O') $lib = my_html($enr[0]);
@@ -859,63 +972,26 @@ function lib_ville($num_ville,$html='O') {
 				unset($res);
 			}
 		}
-		//echo 'MÈmoire 2 : '.number_format(memory_get_usage(), 0, ',', ' ') . "\n";
+		//echo 'M√©moire 2 : '.number_format(memory_get_usage(), 0, ',', ' ') . "\n";
 		$memo_num_ville = $num_ville;
 		$lib_req_ville = $lib;
 		return $lib;
-	}
-	else return $lib_req_ville;
+	} else return $lib_req_ville;
 }
 
-// Retourne le libellÈ d'un dÈpartement
-function lib_departement($num_depart,$html='O') {
-  global $Z_Mere;
-  $lib = '';
-  $Z_Mere = 0;
-  if ($num_depart != 0) {
-    $sql = 'select Nom_Depart_Min, Zone_Mere from '.nom_table('departements').' where identifiant_zone = '.$num_depart.' limit 1';
-    if ($res = lect_sql($sql)) {
-      if ($enr = $res->fetch(PDO::FETCH_NUM)) {
-        if ($html == 'O') $lib = my_html($enr[0]);
-        else $lib = $enr[0];
-        $Z_Mere = $enr[1];
-      }
-      $res->closeCursor();
-    }
-  }
-  return $lib;
-}
-
-// Retourne le libellÈ d'une rÈgion
-function lib_region($num_region,$html='O') {
-  global $Z_Mere;
-  $lib = '';
-  $Z_Mere = 0;
-  if ($num_region != 0) {
-    $sql = 'select Nom_Region_Min, Zone_Mere from '.nom_table('regions').' where identifiant_zone = '.$num_region.' limit 1';
-    if ($res = lect_sql($sql)) {
-      if ($enr = $res->fetch(PDO::FETCH_NUM)) {
-        if ($html == 'O') $lib = my_html($enr[0]);
-        else $lib = $enr[0];
-        $Z_Mere = $enr[1];
-      }
-      $res->closeCursor();
-    }
-  }
-  return $lib;
-}
-
-// Retourne le libellÈ d'un pays
-function lib_pays($num_pays,$html='O') {
+// Retourne le libell√© d'un d√©partement
+function lib_departement($num_depart, $html = 'O')
+{
 	global $Z_Mere;
 	$lib = '';
 	$Z_Mere = 0;
-	if ($num_pays != 0) {
-		$sql = 'select Nom_Pays from '.nom_table('pays').' where identifiant_zone = '.$num_pays.' limit 1';
+	if ($num_depart != 0) {
+		$sql = 'select Nom_Depart_Min, Zone_Mere from ' . nom_table('departements') . ' where identifiant_zone = ' . $num_depart . ' limit 1';
 		if ($res = lect_sql($sql)) {
 			if ($enr = $res->fetch(PDO::FETCH_NUM)) {
-			if ($html == 'O') $lib = my_html($enr[0]);
-			else $lib = $enr[0];
+				if ($html == 'O') $lib = my_html($enr[0]);
+				else $lib = $enr[0];
+				$Z_Mere = $enr[1];
 			}
 			$res->closeCursor();
 		}
@@ -923,98 +999,141 @@ function lib_pays($num_pays,$html='O') {
 	return $lib;
 }
 
-/* Retourne le premier prÈnom */
-function UnPrenom($LesPrenoms) {
-	$pblanc = false;
-	if ($LesPrenoms != '') $pblanc = strpos($LesPrenoms, ' ', 1);
-	if ($pblanc === FALSE) return $LesPrenoms;		// Un seul prÈnom dans les prÈnoms transmis
-	else return substr($LesPrenoms,0,$pblanc);
+// Retourne le libell√© d'une r√©gion
+function lib_region($num_region, $html = 'O')
+{
+	global $Z_Mere;
+	$lib = '';
+	$Z_Mere = 0;
+	if ($num_region != 0) {
+		$sql = 'select Nom_Region_Min, Zone_Mere from ' . nom_table('regions') . ' where identifiant_zone = ' . $num_region . ' limit 1';
+		if ($res = lect_sql($sql)) {
+			if ($enr = $res->fetch(PDO::FETCH_NUM)) {
+				if ($html == 'O') $lib = my_html($enr[0]);
+				else $lib = $enr[0];
+				$Z_Mere = $enr[1];
+			}
+			$res->closeCursor();
+		}
+	}
+	return $lib;
 }
 
-// Affichage des donnÈes des fiches (personne, union, filiation)
-// Validation, crÈation, modification ; fs : affichage dans un fieldset
-function Affiche_Fiche($enreg,$fs=0) {
+// Retourne le libell√© d'un pays
+function lib_pays($num_pays, $html = 'O')
+{
+	global $Z_Mere;
+	$lib = '';
+	$Z_Mere = 0;
+	if ($num_pays != 0) {
+		$sql = 'select Nom_Pays from ' . nom_table('pays') . ' where identifiant_zone = ' . $num_pays . ' limit 1';
+		if ($res = lect_sql($sql)) {
+			if ($enr = $res->fetch(PDO::FETCH_NUM)) {
+				if ($html == 'O') $lib = my_html($enr[0]);
+				else $lib = $enr[0];
+			}
+			$res->closeCursor();
+		}
+	}
+	return $lib;
+}
+
+/* Retourne le premier pr√©nom */
+function UnPrenom($LesPrenoms)
+{
+	$pblanc = false;
+	if ($LesPrenoms != '') $pblanc = strpos($LesPrenoms, ' ', 1);
+	if ($pblanc === FALSE) return $LesPrenoms;		// Un seul pr√©nom dans les pr√©noms transmis
+	else return substr($LesPrenoms, 0, $pblanc);
+}
+
+// Affichage des donn√©es des fiches (personne, union, filiation)
+// Validation, cr√©ation, modification ; fs : affichage dans un fieldset
+function Affiche_Fiche($enreg, $fs = 0)
+{
 	$Statut_Fiche = $enreg['Statut_Fiche'];
 	if ($fs == 0) {
-		echo '<table width="85%" border="1">'."\n";
-		echo '<tr>'."\n";
+		echo '<table width="85%" border="1">' . "\n";
+		echo '<tr>' . "\n";
 		// Validation fiche
 		echo '<td colspan="2">Statut fiche';
 		bouton_radio('Statut_Fiche', 'O', LG_CHECKED_RECORD_SHORT, $Statut_Fiche == 'O' ? true : false);
 		bouton_radio('Statut_Fiche', 'N', LG_NOCHECKED_RECORD_SHORT, $Statut_Fiche == 'N' ? true : false);
 		bouton_radio('Statut_Fiche', 'I', LG_FROM_INTERNET, $Statut_Fiche == 'I' ? true : false);
-		echo '<input type="hidden" name="AStatut_Fiche" value="'.$Statut_Fiche.'">';
+		echo '<input type="hidden" name="AStatut_Fiche" value="' . $Statut_Fiche . '">';
 		echo '</td>';
-		echo '<td>Cr&eacute;ation : '.DateTime_Fr($enreg['Date_Creation']).'</td>'."\n";
-		echo '<td>Modification : '.DateTime_Fr($enreg['Date_Modification']).'</td>'."\n";
+		echo '<td>Cr√©ation : ' . DateTime_Fr($enreg['Date_Creation']) . '</td>' . "\n";
+		echo '<td>Modification : ' . DateTime_Fr($enreg['Date_Modification']) . '</td>' . "\n";
 		if ($Statut_Fiche == 'O') echo ' checked="checked"';
-		echo '/>Valid&eacute;e&nbsp;'."\n";
+		echo '/>Valid√©e ' . "\n";
 		echo '<input type="radio" name="Statut_Fiche" value="N"';
 		if ($Statut_Fiche == 'N') echo ' checked="checked"';
-		echo '</tr>'."\n";
-		echo '</table>'."\n";
-	}
-	else {
-		echo '<fieldset>'."\n";
+		echo '</tr>' . "\n";
+		echo '</table>' . "\n";
+	} else {
+		echo '<fieldset>' . "\n";
 		aff_legend('Statut');
 		bouton_radio('Statut_Fiche', 'O', LG_CHECKED_RECORD_SHORT, $Statut_Fiche == 'O' ? true : false);
 		bouton_radio('Statut_Fiche', 'N', LG_NOCHECKED_RECORD_SHORT, $Statut_Fiche == 'N' ? true : false);
 		bouton_radio('Statut_Fiche', 'I', LG_FROM_INTERNET, $Statut_Fiche == 'I' ? true : false);
-		echo '<input type="hidden" name="AStatut_Fiche" value="'.$Statut_Fiche.'"/>';
-		echo '</fieldset>'."\n";
-		echo '<fieldset>'."\n";
-		echo '<legend>Tra&ccedil;abilit&eacute;</legend>'."\n";
-		echo 'Cr&eacute;ation : '.DateTime_Fr($enreg['Date_Creation']).'<br />'."\n";
-		echo 'Modification : '.DateTime_Fr($enreg['Date_Modification'])."\n";
-		echo '</fieldset>'."\n";
+		echo '<input type="hidden" name="AStatut_Fiche" value="' . $Statut_Fiche . '"/>';
+		echo '</fieldset>' . "\n";
+		echo '<fieldset>' . "\n";
+		echo '<legend>Tra&ccedil;abilit√©</legend>' . "\n";
+		echo 'Cr√©ation : ' . DateTime_Fr($enreg['Date_Creation']) . '<br />' . "\n";
+		echo 'Modification : ' . DateTime_Fr($enreg['Date_Modification']) . "\n";
+		echo '</fieldset>' . "\n";
 	}
 }
 
-// Renvoie une datetime au format franÁais
+// Renvoie une datetime au format fran√ßais
 //2006-07-18 19:35:36
-function DateTime_Fr ($datetime) {
-  sscanf($datetime, "%4s-%2s-%2s %2s:%2s:%2s", $y, $mo, $d, $h, $mi, $s);
-  if ($d != '') return $d.'-'.$mo.'-'.$y.' '.$h.':'.$mi.':'.$s;
-  else          return '';
+function DateTime_Fr($datetime)
+{
+	sscanf($datetime, "%4s-%2s-%2s %2s:%2s:%2s", $y, $mo, $d, $h, $mi, $s);
+	if ($d != '') return $d . '-' . $mo . '-' . $y . ' ' . $h . ':' . $mi . ':' . $s;
+	else          return '';
 }
 
-// Renvoye l'image par dÈfaut si trouvÈe
-function Rech_Image_Defaut($Reference,$Type_Ref) {
-  global $titre_img;
-  $cond_sup = '';
-  if ($_SESSION['niveau'] == 'I') $cond_sup = ' and Diff_Internet_Img = "O"';
-  $Image = '';
-  $sqlI = 'select nom, Titre  from '.nom_table('images').
-          ' where Defaut = "O" and Type_Ref = "'.$Type_Ref.'" and Reference = '.$Reference.$cond_sup.' limit 1';
-  $resI = lect_sql($sqlI);
-  if ($enregI = $resI->fetch(PDO::FETCH_NUM)) {
-  	$Image = $enregI[0];
-  	$titre_img = $enregI[1];
-  }
-  $resI->closeCursor();
-  return $Image;
+// Renvoye l'image par d√©faut si trouv√©e
+function Rech_Image_Defaut($Reference, $Type_Ref)
+{
+	global $titre_img;
+	$cond_sup = '';
+	if ($_SESSION['niveau'] == 'I') $cond_sup = ' and Diff_Internet_Img = "O"';
+	$Image = '';
+	$sqlI = 'select nom, Titre  from ' . nom_table('images') .
+		' where Defaut = "O" and Type_Ref = "' . $Type_Ref . '" and Reference = ' . $Reference . $cond_sup . ' limit 1';
+	$resI = lect_sql($sqlI);
+	if ($enregI = $resI->fetch(PDO::FETCH_NUM)) {
+		$Image = $enregI[0];
+		$titre_img = $enregI[1];
+	}
+	$resI->closeCursor();
+	return $Image;
 }
 
-// RÈcupËre les commentaires pour un objet
+// R√©cup√®re les commentaires pour un objet
 // Types d'objets possibles :
-// D : dÈpartement
-// E : ÈvËnement
+// D : d√©partement
+// E : √©v√®nement
 // F : filiation
 // I : image
 // P : personne
-// R : rÈgion
+// R : r√©gion
 // U : union
 // V : ville
 // L : lien
-function Rech_Commentaire($Reference,$Type_Ref) {
-	global $Commentaire,$Diffusion_Commentaire_Internet;
+function Rech_Commentaire($Reference, $Type_Ref)
+{
+	global $Commentaire, $Diffusion_Commentaire_Internet;
 	$Result = false;
 	$Commentaire = '';
 	$Diffusion_Commentaire_Internet = 'N';
-	$Reference++; // Sinon, si la rÈfÈrence vaut 0, la requÍte n'est pas appelÈe :-(
+	$Reference++; // Sinon, si la r√©f√©rence vaut 0, la requ√™te n'est pas appel√©e :-(
 	if (($Reference != '') and ($Reference != -1)) {
-		$sqlN = 'select Note, Diff_Internet_Note from '.nom_table('commentaires').
-				' where Reference_Objet = '.--$Reference.' and Type_Objet = \''.$Type_Ref.'\' limit 1';
+		$sqlN = 'select Note, Diff_Internet_Note from ' . nom_table('commentaires') .
+			' where Reference_Objet = ' . --$Reference . ' and Type_Objet = \'' . $Type_Ref . '\' limit 1';
 		if ($resN = lect_sql($sqlN)) {
 			$comment = $resN->fetch(PDO::FETCH_NUM);
 			$Commentaire = $comment[0];
@@ -1026,61 +1145,60 @@ function Rech_Commentaire($Reference,$Type_Ref) {
 }
 
 // Affiche une personne et ses parents
-function Aff_Personne($enreg2,$Personne,$Decalage,$Texte,$sortie_pdf=false) {
-	global $chemin_images_util,$Commentaire,$Diffusion_Commentaire_Internet, $Pere, $Mere, $premier_lib_v,
-			$SiteGratuit, $Premium, $LG_Sosa_Number, $LG_Data_noavailable_profile
-			, $aff_note_old
-			;
+function Aff_Personne($enreg2, $Personne, $Decalage, $Texte, $sortie_pdf = false)
+{
+	global $chemin_images_util, $Commentaire, $Diffusion_Commentaire_Internet, $Pere, $Mere, $premier_lib_v,
+		$SiteGratuit, $Premium, $LG_Sosa_Number, $LG_Data_noavailable_profile, $aff_note_old;
 	if (!$sortie_pdf) $sortie = 'H';
 	else $sortie = 'P';
 	$image = '';
 	$ref_pers = $enreg2['Reference'];
-	
+
 	// On ira chercher les commentaires sur ville si non pdf et non texte
 	$modalite_ville_comment = false;
 	if ((!$sortie_pdf) and ($Texte != 'T')) $modalite_ville_comment = true;
-	
+
 	if (($_SESSION['estPrivilegie']) or ($enreg2['Diff_Internet'] == 'O')) {
 		if ($Texte != 'T') {
-			// Recherche de l prÈsence d'une image par dÈfaut
-			$image = Rech_Image_Defaut($ref_pers,'P');
+			// Recherche de l pr√©sence d'une image par d√©faut
+			$image = Rech_Image_Defaut($ref_pers, 'P');
 			if ($image != '') {
-				echo '<table><tr><td align="center" valign="middle">'."\n";
-				$image = $chemin_images_util.$image;
-				Aff_Img_Redim_Lien ($image,150,150,'img_'.$ref_pers);
-				echo '</td><td>&nbsp;</td><td>'."\n";
+				echo '<table><tr><td align="center" valign="middle">' . "\n";
+				$image = $chemin_images_util . $image;
+				Aff_Img_Redim_Lien($image, 150, 150, 'img_' . $ref_pers);
+				echo '</td><td> </td><td>' . "\n";
 			}
 		}
-		if ($Decalage) $tab = '&nbsp;&nbsp;&nbsp;';
+		if ($Decalage) $tab = '   ';
 		else $tab = '';
 
 		$sur = $enreg2['Surnom'];
-		if (($Texte != 'T') and ($sur != '')) echo my_html(LG_PERS_SURNAME).' : '.$sur.'<br />';
-		// Affichage du commentaire associÈ ‡ la personne
+		if (($Texte != 'T') and ($sur != '')) echo my_html(LG_PERS_SURNAME) . ' : ' . $sur . '<br />';
+		// Affichage du commentaire associ√© √† la personne
 		if ($Texte != 'T') {
-			$Existe_Commentaire = Rech_Commentaire($ref_pers,'P');
+			$Existe_Commentaire = Rech_Commentaire($ref_pers, 'P');
 			if (($Existe_Commentaire) and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
-				if ($aff_note_old) Div_Note_Old('ajout'.$ref_pers,'id_div_ajout'.$ref_pers,$Commentaire);
+				if ($aff_note_old) Div_Note_Old('ajout' . $ref_pers, 'id_div_ajout' . $ref_pers, $Commentaire);
 				else echo Div_Note($Commentaire);
 			}
 		}
-		Aff_NS($Personne,$sortie);
+		Aff_NS($Personne, $sortie);
 
 		$on_screen = false;
-		if ((!$sortie_pdf) and ($Texte != 'T')) 
+		if ((!$sortie_pdf) and ($Texte != 'T'))
 			$on_screen = true;
 		$Sexe = $enreg2['Sexe'];
-		HTML_ou_PDF($tab.lib_sexe_born($Sexe),$sortie);
-		// HTML_ou_PDF($tab.Lib_sexe('N&eacute;',$Sexe),$sortie);
+		HTML_ou_PDF($tab . lib_sexe_born($Sexe), $sortie);
+		// HTML_ou_PDF($tab.Lib_sexe('N√©',$Sexe),$sortie);
 		$Date_Nai = $enreg2['Ne_le'];
-		if ($on_screen) 
+		if ($on_screen)
 			$E_Date_Nai = Etend_date_2($Date_Nai);
-		else 
+		else
 			$E_Date_Nai = Etend_date($Date_Nai);
-		HTML_ou_PDF('&nbsp;'.$E_Date_Nai,$sortie);
+		HTML_ou_PDF(' ' . $E_Date_Nai, $sortie);
 		$ville = $enreg2['Ville_Naissance'];
 		if ($enreg2['Ville_Naissance'] <> 0) {
-			HTML_ou_PDF('&nbsp;'.LG_AT.'&nbsp;'.lib_ville_new($ville,'O',$modalite_ville_comment),$sortie);
+			HTML_ou_PDF(' ' . LG_AT . ' ' . lib_ville_new($ville, 'O', $modalite_ville_comment), $sortie);
 			if (($Texte != 'T') and (($premier_lib_v))) {
 				appelle_carte_osm();
 				if ($modalite_ville_comment) {
@@ -1090,163 +1208,178 @@ function Aff_Personne($enreg2,$Personne,$Decalage,$Texte,$sortie_pdf=false) {
 				}
 			}
 		}
-		HTML_ou_PDF('<br />'."\n",$sortie);
-		if (($enreg2['Decede_Le'] <> '') or ($enreg2['Ville_Deces'])<> 0) {
-			HTML_ou_PDF($tab.lib_sexe_dead($Sexe),$sortie);
+		HTML_ou_PDF('<br />' . "\n", $sortie);
+		if (($enreg2['Decede_Le'] <> '') or ($enreg2['Ville_Deces']) <> 0) {
+			HTML_ou_PDF($tab . lib_sexe_dead($Sexe), $sortie);
 			$Date_Dec = $enreg2['Decede_Le'];
-			if ($on_screen) 
+			if ($on_screen)
 				$E_Date_Dec = Etend_date_2($Date_Dec);
-			else 
+			else
 				$E_Date_Dec = Etend_date($Date_Dec);
-			HTML_ou_PDF('&nbsp;'.$E_Date_Dec,$sortie);
+			HTML_ou_PDF(' ' . $E_Date_Dec, $sortie);
 			$ville = $enreg2['Ville_Deces'];
 			if ($ville <> 0) {
-				HTML_ou_PDF('&nbsp;'.LG_AT.'&nbsp;'.lib_ville_new($ville,'O',$modalite_ville_comment),$sortie);
+				HTML_ou_PDF(' ' . LG_AT . ' ' . lib_ville_new($ville, 'O', $modalite_ville_comment), $sortie);
 				if (($Texte != 'T') and (($premier_lib_v))) {
-				appelle_carte_osm();
-				if ($modalite_ville_comment) {
-					if (($Commentaire != '') and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
-						echo Div_Note($Commentaire);
-					}
-				}
-				}
-			}
-			if (($Date_Nai != '') and ($Date_Dec != '')) {
-				$age = Age_Annees_Mois($Date_Nai,$Date_Dec);
-				if ($age != '') {
-					HTML_ou_PDF('&nbsp;('.LG_PERS_OLD.' : '.$age.')',$sortie);
-				}
-			}
-			HTML_ou_PDF('<br />'."\n",$sortie);
-		}
-		// Recherche des professions dans les ÈvËnements
-		$profession = '';
-		$sqlP = 'select Titre, p.Debut, p.Fin, e.Reference '.
-				'from '.nom_table('evenements').' e, '.nom_table('participe').' p '.
-				' where e.Code_Type = \'OCCU\''.
-				' and e.Reference =  p.Evenement'.
-				' and p.Personne = '.$ref_pers.
-				' order by p.Debut';
-		if ($resP = lect_sql($sqlP)) {
-			while ($enregP = $resP->fetch(PDO::FETCH_NUM)) {
-				// Recherche Èventuelle du commentaire associÈ ‡ la profession
-				$cmt  = '';
-				if (($modalite_ville_comment) and (!$sortie_pdf) and ((!$SiteGratuit) or ($Premium))) {		
-					if (Rech_Commentaire($enregP[3],'E')) {
+					appelle_carte_osm();
+					if ($modalite_ville_comment) {
 						if (($Commentaire != '') and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
-							$cmt = div_note($Commentaire);
-							//'&nbsp;<a href="#" class="info2">'.Affiche_Icone('note').'<span>'.$Commentaire.'</span></a>';
+							echo Div_Note($Commentaire);
 						}
 					}
 				}
-				$intervalle = Etend_2_dates($enregP[1] , $enregP[2]);
+			}
+			if (($Date_Nai != '') and ($Date_Dec != '')) {
+				$age = Age_Annees_Mois($Date_Nai, $Date_Dec);
+				if ($age != '') {
+					HTML_ou_PDF(' (' . LG_PERS_OLD . ' : ' . $age . ')', $sortie);
+				}
+			}
+			HTML_ou_PDF('<br />' . "\n", $sortie);
+		}
+		// Recherche des professions dans les √©v√®nements
+		$profession = '';
+		$sqlP = 'select Titre, p.Debut, p.Fin, e.Reference ' .
+			'from ' . nom_table('evenements') . ' e, ' . nom_table('participe') . ' p ' .
+			' where e.Code_Type = \'OCCU\'' .
+			' and e.Reference =  p.Evenement' .
+			' and p.Personne = ' . $ref_pers .
+			' order by p.Debut';
+		if ($resP = lect_sql($sqlP)) {
+			while ($enregP = $resP->fetch(PDO::FETCH_NUM)) {
+				// Recherche √©ventuelle du commentaire associ√© √† la profession
+				$cmt  = '';
+				if (($modalite_ville_comment) and (!$sortie_pdf) and ((!$SiteGratuit) or ($Premium))) {
+					if (Rech_Commentaire($enregP[3], 'E')) {
+						if (($Commentaire != '') and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
+							$cmt = div_note($Commentaire);
+							//' <a href="#" class="info2">'.Affiche_Icone('note').'<span>'.$Commentaire.'</span></a>';
+						}
+					}
+				}
+				$intervalle = Etend_2_dates($enregP[1], $enregP[2]);
 				if ($profession != '') $profession .= ', ';
 				$profession .= my_html($enregP[0]);
-				if ($intervalle != '') $profession .= ' ('.$intervalle.')';
+				if ($intervalle != '') $profession .= ' (' . $intervalle . ')';
 				$profession .= $cmt;
 			}
 			$resP->closeCursor();
 			unset($resP);
 		}
 
-		HTML_ou_PDF($tab.LG_PERS_OCCU.' : '.$profession.'<br />'."\n",$sortie);
+		HTML_ou_PDF($tab . LG_PERS_OCCU . ' : ' . $profession . '<br />' . "\n", $sortie);
 		if ($enreg2['Numero'] <> '') {
-			HTML_ou_PDF($tab.$LG_Sosa_Number.' : '.$enreg2['Numero'].'<br />'."\n",$sortie);
+			HTML_ou_PDF($tab . $LG_Sosa_Number . ' : ' . $enreg2['Numero'] . '<br />' . "\n", $sortie);
 		}
-		if (Get_Parents($Personne,$Pere,$Mere,$Rang)) {
-			HTML_ou_PDF($tab,$sortie);
+		if (Get_Parents($Personne, $Pere, $Mere, $Rang)) {
+			HTML_ou_PDF($tab, $sortie);
 			if (($Pere != 0) or ($Mere != 0)) {
 				switch ($Sexe) {
-					case 'm' : HTML_ou_PDF('Fils',$sortie); break;
-					case 'f' : HTML_ou_PDF('Fille',$sortie); break;
-					default  : HTML_ou_PDF('Enfant',$sortie); break;
+					case 'm':
+						HTML_ou_PDF('Fils', $sortie);
+						break;
+					case 'f':
+						HTML_ou_PDF('Fille', $sortie);
+						break;
+					default:
+						HTML_ou_PDF('Enfant', $sortie);
+						break;
 				}
 			}
 			$mys = my_self();
 			if ($Pere != 0) {
-				if (Get_Nom_Prenoms($Pere,$Nom,$Prenoms)) {
-					if ($Texte == 'T') HTML_ou_PDF(' de '.$Prenoms.'&nbsp;'.$Nom,$sortie);
-					else echo ' de <a href="'.$mys.'?Refer='.$Pere.'">'.$Prenoms.'&nbsp;'.$Nom.'</a>'."\n";
+				if (Get_Nom_Prenoms($Pere, $Nom, $Prenoms)) {
+					if ($Texte == 'T') HTML_ou_PDF(' de ' . $Prenoms . ' ' . $Nom, $sortie);
+					else echo ' de <a href="' . $mys . '?Refer=' . $Pere . '">' . $Prenoms . ' ' . $Nom . '</a>' . "\n";
 				}
 			}
 			if ($Mere != 0) {
-				if (Get_Nom_Prenoms($Mere,$Nom,$Prenoms)) {
-					if ($Pere != 0) HTML_ou_PDF(' et',$sortie);
-					if ($Texte == 'T') HTML_ou_PDF(' de '.$Prenoms.'&nbsp;'.$Nom,$sortie);
-					else echo ' de <a href="'.$mys.'?Refer='.$Mere.'">'.$Prenoms.'&nbsp;'.$Nom.'</a>'."\n";
+				if (Get_Nom_Prenoms($Mere, $Nom, $Prenoms)) {
+					if ($Pere != 0) HTML_ou_PDF(' et', $sortie);
+					if ($Texte == 'T') HTML_ou_PDF(' de ' . $Prenoms . ' ' . $Nom, $sortie);
+					else echo ' de <a href="' . $mys . '?Refer=' . $Mere . '">' . $Prenoms . ' ' . $Nom . '</a>' . "\n";
 				}
 			}
-			HTML_ou_PDF('<br />',$sortie);
+			HTML_ou_PDF('<br />', $sortie);
 
 			//  Documents lies a la filiation
-			if ($Texte != 'T') $x = Aff_Documents_Objet($Personne, 'F' , 'O');
-
+			if ($Texte != 'T') $x = Aff_Documents_Objet($Personne, 'F', 'O');
 		}
 		if (($Texte != 'T') and ($image != ''))
-		  echo '</td></tr></table>'."\n";
+			echo '</td></tr></table>' . "\n";
+	} else aff_erreur($LG_Data_noavailable_profile);
+}
+
+// Calcule la g√©n√©ration
+function Calc_Gener($numero)
+{
+	$numero = intval($numero);
+	if ($numero == 0) {
+		return '';
+	} else {
+		$nb     = 1;
+		$nb_gen = 1;
+		// on calcule le nombre de d√©part pour une g√©n√©ration jusqu'√† d√©passement
+		while ($nb <= $numero) {
+			$nb_gen++;
+			$nb *= 2;
+		}
+		// on redescend d'un cran pour calculer le c√¥t√©
+		--$nb_gen;
+		$nb /= 2;
+		$nb += ($nb / 2);
+		$cote = '';
+		if ($nb_gen > 1) {
+			($numero >= $nb) ? $cote = "maternel" : $cote = "paternel";
+			return "( " . $nb_gen . "√®me g√©n√©ration c√¥t√© " . $cote . " )";
+		} else
+			return "( 1 √®re g√©n√©ration )";
 	}
-	else aff_erreur($LG_Data_noavailable_profile);
 }
 
-// Calcule la gÈnÈration
-function Calc_Gener($numero) {
-  $numero = intval($numero);
-  if ($numero == 0) {
-    return '';
-  }
-  else {
-    $nb     = 1;
-    $nb_gen = 1;
-    // on calcule le nombre de dÈpart pour une gÈnÈration jusqu'‡ dÈpassement
-    while ($nb <= $numero) {
-      $nb_gen++;
-      $nb *= 2;
-    }
-    // on redescend d'un cran pour calculer le cÙtÈ
-    --$nb_gen;
-    $nb /= 2;
-    $nb += ($nb/2);
-    $cote = '';
-    if ($nb_gen > 1) {
-      ($numero >= $nb) ? $cote="maternel" : $cote="paternel";
-      return "( ".$nb_gen."&egrave;me g&eacute;n&eacute;ration c&ocirc;t&eacute; ".$cote." )";
-    }
-    else
-      return "( 1 &egrave;re g&eacute;n&eacute;ration )";
-  }
-}
-
-function bissextile($annee) {
+function bissextile($annee)
+{
 	if (($annee % 4) == 0) {
 		if (($annee % 100) == 0) {
 			if (($annee % 400) == 0) {
-				return(1);
-				} else {
-					return(0);
-				}
+				return (1);
 			} else {
-				return(1);
+				return (0);
 			}
 		} else {
-		return(0);
+			return (1);
+		}
+	} else {
+		return (0);
 	}
 }
 
-// Retourne l'annÈe d'une date prÈcise ;
-// utilisÈ dans les arbres ascendants et descendants et dans les listes de personnes
-function affiche_date($ladate) {
+// Retourne l'ann√©e d'une date pr√©cise ;
+// utilis√© dans les arbres ascendants et descendants et dans les listes de personnes
+function affiche_date($ladate)
+{
 	global $Environnement, $est_cnx, $Premium, $Pivot_Masquage, $SiteGratuit;
 	$retour = '?';
-	if (($ladate != '') and (strlen($ladate)== 10)) {
-		$annee = substr($ladate,0,4);
+	if (($ladate != '') and (strlen($ladate) == 10)) {
+		$annee = substr($ladate, 0, 4);
 		$preci = $ladate[9];
 		switch ($preci) {
-			case 'L' : $retour = $annee; break;
-			case 'E' : $retour = '~' . $annee; break;
-			case 'A' : $annee = strval($annee) + 1 ; $retour = '/' . $annee; break;
-			case 'P' : $annee = strval($annee) - 1 ; $retour = $annee . '/'; break;
+			case 'L':
+				$retour = $annee;
+				break;
+			case 'E':
+				$retour = '~' . $annee;
+				break;
+			case 'A':
+				$annee = strval($annee) + 1;
+				$retour = '/' . $annee;
+				break;
+			case 'P':
+				$annee = strval($annee) - 1;
+				$retour = $annee . '/';
+				break;
 		}
-		// Masquage des dates rÈcentes en option
+		// Masquage des dates r√©centes en option
 		if ($Environnement == 'I') {
 			if (!$est_cnx) {
 				if ((($SiteGratuit) and ($Premium)) or (!$SiteGratuit)) {
@@ -1261,48 +1394,53 @@ function affiche_date($ladate) {
 }
 
 // Retourne l'extension d'un fichier
-function Extension_Fic($fichier) {
-  $elements = explode(".", $fichier);
-  $extension = array_pop($elements);
-  return strtolower($extension);
+function Extension_Fic($fichier)
+{
+	$elements = explode(".", $fichier);
+	$extension = array_pop($elements);
+	return strtolower($extension);
 }
 
-// Recup de la variable passÈe dans l'URL : texte ou non
-function Dem_Texte() {
-  $texte = 0;
-  if (isset($_GET['texte'])) {
-    $texte = Recup_Variable('texte','C','O');
-    if ($texte === 'O') $texte = 1;
-  }
-  return $texte;
+// Recup de la variable pass√©e dans l'URL : texte ou non
+function Dem_Texte()
+{
+	$texte = 0;
+	if (isset($_GET['texte'])) {
+		$texte = Recup_Variable('texte', 'C', 'O');
+		if ($texte === 'O') $texte = 1;
+	}
+	return $texte;
 }
 
-// RÈcupËre une variable passÈe dans l'URL avec contrÙle du type
-// N : type numÈrique
-// C : type caractËre avec liste de valeurs autorisÈes ; si valeur non autorisÈe, on force la premiËre
+// R√©cup√©re une variable pass√©e dans l'URL avec contr√©le du type
+// N : type num√©rique
+// C : type caract√®re avec liste de valeurs autoris√©es ; si valeur non autoris√©e, on force la premi√®re
 // S : type chaine (string)
-function Recup_Variable($nom_var,$type_var,$Autorises="") {
-  $contenu = 0;
-  if (isset($_GET[$nom_var])) {
-    if (!get_magic_quotes_gpc()) $contenu = addslashes($_GET[$nom_var]);
-    else $contenu = $_GET[$nom_var];
-  }
-  if ($contenu) {
-    if ($type_var == 'N') {
-      if (!is_numeric($contenu)) $contenu = 0;
-    }
-    if ($type_var == 'C') {
-      if (strlen($contenu) > 1) $contenu = substr($contenu,0,1);
-      if (strpos($Autorises,$contenu) === false) $contenu = substr($Autorises,0,1);
-    }
-  }
-  return $contenu;
+function Recup_Variable($nom_var, $type_var, $Autorises = "")
+{
+	$contenu = 0;
+	if (isset($_GET[$nom_var])) {
+		/* if (!get_magic_quotes_gpc()) $contenu = addslashes($_GET[$nom_var]);
+		else $contenu = $_GET[$nom_var]; */
+		$contenu = $_GET[$nom_var];
+	}
+	if ($contenu) {
+		if ($type_var == 'N') {
+			if (!is_numeric($contenu)) $contenu = 0;
+		}
+		if ($type_var == 'C') {
+			if (strlen($contenu) > 1) $contenu = substr($contenu, 0, 1);
+			if (strpos($Autorises, $contenu) === false) $contenu = substr($Autorises, 0, 1);
+		}
+	}
+	return $contenu;
 }
 
-// SÈcurise une variable postÈe
-function Secur_Variable_Post($contenu,$long,$type_var) {
+// S√©curise une variable post√©e
+function Secur_Variable_Post($contenu, $long, $type_var)
+{
 	if ($type_var == 'S') {
-		if (strlen($contenu) > $long) $contenu = substr($contenu,0,strval($long));
+		if (strlen($contenu) > $long) $contenu = substr($contenu, 0, strval($long));
 	}
 	if ($type_var == 'N') {
 		if (!is_numeric($contenu)) $contenu = 0;
@@ -1310,62 +1448,67 @@ function Secur_Variable_Post($contenu,$long,$type_var) {
 	return $contenu;
 }
 
-function Erreur_DeCujus() {
-	global $chemin_images,$RepGenSite,$Icones;
-	echo '<img src="'.$chemin_images.$Icones['warning'].'" alt="Avertissement">&nbsp;';
-	echo 'De cujus non trouv&eacute;, veuillez attribuer le num&eacute;ro 1 &agrave; la personne de votre choix ;&nbsp;';
-	echo 'pour ce faire, passez par la <a href="'.$RepGenSite.'Liste_Pers.php?Type_Liste=P">liste par noms</a>.';
+function Erreur_DeCujus()
+{
+	global $chemin_images, $RepGenSite, $Icones;
+	echo '<img src="' . $chemin_images . $Icones['warning'] . '" alt="Avertissement"> ';
+	echo 'De cujus non trouv√©, veuillez attribuer le num√©ro 1 √† la personne de votre choix ; ';
+	echo 'pour ce faire, passez par la <a href="' . $RepGenSite . 'Liste_Pers.php?Type_Liste=P">liste par noms</a>.';
 	return 1;
 }
-function Affiche_Warning($Message) {
-	global $chemin_images,$Icones;
-	echo '<img src="'.$chemin_images.$Icones['warning'].'" alt="Avertissement"/>&nbsp;';
-	echo $Message."<br />\n";
+function Affiche_Warning($Message)
+{
+	global $chemin_images, $Icones;
+	echo '<img src="' . $chemin_images . $Icones['warning'] . '" alt="Avertissement"/> ';
+	echo $Message . "<br />\n";
 }
 
-function Affiche_Stop($Message) {
-	global $chemin_images,$Icones;
-	echo '<br />'.'<img src="'.$chemin_images.$Icones['stop'].'" alt="Stop"/>&nbsp;';
-	echo my_html($Message)."<br />\n";
+function Affiche_Stop($Message)
+{
+	global $chemin_images, $Icones;
+	echo '<br />' . '<img src="' . $chemin_images . $Icones['stop'] . '" alt="Stop"/> ';
+	echo my_html($Message) . "<br />\n";
 }
 
 // Entete de paragraphe
-function paragraphe($texte) {
+function paragraphe($texte)
+{
 	global $def_enc;
-  echo '<br />'."\n";
-  echo '<table width="100%" border="0" align="left" cellspacing="1" cellpadding="3">'."\n";
-  echo '<tr class="rupt_table">';
-  echo '<td><b>'.my_html($texte).'</b></td>';
-  echo '</tr>'."\n";
-  echo '</table>'."\n";
-  echo '<br /><br />'."\n";
-  return 0;
+	echo '<br />' . "\n";
+	echo '<table width="100%" border="0" align="left" cellspacing="1" cellpadding="3">' . "\n";
+	echo '<tr class="rupt_table">';
+	echo '<td><b>' . my_html($texte) . '</b></td>';
+	echo '</tr>' . "\n";
+	echo '</table>' . "\n";
+	echo '<br /><br />' . "\n";
+	return 0;
 }
 
 //  Lecture de la ville, du departement, de la region et du pays ==> arborescence en fonction du niveau
-function lectZone($idZone,$Niveau,$html='O') {
+function lectZone($idZone, $Niveau, $html = 'O')
+{
 	global $Z_Mere;
 	$retour = '';
-	// Lecture du nom de la ville et de la zone mËre
+	// Lecture du nom de la ville et de la zone m√®re
 	if ($Niveau >= 4) {
-		$lib_ville = lib_ville($idZone,$html);
+		$lib_ville = lib_ville($idZone, $html);
 		if ($lib_ville == '') return $retour;
 		$retour .= $lib_ville;
 		$idZone = $Z_Mere;
 		if ($idZone == 0) return $retour;
 	}
-	// Lecture du dÈpartement et de la zone mËre
+	// Lecture du d√©partement et de la zone m√®re
 	if ($Niveau >= 3) {
-		$lib_depart = lib_departement($idZone,$html);
+		$lib_depart = lib_departement($idZone, $html);
 		if ($lib_depart == '') return $retour;
 		if ($retour != '') $retour .= ', ';
 		$retour .= $lib_depart;
 		$idZone = $Z_Mere;
 		if ($idZone == 0) return $retour;
 	}
-	// Lecture de la rÈgion et de la zone mËre
+	// Lecture de la r√©gion et de la zone m√®re
 	if ($Niveau >= 2) {
-		$lib_region = lib_region($idZone,$html);
+		$lib_region = lib_region($idZone, $html);
 		if ($lib_region == '') return $retour;
 		if ($retour != '') $retour .= ', ';
 		$retour .= $lib_region;
@@ -1374,7 +1517,7 @@ function lectZone($idZone,$Niveau,$html='O') {
 	}
 	// Lecture du pays
 	if ($Niveau >= 1) {
-		$lib_pays = lib_pays($idZone,$html);
+		$lib_pays = lib_pays($idZone, $html);
 		if ($lib_pays == '') return $retour;
 		if ($retour != '') $retour .= ', ';
 		$retour .= $lib_pays;
@@ -1383,80 +1526,79 @@ function lectZone($idZone,$Niveau,$html='O') {
 }
 
 
-function Etend_2_dates($date1, $date2, $forcage=false) {
+function Etend_2_dates($date1, $date2, $forcage = false)
+{
 	$texte = '';
 	if ($date1 != $date2) {
-		if ($date1 != '') $texte .= 'd&eacute;but : '.Etend_date($date1, $forcage);
+		if ($date1 != '') $texte .= 'd√©but : ' . Etend_date($date1, $forcage);
 		if ($date2 != '') {
-			if ($date1 != '') $texte .= ', '	;
-			$texte .= 'fin : '.Etend_date($date2, $forcage);
+			if ($date1 != '') $texte .= ', ';
+			$texte .= 'fin : ' . Etend_date($date2, $forcage);
 		}
-	}
-	else {
-		if ($date1 != '') $texte .= 'd&eacute;but/fin : '.Etend_date($date1, $forcage);
+	} else {
+		if ($date1 != '') $texte .= 'd√©but/fin : ' . Etend_date($date1, $forcage);
 	}
 	return $texte;
 }
 
-// Affiche les ÈvËnements liÈs ‡ une personne
-// ParamËtre : rÈfÈrence de la personne, modification autorisÈe du lien
-function Aff_Evenements_Pers($numPers,$modif) {
-	global $Environnement, $chemin_images, $Icones, $Texte
-			, $Commentaire, $Diffusion_Commentaire_Internet, $aff_note_old
-			;			
+// Affiche les √©v√®nements li√©s √† une personne
+// Param√®tre : r√©f√©rence de la personne, modification autoris√©e du lien
+function Aff_Evenements_Pers($numPers, $modif)
+{
+	global $Environnement, $chemin_images, $Icones, $Texte, $Commentaire, $Diffusion_Commentaire_Internet, $aff_note_old;
 	$nom_div = 'id_div_eve';
 	$anc_lib = '';
-	$requete  = 'SELECT Libelle_Type, Titre, p.Debut AS dDebP , p.Fin AS dFinP , p.Evenement as refEve ,'.
-				' e.Identifiant_Zone as idZone , e.Identifiant_Niveau as Niveau, r.Code_Role ,'.
-				' p.Identifiant_zone as idZoneP, p. Identifiant_Niveau as NiveauP, '.
-				' Libelle_Role AS libRole, e.Debut AS dDebE , e.Fin AS dFinE'.
-				' FROM '.nom_table('evenements').' AS e ,'.
-						nom_table('participe').' AS p ,'.
-						nom_table('types_evenement').' AS t , '.
-						nom_table('roles').' AS r '.
-				' WHERE personne = ' . $numPers;
+	$requete  = 'SELECT Libelle_Type, Titre, p.Debut AS dDebP , p.Fin AS dFinP , p.Evenement as refEve ,' .
+		' e.Identifiant_Zone as idZone , e.Identifiant_Niveau as Niveau, r.Code_Role ,' .
+		' p.Identifiant_zone as idZoneP, p. Identifiant_Niveau as NiveauP, ' .
+		' Libelle_Role AS libRole, e.Debut AS dDebE , e.Fin AS dFinE' .
+		' FROM ' . nom_table('evenements') . ' AS e ,' .
+		nom_table('participe') . ' AS p ,' .
+		nom_table('types_evenement') . ' AS t , ' .
+		nom_table('roles') . ' AS r ' .
+		' WHERE personne = ' . $numPers;
 	if ($modif == 'N') $requete .= ' AND (e.Code_Type != "OCCU" or (p.Debut != "" and p.Debut is not null) or (p.Fin != "" and p.Fin is not null))';
-	$requete .= ' AND e.Code_Type = t.Code_Type AND p.Evenement = e.Reference AND p.Code_Role = r.Code_Role'.
-				' order by Libelle_Type, dDebE, dFinE';
+	$requete .= ' AND e.Code_Type = t.Code_Type AND p.Evenement = e.Reference AND p.Code_Role = r.Code_Role' .
+		' order by Libelle_Type, dDebE, dFinE';
 	$res = lect_sql($requete);
 	if ($res->rowCount()) {
-		// En mode lecture, on ne montre que s'il existe des ÈvËnements
+		// En mode lecture, on ne montre que s'il existe des √©v√®nements
 		if ($modif == 'N') {
-			echo 'Ev&egrave;nements et faits pour la personne&nbsp;'."\n";
-			$x = Oeil_Div('ajout_eve','Montrer les ÈvËnements',$nom_div);
+			echo 'Ev√®nements et faits pour la personne ' . "\n";
+			$x = Oeil_Div('ajout_eve', 'Montrer les √©v√®nements', $nom_div);
 		}
-		
-		$tab = '&nbsp;&nbsp;&nbsp;';
+
+		$tab = '   ';
 		while ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
 			$ref_evt = $enreg['refEve'];
-			// On affiche le cadre en rupture sur le libellÈ
+			// On affiche le cadre en rupture sur le libell√©
 			$nouv_lib = $enreg['Libelle_Type'];
 			if ($nouv_lib != $anc_lib) {
-				// On ferme la table ouverte prÈcÈdemment
+				// On ferme la table ouverte pr√©c√©demment
 				if ($anc_lib != '') echo '</table></fieldset>';
-				echo '  <fieldset><legend>'.my_html($nouv_lib).'</legend>'."\n";
+				echo '  <fieldset><legend>' . my_html($nouv_lib) . '</legend>' . "\n";
 				$anc_lib = $nouv_lib;
-				echo '<table width="95%" border="0">'."\n";
+				echo '<table width="95%" border="0">' . "\n";
 			}
-			echo '<tr>'."\n";
-			echo '<td width="90%"><a href="Fiche_Evenement.php?refPar='.$ref_evt.'">' . my_html($enreg['Titre']) . '</a>';
-			// Ajout des commentaires des ÈvËnements
+			echo '<tr>' . "\n";
+			echo '<td width="90%"><a href="Fiche_Evenement.php?refPar=' . $ref_evt . '">' . my_html($enreg['Titre']) . '</a>';
+			// Ajout des commentaires des √©v√®nements
 			if ($Texte != 'T') {
-				$Existe_Commentaire = Rech_Commentaire($ref_evt,'E');
+				$Existe_Commentaire = Rech_Commentaire($ref_evt, 'E');
 				if (($Existe_Commentaire) and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
-					if ($aff_note_old) Div_Note_Old('ajout'.$ref_evt,'id_div_ajout'.$ref_evt,$Commentaire);
+					if ($aff_note_old) Div_Note_Old('ajout' . $ref_evt, 'id_div_ajout' . $ref_evt, $Commentaire);
 					else echo Div_Note($Commentaire);
 				}
 			}
-			echo '</td>'."\n";
+			echo '</td>' . "\n";
 			if ($modif == 'O') {
-				echo '<td align="center">'.
-					Affiche_Icone_Lien('href="Edition_Lier_Eve.php?refPar='.$numPers.'&amp;refEvt=' .
-											$ref_evt .'&amp;refPers='.$numPers.'&amp;refRolePar=' .
-											$enreg['Code_Role'] . '"','fiche_edition','Modification du lien').
-					'</td>'."\n";
+				echo '<td align="center">' .
+					Affiche_Icone_Lien('href="Edition_Lier_Eve.php?refPar=' . $numPers . '&amp;refEvt=' .
+						$ref_evt . '&amp;refPers=' . $numPers . '&amp;refRolePar=' .
+						$enreg['Code_Role'] . '"', 'fiche_edition', 'Modification du lien') .
+					'</td>' . "\n";
 			}
-			echo '</tr><tr>'."\n";
+			echo '</tr><tr>' . "\n";
 			if ($modif == 'O') echo '<td colspan="2">';
 			else               echo '<td>';
 			$idZone  = $enreg['idZone'];
@@ -1464,17 +1606,17 @@ function Aff_Evenements_Pers($numPers,$modif) {
 			$dFinE   = $enreg['dFinE'];
 			$idZoneP = $enreg['idZoneP'];
 			$NiveauP = $enreg['NiveauP'];
-			
+
 			if (($idZone) or ($dDebE != '') or ($dFinE != '')) {
 				if (($dDebE != '') or ($dFinE != '')) {
-					$plage = Etend_2_dates($enreg['dDebE'] , $enreg['dFinE']);
-					echo $tab.'Dates de l\'&eacute;v&egrave;nement : ' . $plage."\n";
+					$plage = Etend_2_dates($enreg['dDebE'], $enreg['dFinE']);
+					echo $tab . 'Dates de l\'√©v√®nement : ' . $plage . "\n";
 				}
 				if ($idZone) {
 					if (($dDebE != '') or ($dFinE != '')) echo ' et lieu : ';
 					else                      echo 'Lieu : ';
-					$zone = LectZone($idZone,$enreg['Niveau']);
-					echo $zone."\n";
+					$zone = LectZone($idZone, $enreg['Niveau']);
+					echo $zone . "\n";
 				}
 			}
 			echo '</td></tr>';
@@ -1483,306 +1625,313 @@ function Aff_Evenements_Pers($numPers,$modif) {
 			$dDebP  = $enreg['dDebP'];
 			$dFinP  = $enreg['dFinP'];
 			if (($idZoneP) or (($libRole != '') and ($Code_Role != '')) or ($dDebP != '') or ($dFinP != '')) {
-				echo '<tr><td colspan="2">'."\n";
+				echo '<tr><td colspan="2">' . "\n";
 				$ligne = false;
 				if (($libRole != '') and ($Code_Role != '')) {
-					echo $tab.'R&ocirc;le : '.$libRole;
+					echo $tab . 'R√¥le : ' . $libRole;
 					$ligne = true;
 				}
 				if (($dDebP != '') or ($dFinP != '')) {
 					if ($ligne) echo '<br />';
-					echo $tab.'Dates de participation : '.Etend_2_dates($enreg['dDebP'] , $enreg['dFinP']);
-					$ligne = true;
-			}
-				if ($idZoneP) {
-					if ($ligne) echo '<br />';
-					echo $tab.'Lieu : '.LectZone($idZoneP,$NiveauP)."\n";
+					echo $tab . 'Dates de participation : ' . Etend_2_dates($enreg['dDebP'], $enreg['dFinP']);
 					$ligne = true;
 				}
-				echo '</td></tr>'."\n";
+				if ($idZoneP) {
+					if ($ligne) echo '<br />';
+					echo $tab . 'Lieu : ' . LectZone($idZoneP, $NiveauP) . "\n";
+					$ligne = true;
+				}
+				echo '</td></tr>' . "\n";
 			}
 		}
-		echo '</table></fieldset>'."\n";
+		echo '</table></fieldset>' . "\n";
 		$res->closeCursor();
 		unset($res);
 		if ($modif == 'N')
 			fin_div_cache($nom_div);
 	}
 	if ($modif == 'O') {
-		$lib = my_html('Ajouter un ÈvËnement existant');
-		echo '<br />'.$lib.'&nbsp;:&nbsp;' . Affiche_Icone_Lien('href="Edition_Lier_Eve.php?refPers='.$numPers.'&amp;refEvt=-1"','ajout',$lib)."\n";
+		$lib = my_html('Ajouter un √©v√®nement existant');
+		echo '<br />' . $lib . ' : ' . Affiche_Icone_Lien('href="Edition_Lier_Eve.php?refPers=' . $numPers . '&amp;refEvt=-1"', 'ajout', $lib) . "\n";
 	}
 }
 
-// Affiche les personnes liÈes ‡ une personne
-// ParamËtre : rÈfÈrence de la personne, modification autorisÈe du lien
-function Aff_Liens_Pers($numPers,$modif) {
-	global $chemin_images,$Icones;
+// Affiche les personnes li√©es √† une personne
+// Param√®tre : r√©f√©rence de la personne, modification autoris√©e du lien
+function Aff_Liens_Pers($numPers, $modif)
+{
+	global $chemin_images, $Icones;
 	$nom_div = 'id_div_liens';
-	$requete = 'SELECT Personne_1, Personne_2, rp.Code_Role AS codeRole,Libelle_Role,Debut,Fin, Principale '.
-					',Symetrie, Libelle_Inv_Role '.
-				'FROM ' .nom_table('relation_personnes') . ' AS rp,' . nom_table('roles') . ' AS r ' .
-				'WHERE rp.Code_Role = r.Code_Role ' .
-				'AND (rp.Personne_1 = '.$numPers.' OR rp.Personne_2 = '.$numPers.') ORDER by Debut';
+	$requete = 'SELECT Personne_1, Personne_2, rp.Code_Role AS codeRole,Libelle_Role,Debut,Fin, Principale ' .
+		',Symetrie, Libelle_Inv_Role ' .
+		'FROM ' . nom_table('relation_personnes') . ' AS rp,' . nom_table('roles') . ' AS r ' .
+		'WHERE rp.Code_Role = r.Code_Role ' .
+		'AND (rp.Personne_1 = ' . $numPers . ' OR rp.Personne_2 = ' . $numPers . ') ORDER by Debut';
 	$res = lect_sql($requete);
 	if ($res->rowCount()) {
-	// En mode lecture, on ne montre que s'il existe des liens
-	if ($modif == 'N') {
-		echo 'Liens avec d\'autres personnes&nbsp;'."\n";
-		$x = Oeil_Div('ajout_liens','Montrer les liens',$nom_div);
+		// En mode lecture, on ne montre que s'il existe des liens
+		if ($modif == 'N') {
+			echo 'Liens avec d\'autres personnes ' . "\n";
+			$x = Oeil_Div('ajout_liens', 'Montrer les liens', $nom_div);
+		}
+		while ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
+			$P1 = $enreg['Personne_1'];
+			$P2 = $enreg['Personne_2'];
+			$Symetrie = $enreg['Symetrie'];
+			$Principale = $enreg['Principale'];
+			$role = $enreg['Libelle_Role'];
+			if ($P1 == $numPers) {
+				$LaRef = $P2;
+				if (($Symetrie == 'N') and ($Principale == 'N')) $role = $enreg['Libelle_Inv_Role'];
+			} else {
+				$LaRef = $P1;
+				if (($Symetrie == 'N') and ($Principale == 'O')) $role = $enreg['Libelle_Inv_Role'];
+			}
+			//echo 'sym/princ : '.$Symetrie.'/'.$Principale.'<br />';
+
+			if (Get_Nom_Prenoms($LaRef, $Nom, $Prenoms)) {
+				echo '  <fieldset><legend>Avec ' . '<a ' . Ins_Ref_Pers($LaRef) . '>' . $Prenoms . ' ' . $Nom . '</a>' . '</legend>' . "\n";
+				echo '<table width="85%" border="0">' . "\n";
+				echo '<tr><td>R√¥le : ' . $role . '</td>' . "\n";
+				if ($modif == 'O') {
+					$lib = 'Modification du lien';
+					echo '<td rowspan="2" align="center" valign="middle"><a href="Edition_Lier_Pers.php?ref1=' . $enreg['Personne_1'] .
+						'&amp;ref2=' . $enreg['Personne_2'] . '&amp;orig=';
+					// De quelle personne vient-on ?
+					if ($numPers == $enreg['Personne_1']) echo '1';
+					else echo '2';
+					// Fin du lien
+					echo '&amp;role=' . $enreg['codeRole'] . '">' .
+						'<img src="' . $chemin_images . $Icones['fiche_edition'] . '" border="0" alt="' . $lib . '" title="' . $lib . '"></a></td>' . "\n";
+				}
+				echo '</tr>' . "\n";
+				$debut = $enreg['Debut'];
+				$fin   = $enreg['Fin'];
+				echo '<tr><td>Dates : ' . Etend_2_dates($debut, $fin) . '</td></tr>' . "\n";
+				echo '</table>' . "\n";
+				echo '</fieldset>' . "\n";
+			}
+		}
+		$res->closeCursor();
+		if ($modif == 'N') fin_div_cache($nom_div);
 	}
-	while ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
-		$P1 = $enreg['Personne_1'];
-		$P2 = $enreg['Personne_2'];
-		$Symetrie = $enreg['Symetrie'];
-		$Principale = $enreg['Principale'];
-		$role = $enreg['Libelle_Role'];
-		if ($P1 == $numPers) {
-			$LaRef = $P2;
-			if (($Symetrie == 'N') and ($Principale == 'N')) $role = $enreg['Libelle_Inv_Role'];
-		}
-		else {
-			$LaRef = $P1;
-			if (($Symetrie == 'N') and ($Principale == 'O')) $role = $enreg['Libelle_Inv_Role'];
-		}
-		//echo 'sym/princ : '.$Symetrie.'/'.$Principale.'<br />';
-
-		if (Get_Nom_Prenoms($LaRef,$Nom,$Prenoms)) {
-		echo '  <fieldset><legend>Avec '.'<a '.Ins_Ref_Pers($LaRef).'>'.$Prenoms.'&nbsp;'.$Nom.'</a>'.'</legend>'."\n";
-		echo '<table width="85%" border="0">'."\n";
-		echo '<tr><td>R&ocirc;le : '.$role.'</td>'."\n" ;
-		if ($modif == 'O') {
-			$lib = 'Modification du lien';
-			echo '<td rowspan="2" align="center" valign="middle"><a href="Edition_Lier_Pers.php?ref1='.$enreg['Personne_1'].
-										   '&amp;ref2='.$enreg['Personne_2'].'&amp;orig=';
-			// De quelle personne vient-on ?
-			if ($numPers == $enreg['Personne_1']) echo '1';
-			else echo '2';
-			// Fin du lien
-			echo '&amp;role='.$enreg['codeRole'].'">'.
-					'<img src="'.$chemin_images.$Icones['fiche_edition'].'" border="0" alt="'.$lib.'" title="'.$lib.'"></a></td>'."\n";
-		}
-		echo '</tr>'."\n";
-		$debut = $enreg['Debut'];
-		$fin   = $enreg['Fin'];
-		echo '<tr><td>Dates : '.Etend_2_dates($debut,$fin) . '</td></tr>'."\n";
-		echo '</table>'."\n";
-		echo '</fieldset>'."\n";
-	  }
-    }
-    $res->closeCursor();
-    if ($modif == 'N') fin_div_cache($nom_div);
-  }
-  if ($modif == 'O') {
-   	$lib = 'Ajouter un lien vers une personne';
-  	echo '<br />'.$lib.'&nbsp;:&nbsp;' .
-			Affiche_Icone_Lien('href="Edition_Lier_Pers.php?ref1='.$numPers.'&amp;ref2=-1"','ajout',$lib)."\n";
-  }
+	if ($modif == 'O') {
+		$lib = 'Ajouter un lien vers une personne';
+		echo '<br />' . $lib . ' : ' .
+			Affiche_Icone_Lien('href="Edition_Lier_Pers.php?ref1=' . $numPers . '&amp;ref2=-1"', 'ajout', $lib) . "\n";
+	}
 }
 
-// Affiche les ÈvËnements liÈs ‡ un objet
-// ParamËtre : rÈfÈrence de l'objet, type d'objet, modification autorisÈe du lien
-function Aff_Evenements_Objet($RefObjet,$TypeObjet,$modif) {
-  global $Environnement,$chemin_images,$Icones
-		, $LG_Add_Existing_Event;
-  $nom_div = 'id_div_eve_obj_'.$TypeObjet.$RefObjet;
-  $Lib_Type = lib_pfu($TypeObjet,true);
-  $requete  = 'SELECT Libelle_Type, Titre, e.Debut AS dDebE , e.Fin AS dFinE , c.Evenement as refEve ,'.
-              ' e.Identifiant_Zone as idZone , e.Identifiant_Niveau as Niveau '.
-              ' FROM '.nom_table('evenements').' AS e ,'.
-                       nom_table('concerne_objet').' AS c ,'.
-                       nom_table('types_evenement').' AS t '.
-              ' WHERE Reference_Objet = ' . $RefObjet.' and Type_Objet = \''.$TypeObjet.'\''.
-              ' AND e.Code_Type = t.Code_Type AND c.Evenement = e.Reference'.
-              ' order by Libelle_Type, dDebE, dFinE';
-  $res = lect_sql($requete);
+// Affiche les √©v√®nements li√©s √† un objet
+// Param√®tre : r√©f√©rence de l'objet, type d'objet, modification autoris√©e du lien
+function Aff_Evenements_Objet($RefObjet, $TypeObjet, $modif)
+{
+	global $Environnement, $chemin_images, $Icones, $LG_Add_Existing_Event;
+	$nom_div = 'id_div_eve_obj_' . $TypeObjet . $RefObjet;
+	$Lib_Type = lib_pfu($TypeObjet, true);
+	$requete  = 'SELECT Libelle_Type, Titre, e.Debut AS dDebE , e.Fin AS dFinE , c.Evenement as refEve ,' .
+		' e.Identifiant_Zone as idZone , e.Identifiant_Niveau as Niveau ' .
+		' FROM ' . nom_table('evenements') . ' AS e ,' .
+		nom_table('concerne_objet') . ' AS c ,' .
+		nom_table('types_evenement') . ' AS t ' .
+		' WHERE Reference_Objet = ' . $RefObjet . ' and Type_Objet = \'' . $TypeObjet . '\'' .
+		' AND e.Code_Type = t.Code_Type AND c.Evenement = e.Reference' .
+		' order by Libelle_Type, dDebE, dFinE';
+	$res = lect_sql($requete);
 
-  if ($res->rowCount()) {
-    // En mode lecture, on ne montre que s'il existe des ÈvËnements
-    if ($modif == 'N') {
-      echo 'Ev&egrave;nements et faits pour '.$Lib_Type.'&nbsp;'."\n";
-      $x = Oeil_Div('ajout_eve_obj','Montrer les ÈvËnements',$nom_div);
-    }
-    $anc_lib = '';
-    while ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
-		$nouv_lib = $enreg['Libelle_Type'];
-		  if ($nouv_lib != $anc_lib) {
-		    // On ferme la table ouverte prÈcÈdemment
-		    if ($anc_lib != '') echo '</table></fieldset>';
-		    echo '  <fieldset><legend>'.$nouv_lib.'</legend>'."\n";
-		    $anc_lib = $nouv_lib;
-		    echo '<table width="95%" border="0">'."\n";
-		  }
+	if ($res->rowCount()) {
+		// En mode lecture, on ne montre que s'il existe des √©v√®nements
+		if ($modif == 'N') {
+			echo 'Ev√®nements et faits pour ' . $Lib_Type . ' ' . "\n";
+			$x = Oeil_Div('ajout_eve_obj', 'Montrer les √©v√®nements', $nom_div);
+		}
+		$anc_lib = '';
+		while ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
+			$nouv_lib = $enreg['Libelle_Type'];
+			if ($nouv_lib != $anc_lib) {
+				// On ferme la table ouverte pr√©c√©demment
+				if ($anc_lib != '') echo '</table></fieldset>';
+				echo '  <fieldset><legend>' . $nouv_lib . '</legend>' . "\n";
+				$anc_lib = $nouv_lib;
+				echo '<table width="95%" border="0">' . "\n";
+			}
 
-      echo '<tr>'."\n";
-      echo '<td>&nbsp;<a href="Fiche_Evenement.php?refPar='.$enreg['refEve'].'">' . $enreg['Titre'] . '</a></td>'."\n";
-      if ($modif == 'O') {
-        echo '<td align="center"><a href="Edition_Lier_Objet.php?refEvt='.$enreg['refEve'].
-                                    '&amp;refObjet='.$RefObjet.
-                                    '&amp;TypeObjet='.$TypeObjet.'">'.
-             '<img src="'.$chemin_images.$Icones['fiche_edition'].'" border="0" alt="Modification lien"/></a></td>'."\n";
-      }
-      echo '</tr><tr>'."\n";
-	  if ($modif == 'O') echo '<td colspan="2">';
-      else               echo '<td>';
-      $idZone = $enreg['idZone'];
-      $dDebE  = $enreg['dDebE'];
-      $dFinE  = $enreg['dFinE'];
-      if (($idZone) or ($dDebE != '') or ($dFinE != '')) {
-        if (($dDebE != '') or ($dFinE != '')) {
-          $plage = Etend_2_dates($enreg['dDebE'] , $enreg['dFinE']);
-          echo 'Dates de l\'&eacute;v&egrave;nement : ' . $plage."\n";
-        }
-        if ($idZone) {
-          if (($dDebE != '') or ($dFinE != '')) echo ' et lieux : ';
-          else                      echo 'Lieux : ';
-          $zone = LectZone($idZone,$enreg['Niveau']);
-          echo $zone."\n";
-        }
-      }
-      echo '</td></tr>'."\n";
-    }
-    echo '</table></fieldset>'."\n";
-    $res->closeCursor();
-    if ($modif == 'N')
-      fin_div_cache($nom_div);
-  }
-  // Sur la modification on montre toujours l'entÍte de div et on peut ajouter un ÈvËnement
-  if ($modif == 'O') {
-    echo my_html($LG_Add_Existing_Event).' : ' .
-         '<a href="Edition_Lier_Objet.php?refEvt=-1'.
-                                    '&amp;refObjet='.$RefObjet.
-                                    '&amp;TypeObjet='.$TypeObjet.'">'.
-         '<img src="'.$chemin_images.$Icones['ajout'].'" border="0" alt="'.$LG_Add_Existing_Event.'"/></a>'."\n";
-  }
+			echo '<tr>' . "\n";
+			echo '<td> <a href="Fiche_Evenement.php?refPar=' . $enreg['refEve'] . '">' . $enreg['Titre'] . '</a></td>' . "\n";
+			if ($modif == 'O') {
+				echo '<td align="center"><a href="Edition_Lier_Objet.php?refEvt=' . $enreg['refEve'] .
+					'&amp;refObjet=' . $RefObjet .
+					'&amp;TypeObjet=' . $TypeObjet . '">' .
+					'<img src="' . $chemin_images . $Icones['fiche_edition'] . '" border="0" alt="Modification lien"/></a></td>' . "\n";
+			}
+			echo '</tr><tr>' . "\n";
+			if ($modif == 'O') echo '<td colspan="2">';
+			else               echo '<td>';
+			$idZone = $enreg['idZone'];
+			$dDebE  = $enreg['dDebE'];
+			$dFinE  = $enreg['dFinE'];
+			if (($idZone) or ($dDebE != '') or ($dFinE != '')) {
+				if (($dDebE != '') or ($dFinE != '')) {
+					$plage = Etend_2_dates($enreg['dDebE'], $enreg['dFinE']);
+					echo 'Dates de l\'√©v√®nement : ' . $plage . "\n";
+				}
+				if ($idZone) {
+					if (($dDebE != '') or ($dFinE != '')) echo ' et lieux : ';
+					else                      echo 'Lieux : ';
+					$zone = LectZone($idZone, $enreg['Niveau']);
+					echo $zone . "\n";
+				}
+			}
+			echo '</td></tr>' . "\n";
+		}
+		echo '</table></fieldset>' . "\n";
+		$res->closeCursor();
+		if ($modif == 'N')
+			fin_div_cache($nom_div);
+	}
+	// Sur la modification on montre toujours l'ent√™te de div et on peut ajouter un √©v√®nement
+	if ($modif == 'O') {
+		echo my_html($LG_Add_Existing_Event) . ' : ' .
+			'<a href="Edition_Lier_Objet.php?refEvt=-1' .
+			'&amp;refObjet=' . $RefObjet .
+			'&amp;TypeObjet=' . $TypeObjet . '">' .
+			'<img src="' . $chemin_images . $Icones['ajout'] . '" border="0" alt="' . $LG_Add_Existing_Event . '"/></a>' . "\n";
+	}
 }
 
-//	Affichage des documents liÈs ‡ un objet
-//	ParamËtres : $refObjet : identifiant de l'objet
+//	Affichage des documents li√©s √† un objet
+//	Param√®tres : $refObjet : identifiant de l'objet
 //		$typeObjet : type de l'objet
-//		$masquer : masquer la balise div ‡ l'affichage (valeurs O ou N)
-function Aff_Documents_Objet($refObjet , $typeObjet , $masquer) {
+//		$masquer : masquer la balise div √† l'affichage (valeurs O ou N)
+function Aff_Documents_Objet($refObjet, $typeObjet, $masquer)
+{
 	global $Environnement,
-	$LG_update_link, $LG_see_document,
-	$Natures_Docs
-    ;
-    $nom_div = 'id_div_doc_obj_' . $typeObjet . '_' . $refObjet;
-	$req_doc = 'SELECT Titre,d.id_document,nature_document,Nom_Fichier FROM '.nom_table('documents').' d, '.nom_table('concerne_doc').' c'.
-				' WHERE d.id_document = c.id_document AND reference_objet = '.$refObjet;
+		$LG_update_link, $LG_see_document,
+		$Natures_Docs;
+	$nom_div = 'id_div_doc_obj_' . $typeObjet . '_' . $refObjet;
+	$req_doc = 'SELECT Titre,d.id_document,nature_document,Nom_Fichier FROM ' . nom_table('documents') . ' d, ' . nom_table('concerne_doc') . ' c' .
+		' WHERE d.id_document = c.id_document AND reference_objet = ' . $refObjet;
 	if (!$_SESSION['estPrivilegie']) $req_doc = $req_doc . ' AND Diff_Internet = "O"';
-	$req_doc = $req_doc .' AND type_objet = "' . $typeObjet . '" order by Nature_Document,titre';
+	$req_doc = $req_doc . ' AND type_objet = "' . $typeObjet . '" order by Nature_Document,titre';
 	$res_doc = lect_sql($req_doc);
 	// Affichage
 	if ($res_doc->rowCount()) {
-		echo 'Documents li&eacute;s &agrave;&nbsp;' . lib_pfu($typeObjet,true) . '&nbsp;'."\n";
-		$x = Oeil_Div('ajout_doc_obj'.$refObjet,'Montrer les documents',$nom_div);
+		echo 'Documents li√©s √† ' . lib_pfu($typeObjet, true) . ' ' . "\n";
+		$x = Oeil_Div('ajout_doc_obj' . $refObjet, 'Montrer les documents', $nom_div);
 		$natureAncien = '';
 		$nbRupt = 0;
 		while ($enr_doc = $res_doc->fetch(PDO::FETCH_NUM)) {
 			$natureCourante = $enr_doc[2];
 			if ($natureCourante != $natureAncien) {
 				if ($nbRupt > 0) {
-					echo '</table></fieldset>'."\n";
+					echo '</table></fieldset>' . "\n";
 				}
-				$nbRupt ++;
-				echo '  <fieldset><legend>' . $Natures_Docs[$natureCourante] . '</legend>'."\n";
-				echo '<table width="95%" border="0">'."\n";
+				$nbRupt++;
+				echo '  <fieldset><legend>' . $Natures_Docs[$natureCourante] . '</legend>' . "\n";
+				echo '<table width="95%" border="0">' . "\n";
 			}
-			echo '<tr><td>'.'<a href="Fiche_Document.php?Reference='.$enr_doc[1].'">'.$enr_doc[0].'</a>'."\n" ;
+			echo '<tr><td>' . '<a href="Fiche_Document.php?Reference=' . $enr_doc[1] . '">' . $enr_doc[0] . '</a>' . "\n";
 			$chemin_docu = get_chemin_docu($natureCourante);
 			$le_type = Get_Type_Mime($natureCourante);
 			if ($_SESSION['estGestionnaire']) {
-				echo '&nbsp;&nbsp;'.Affiche_Icone_Lien('href="Edition_Lier_Doc.php?refObjet='.$refObjet.
-						'&amp;typeObjet=' . $typeObjet . '&amp;refDoc='.$enr_doc[1].'"','fiche_edition',$LG_update_link).
-						'&nbsp;&nbsp;';
+				echo '  ' . Affiche_Icone_Lien('href="Edition_Lier_Doc.php?refObjet=' . $refObjet .
+					'&amp;typeObjet=' . $typeObjet . '&amp;refDoc=' . $enr_doc[1] . '"', 'fiche_edition', $LG_update_link) .
+					'  ';
 			}
-			echo Affiche_Icone_Lien('href="'.$chemin_docu.$enr_doc[3].'" type="'.$le_type.'"','oeil',$LG_see_document,'n').
-					'</td></tr>'."\n";
+			echo Affiche_Icone_Lien('href="' . $chemin_docu . $enr_doc[3] . '" type="' . $le_type . '"', 'oeil', $LG_see_document, 'n') .
+				'</td></tr>' . "\n";
 			$natureAncien = $natureCourante;
 		}
-		echo '</table></fieldset>'."\n";
+		echo '</table></fieldset>' . "\n";
 		if ($masquer == 'O')
 			fin_div_cache($nom_div);
 		else
-		  echo '</div>'."\n";
+			echo '</div>' . "\n";
 	}
 }
 
-//	Affichage des sources liÈs ‡ un objet
-//	ParamËtres : $refObjet : identifiant de l'objet
+//	Affichage des sources li√©s √† un objet
+//	Param√®tres : $refObjet : identifiant de l'objet
 //		$typeObjet : type de l'objet
-//		$masquer : masquer la balise div ‡ l'affichage (valeurs O ou N)
-function Aff_Sources_Objet($refObjet , $typeObjet , $masquer) {
+//		$masquer : masquer la balise div √† l'affichage (valeurs O ou N)
+function Aff_Sources_Objet($refObjet, $typeObjet, $masquer)
+{
 	global $Environnement;
 	if ($_SESSION['estContributeur']) {
-	    $nom_div = 'id_div_src_obj_' . $typeObjet . '_' . $refObjet;
-		$req_src = 'SELECT s.Titre, s.Ident FROM '.nom_table('sources').' s, '.nom_table('concerne_source').' c'.
-					' WHERE s.Ident = c.Id_Source AND reference_objet = '.$refObjet .
-					' AND type_objet = "' . $typeObjet . '" order by titre';
+		$nom_div = 'id_div_src_obj_' . $typeObjet . '_' . $refObjet;
+		$req_src = 'SELECT s.Titre, s.Ident FROM ' . nom_table('sources') . ' s, ' . nom_table('concerne_source') . ' c' .
+			' WHERE s.Ident = c.Id_Source AND reference_objet = ' . $refObjet .
+			' AND type_objet = "' . $typeObjet . '" order by titre';
 		$res_src = lect_sql($req_src);
 		// Affichage
 		if ($res_src->rowCount()) {
-			echo 'Sources li&eacute;es &agrave;&nbsp;' . lib_pfu($typeObjet,true) . '&nbsp;'."\n";
-			$x = Oeil_Div('ajout_src_obj'.$refObjet,'Montrer les sources',$nom_div);
+			echo 'Sources li√©es √† ' . lib_pfu($typeObjet, true) . ' ' . "\n";
+			$x = Oeil_Div('ajout_src_obj' . $refObjet, 'Montrer les sources', $nom_div);
 			$premier = true;
 			while ($enr_src = $res_src->fetch(PDO::FETCH_NUM)) {
 				if ($premier) {
-					echo '<table width="95%" border="0">'."\n";
+					echo '<table width="95%" border="0">' . "\n";
 					$premier = false;
 				}
-				echo '<tr><td>'.'<a href="Fiche_Source.php?ident='.$enr_src[1].'">'.my_html($enr_src[0]).'</a>'."\n" ;
-				echo '&nbsp;&nbsp;'.Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet='.$refObjet.
-							'&amp;typeObjet=' . $typeObjet . '&amp;refSrc='.$enr_src[1].'"','fiche_edition','Modification de la liaison');
+				echo '<tr><td>' . '<a href="Fiche_Source.php?ident=' . $enr_src[1] . '">' . my_html($enr_src[0]) . '</a>' . "\n";
+				echo '  ' . Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet=' . $refObjet .
+					'&amp;typeObjet=' . $typeObjet . '&amp;refSrc=' . $enr_src[1] . '"', 'fiche_edition', 'Modification de la liaison');
 			}
-			echo '</table></fieldset>'."\n";
+			echo '</table></fieldset>' . "\n";
 			if ($masquer == 'O')
 				fin_div_cache($nom_div);
 			else
-			  echo '</div>'."\n";
+				echo '</div>' . "\n";
 		}
 	}
 }
 
 // Positionnement d'une fin de div avec masquage
-function fin_div_cache($nom_div) {
-	echo '</div>'."\n";
-	echo '<script type="text/javascript">'."\n";
-	echo '<!--'."\n";
-	echo 'cache_div(\''.$nom_div.'\');'."\n";
-	echo '//-->'."\n";
-	echo '</script>'."\n";
+function fin_div_cache($nom_div)
+{
+	echo '</div>' . "\n";
+	echo '<script type="text/javascript">' . "\n";
+	echo '<!--' . "\n";
+	echo 'cache_div(\'' . $nom_div . '\');' . "\n";
+	echo '//-->' . "\n";
+	echo '</script>' . "\n";
 }
 
-function Note_Div($nom_img,$alt_img,$div) {
-	Image_Div('note',$nom_img,$alt_img,$div);
+function Note_Div($nom_img, $alt_img, $div)
+{
+	Image_Div('note', $nom_img, $alt_img, $div);
 }
 
-function Oeil_Div($nom_img,$alt_img,$div) {
-	Image_Div('oeil',$nom_img,$alt_img,$div);
+function Oeil_Div($nom_img, $alt_img, $div)
+{
+	Image_Div('oeil', $nom_img, $alt_img, $div);
 }
 
-// Affiche une image avec son comportement associÈ et le dÈbut d'un div
-// ParamËtre : nom de l'image, alt sur image, nom du div
-function Image_Div($image,$nom_img,$alt_img,$div) {
-	global $chemin_images,$Icones;
-	echo '<img id="'.$nom_img.'" src="'.$chemin_images.$Icones[$image].'" alt="'.my_html($alt_img).'" '.Survole_Clic_Div($div).'/>'."\n";
-	echo '<div id="'.$div.'">'."\n";
+// Affiche une image avec son comportement associ√© et le d√©but d'un div
+// Param√®tre : nom de l'image, alt sur image, nom du div
+function Image_Div($image, $nom_img, $alt_img, $div)
+{
+	global $chemin_images, $Icones;
+	echo '<img id="' . $nom_img . '" src="' . $chemin_images . $Icones[$image] . '" alt="' . my_html($alt_img) . '" ' . Survole_Clic_Div($div) . '/>' . "\n";
+	echo '<div id="' . $div . '">' . "\n";
 }
 
-function oeil_div_simple($image,$nom_img,$alt_img,$div) {
-	global $chemin_images,$Icones;
-	echo '&nbsp;&nbsp;<img id="'.$image.'" src="'.$chemin_images.$Icones['oeil'].'" alt="'.$alt_img.'" title="'.$alt_img.'" '.Survole_Clic_Div($div).'/>'."\n";
+function oeil_div_simple($image, $nom_img, $alt_img, $div)
+{
+	global $chemin_images, $Icones;
+	echo '  <img id="' . $image . '" src="' . $chemin_images . $Icones['oeil'] . '" alt="' . $alt_img . '" title="' . $alt_img . '" ' . Survole_Clic_Div($div) . '/>' . "\n";
 }
 
 //--------------------------------------------------------------------------
-// Retourne le nom et le prÈnom d'une personne : code retour 1 : trouvÈ, 0 : sinon
+// Retourne le nom et le pr√©nom d'une personne : code retour 1 : trouv√©, 0 : sinon
 //--------------------------------------------------------------------------
-function Get_Nom_Prenoms($Pers,&$Nom,&$Prenoms) {
+function Get_Nom_Prenoms($Pers, &$Nom, &$Prenoms)
+{
 	global $Diff_Internet_P;
 	$Nom = '';
 	$Prenoms = '';
 	$Diff_Internet_P = 'N';
-	$sql = 'select Nom, Prenoms, Diff_Internet from '.nom_table('personnes').' where Reference  = '.$Pers.' limit 1';
+	$sql = 'select Nom, Prenoms, Diff_Internet from ' . nom_table('personnes') . ' where Reference  = ' . $Pers . ' limit 1';
 	if ($res = lect_sql($sql)) {
 		if ($enreg = $res->fetch(PDO::FETCH_NUM)) {
 			$Nom     = my_html($enreg[0]);
@@ -1796,11 +1945,12 @@ function Get_Nom_Prenoms($Pers,&$Nom,&$Prenoms) {
 }
 
 //--------------------------------------------------------------------------
-// Retourne le nom correspondant ‡ un id : code retour 1 : trouvÈ, 0 : sinon
+// Retourne le nom correspondant √† un id : code retour 1 : trouv√©, 0 : sinon
 //--------------------------------------------------------------------------
-function Get_Nom($idNom,&$Nom) {
+function Get_Nom($idNom, &$Nom)
+{
 	$Nom = '';
-	$sql = 'select nomFamille from '.nom_table('noms_famille').' where idNomFam = '.$idNom.' limit 1';
+	$sql = 'select nomFamille from ' . nom_table('noms_famille') . ' where idNomFam = ' . $idNom . ' limit 1';
 	if ($res = lect_sql($sql)) {
 		if ($enreg = $res->fetch(PDO::FETCH_NUM)) {
 			$Nom = my_html($enreg[0]);
@@ -1812,182 +1962,199 @@ function Get_Nom($idNom,&$Nom) {
 }
 
 // Affiche les notes pour une fiche
-function Aff_Comment_Fiche($divers,$diff) {
+function Aff_Comment_Fiche($divers, $diff)
+{
 	global $est_privilegie, $def_enc;
 	if (($divers != '') and (($est_privilegie) or ($diff == 'O'))) {
-		echo '<fieldset><legend>Note</legend>'.html_entity_decode(my_html($divers), ENT_QUOTES, $def_enc).'</fieldset><br />'."\n";
+		echo '<fieldset><legend>Note</legend>' . html_entity_decode(my_html($divers), ENT_QUOTES, $def_enc) . '</fieldset><br />' . "\n";
 	}
 }
 
 // Affiche la balise Img pour une icone
-function Affiche_Icone($nom_image,$texte_image = '') {
-	return Affiche_Icone_Clic($nom_image,'',$texte_image);
+function Affiche_Icone($nom_image, $texte_image = '')
+{
+	return Affiche_Icone_Clic($nom_image, '', $texte_image);
 }
 
-function Affiche_Icone_Clic($nom_image,$Action_Clic,$texte_image = '') {
+function Affiche_Icone_Clic($nom_image, $Action_Clic, $texte_image = '')
+{
 	global $chemin_images, $Icones, $offset_info, $id_image;
 	$texte_image = my_html($texte_image);
 	$the_id = ' ';
 	if ((isset($id_image)) and ($id_image != '')) {
-		$the_id = 'id="'.$id_image.'" ';
+		$the_id = 'id="' . $id_image . '" ';
 	}
 	$id_image = '';
 	$nom_icone = $Icones[$nom_image];
 	if (is_info()) {
-		$chemin = $offset_info.$chemin_images.$nom_icone;
+		$chemin = $offset_info . $chemin_images . $nom_icone;
 	} else {
-		$chemin = $chemin_images.$nom_icone;
+		$chemin = $chemin_images . $nom_icone;
 	}
 	$oc = '';
-	if ($Action_Clic != '') $oc = 'onclick="'.$Action_Clic.';"';
-	return '<img '.$the_id.'src="'.$chemin.'" alt="'.$texte_image.'" title="'.$texte_image.'" border="0" '.$oc.'/>';
+	if ($Action_Clic != '') $oc = 'onclick="' . $Action_Clic . ';"';
+	return '<img ' . $the_id . 'src="' . $chemin . '" alt="' . $texte_image . '" title="' . $texte_image . '" border="0" ' . $oc . '/>';
 }
 
 // Affiche icone d'appel des textes et pdf ; lien en nofollow...
-function Affiche_Icone_Lien_TXT_PDF($lien,$texte_image,$le_type) {
-	global $chemin_images,$Icones;
+function Affiche_Icone_Lien_TXT_PDF($lien, $texte_image, $le_type)
+{
+	global $chemin_images, $Icones;
 	$texte_image = my_html($texte_image);
 	switch ($le_type) {
-		case 'T' : $image = 'text'; break;
-		case 'P' : $image = 'PDF'; break;
+		case 'T':
+			$image = 'text';
+			break;
+		case 'P':
+			$image = 'PDF';
+			break;
 	}
-	return '<a '.$lien.' rel="nofollow"><img src="'.$chemin_images.$Icones[$image].'" alt="'.$texte_image.'" title="'.$texte_image.'" border="0"/></a>';
+	return '<a ' . $lien . ' rel="nofollow"><img src="' . $chemin_images . $Icones[$image] . '" alt="' . $texte_image . '" title="' . $texte_image . '" border="0"/></a>';
 }
 
 // Affiche la balise Img pour une icone avec le lien
-function Affiche_Icone_Lien($lien,$nom_image,$texte_image,$target='') {
-	if ($target == 'n') $lien .=' target="_blank"';
-	return '<a '.$lien.'>'.Affiche_Icone($nom_image,$texte_image).'</a>';
+function Affiche_Icone_Lien($lien, $nom_image, $texte_image, $target = '')
+{
+	if ($target == 'n') $lien .= ' target="_blank"';
+	return '<a ' . $lien . '>' . Affiche_Icone($nom_image, $texte_image) . '</a>';
 }
 
-function Img_Zone_Oblig($nom_image) {
-  global $chemin_images,$Icones;
-  $texte = 'Zone obligatoire';
-  echo '<img id="'.$nom_image.'" src="'.$chemin_images.$Icones['obligatoire'].'" alt="'.$texte.'" title="'.$texte.'"/>';
+function Img_Zone_Oblig($nom_image)
+{
+	global $chemin_images, $Icones;
+	$texte = 'Zone obligatoire';
+	echo '<img id="' . $nom_image . '" src="' . $chemin_images . $Icones['obligatoire'] . '" alt="' . $texte . '" title="' . $texte . '"/>';
 }
 
-function Affiche_Calendrier($nom_image,$fonc_click) {
-  global $chemin_images,$Icones;
-  $texte = 'Calendrier';
-  echo '<img id="'.$nom_image.'" src="'.$chemin_images.$Icones['calendrier'].'" alt="'.$texte.'" title="'.$texte.'" onclick="'.$fonc_click.'"/>'."\n";
+function Affiche_Calendrier($nom_image, $fonc_click)
+{
+	global $chemin_images, $Icones;
+	$texte = 'Calendrier';
+	echo '<img id="' . $nom_image . '" src="' . $chemin_images . $Icones['calendrier'] . '" alt="' . $texte . '" title="' . $texte . '" onclick="' . $fonc_click . '"/>' . "\n";
 }
 
 // Affiche l'icone d'information si la page d'information existe et le lien vers la page
-function Ajoute_Page_Info($largeur,$hauteur) {
-	global $chemin_images,$Icones, $rep_Infos;
+function Ajoute_Page_Info($largeur, $hauteur)
+{
+	global $chemin_images, $Icones, $rep_Infos;
 	// Constitution du nom de la page info
 	$nom_script = $_SERVER['SCRIPT_NAME'];
-	if ($nom_script[0] == '/') $nom_script = substr($nom_script,1);
+	if ($nom_script[0] == '/') $nom_script = substr($nom_script, 1);
 	$nom_script = Retire_sr($nom_script);
-	$l_p  = strrpos($nom_script,'.');
+	$l_p  = strrpos($nom_script, '.');
 	/*
 	$nom_script = $rep_Infos.substr($nom_script,0,$l_p).'_Info'.substr($nom_script,$l_p);
 	// La page info existe-t-elle ? Si oui, on l'affiche.
 	if (file_exists($nom_script)) {
 		$texte = 'Aide sur la page';
 		return '<a href=\'javascript:PopupCentrer("'.$nom_script.'",'.$largeur.','.$hauteur.',"menubar=no,scrollbars=yes,statusbar=no")\'>'.
-		'<img src="'.$chemin_images.$Icones['information'].'" alt="'.$texte.'" title="'.$texte.'" border="0"/></a>&nbsp;';
+		'<img src="'.$chemin_images.$Icones['information'].'" alt="'.$texte.'" title="'.$texte.'" border="0"/></a> ';
 	}
 	else return '';
 	*/
 	$texte = 'Aide sur la page';
-	$nom_script = substr($nom_script,0,$l_p);
-	return '<a href=\'javascript:PopupCentrer("appel_info.php?aide='.$nom_script.'",'.$largeur.','.$hauteur.',"menubar=no,scrollbars=yes,statusbar=no")\'>'.
-		'<img src="'.$chemin_images.$Icones['information'].'" alt="'.$texte.'" title="'.$texte.'" border="0"/></a>&nbsp;';
+	$nom_script = substr($nom_script, 0, $l_p);
+	return '<a href=\'javascript:PopupCentrer("appel_info.php?aide=' . $nom_script . '",' . $largeur . ',' . $hauteur . ',"menubar=no,scrollbars=yes,statusbar=no")\'>' .
+		'<img src="' . $chemin_images . $Icones['information'] . '" alt="' . $texte . '" title="' . $texte . '" border="0"/></a> ';
 }
 
-function Retire_sr($nom_script) {
-  $position = strrpos($nom_script,'/');
-  if ($position) $nom_script = substr($nom_script , $position + 1, strlen($nom_script));
-  return $nom_script;
+function Retire_sr($nom_script)
+{
+	$position = strrpos($nom_script, '/');
+	if ($position) $nom_script = substr($nom_script, $position + 1, strlen($nom_script));
+	return $nom_script;
 }
 
-// Retour arriËre vers la page prÈcÈdente
+// Retour arri√®re vers la page pr√©c√©dente
 // S'il n'y en a pas, retour vers l'index
-function Retour_Ar() {
+function Retour_Ar()
+{
 	global $fp, $cr, $debug;
 	$xx = array_pop($_SESSION['pages']);
-	$dest = $_SESSION['pages'][count($_SESSION['pages'])-1];
+	$dest = $_SESSION['pages'][count($_SESSION['pages']) - 1];
 	if ($debug) {
 		$mys = my_self();
 		$dh = date("d/m/Y H:i:s");
 		$f_log = open_log();
-		ecrire($f_log,'');
-		ecrire($f_log,$dh.' Retour_Ar');
-		ecrire($f_log,' Self '.$mys.', dest : '.$dest);
+		ecrire($f_log, '');
+		ecrire($f_log, $dh . ' Retour_Ar');
+		ecrire($f_log, ' Self ' . $mys . ', dest : ' . $dest);
 		fclose($f_log);
 	}
-	header('Location: '.$dest);
+	header('Location: ' . $dest);
 }
 
 // Liste de personnes dans un select
-function Liste_Pers($Ensemble,$Nom_Sel,$Ref_Sel=0) {
-  // Liste des rubriques : Reference, Nom, Prenoms, Ne_le, Decede_Le
-  echo '<select name="'.$Nom_Sel.'">'."\n";
-  while ($row = $Ensemble->fetch(PDO::FETCH_NUM)) {
-    $Ref = $row[0];
-    echo '<option value="'.$Ref.'"';
-    if (($Ref_Sel != 0) and ($Ref == $Ref_Sel)) echo ' selected="selected" ';
-    echo '>'.my_html($row[1].' '.$row[2]).
-         ' ('.affiche_date($row[3]).'-'.affiche_date($row[4]).')'.'</option>'.
-         "\n";
-  }
-  echo '</select>';
+function Liste_Pers($Ensemble, $Nom_Sel, $Ref_Sel = 0)
+{
+	// Liste des rubriques : Reference, Nom, Prenoms, Ne_le, Decede_Le
+	echo '<select name="' . $Nom_Sel . '">' . "\n";
+	while ($row = $Ensemble->fetch(PDO::FETCH_NUM)) {
+		$Ref = $row[0];
+		echo '<option value="' . $Ref . '"';
+		if (($Ref_Sel != 0) and ($Ref == $Ref_Sel)) echo ' selected="selected" ';
+		echo '>' . my_html($row[1] . ' ' . $row[2]) .
+			' (' . affiche_date($row[3]) . '-' . affiche_date($row[4]) . ')' . '</option>' .
+			"\n";
+	}
+	echo '</select>';
 }
 
 // Affiche la liste des villes dans un select
-// ParamËtres : $nom_select : nom du select
-//              $premier : premiËre fois que l'on appelle le select dans la page
-//              $dernier : derniËre fois que l'on appelle le select dans la page
-//              $cle_sel : clÈ ‡ sÈlectionner
-function aff_liste_villes($nom_select,$premier,$dernier,$cle_sel) {
+// Param√®tres : $nom_select : nom du select
+//              $premier : premi√®re fois que l'on appelle le select dans la page
+//              $dernier : derni√®re fois que l'on appelle le select dans la page
+//              $cle_sel : cl√© √† s√©lectionner
+function aff_liste_villes($nom_select, $premier, $dernier, $cle_sel)
+{
 	global $res_lv;
 	//if ($premier) echo 'Premier ';else echo 'Pas premier ';
 	//if ($dernier) echo 'Dernier ';else echo 'Pas dernier ';
-	echo '<select name="'.$nom_select.'" id="'.$nom_select.'">'."\n";
-	$sql = 'select Identifiant_zone, Nom_Ville from '.nom_table('villes').' order by Nom_Ville';
+	echo '<select name="' . $nom_select . '" id="' . $nom_select . '">' . "\n";
+	$sql = 'select Identifiant_zone, Nom_Ville from ' . nom_table('villes') . ' order by Nom_Ville';
 	if ($premier) {
 		$res_lv = lect_sql($sql);
-	}
-	else {
+	} else {
 		$res_lv->closeCursor();
 		$res_lv = lect_sql($sql);
 	}
 	while ($row = $res_lv->fetch(PDO::FETCH_NUM)) {
-		echo '<option value="'.$row[0].'"';
+		echo '<option value="' . $row[0] . '"';
 		if ($cle_sel == $row[0]) echo ' selected="selected" ';
-		echo '>'.my_html($row[1]).'</option>'."\n";
+		echo '>' . my_html($row[1]) . '</option>' . "\n";
 	}
 	echo "</select>\n";
 	if ($dernier) $res_lv->closeCursor();
 }
 
-// Retourne les annÈes de naissance et de dÈcËs entre parenthËses si l'une des 2 est servie
-function aff_annees_pers($Ne,$Decede) {
+// Retourne les ann√©es de naissance et de d√©c√®s entre parenth√®ses si l'une des 2 est servie
+function aff_annees_pers($Ne, $Decede)
+{
 	$Dates = '';
 	$Ne     = affiche_date($Ne);
 	$Decede = affiche_date($Decede);
 	if (($Ne != '?') or ($Decede != '?')) {
-		$Dates = '&nbsp;('.$Ne.'-'.$Decede.')';
+		$Dates = ' (' . $Ne . '-' . $Decede . ')';
 	}
 	return $Dates;
 }
 
 // Affiche la liste des personnes dans un select
-// ParamËtres : $nom_select : nom du select
-//              $premier : premiËre fois que l'on appelle le select dans la page
-//              $dernier : derniËre fois que l'on appelle le select dans la page
-//              $cle_sel : clÈ ‡ sÈlectionner
-//              $crit : critere de sÈlection
-//              $order : critËre de tri
+// Param√®tres : $nom_select : nom du select
+//              $premier : premi√®re fois que l'on appelle le select dans la page
+//              $dernier : derni√®re fois que l'on appelle le select dans la page
+//              $cle_sel : cl√© √† s√©lectionner
+//              $crit : critere de s√©lection
+//              $order : crit√®re de tri
 //              $oblig : zone obligatoire ?
-//              $oc : action complÈmentaire sur select exemple onchange="..."
-function aff_liste_pers($nom_select,$premier,$dernier,$cle_sel,$crit,$order,$oblig, $oc='') {
-	global $res,$_SESSION;
+//              $oc : action compl√©mentaire sur select exemple onchange="..."
+function aff_liste_pers($nom_select, $premier, $dernier, $cle_sel, $crit, $order, $oblig, $oc = '')
+{
+	global $res, $_SESSION;
 	if (!$oblig) $style_z_oblig = '';
-	echo '<select name="'.$nom_select.'" class="oblig" '.$oc.'>'."\n";
+	echo '<select name="' . $nom_select . '" class="oblig" ' . $oc . '>' . "\n";
 	if ($premier) {
-		$sql = 'select Reference, Nom, Prenoms, Ne_Le, Decede_Le from '.nom_table('personnes');
+		$sql = 'select Reference, Nom, Prenoms, Ne_Le, Decede_Le from ' . nom_table('personnes');
 		// clause where
 		$crit_sel = '';
 		if ($crit != '') $crit_sel = $crit;
@@ -1996,24 +2163,24 @@ function aff_liste_pers($nom_select,$premier,$dernier,$cle_sel,$crit,$order,$obl
 			$crit_sel .= ' Diff_Internet = \'O\' ';
 		}
 		// clause where
-		if ($crit_sel != '') $sql .= ' where '.$crit_sel;
+		if ($crit_sel != '') $sql .= ' where ' . $crit_sel;
 		// clause order by
-		if ($order != '') $sql .= ' order by '.$order;
+		if ($order != '') $sql .= ' order by ' . $order;
 		$res = lect_sql($sql);
-	}
-	else {
+	} else {
 		$res->data_seek(0);
 	}
 	while ($row = $res->fetch(PDO::FETCH_NUM)) {
-		echo '<option value="'.$row[0].'"';
+		echo '<option value="' . $row[0] . '"';
 		if ($cle_sel == $row[0]) echo ' selected="selected" ';
-		echo '>'.my_html($row[1].' '.$row[2]).aff_annees_pers($row[3],$row[4]).'</option>'."\n";
+		echo '>' . my_html($row[1] . ' ' . $row[2]) . aff_annees_pers($row[3], $row[4]) . '</option>' . "\n";
 	}
-	echo '</select>&nbsp;';
+	echo '</select> ';
 	if ($dernier) $res->closeCursor();
 }
 
-function ne_dec_approx(&$naissance,&$deces)	{
+function ne_dec_approx(&$naissance, &$deces)
+{
 	global $annees_maxi_vivant;
 	$l_naissance = strlen($naissance);
 	$l_deces = strlen($deces);
@@ -2021,183 +2188,191 @@ function ne_dec_approx(&$naissance,&$deces)	{
 	if ($l_naissance <> 10) $naissance = '';
 	if (($l_deces == 10) and ($deces[9] <> 'L')) $deces = '';
 	if ($l_deces <> 10) $deces = '';
-	// Si la date de dÈcËs n'est pas servie, on fait naissance + 130 ans
+	// Si la date de d√©c√®s n'est pas servie, on fait naissance + 130 ans
 	if (($deces == '') and ($naissance <> '')) {
-		$tmp_annee = str_pad(intval(substr($naissance,0,4)) + $annees_maxi_vivant,4,'0',STR_PAD_LEFT);
-		$deces = $tmp_annee . substr($naissance,4);
+		$tmp_annee = str_pad(intval(substr($naissance, 0, 4)) + $annees_maxi_vivant, 4, '0', STR_PAD_LEFT);
+		$deces = $tmp_annee . substr($naissance, 4);
 	}
-	// Si la date de naissance n'est pas servie, on fait dÈcËs - 130 ans
+	// Si la date de naissance n'est pas servie, on fait d√©c√®s - 130 ans
 	if (($naissance == '') and ($deces <> '')) {
-		$tmp_annee = str_pad(intval(substr($deces,0,4)) - $annees_maxi_vivant,4,'0',STR_PAD_LEFT);
-		$naissance = $tmp_annee . substr($deces,4);
+		$tmp_annee = str_pad(intval(substr($deces, 0, 4)) - $annees_maxi_vivant, 4, '0', STR_PAD_LEFT);
+		$naissance = $tmp_annee . substr($deces, 4);
 	}
 }
 
-// Affiche les personnes liÈes ‡ un ÈvËnement
-function aff_lien_pers($refPar,$modif='N') {
-	global $db,$chemin_images,$Icones;
+// Affiche les personnes li√©es √† un √©v√®nement
+function aff_lien_pers($refPar, $modif = 'N')
+{
+	global $db, $chemin_images, $Icones;
 	//  ===== Recherche de liens avec des personnes
 	$requete = 'SELECT Reference, Debut, Fin, Nom, Prenoms, r.Code_Role, Libelle_Role as libRole, Diff_Internet ' .
-				' FROM ' . nom_table('participe') . ' AS pa , ' . nom_table('personnes') . ' AS pe , ' .
-				nom_table('roles') . ' AS r ' .
-				" WHERE Evenement = $refPar AND pa.Personne = pe.Reference AND pa.Code_Role = r.Code_Role";
+		' FROM ' . nom_table('participe') . ' AS pa , ' . nom_table('personnes') . ' AS pe , ' .
+		nom_table('roles') . ' AS r ' .
+		" WHERE Evenement = $refPar AND pa.Personne = pe.Reference AND pa.Code_Role = r.Code_Role";
 	$result = lect_sql($requete);
 	if ($result->rowCount() > 0) {
-		$icone_mod = '<img src="'.$chemin_images.$Icones['fiche_edition'].'" border="0" alt="Modification lien"/>';
-		echo '<br />'."\n";
-		if ($modif == 'N') echo '<fieldset><legend>Lien avec des personnes</legend>'."\n";
+		$icone_mod = '<img src="' . $chemin_images . $Icones['fiche_edition'] . '" border="0" alt="Modification lien"/>';
+		echo '<br />' . "\n";
+		if ($modif == 'N') echo '<fieldset><legend>Lien avec des personnes</legend>' . "\n";
 		while ($enreg = $result->fetch(PDO::FETCH_ASSOC)) {
-			echo '<br />'."\n";
+			echo '<br />' . "\n";
 			if (($_SESSION['estPrivilegie']) || ($enreg['Diff_Internet'] != 'N')) {
 				echo '<a href="Fiche_Fam_Pers.php?Refer=' . $enreg['Reference'] . '"' . ">" .
-					my_html($enreg['Prenoms'] . ' ' . $enreg['Nom']) . 
+					my_html($enreg['Prenoms'] . ' ' . $enreg['Nom']) .
 					'</a>';
-					$role = $enreg['libRole'];
+				$role = $enreg['libRole'];
 				if (($role != '') and ($enreg['Code_Role'] != ''))
-					echo ', r&ocirc;le : '.my_html($role);
+					echo ', r√¥le : ' . my_html($role);
 				$deb = $enreg['Debut'];
 				$fin = $enreg['Fin'];
 				if (($deb != '') or ($fin != '')) {
 					if (($deb != '') and ($fin != '')) echo ', dates';
 					else  echo ', date';
-					echo ' de participation : '.Etend_2_dates($deb , $fin);
+					echo ' de participation : ' . Etend_2_dates($deb, $fin);
 				}
 				// En mode modification, on va mettre un lien pour modifier la liaison
 				if ($modif == 'O') {
-					echo '&nbsp;<a href="Edition_Lier_Eve.php?typeLienPar=P&amp;refPers='.$enreg['Reference'].
-				                                   '&amp;refEvt='.$refPar.
-				                                   '&amp;refRolePar='.$enreg['Code_Role'].'">'.
-				                                   $icone_mod.'</a>';
+					echo ' <a href="Edition_Lier_Eve.php?typeLienPar=P&amp;refPers=' . $enreg['Reference'] .
+						'&amp;refEvt=' . $refPar .
+						'&amp;refRolePar=' . $enreg['Code_Role'] . '">' .
+						$icone_mod . '</a>';
 				}
-			}
-			else echo 'Donn&eacute;es non disponibles pour votre profil';
+			} else echo 'Donn√©es non disponibles pour votre profil';
 			echo "\n";
 		}
-		if ($modif == 'N') echo '</fieldset>'."\n";
+		if ($modif == 'N') echo '</fieldset>' . "\n";
 	}
 }
 
-// Affiche les filiations liÈes ‡ un ÈvËnement
-function aff_lien_filiations($refPar,$modif='N') {
-	global $chemin_images,$Icones;
-	$requete = 'SELECT ev.Reference,fi.Enfant,fi.Pere,fi.Mere,Reference_objet,'.
-	         'enf.Reference AS eRef,enf.Sexe AS eSexe,enf.Prenoms AS ePrenoms,enf.Nom AS eNom,enf.Diff_Internet AS eDiff,' .
-	         'pere.Reference AS pRef,pere.Prenoms AS pPrenoms,pere.Nom AS pNom,pere.Diff_Internet AS pDiff,' .
-	         'mere.Reference AS mRef,mere.Prenoms AS mPrenoms,mere.Nom AS mNom,mere.Diff_Internet AS mDiff,type_Objet,Debut,Fin' .
-	         ' FROM ' . nom_table('evenements') . ' AS ev,'
-	                  . nom_table('concerne_objet') . ' AS co,'
-	                  . nom_table('filiations') . ' AS fi,'
-	                  . nom_table('personnes') . ' AS enf,'
-	                  . nom_table('personnes') . ' AS pere,'
-	                  . nom_table('personnes') . ' AS mere ' .
-	         ' WHERE ev.Reference = ' . $refPar . ' AND Evenement = ev.Reference AND fi.Enfant = Reference_objet ' .
-	         ' AND fi.Enfant=enf.Reference AND fi.Pere = pere.Reference AND fi.Mere = mere.Reference '.
-	         ' AND Type_Objet="F"';
+// Affiche les filiations li√©es √† un √©v√®nement
+function aff_lien_filiations($refPar, $modif = 'N')
+{
+	global $chemin_images, $Icones;
+	$requete = 'SELECT ev.Reference,fi.Enfant,fi.Pere,fi.Mere,Reference_objet,' .
+		'enf.Reference AS eRef,enf.Sexe AS eSexe,enf.Prenoms AS ePrenoms,enf.Nom AS eNom,enf.Diff_Internet AS eDiff,' .
+		'pere.Reference AS pRef,pere.Prenoms AS pPrenoms,pere.Nom AS pNom,pere.Diff_Internet AS pDiff,' .
+		'mere.Reference AS mRef,mere.Prenoms AS mPrenoms,mere.Nom AS mNom,mere.Diff_Internet AS mDiff,type_Objet,Debut,Fin' .
+		' FROM ' . nom_table('evenements') . ' AS ev,'
+		. nom_table('concerne_objet') . ' AS co,'
+		. nom_table('filiations') . ' AS fi,'
+		. nom_table('personnes') . ' AS enf,'
+		. nom_table('personnes') . ' AS pere,'
+		. nom_table('personnes') . ' AS mere ' .
+		' WHERE ev.Reference = ' . $refPar . ' AND Evenement = ev.Reference AND fi.Enfant = Reference_objet ' .
+		' AND fi.Enfant=enf.Reference AND fi.Pere = pere.Reference AND fi.Mere = mere.Reference ' .
+		' AND Type_Objet="F"';
 	$result = lect_sql($requete);
 	if ($result->rowCount() > 0) {
-		echo '<br />'."\n";
-		if ($modif == 'N') echo '<fieldset><legend>Lien avec des filiations</legend>'."\n";
+		echo '<br />' . "\n";
+		if ($modif == 'N') echo '<fieldset><legend>Lien avec des filiations</legend>' . "\n";
 		while ($enreg = $result->fetch(PDO::FETCH_ASSOC)) {
 			switch ($enreg['eSexe']) {
-				case 'm' : $texte='fils de ' ; break ;
-				case 'f' : $texte='fille de ' ; break ;
-				default :  $texte='enfant de ';
+				case 'm':
+					$texte = 'fils de ';
+					break;
+				case 'f':
+					$texte = 'fille de ';
+					break;
+				default:
+					$texte = 'enfant de ';
 			}
 			if (($_SESSION['estPrivilegie']) || ($enreg['eDiff'] != 'N')) {
-				echo '<br /><a '.Ins_Ref_Pers($enreg['eRef']).'>'.my_html($enreg['ePrenoms'].' '.$enreg['eNom']).'</a>';
+				echo '<br /><a ' . Ins_Ref_Pers($enreg['eRef']) . '>' . my_html($enreg['ePrenoms'] . ' ' . $enreg['eNom']) . '</a>';
 			}
-			
+
 			//
-			echo '<br />&nbsp;&nbsp;' . $texte ;
+			echo '<br />  ' . $texte;
 			if (($_SESSION['estPrivilegie']) || ($enreg['pDiff'] != 'N')) {
-				echo '<a '.Ins_Ref_Pers($enreg['pRef']).'>'.my_html($enreg['pPrenoms'].' '.$enreg['pNom']).'</a>';
+				echo '<a ' . Ins_Ref_Pers($enreg['pRef']) . '>' . my_html($enreg['pPrenoms'] . ' ' . $enreg['pNom']) . '</a>';
 			}
 			echo ' et de ';
 			if (($_SESSION['estPrivilegie']) || ($enreg['mDiff'] != 'N')) {
-				echo '<a '.Ins_Ref_Pers($enreg['mRef']).'>'.my_html($enreg['mPrenoms'].' '.$enreg['mNom']).'</a>';
+				echo '<a ' . Ins_Ref_Pers($enreg['mRef']) . '>' . my_html($enreg['mPrenoms'] . ' ' . $enreg['mNom']) . '</a>';
 			}
 			// En mode modification, on va mettre un lien pour modifier la liaison (utile uniquement pour la suppression)
 			if ($modif == 'O') {
-				echo '&nbsp;<a href="Edition_Lier_Objet.php?refEvt='.$refPar.
-			                                   '&amp;refObjet='.$enreg['eRef'].
-			                                   '&amp;TypeObjet=F'.
-			                                   '">'.
-			                                   '<img src="'.$chemin_images.$Icones['fiche_edition'].'" border="0" alt="Modification lien"/></a>';
+				echo ' <a href="Edition_Lier_Objet.php?refEvt=' . $refPar .
+					'&amp;refObjet=' . $enreg['eRef'] .
+					'&amp;TypeObjet=F' .
+					'">' .
+					'<img src="' . $chemin_images . $Icones['fiche_edition'] . '" border="0" alt="Modification lien"/></a>';
 			}
 		}
-		if ($modif == 'N') echo '</fieldset>'."\n";
+		if ($modif == 'N') echo '</fieldset>' . "\n";
 	}
 
-	  if ($modif == 'O') {
-	  	echo '<br /><br />Ajouter une filiation : ' .
-			 '<a href="Edition_Lier_Objet.php?refEvt='.$refPar.
-	                                   '&amp;refObjet=-1'.
-	                                   '&amp;TypeObjet=F'.
-	                                   '">'.
-	         '<img src="'.$chemin_images.$Icones['ajout'].'" border="0" alt="Ajouter une filiation"/></a>'."\n";
+	if ($modif == 'O') {
+		echo '<br /><br />Ajouter une filiation : ' .
+			'<a href="Edition_Lier_Objet.php?refEvt=' . $refPar .
+			'&amp;refObjet=-1' .
+			'&amp;TypeObjet=F' .
+			'">' .
+			'<img src="' . $chemin_images . $Icones['ajout'] . '" border="0" alt="Ajouter une filiation"/></a>' . "\n";
 	}
 }
 
-// Affiche les unions liÈes ‡ un ÈvËnement
-function aff_lien_unions($refPar,$modif='N') {
-	global $chemin_images,$Icones;
-	$requete = 'SELECT ev.Reference,un.Reference as uRef,un.Conjoint_1,un.Conjoint_2,Reference_objet,'.
+// Affiche les unions li√©es √† un √©v√®nement
+function aff_lien_unions($refPar, $modif = 'N')
+{
+	global $chemin_images, $Icones;
+	$requete = 'SELECT ev.Reference,un.Reference as uRef,un.Conjoint_1,un.Conjoint_2,Reference_objet,' .
 		'pere.Reference AS pRef,pere.Prenoms AS pPrenoms,pere.Nom AS pNom,pere.Diff_Internet AS pDiff,' .
 		'mere.Reference AS mRef,mere.Prenoms AS mPrenoms,mere.Nom AS mNom,mere.Diff_Internet AS mDiff,type_Objet,Debut,Fin' .
 		' FROM ' . nom_table('evenements') . ' AS ev,' .
-			nom_table('concerne_objet') . ' AS co,' . nom_table('unions') . ' AS un,' .
-			nom_table('personnes') . ' AS pere,' .
-			nom_table('personnes') . ' AS mere ' .
+		nom_table('concerne_objet') . ' AS co,' . nom_table('unions') . ' AS un,' .
+		nom_table('personnes') . ' AS pere,' .
+		nom_table('personnes') . ' AS mere ' .
 		' WHERE ev.Reference = ' . $refPar . ' AND Evenement = ev.Reference AND un.Reference = Reference_objet ' .
-		' AND un.Conjoint_1 = pere.Reference AND un.Conjoint_2 = mere.Reference '.
+		' AND un.Conjoint_1 = pere.Reference AND un.Conjoint_2 = mere.Reference ' .
 		' AND Type_Objet="U"';
 	$result = lect_sql($requete);
 	if ($result->rowCount() > 0) {
-		echo '<br />'."\n";
-		if ($modif == 'N') echo '<fieldset><legend>Lien avec des unions</legend>'."\n";
+		echo '<br />' . "\n";
+		if ($modif == 'N') echo '<fieldset><legend>Lien avec des unions</legend>' . "\n";
 		while ($enreg = $result->fetch(PDO::FETCH_ASSOC)) {
-			echo '<br />'."\n";
+			echo '<br />' . "\n";
 			if (($_SESSION['estPrivilegie']) || ($enreg['pDiff'] != 'N')) {
-				echo '<a '.Ins_Ref_Pers($enreg['pRef']).'>'.my_html($enreg['pPrenoms'].' '.$enreg['pNom']).'</a>';
+				echo '<a ' . Ins_Ref_Pers($enreg['pRef']) . '>' . my_html($enreg['pPrenoms'] . ' ' . $enreg['pNom']) . '</a>';
 			}
 			echo ' et ';
 			if (($_SESSION['estPrivilegie']) || ($enreg['mDiff'] != 'N')) {
-				echo '<a '.Ins_Ref_Pers($enreg['mRef']).'>'.my_html($enreg['mPrenoms'].' '.$enreg['mNom']).'</a>';
+				echo '<a ' . Ins_Ref_Pers($enreg['mRef']) . '>' . my_html($enreg['mPrenoms'] . ' ' . $enreg['mNom']) . '</a>';
 			}
 			// En mode modification, on va mettre un lien pour modifier la liaison (utile uniquement pour la suppression)
 			if ($modif == 'O') {
-				echo '&nbsp;<a href="Edition_Lier_Objet.php?refEvt='.$refPar.
-			                                   '&amp;refObjet='.$enreg['uRef'].
-			                                   '&amp;TypeObjet=U'.
-			                                   '">'.
-			                                   '<img src="'.$chemin_images.$Icones['fiche_edition'].'" border="0" alt="Modification lien"/></a>';
+				echo ' <a href="Edition_Lier_Objet.php?refEvt=' . $refPar .
+					'&amp;refObjet=' . $enreg['uRef'] .
+					'&amp;TypeObjet=U' .
+					'">' .
+					'<img src="' . $chemin_images . $Icones['fiche_edition'] . '" border="0" alt="Modification lien"/></a>';
 			}
-
 		}
-		if ($modif == 'N') echo '</fieldset>'."\n";
+		if ($modif == 'N') echo '</fieldset>' . "\n";
 	}
 	if ($modif == 'O') {
-	  	echo '<br /><br />Ajouter une union : ' .
-			 '<a href="Edition_Lier_Objet.php?refEvt='.$refPar.
-	                                   '&amp;refObjet=-1'.
-	                                   '&amp;TypeObjet=U'.
-	                                   '">'.
-	         '<img src="'.$chemin_images.$Icones['ajout'].'" border="0" alt="Ajouter une union"/></a>'."\n";
+		echo '<br /><br />Ajouter une union : ' .
+			'<a href="Edition_Lier_Objet.php?refEvt=' . $refPar .
+			'&amp;refObjet=-1' .
+			'&amp;TypeObjet=U' .
+			'">' .
+			'<img src="' . $chemin_images . $Icones['ajout'] . '" border="0" alt="Ajouter une union"/></a>' . "\n";
 	}
 }
 
 // Affiche un message d'erreur
-function aff_erreur($message) {
-	echo '<center><font color="red"><br /><br /><br /><h2>'.my_html($message).'</h2></font></center>';
+function aff_erreur($message)
+{
+	echo '<center><font color="red"><br /><br /><br /><h2>' . my_html($message) . '</h2></font></center>';
 }
 
 // Fonction de recherche du decujus
-// Pour le moment, recherche en base ; ‡ terme, recherche dans variable de session pour autoriser la vue personnalisÈe
-function get_decujus() {
+// Pour le moment, recherche en base ; √† terme, recherche dans variable de session pour autoriser la vue personnalis√©e
+function get_decujus()
+{
 	global $_SESSION;
 	$decujus = 0;
 	if ((!isset($_SESSION['decujus'])) or ($_SESSION['decujus'] == -1)) {
-		$sql = 'select Reference from '.nom_table('personnes').' where Numero = \'1\' limit 1';
+		$sql = 'select Reference from ' . nom_table('personnes') . ' where Numero = \'1\' limit 1';
 		if ($Res = lect_sql($sql)) {
 			if ($pers = $Res->fetch(PDO::FETCH_NUM)) {
 				$decujus = $pers[0];
@@ -2205,166 +2380,167 @@ function get_decujus() {
 			}
 			$Res->closeCursor();
 		}
-	}
-	else {
+	} else {
 		$decujus = $_SESSION['decujus'];
 	}
 	return $decujus;
 }
 
-// Affiche une entrÈe de sous-menu
-function sous_menu($url,$libelle,$niveau) {
+// Affiche une entr√©e de sous-menu
+function sous_menu($url, $libelle, $niveau)
+{
 	global $LG_Menu_Title;
 	$sep = '^^^';
-	return '1'.$sep.$url.$sep.$LG_Menu_Title[$libelle].$sep.$niveau.$sep;
+	return '1' . $sep . $url . $sep . $LG_Menu_Title[$libelle] . $sep . $niveau . $sep;
 }
 
-function aff_menu($type_menu,$droits,$formu=true) {
+function aff_menu($type_menu, $droits, $formu = true)
+{
 	global $RepGenSite, $Version, $adr_rech_gratuits, $gestionnaire,
-			$SiteGratuit,$Premium,$chemin_images,$Icones,$Base_Vide,
-			$LG_Menu_Title;
+		$SiteGratuit, $Premium, $chemin_images, $Icones, $Base_Vide,
+		$LG_Menu_Title;
 
 	/* 4 niveaux d'autorisation
-	InvitÈ       : I
-	PrivilÈgiÈ   : P
+	Invit√©       : I
+	Privil√©gi√©   : P
 	Contributeur : C
 	Gestionnaire : G
 	*/
 
-	$menu[] = '0^^^ ^^^AccËs rapide^^^C^^^';
-	$menu[] = sous_menu('Edition_Personne.php?Refer=-1','Person_Add','C');
-	$menu[] = sous_menu('Edition_Ville.php?Ident=-1','Town_Add','C');
-	$menu[] = sous_menu('Edition_Evenement.php?refPar=-1','Event_Add','C');
+	$menu[] = '0^^^ ^^^Acc√©s rapide^^^C^^^';
+	$menu[] = sous_menu('Edition_Personne.php?Refer=-1', 'Person_Add', 'C');
+	$menu[] = sous_menu('Edition_Ville.php?Ident=-1', 'Town_Add', 'C');
+	$menu[] = sous_menu('Edition_Evenement.php?refPar=-1', 'Event_Add', 'C');
 	$menu[] = '1^^^Edition_NomFam.php?idNom=-1^^^Ajouter un nom de famille ^^^C^^^';
 	if ($droits == 'G') {
 		$menu[] = '1^^^Edition_Parametres_Graphiques.php^^^Graphisme du site^^^G^^^';
 		if ($Base_Vide)
-			$menu[] = '1^^^Noyau_Pers.php^^^'.$LG_Menu_Title['Decujus_And_Family'].'^^^G^^^';
+			$menu[] = '1^^^Noyau_Pers.php^^^' . $LG_Menu_Title['Decujus_And_Family'] . '^^^G^^^';
 	}
 
 	if (!$Base_Vide) {
 		$menu[] = '0^^^ ^^^Listes des personnes^^^I^^^';
 		$menu[] = '1^^^Liste_Pers.php?Type_Liste=P^^^Par nom^^^I^^^';
-		$menu[] = '1^^^Liste_Pers_Gen.php^^^Par gÈnÈration^^^I^^^';
+		$menu[] = '1^^^Liste_Pers_Gen.php^^^Par g√©n√©ration^^^I^^^';
 		$menu[] = '1^^^Liste_Pers.php?Type_Liste=N^^^Par ville de naissance^^^I^^^';
 		$menu[] = '1^^^Liste_Pers.php?Type_Liste=M^^^Par ville de mariage^^^I^^^';
 		$menu[] = '1^^^Liste_Pers.php?Type_Liste=K^^^Par ville de contrat de mariage^^^I^^^';
-		$menu[] = '1^^^Liste_Pers.php?Type_Liste=D^^^Par ville de dÈcËs^^^I^^^';
-		$menu[] = '1^^^Liste_Pers.php?Type_Liste=C^^^Par catÈgorie^^^C^^^';
+		$menu[] = '1^^^Liste_Pers.php?Type_Liste=D^^^Par ville de d√©c√®s^^^I^^^';
+		$menu[] = '1^^^Liste_Pers.php?Type_Liste=C^^^Par cat√©gorie^^^C^^^';
 		$menu[] = '1^^^Liste_Patro.php^^^Liste patronymique^^^I^^^';
-		$menu[] = sous_menu('Liste_Eclair.php','County_List','I');
-		$menu[] = sous_menu('Liste_Nom_Vivants.php','Living_Pers','I');
+		$menu[] = sous_menu('Liste_Eclair.php', 'County_List', 'I');
+		$menu[] = sous_menu('Liste_Nom_Vivants.php', 'Living_Pers', 'I');
 		$menu[] = '1^^^Liste_NomFam.php^^^Liste des noms de famille^^^I^^^';
 	}
-	$menu[] = '0^^^ ^^^Listes des zones gÈographiques^^^I^^^';
+	$menu[] = '0^^^ ^^^Listes des zones g√©ographiques^^^I^^^';
 	$menu[] = '1^^^Liste_Villes.php?Type_Liste=S^^^Subdivisions^^^I^^^';
 	$menu[] = '1^^^Liste_Villes.php?Type_Liste=V^^^Villes^^^I^^^';
-	$menu[] = '1^^^Liste_Villes.php?Type_Liste=D^^^DÈpartements^^^I^^^';
-	$menu[] = '1^^^Liste_Villes.php?Type_Liste=R^^^RÈgions^^^I^^^';
+	$menu[] = '1^^^Liste_Villes.php?Type_Liste=D^^^D√©partements^^^I^^^';
+	$menu[] = '1^^^Liste_Villes.php?Type_Liste=R^^^R√©gions^^^I^^^';
 	$menu[] = '1^^^Liste_Villes.php?Type_Liste=P^^^Pays^^^I^^^';
 
 	$menu[] = '0^^^ ^^^Recherche^^^I^^^';
 	$menu[] = '1^^^Recherche_Personne.php^^^De personnes^^^I^^^';
 	if ((!$SiteGratuit) or ($Premium)) {
-		$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=Q^^^Liste des requÍtes sur les personnes^^^P^^^';
+		$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=Q^^^Liste des requ√™tes sur les personnes^^^P^^^';
 	}
-	$menu[] = '1^^^'.$adr_rech_gratuits.'^^^Recherche sur les sites gratuits^^^I^^^';
-	$menu[] = sous_menu('Recherche_Cousinage.php','Search_Related','I');
+	$menu[] = '1^^^' . $adr_rech_gratuits . '^^^Recherche sur les sites gratuits^^^I^^^';
+	$menu[] = sous_menu('Recherche_Cousinage.php', 'Search_Related', 'I');
 	$menu[] = '1^^^Recherche_Personne_Archive.php^^^Aux archives^^^C^^^';
 	$menu[] = '1^^^Recherche_Ville.php^^^De villes^^^I^^^';
-	$menu[] = sous_menu('Recherche_Ville.php','Town_Search','I');
-	$menu[] = sous_menu('Recherche_Commentaire.php','Search_Comment','C');
-	
+	$menu[] = sous_menu('Recherche_Ville.php', 'Town_Search', 'I');
+	$menu[] = sous_menu('Recherche_Commentaire.php', 'Search_Comment', 'C');
+
 	if ((!$SiteGratuit) or ($Premium)) {
 		$menu[] = '1^^^Recherche_Document.php^^^Dans les documents^^^C^^^';
 	}
 	$menu[] = '0^^^ ^^^Gestion des contributions^^^C^^^';
 	$menu[] = sous_menu('Liste_Contributions.php', 'Contribs_List', 'C');
 
-	$menu[] = '0^^^ ^^^Gestion des catÈgories^^^P^^^';
-	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=C^^^Liste des catÈgories^^^P^^^';
+	$menu[] = '0^^^ ^^^Gestion des cat√©gories^^^P^^^';
+	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=C^^^Liste des cat√©gories^^^P^^^';
 
-	$menu[] = '0^^^ ^^^Gestion des ÈvËnements et des relations^^^P^^^';
-	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=R^^^Liste des rÙles^^^C^^^';
-	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=T^^^Liste des types d\'ÈvËnements^^^C^^^';
-	$menu[] = sous_menu('Liste_Evenements.php','Event_List','P');
-	$menu[] = sous_menu('Liste_Evenements.php?actu=o','News_List','P');
-	$menu[] = sous_menu('Liste_Evenements.php?prof=o','Jobs_List','P');
-	$menu[] = sous_menu('Fusion_Evenements.php','Event_Merging','C');
+	$menu[] = '0^^^ ^^^Gestion des √©v√®nements et des relations^^^P^^^';
+	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=R^^^Liste des r√¥les^^^C^^^';
+	$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=T^^^Liste des types d\'√©v√®nements^^^C^^^';
+	$menu[] = sous_menu('Liste_Evenements.php', 'Event_List', 'P');
+	$menu[] = sous_menu('Liste_Evenements.php?actu=o', 'News_List', 'P');
+	$menu[] = sous_menu('Liste_Evenements.php?prof=o', 'Jobs_List', 'P');
+	$menu[] = sous_menu('Fusion_Evenements.php', 'Event_Merging', 'C');
 
 
-	// La gestion des sources et documents n'est pas autorisÈe sur les sites gratuits non Premium
+	// La gestion des sources et documents n'est pas autoris√©e sur les sites gratuits non Premium
 	if ((!$SiteGratuit) or ($Premium)) {
-		$menu[] = '0^^^ ^^^Gestion des dÈpÙts et des sources^^^C^^^';
-		$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=O^^^Liste des dÈpÙts de sources^^^C^^^';
-		$menu[] = sous_menu('Liste_Sources.php','Source_List','C');
+		$menu[] = '0^^^ ^^^Gestion des d√©p√¥ts et des sources^^^C^^^';
+		$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=O^^^Liste des d√©p√¥ts de sources^^^C^^^';
+		$menu[] = sous_menu('Liste_Sources.php', 'Source_List', 'C');
 		$menu[] = '0^^^ ^^^Documents^^^I^^^';
 		$menu[] = '1^^^Liste_Referentiel.php?Type_Liste=D^^^Liste des types de documents^^^C^^^';
-		$menu[] = sous_menu('Liste_Documents.php','Documents_List','I');
-		$menu[] = sous_menu('Galerie_Images.php','Galery','I');
+		$menu[] = sous_menu('Liste_Documents.php', 'Documents_List', 'I');
+		$menu[] = sous_menu('Galerie_Images.php', 'Galery', 'I');
 		if ((!$SiteGratuit) or ($Premium))
-			$menu[] = sous_menu('Liste_Docs_Branche.php','Galery_Branch','I');
-		$menu[] = sous_menu('Create_Multiple_Docs.php','Document_Multiple_Add','C');
+			$menu[] = sous_menu('Liste_Docs_Branche.php', 'Galery_Branch', 'I');
+		$menu[] = sous_menu('Create_Multiple_Docs.php', 'Document_Multiple_Add', 'C');
 	}
 
 	$menu[] = '0^^^ ^^^Imports - exports^^^G^^^';
 	$menu[] = '1^^^Export.php^^^Export de la base^^^G^^^';
 	$menu[] = '1^^^exp_GenWeb.php^^^Export GenWeb^^^G^^^';
-	$menu[] = sous_menu('exp_GenWeb.php','exp_GenWeb','G');
-	$menu[] = sous_menu('exp_Gedcom.php','Exp_Ged','G');
-	$menu[] = sous_menu('exp_Gedcom.php?leger=o','Exp_Ged_Light','G');
+	$menu[] = sous_menu('exp_GenWeb.php', 'exp_GenWeb', 'G');
+	$menu[] = sous_menu('exp_Gedcom.php', 'Exp_Ged', 'G');
+	$menu[] = sous_menu('exp_Gedcom.php?leger=o', 'Exp_Ged_Light', 'G');
 	$menu[] = '1^^^Import_Gedcom.php^^^Import Gedcom^^^G^^^';
-	$menu[] = sous_menu('Import_Sauvegarde.php','Import_Backup', 'G');
+	$menu[] = sous_menu('Import_Sauvegarde.php', 'Import_Backup', 'G');
 	if ((!$SiteGratuit) or ($Premium)) {
 		$menu[] = '1^^^Import_CSV.php^^^Import CSV (tableur)^^^G^^^';
-		$menu[] = sous_menu('Import_CSV_Liens.php','Imp_CSV_Links','G');
-		$menu[] = sous_menu('Import_CSV_Evenements.php','Imp_CSV_Events','G');
-		$menu[] = sous_menu('Import_CSV_Villes.php','Imp_CSV_Towns','G');
+		$menu[] = sous_menu('Import_CSV_Liens.php', 'Imp_CSV_Links', 'G');
+		$menu[] = sous_menu('Import_CSV_Evenements.php', 'Imp_CSV_Events', 'G');
+		$menu[] = sous_menu('Import_CSV_Villes.php', 'Imp_CSV_Towns', 'G');
 	}
-	$menu[] = sous_menu('Import_Docs.php','Import_Docs','G');
+	$menu[] = sous_menu('Import_Docs.php', 'Import_Docs', 'G');
 
-	$menu[] = '0^^^ ^^^VÈrifications^^^C^^^';
-	$menu[] = sous_menu('Verif_Sosa.php','Check_Sosa','C');
-	$menu[] = sous_menu('Verif_Internet.php','Internet_Cheking','C');
-	$menu[] = sous_menu('Verif_Internet_Absente.php','Internet_Hidding_Cheking','C');
-	$menu[] = sous_menu('Pers_Isolees.php','Non_Linked_Pers','C');
-	$menu[] = sous_menu('Verif_Homonymes.php','Namesake_Cheking','C');
+	$menu[] = '0^^^ ^^^V√©rifications^^^C^^^';
+	$menu[] = sous_menu('Verif_Sosa.php', 'Check_Sosa', 'C');
+	$menu[] = sous_menu('Verif_Internet.php', 'Internet_Cheking', 'C');
+	$menu[] = sous_menu('Verif_Internet_Absente.php', 'Internet_Hidding_Cheking', 'C');
+	$menu[] = sous_menu('Pers_Isolees.php', 'Non_Linked_Pers', 'C');
+	$menu[] = sous_menu('Verif_Homonymes.php', 'Namesake_Cheking', 'C');
 	if ((!$SiteGratuit) or ($Premium)) {
-		$menu[] = '1^^^Controle_Personnes.php^^^ContrÙle des personnes^^^C^^^';
+		$menu[] = '1^^^Controle_Personnes.php^^^Contr√¥le des personnes^^^C^^^';
 	}
 
-	$menu[] = '0^^^ ^^^Vue personnalisÈe^^^I^^^';
-	$menu[] = sous_menu('Vue_Personnalisee.php','Custom_View','I');
+	$menu[] = '0^^^ ^^^Vue personnalis√©e^^^I^^^';
+	$menu[] = sous_menu('Vue_Personnalisee.php', 'Custom_View', 'I');
 
 	$menu[] = '0^^^ ^^^Utilitaires^^^I^^^';
 	$menu[] = '1^^^Calendriers.php^^^Les calendriers^^^I^^^';
-	$menu[] = sous_menu('Calc_So.php','Calc_Sosa','I');
+	$menu[] = sous_menu('Calc_So.php', 'Calc_Sosa', 'I');
 	$menu[] = '1^^^Conv_Romain.php^^^Convertisseur de nombres romains^^^I^^^';
-	$menu[] = sous_menu('Init_Sosa.php','Delete_Sosa','G');
-	if (!$SiteGratuit) $menu[] = sous_menu('Init_Noms.php','Init_Names','G');
-	$menu[] = '1^^^Rectif_Utf8.php^^^'.$LG_Menu_Title['Rect_Utf'].'^^^G^^^';
+	$menu[] = sous_menu('Init_Sosa.php', 'Delete_Sosa', 'G');
+	if (!$SiteGratuit) $menu[] = sous_menu('Init_Noms.php', 'Init_Names', 'G');
+	$menu[] = '1^^^Rectif_Utf8.php^^^' . $LG_Menu_Title['Rect_Utf'] . '^^^G^^^';
 	if ((!$SiteGratuit) or ($Premium)) {
-		$menu[] = sous_menu('Calcul_Distance.php','Calculate_Distance','I');
-		$menu[] = sous_menu('Liste_Noms_Non_Ut.php','Name_Not_Used','C');
+		$menu[] = sous_menu('Calcul_Distance.php', 'Calculate_Distance', 'I');
+		$menu[] = sous_menu('Liste_Noms_Non_Ut.php', 'Name_Not_Used', 'C');
 	}
-	if (!$SiteGratuit) $menu[] = sous_menu('Infos_Tech.php','Tech_Info','G');
+	if (!$SiteGratuit) $menu[] = sous_menu('Infos_Tech.php', 'Tech_Info', 'G');
 
 	$menu[] = '0^^^ ^^^Informations^^^I^^^';
-	$menu[] = sous_menu('Premiers_Pas_Genealogie.php','Start','I');
-	$menu[] = sous_menu('Glossaire_Gen.php','Glossary','I');
-	$menu[] = sous_menu('Stat_Base.php','Statistics','I');
-	$menu[] = sous_menu('Liste_Liens.php','Links','I');
+	$menu[] = sous_menu('Premiers_Pas_Genealogie.php', 'Start', 'I');
+	$menu[] = sous_menu('Glossaire_Gen.php', 'Glossary', 'I');
+	$menu[] = sous_menu('Stat_Base.php', 'Statistics', 'I');
+	$menu[] = sous_menu('Liste_Liens.php', 'Links', 'I');
 	$menu[] = '1^^^Anniversaires.php^^^Anniversaires^^^I^^^';
 
 	$menu[] = '0^^^ ^^^Gestion du site^^^G^^^';
-	$menu[] = sous_menu('Edition_Parametres_Site.php','Site_parameters','G');
+	$menu[] = sous_menu('Edition_Parametres_Site.php', 'Site_parameters', 'G');
 	$menu[] = '1^^^Edition_Parametres_Graphiques.php^^^Graphisme du site^^^G^^^';
-	$menu[] = sous_menu('Liste_Utilisateurs.php','Users_List','G');
-	$menu[] = sous_menu('Liste_Connexions.php','Connections','G');
+	$menu[] = sous_menu('Liste_Utilisateurs.php', 'Users_List', 'G');
+	$menu[] = sous_menu('Liste_Connexions.php', 'Connections', 'G');
 	if (!$SiteGratuit) {
-		$menu[] = '1^^^http://tech.geneamania.net/Verif_Version.php?Version='.$Version.'^^^VÈrification de la version de GÈnÈamania^^^G^^^';
-		$menu[] = sous_menu('Admin_Tables.php','Tables_Admin','G');
-		$menu[] = '1^^^http://genealogies.geneamania.net/Gratuits_Premiums.php^^^DiffÈrences gratuit / Premium^^^G^^^';
+		$menu[] = '1^^^http://tech.geneamania.net/Verif_Version.php?Version=' . $Version . '^^^V√©rification de la version de G√©n√©amania^^^G^^^';
+		$menu[] = sous_menu('Admin_Tables.php', 'Tables_Admin', 'G');
+		$menu[] = '1^^^http://genealogies.geneamania.net/Gratuits_Premiums.php^^^Diff√©rences gratuit / Premium^^^G^^^';
 	}
 
 	$num_div = 0;
@@ -2372,96 +2548,145 @@ function aff_menu($type_menu,$droits,$formu=true) {
 
 	if ($type_menu == 'D') {
 		if ($formu) echo '<form method="post" action="">';
-		echo '<select name="example" size="1" onchange="document.location = this.options[this.selectedIndex].value;">'."\n";
-		echo '<option value="'.Get_Adr_Base_Ref().'index.php">Menu rapide...</option>'."\n";
-		echo '<option value="'.Get_Adr_Base_Ref().'index.php">Accueil</option>'."\n";
+		echo '<select name="example" size="1" onchange="document.location = this.options[this.selectedIndex].value;">' . "\n";
+		echo '<option value="' . Get_Adr_Base_Ref() . 'index.php">Menu rapide...</option>' . "\n";
+		echo '<option value="' . Get_Adr_Base_Ref() . 'index.php">Accueil</option>' . "\n";
 	}
 	$deb_opt  = 0;
 	$count = count($menu);
-	for ($nb = 0;$nb < $count; $nb++) {
+	for ($nb = 0; $nb < $count; $nb++) {
 		$elements = explode('^^^', $menu[$nb]);
 		$rep = '';
 		// On affiche les lignes publiques
 		// ou les autres si on a les droits
-		if ( ($elements[3] == 'I') or ($droits == $elements[3]) or ($droits == 'G') ) {
+		if (($elements[3] == 'I') or ($droits == $elements[3]) or ($droits == 'G')) {
 			if ($elements[0] == 0) {
 				if ($type_menu == 'D') {
-					if ($deb_opt) echo '</optgroup>'."\n";
-					echo '<optgroup label="'.my_html($elements[2]).'">'."\n";
-				}
-				else {
-					if ($deb_opt) echo '</div>'."\n";
-					echo '<br />'.my_html($elements[2]).'&nbsp;'."\n";
+					if ($deb_opt) echo '</optgroup>' . "\n";
+					echo '<optgroup label="' . my_html($elements[2]) . '">' . "\n";
+				} else {
+					if ($deb_opt) echo '</div>' . "\n";
+					echo '<br />' . my_html($elements[2]) . ' ' . "\n";
 					++$num_div;
-					Image_Div('menu_open','ajout'.$num_div,'FlËche','id_div'.$num_div);
+					Image_Div('menu_open', 'ajout' . $num_div, 'Fl√®che', 'id_div' . $num_div);
 				}
 				$deb_opt = 1;
-			}
-			else {
+			} else {
 				if ($type_menu == 'D') {
 					echo '<option value="';
-					echo $rep.$elements[1].'">'.my_html($elements[2]).'</option>'."\n";
+					echo $rep . $elements[1] . '">' . my_html($elements[2]) . '</option>' . "\n";
+				} else {
+					echo '   <img id="puce' . ++$num_puce . '" src="' . $chemin_images . $Icones['menu_option'] . '" alt="Puce"/>' . "\n";
+					echo '<a href="' . $rep . $rep . $elements[1] . '">' . my_html($elements[2]) . '</a><br />' . "\n";
 				}
-				else {
-					echo '&nbsp;&nbsp;&nbsp;<img id="puce'.++$num_puce.'" src="'.$chemin_images.$Icones['menu_option'].'" alt="Puce"/>'."\n";
-					echo '<a href="'.$rep.$rep.$elements[1].'">'.my_html($elements[2]).'</a><br />'."\n";				}
 			}
 		}
 	}
 	if ($type_menu == 'D') {
-		if ($deb_opt) echo '</optgroup>'."\n";
-		echo '</select>'."\n";
-		if ($formu) echo '</form>'."\n";
-	}
-	else {
-		if ($deb_opt) echo '</div>'."\n";
+		if ($deb_opt) echo '</optgroup>' . "\n";
+		echo '</select>' . "\n";
+		if ($formu) echo '</form>' . "\n";
+	} else {
+		if ($deb_opt) echo '</div>' . "\n";
 
-		// Masquage des div crÈÈs
-		echo '<script type="text/javascript">'."\n";
-		echo '<!--'."\n";
+		// Masquage des div cr√©√©s
+		echo '<script type="text/javascript">' . "\n";
+		echo '<!--' . "\n";
 		for ($x = 1; $x <= $num_div; $x++) {
-		  echo 'cache_div(\'id_div'.$x.'\');'."\n";
+			echo 'cache_div(\'id_div' . $x . '\');' . "\n";
 		}
-		echo '//-->'."\n";
-		echo '</script>'."\n";
+		echo '//-->' . "\n";
+		echo '</script>' . "\n";
 	}
 }
 
-// LibellÈ personne / filiation / union ...
-function lib_pfu ($TypeObjet,$dem_article=false) {
+// Libell√© personne / filiation / union ...
+function lib_pfu($TypeObjet, $dem_article = false)
+{
 	global $art_indet;
 	$txt = '';
 	switch ($TypeObjet) {
-		  case 'P' : $txt = 'personne'; $article = 'la '; $art_indet = 'une'; break ;
-		  case 'U' : $txt = 'union'; $article = 'l\''; $art_indet = 'une'; break ;
-		  case 'F' : $txt = 'filiation'; $article = 'la '; $art_indet = 'une'; break ;
-		  case 'E' : $txt = '&eacute;v&egrave;nement'; $article = 'l\''; $art_indet = 'un'; break ;
-		  case 'V' : $txt = 'ville'; $article = 'la '; $art_indet = 'une'; break ;
-		  case 'D' : $txt = 'd&eacute;partement'; $article = 'la '; $art_indet = 'un'; break ;
-		  case 'R' : $txt = 'r&eacute;gion'; $article = 'la '; $art_indet = 'une'; break ;
-		  case 'I' : $txt = 'image'; $article = 'l\''; $art_indet = 'une'; break ;
-		  case 'O' : $txt = 'nom'; $article = 'le '; $art_indet = 'un'; break ;
-		  case 'L' : $txt = 'lien'; $article = 'le '; $art_indet = 'un'; break ;
-		  case 'S' : $txt = 'source'; $article = 'la '; $art_indet = 'une'; break ;
-		  default:   $txt = 'autre'; $article = 'l\''; $art_indet = 'un';
+		case 'P':
+			$txt = 'personne';
+			$article = 'la ';
+			$art_indet = 'une';
+			break;
+		case 'U':
+			$txt = 'union';
+			$article = 'l\'';
+			$art_indet = 'une';
+			break;
+		case 'F':
+			$txt = 'filiation';
+			$article = 'la ';
+			$art_indet = 'une';
+			break;
+		case 'E':
+			$txt = '√©v√®nement';
+			$article = 'l\'';
+			$art_indet = 'un';
+			break;
+		case 'V':
+			$txt = 'ville';
+			$article = 'la ';
+			$art_indet = 'une';
+			break;
+		case 'D':
+			$txt = 'd√©partement';
+			$article = 'la ';
+			$art_indet = 'un';
+			break;
+		case 'R':
+			$txt = 'r√©gion';
+			$article = 'la ';
+			$art_indet = 'une';
+			break;
+		case 'I':
+			$txt = 'image';
+			$article = 'l\'';
+			$art_indet = 'une';
+			break;
+		case 'O':
+			$txt = 'nom';
+			$article = 'le ';
+			$art_indet = 'un';
+			break;
+		case 'L':
+			$txt = 'lien';
+			$article = 'le ';
+			$art_indet = 'un';
+			break;
+		case 'S':
+			$txt = 'source';
+			$article = 'la ';
+			$art_indet = 'une';
+			break;
+		default:
+			$txt = 'autre';
+			$article = 'l\'';
+			$art_indet = 'un';
 	}
-	if ($dem_article) $txt = $article.$txt;
+	if ($dem_article) $txt = $article . $txt;
 	return $txt;
 }
 
 // Colonne de titre dans un tableau
-function col_titre_tab($lib,$larg) {
-  echo '<tr><td class="label" width="'.$larg.'%">&nbsp;'.my_html(ucfirst($lib)).'&nbsp;</td>';
+function col_titre_tab($lib, $larg)
+{
+	echo '<tr><td class="label" width="' . $larg . '%"> ' . my_html(ucfirst($lib)) . ' </td>';
 }
-function col_titre_tab_noClass($lib,$larg) {
-  echo '<tr><td width="'.$larg.'%">&nbsp;'.my_html($lib).'&nbsp;</td>';
+function col_titre_tab_noClass($lib, $larg)
+{
+	echo '<tr><td width="' . $larg . '%"> ' . my_html($lib) . ' </td>';
 }
-function colonne_titre_tab($lib) {
+function colonne_titre_tab($lib)
+{
 	global $larg_titre;
-	echo col_titre_tab($lib,$larg_titre).'<td class="value">';
+	echo col_titre_tab($lib, $larg_titre) . '<td class="value">';
 }
 
-function lit_fonc_fichier() {
+function lit_fonc_fichier()
+{
 	$nom_fic = 'version.txt';
 	if (file_exists($nom_fic)) {
 		$fic = fopen($nom_fic, 'r');
@@ -2474,180 +2699,215 @@ function lit_fonc_fichier() {
 }
 
 // Affichage des noms secondaires (princ = 'N') pour la personne
-function Aff_NS($Personne,$sortie='H') {
-	$req_ns = 'SELECT b.nomFamille, a.comment FROM '.nom_table('noms_personnes').' a, '.nom_table('noms_famille').' b'.
-				' where b.idNomFam = idNom'.
-				' and a.idPers = '.$Personne.
-				' and a.princ = \'N\''.
-				' order by b.nomFamille';
+function Aff_NS($Personne, $sortie = 'H')
+{
+	$req_ns = 'SELECT b.nomFamille, a.comment FROM ' . nom_table('noms_personnes') . ' a, ' . nom_table('noms_famille') . ' b' .
+		' where b.idNomFam = idNom' .
+		' and a.idPers = ' . $Personne .
+		' and a.princ = \'N\'' .
+		' order by b.nomFamille';
 	$res_ns = lect_sql($req_ns);
 	if ($res_ns->rowCount()) {
-		HTML_ou_PDF('Noms secondaires :<br />'."\n",$sortie);
+		HTML_ou_PDF('Noms secondaires :<br />' . "\n", $sortie);
 		while ($enr_ns = $res_ns->fetch(PDO::FETCH_NUM)) {
-			HTML_ou_PDF('&nbsp;&nbsp;'.my_html($enr_ns[0]),$sortie);
-			if ($enr_ns[1] != '') HTML_ou_PDF(' ('.my_html($enr_ns[1]).')',$sortie);
-			HTML_ou_PDF('<br />'."\n",$sortie) ;
+			HTML_ou_PDF('  ' . my_html($enr_ns[0]), $sortie);
+			if ($enr_ns[1] != '') HTML_ou_PDF(' (' . my_html($enr_ns[1]) . ')', $sortie);
+			HTML_ou_PDF('<br />' . "\n", $sortie);
 		}
 	}
 }
 
-// MÈmorisation de la personne en cours de consultation ou de modification
-// Si la personne est dÈj‡ mÈmorisÈe, on ne fait rien
-function memo_pers($Refer,$Nom,$Prenoms) {
-    if ($Refer != -1) {
-    	$est_memo = false;
-    	if (isset($_SESSION['mem_pers'])) {
-	    	// DÈtection mÈmorisation antÈrieure
-	    	for ($nb = 0; $nb < 3; $nb++) {
+// M√©morisation de la personne en cours de consultation ou de modification
+// Si la personne est d√©j√† m√©moris√©e, on ne fait rien
+function memo_pers($Refer, $Nom, $Prenoms)
+{
+	if ($Refer != -1) {
+		$est_memo = false;
+		if (isset($_SESSION['mem_pers'])) {
+			// D√©tection m√©morisation ant√©rieure
+			for ($nb = 0; $nb < 3; $nb++) {
 				if ($_SESSION['mem_pers'][$nb] == $Refer) $est_memo = true;
 			}
-			// La personne n'est pas mÈmorisÈe, on la mÈmorise
+			// La personne n'est pas m√©moris√©e, on la m√©morise
 			if (!$est_memo) {
-				// On dÈcale les mÈmorisation
-	        	for ($nb = 3; $nb > 0; $nb--) {
-					$_SESSION['mem_pers'][$nb]    = $_SESSION['mem_pers'][$nb-1];
-					$_SESSION['mem_nom'][$nb]     = $_SESSION['mem_nom'][$nb-1];
-					$_SESSION['mem_prenoms'][$nb] = $_SESSION['mem_prenoms'][$nb-1];
+				// On d√©cale les m√©morisation
+				for ($nb = 3; $nb > 0; $nb--) {
+					$_SESSION['mem_pers'][$nb]    = $_SESSION['mem_pers'][$nb - 1];
+					$_SESSION['mem_nom'][$nb]     = $_SESSION['mem_nom'][$nb - 1];
+					$_SESSION['mem_prenoms'][$nb] = $_SESSION['mem_prenoms'][$nb - 1];
 				}
-				// On mÈmorise les infos courantes
+				// On m√©morise les infos courantes
 				$_SESSION['mem_pers'][0]    = $Refer;
 				$_SESSION['mem_nom'][0]     = $Nom;
 				$_SESSION['mem_prenoms'][0] = $Prenoms;
 			}
-    	}
-    }
-}
-
-// Affiche des lignes vides dans un formaulaire de saisie
-function ligne_vide_tab_form($nb_lig) {
-	for ($nb = 1; $nb <= $nb_lig; $nb++) {
-		echo '<tr><td colspan="2">&nbsp;</td></tr>'."\n";
+		}
 	}
 }
 
-// Affichage conditionnÈ des boutons ok, annuler, supprimer
-function bt_ok_an_sup($lib_ok,$lib_an,$lib_sup,$lib_conf,$dans_table=true,$suppl=false) {
+// Affiche des lignes vides dans un formaulaire de saisie
+function ligne_vide_tab_form($nb_lig)
+{
+	for ($nb = 1; $nb <= $nb_lig; $nb++) {
+		echo '<tr><td colspan="2"> </td></tr>' . "\n";
+	}
+}
+
+// Affichage conditionn√© des boutons ok, annuler, supprimer
+function bt_ok_an_sup($lib_ok, $lib_an, $lib_sup, $lib_conf, $dans_table = true, $suppl = false)
+{
 	global $chemin_images, $Icones, $lib_Retour, $lib_Annuler, $lib_Rechercher, $hidden;
 
 	if ($dans_table) echo '<tr><td colspan="2" align="center">';
-	// Lors d'un appel supplÈmentaire, il ne faut pas re-crÈer les champs cachÈs
+	// Lors d'un appel suppl√©mentaire, il ne faut pas re-cr√©er les champs cach√©s
 	if (!$suppl) {
-		echo '<input type="'.$hidden.'" name="cache" id="cache" value=""/>'."\n";
-		echo '<input type="'.$hidden.'" name="ok" id="ok" value=""/>'."\n";
-		echo '<input type="'.$hidden.'" name="annuler" id="annuler" value=""/>'."\n";
-		echo '<input type="'.$hidden.'" name="supprimer" id="supprimer" value=""/>'."\n";
+		echo '<input type="' . $hidden . '" name="cache" id="cache" value=""/>' . "\n";
+		echo '<input type="' . $hidden . '" name="ok" id="ok" value=""/>' . "\n";
+		echo '<input type="' . $hidden . '" name="annuler" id="annuler" value=""/>' . "\n";
+		echo '<input type="' . $hidden . '" name="supprimer" id="supprimer" value=""/>' . "\n";
 	}
 
 	$id_but = 'boutons';
 	if ($suppl) $id_but .= 'b';
-   	echo '<div id="'.$id_but.'">'."\n";
+	echo '<div id="' . $id_but . '">' . "\n";
 	echo '<br />';
-	echo '<table border="0" cellpadding="0" cellspacing="0">'."\n";
-	echo '<tr><td>&nbsp;';
-   	echo '<div class="buttons">';
-   	if ($lib_ok != '') {
-   		if ($lib_ok == $lib_Rechercher) $Icone = 'chercher';
-   		else $Icone = 'fiche_validee';
-	   	echo '<button type="submit" class="positive" id="bouton_ok" '.
-	   	 	'onclick="document.forms.saisie.cache.value=\'ok\';document.forms.saisie.ok.value=\''.addslashes($lib_ok).'\';"> '.
-	        '<img src="'.$chemin_images.$Icones[$Icone].'" alt=""/>'.$lib_ok.'</button>';
+	echo '<table border="0" cellpadding="0" cellspacing="0">' . "\n";
+	echo '<tr><td> ';
+	echo '<div class="buttons">';
+	if ($lib_ok != '') {
+		if ($lib_ok == $lib_Rechercher) $Icone = 'chercher';
+		else $Icone = 'fiche_validee';
+		echo '<button type="submit" class="positive" id="bouton_ok" ' .
+			'onclick="document.forms.saisie.cache.value=\'ok\';document.forms.saisie.ok.value=\'' . addslashes($lib_ok) . '\';"> ' .
+			'<img src="' . $chemin_images . $Icones[$Icone] . '" alt=""/>' . $lib_ok . '</button>';
 	}
 	if ($lib_an != '') {
 		if ($lib_an == $lib_Retour) $Icone = 'previous';
 		else $Icone = 'cancel';
-		echo '<button type="submit" '.
-			'onclick="document.forms.saisie.cache.value=\'an\';document.forms.saisie.annuler.value=\''.$lib_Annuler.'\';"> '.
-			'<img src="'.$chemin_images.$Icones[$Icone].'" alt=""/>'.$lib_an.'</button>';
+		echo '<button type="submit" ' .
+			'onclick="document.forms.saisie.cache.value=\'an\';document.forms.saisie.annuler.value=\'' . $lib_Annuler . '\';"> ' .
+			'<img src="' . $chemin_images . $Icones[$Icone] . '" alt=""/>' . $lib_an . '</button>';
 	}
 	if ($lib_sup != '')
-		echo '<button type="submit" class="negative" '.
-			'onclick="confirmer(\''.my_html($lib_conf).'\',this);"> '.
-			'<img src="'.$chemin_images.$Icones['supprimer'].'" alt=""/>'.$lib_sup.'</button>';
+		echo '<button type="submit" class="negative" ' .
+			'onclick="confirmer(\'' . my_html($lib_conf) . '\',this);"> ' .
+			'<img src="' . $chemin_images . $Icones['supprimer'] . '" alt=""/>' . $lib_sup . '</button>';
 	echo '</div>';
 
 	echo '</td></tr>';
-	echo '</table>'."\n";
-	echo '</div>'."\n";
+	echo '</table>' . "\n";
+	echo '</div>' . "\n";
 
-    if ($dans_table) echo '</td></tr>'."\n";
+	if ($dans_table) echo '</td></tr>' . "\n";
 }
 
-// Renvoye un nombre paddÈ ‡ gauche avec des zÈros (2 car) ==> jour, mois
-function zerofill2($zInitiale) {
-    return sprintf('%02s', $zInitiale);
+// Renvoye un nombre padd√© √† gauche avec des z√©ros (2 car) ==> jour, mois
+function zerofill2($zInitiale)
+{
+	return sprintf('%02s', $zInitiale);
 }
 
-// Renvoye un nombre paddÈ ‡ gauche avec des zÈros  (4 car) ==> annÈe
-function zerofill4($zInitiale) {
-    return sprintf('%04s', $zInitiale);
+// Renvoye un nombre padd√© √† gauche avec des z√©ros  (4 car) ==> ann√©e
+function zerofill4($zInitiale)
+{
+	return sprintf('%04s', $zInitiale);
 }
 
-// RÈcupÈration du microtime pour profilage de script
-function microtime_float() {
-    list($usec, $sec) = explode(" ", microtime());
-    return ((float)$usec + (float)$sec);
+// R√©cup√©ration du microtime pour profilage de script
+function microtime_float()
+{
+	list($usec, $sec) = explode(" ", microtime());
+	return ((float)$usec + (float)$sec);
 }
 
 // Affichage de l'heure
-function aff_heure() {
+function aff_heure()
+{
 	$temps = time();
 	$jour = date('j', $temps);  //format numerique : 1->31
 	$annee = date('Y', $temps); //format numerique : 4 chiffres
 	$mois = date('m', $temps);
 	$heure = date('H', $temps);
 	$minutes = date('i', $temps);
-	$secondes = date('s',$temps);
-	$date = $jour.'/'.$mois.'/'.$annee.' ‡ '.$heure.':'.$minutes.':'.$secondes.' sec';
-	echo $date.'<br />';
+	$secondes = date('s', $temps);
+	$date = $jour . '/' . $mois . '/' . $annee . ' √† ' . $heure . ':' . $minutes . ':' . $secondes . ' sec';
+	echo $date . '<br />';
 }
 
-function aff_origine() {
+function aff_origine()
+{
 	global $Horigine;
-	echo '<input type="hidden" name="Horigine" value="'.my_html($Horigine).'"/>'."\n";
+	echo '<input type="hidden" name="Horigine" value="' . my_html($Horigine) . '"/>' . "\n";
 }
 
 // Retourne le chemin d'un document en fonction de son type
-function get_chemin_docu($NatureDoc) {
+function get_chemin_docu($NatureDoc)
+{
 	global $chemin_docs_HTM, $chemin_docs_PDF, $chemin_docs_IMG, $chemin_docs_TXT;
 	switch ($NatureDoc) {
-		case 'HTM' : $chemin_docu = $chemin_docs_HTM; break;
-		case 'PDF' : $chemin_docu = $chemin_docs_PDF; break;
-		case 'IMG' : $chemin_docu = $chemin_docs_IMG; break;
-		case 'TXT' : $chemin_docu = $chemin_docs_TXT; break;
+		case 'HTM':
+			$chemin_docu = $chemin_docs_HTM;
+			break;
+		case 'PDF':
+			$chemin_docu = $chemin_docs_PDF;
+			break;
+		case 'IMG':
+			$chemin_docu = $chemin_docs_IMG;
+			break;
+		case 'TXT':
+			$chemin_docu = $chemin_docs_TXT;
+			break;
 	}
 	return $chemin_docu;
 }
 
 // Retourne le type mime d'un document en fonction de son type
-function Get_Type_Mime($NatureDoc) {
+function Get_Type_Mime($NatureDoc)
+{
 	switch ($NatureDoc) {
-		case 'HTM' : $le_type = 'text/html'; break;
-		case 'PDF' : $le_type = 'application/pdf'; break;
-		case 'IMG' : $le_type = 'image'; break;
-		case 'TXT' : $le_type = 'text'; break;
+		case 'HTM':
+			$le_type = 'text/html';
+			break;
+		case 'PDF':
+			$le_type = 'application/pdf';
+			break;
+		case 'IMG':
+			$le_type = 'image';
+			break;
+		case 'TXT':
+			$le_type = 'text';
+			break;
 	}
 	return $le_type;
 }
 
 // Renvoye le bon ordre en fonction du comportement click / mouse over
-function Survole_Clic_Div($id_div) {
+function Survole_Clic_Div($id_div)
+{
 	global $Comportement;
 	if ($Comportement == 'C') $evenement = 'onclick';
 	else $evenement = 'onmouseover';
-	return $evenement.'="inverse_div(\''.$id_div.'\');"';
+	return $evenement . '="inverse_div(\'' . $id_div . '\');"';
 }
 
-function HTML_ou_PDF($texte,$sortie,$ech=true) {
+function HTML_ou_PDF($texte, $sortie, $ech = true)
+{
 	global $pdf, $def_enc;
 	switch ($sortie) {
-		//case 'H' : if ($ech) echo $texte; else return $texte; break;
-		case 'H' : echo $texte; break;
-		case 'P' : $texte = str_replace('<br />','<br>',$texte); $pdf->WriteHTML(html_entity_decode($texte, ENT_QUOTES, $def_enc )); break;
+			//case 'H' : if ($ech) echo $texte; else return $texte; break;
+		case 'H':
+			echo $texte;
+			break;
+		case 'P':
+			$texte = str_replace('<br />', '<br>', $texte);
+			$pdf->WriteHTML(html_entity_decode($texte, ENT_QUOTES, $def_enc));
+			break;
 	}
 }
 
-// DÈtermine l'Ètat d'une personne : prÈsumÈe vivante ou non
-function determine_etat_vivant($naissance,$deces='') {
+// D√©termine l'√©tat d'une personne : pr√©sum√©e vivante ou non
+function determine_etat_vivant($naissance, $deces = '')
+{
 	global $date_lim_vivant;
 
 	// Initialisation de la variable de retour
@@ -2655,20 +2915,20 @@ function determine_etat_vivant($naissance,$deces='') {
 
 	if ($deces != '') {
 		$vivant = false;
-	}
-	else {
+	} else {
 		if (strlen($naissance) == 10) {
 			$precision = $naissance[9];
 			$calend    = $naissance[8];
-			// Les personnes nÈes sous la rÈvolution franÁaise sont dÈcÈdÈes
+			// Les personnes n√©es sous la r√©volution fran√ßaise sont d√©c√©d√©es
 			if ($calend == 'R')	$vivant = false;
 
-			// Traitement des personnes nÈes en dehors de la rÈvolution franÁaise
+			// Traitement des personnes n√©es en dehors de la r√©volution fran√ßaise
 			if ($calend == 'G') {
 				switch ($precision) {
-					case 'L' :
-					case 'A' :
-					case 'E' : if ($naissance < $date_lim_vivant) $vivant = false;
+					case 'L':
+					case 'A':
+					case 'E':
+						if ($naissance < $date_lim_vivant) $vivant = false;
 				}
 			}
 		}
@@ -2676,121 +2936,130 @@ function determine_etat_vivant($naissance,$deces='') {
 	return $vivant;
 }
 
-// Sauvegarde d'une image GD pour rÈcupÈration Èventuelle
-function sauve_img_gd($image) {
+// Sauvegarde d'une image GD pour r√©cup√©ration √©ventuelle
+function sauve_img_gd($image)
+{
 	global $Environnement, $chemin_images_util, $n_sv_img_gd;
 	// Si environnement local, sauvegarde pour utilisation externe
 	if (($Environnement == 'L') or ($n_sv_img_gd != '')) {
 		if ($n_sv_img_gd == '') $n_sv_img_gd = '__sv_img_gd.png';
-		@ImagePng($image,$chemin_images_util.$n_sv_img_gd);
+		@ImagePng($image, $chemin_images_util . $n_sv_img_gd);
 	}
 }
 
-function Affiche_Icone_Lien_Bt($lien,$icone,$lib) {
+function Affiche_Icone_Lien_Bt($lien, $icone, $lib)
+{
 	global $chemin_images, $Icones;
 	$a = '<div class="buttons">';
-	$a .= '<a '.$lien.'"><img src="'.$chemin_images.$Icones[$icone].'" alt="'.$lib.'"/> '.$lib.'</a>';
-	$a .= '</div>'."\n";
+	$a .= '<a ' . $lien . '"><img src="' . $chemin_images . $Icones[$icone] . '" alt="' . $lib . '"/> ' . $lib . '</a>';
+	$a .= '</div>' . "\n";
 	return $a;
 }
 
 // Ajout d'un bouton retour
-function Bouton_Retour($lib_Retour,$compl=''){
-	echo '<form id="saisie" method="post" action="'.my_self().$compl.'">'."\n";
+function Bouton_Retour($lib_Retour, $compl = '')
+{
+	echo '<form id="saisie" method="post" action="' . my_self() . $compl . '">' . "\n";
 	bt_ok_an_sup('', $lib_Retour, '', '', false);
 	echo '</form>';
 }
 
-// Positionne la couleur par dÈfaut pour les PDF
-function PDF_Set_Def_Color($PDF) {
+// Positionne la couleur par d√©faut pour les PDF
+function PDF_Set_Def_Color($PDF)
+{
 	global $coul_pdf, $SiteGratuit, $Premium;
-	if ((!isset($coul_pdf)) or (($SiteGratuit) and (!$Premium))){
+	if ((!isset($coul_pdf)) or (($SiteGratuit) and (!$Premium))) {
 		$coul_pdfr = 0;
 		$coul_pdfv = 0;
 		$coul_pdfb = 255;
-	}
-	else {
-		$coul_pdfr = hexdec(substr($coul_pdf,1,2));
-		$coul_pdfv = hexdec(substr($coul_pdf,3,2));
-		$coul_pdfb = hexdec(substr($coul_pdf,5,2));
+	} else {
+		$coul_pdfr = hexdec(substr($coul_pdf, 1, 2));
+		$coul_pdfv = hexdec(substr($coul_pdf, 3, 2));
+		$coul_pdfb = hexdec(substr($coul_pdf, 5, 2));
 	}
 	$PDF->SetTextColor($coul_pdfr, $coul_pdfv, $coul_pdfb);
 }
-function PDF_SetColor($PDF,$r,$v,$b) {
+function PDF_SetColor($PDF, $r, $v, $b)
+{
 	$PDF->SetTextColor($r, $v, $b);
 }
-function PDF_AddPolice($PDF) {
+function PDF_AddPolice($PDF)
+{
 	global $font_pdf, $list_font_pdf;
-	// La police ne fait pas partie des polices par dÈfaut, il faut l'installer
-	if (!array_search($font_pdf,$list_font_pdf)) {
-		$list_font_reg = array('LibreBaskerville','AguafinaScript','Parisienne');
-		if (array_search($font_pdf,$list_font_reg)) 
-			$nom_reg = $font_pdf.'-Regular.php';
+	// La police ne fait pas partie des polices par d√©faut, il faut l'installer
+	if (!array_search($font_pdf, $list_font_pdf)) {
+		$list_font_reg = array('LibreBaskerville', 'AguafinaScript', 'Parisienne');
+		if (array_search($font_pdf, $list_font_reg))
+			$nom_reg = $font_pdf . '-Regular.php';
 		else
-			$nom_reg = $font_pdf.'.php';
+			$nom_reg = $font_pdf . '.php';
 		$rep_font_pdf = 'font/';
 		//echo $rep_font_pdf.$nom_reg.'<br >';
-		if (file_exists($rep_font_pdf.$nom_reg)) {
+		if (file_exists($rep_font_pdf . $nom_reg)) {
 			//echo 'add font'.$nom_reg.'<br >';
-			$PDF->AddFont($font_pdf,'',$nom_reg);
-			if (file_exists($rep_font_pdf.$font_pdf.'-Bold.php'))
-				$PDF->AddFont($font_pdf,'B',$font_pdf.'-Bold.php');
+			$PDF->AddFont($font_pdf, '', $nom_reg);
+			if (file_exists($rep_font_pdf . $font_pdf . '-Bold.php'))
+				$PDF->AddFont($font_pdf, 'B', $font_pdf . '-Bold.php');
 			else
-				$PDF->AddFont($font_pdf,'B',$nom_reg);
-			if (file_exists($rep_font_pdf.$font_pdf.'-Italic.php'))
-				$PDF->AddFont($font_pdf,'I',$font_pdf.'-Italic.php');
+				$PDF->AddFont($font_pdf, 'B', $nom_reg);
+			if (file_exists($rep_font_pdf . $font_pdf . '-Italic.php'))
+				$PDF->AddFont($font_pdf, 'I', $font_pdf . '-Italic.php');
 			else
-				$PDF->AddFont($font_pdf,'I',$nom_reg);
-		}
-		else $font_pdf = $list_font_pdf[0];
+				$PDF->AddFont($font_pdf, 'I', $nom_reg);
+		} else $font_pdf = $list_font_pdf[0];
 	}
 }
 
 // Renvoye un Query String compatible W3C
-function Query_Str() {
-	return str_replace('&','&amp;',$_SERVER['QUERY_STRING']);
+function Query_Str()
+{
+	return str_replace('&', '&amp;', $_SERVER['QUERY_STRING']);
 }
 
 // Appel de my_html// Appel de htmlentities
-function my_html($chaine) {
+function my_html($chaine)
+{
 	global $def_enc;
 	return htmlentities($chaine, ENT_QUOTES, $def_enc);
 }
-function my_html_inv($chaine) {
+function my_html_inv($chaine)
+{
 	global $def_enc;
 	return html_entity_decode($chaine, ENT_QUOTES, $def_enc);
 }
 
-// RÈcupËre la liste des champs d'une requÍte SQL
-function get_fields($req, $enleve_descripteur) {
+// R√©cup√®re la liste des champs d'une requ√™te SQL
+function get_fields($req, $enleve_descripteur)
+{
 	$res = '';
 	$ureq = strtoupper($req);
-	$p1 = strpos($ureq,'SELECT ');
-	$p2 = strpos($ureq,' FROM ');
-	if (($p1 !== false) and ($p2!== false)) {
-		$req = substr($req,7,$p2-7);
+	$p1 = strpos($ureq, 'SELECT ');
+	$p2 = strpos($ureq, ' FROM ');
+	if (($p1 !== false) and ($p2 !== false)) {
+		$req = substr($req, 7, $p2 - 7);
 		$res = explode(",", $req);
 	}
 	if ($enleve_descripteur) {
 		$c_champs = count($res);
 		for ($nb = 0; $nb < $c_champs; $nb++) {
 			$nom_champ = $res[$nb];
-			$ppoint = strpos($nom_champ,'.');
+			$ppoint = strpos($nom_champ, '.');
 			if ($ppoint !== false)
-				$res[$nb] = substr($nom_champ,$ppoint+1);
+				$res[$nb] = substr($nom_champ, $ppoint + 1);
 		}
-
 	}
 	return $res;
 }
 
-function bouton_radio($nom, $valeur, $lib, $chk=false) {
+function bouton_radio($nom, $valeur, $lib, $chk = false)
+{
 	if ($chk) $chk = 'checked="checked"';
 	else $chk = '';
-	echo '<input type="radio" name="'.$nom.'" value="'.$valeur.'" '.$chk.'/>'.my_html($lib).'&nbsp;';
+	echo '<input type="radio" name="' . $nom . '" value="' . $valeur . '" ' . $chk . '/>' . my_html($lib) . ' ';
 }
 
-function open_log() {
+function open_log()
+{
 	global $_fputs;
 	$gz = false;
 	$_fputs = ($gz) ? @gzputs : @fputs;
@@ -2798,42 +3067,43 @@ function open_log() {
 	return $f_log;
 }
 
-function affiche_var($nom) {
+function affiche_var($nom)
+{
 	global $$nom;
 	//echo ' variable $'.$nom.' = '.$$nom.'<br />';
-	echo '$'.$nom.' = ';var_dump($$nom); echo'<br />';
+	echo '$' . $nom . ' = ';
+	var_dump($$nom);
+	echo '<br />';
 }
 
-/* Retourne le libellÈ d'une ville */
-/* P1 :numÈro de la ville ; P2 : sortie HTML du libellÈ ; P3 : recherche du commentaire sur la ville */
-function lib_ville_new($num_ville,$html='O',$rech_comment=false) {
-	global $Z_Mere,$Lat_V, $Long_V, $debug, $rech, $premier_lib_v
-			, $SiteGratuit, $Premium
-			, $villes_ref, $villes_lib
-		;
+/* Retourne le libell√© d'une ville */
+/* P1 :num√©ro de la ville ; P2 : sortie HTML du libell√© ; P3 : recherche du commentaire sur la ville */
+function lib_ville_new($num_ville, $html = 'O', $rech_comment = false)
+{
+	global $Z_Mere, $Lat_V, $Long_V, $debug, $rech, $premier_lib_v, $SiteGratuit, $Premium, $villes_ref, $villes_lib;
 	$lib = '';
 	$Z_Mere = 0;
 	$Lat_V = 0;
 	$Long_V = 0;
 	$comment = '';
 	$premier_lib_v = true;
-	// Si le libellÈ a dÈj‡ ÈtÈ demandÈ, on va chercher les infos en mÈmoire, sinon on accËde ‡ la base
+	// Si le libell√© a d√©j√† √©t√© demand√©, on va chercher les infos en m√©moire, sinon on acc√®de √† la base
 	if ($debug) {
-		echo ' <br />$num_ville 1 dans lib : '.$num_ville.'<br />';
+		echo ' <br />$num_ville 1 dans lib : ' . $num_ville . '<br />';
 		affiche_var('villes_ref');
 		affiche_var('villes_lib');
 	}
 	if (isset($villes_ref)) {
-		$rech = array_search($num_ville,$villes_ref);
+		$rech = array_search($num_ville, $villes_ref);
 		if ($rech !== false) {
 			$lib = $villes_lib[$rech];
 			$premier_lib_v = false;
 		}
 	}
-		
+
 	if ($premier_lib_v) {
 		if ($num_ville != 0) {
-			$sql = 'select nom_ville, Zone_Mere, Latitude, Longitude from '.nom_table('villes').' where identifiant_zone = '.$num_ville.' limit 1';
+			$sql = 'select nom_ville, Zone_Mere, Latitude, Longitude from ' . nom_table('villes') . ' where identifiant_zone = ' . $num_ville . ' limit 1';
 			if ($res = lect_sql($sql)) {
 				if ($enr = $res->fetch(PDO::FETCH_NUM)) {
 					if ($html == 'O') $lib = my_html($enr[0]);
@@ -2848,41 +3118,43 @@ function lib_ville_new($num_ville,$html='O',$rech_comment=false) {
 				unset($res);
 				if ((!$SiteGratuit) or ($Premium)) {
 					if ($rech_comment) {
-						$Existe_Commentaire = Rech_Commentaire($num_ville,'V');
+						$Existe_Commentaire = Rech_Commentaire($num_ville, 'V');
 					}
 				}
 			}
 		}
 		return $lib;
-	}
-	else return $lib;
+	} else return $lib;
 }
 
 // Affiche un div pour les notes
-function Div_Note($texte) {
+function Div_Note($texte)
+{
 	global $debug;
 	//return '<a href="#" class="info2">'.Affiche_Icone('note').'<span>'.$texte.'</span></a>';	
-	$strip_list = array('p','span');
+	$strip_list = array('p', 'span');
 	foreach ($strip_list as $tag) {
 		$texte = preg_replace('/<\/?' . $tag . '(.|\s)*?>/', '', $texte);
 	}
-	return '&nbsp;<span class="help-tip"><span >'.$texte.'</span></span>&nbsp;';
+	return ' <span class="help-tip"><span >' . $texte . '</span></span> ';
 }
 
-function my_self() {
+function my_self()
+{
 	return my_html($_SERVER['PHP_SELF']);
 }
 
-// Recherche d'un divorce Èventuel ; prend en entrÈe la rÈfÈrence de l'union
-function get_divorce($Reference) {
+// Recherche d'un divorce √©ventuel ; prend en entr√©e la r√©f√©rence de l'union
+function get_divorce($Reference)
+{
 	global $lib_div;
 	$retour = false;
-	$sel_div = 'SELECT "1", Debut '.
-		'FROM '.nom_table('concerne_objet').' co, '.nom_table('evenements').' ev '.
-		'where ev.Reference = co.Evenement'.
-		' and ev.Code_Type = "DIV"'.
-		' and co.Reference_Objet = '.$Reference.
-		' and co.Type_Objet = "U" '.
+	$sel_div = 'SELECT "1", Debut ' .
+		'FROM ' . nom_table('concerne_objet') . ' co, ' . nom_table('evenements') . ' ev ' .
+		'where ev.Reference = co.Evenement' .
+		' and ev.Code_Type = "DIV"' .
+		' and co.Reference_Objet = ' . $Reference .
+		' and co.Type_Objet = "U" ' .
 		'limit 1';
 	$res_div = lect_sql($sel_div);
 	$enreg_div = $res_div->fetch(PDO::FETCH_NUM);
@@ -2904,60 +3176,66 @@ Auteur : Rajesh Singh (2014)
 Site web : AssemblySys.com
  
 Si vous trouvez ce code utile, vous pouvez montrer votre
-apprÈciation ‡ Rajesh en lui offrant un cafÈ ;)
+appr√©ciation √† Rajesh en lui offrant un caf√© ;)
 PayPal: rajesh.singh@assemblysys.com
  
-Du moment que cette notice (y compris le nom et dÈtails sur l'auteur) est
-inclue et N'EST PAS ALT…R…E, ce code est distribuÈ selon la GNU General
+Du moment que cette notice (y compris le nom et d√©tails sur l'auteur) est
+inclue et N'EST PAS ALTÔøΩRÔøΩE, ce code est distribu√© selon la GNU General
 Public License version 3 : http://www.gnu.org/licenses/gpl-3.0.fr.html
 */
-function distanceCalculation($point1_lat, $point1_long, $point2_lat, $point2_long, $unit = 'km', $decimals = 2) {
-	// Calcul de la distance en degrÈs
-	$degrees = rad2deg(acos((sin(deg2rad($point1_lat))*sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat))*cos(deg2rad($point2_lat))*cos(deg2rad($point1_long-$point2_long)))));
- 
-	// Conversion de la distance en degrÈs ‡ l'unitÈ choisie (kilomËtres, milles ou milles nautiques)
-	switch($unit) {
+function distanceCalculation($point1_lat, $point1_long, $point2_lat, $point2_long, $unit = 'km', $decimals = 2)
+{
+	// Calcul de la distance en degr√©s
+	$degrees = rad2deg(acos((sin(deg2rad($point1_lat)) * sin(deg2rad($point2_lat))) + (cos(deg2rad($point1_lat)) * cos(deg2rad($point2_lat)) * cos(deg2rad($point1_long - $point2_long)))));
+
+	// Conversion de la distance en degr√©s √† l'unit√© choisie (kilom√®tres, milles ou milles nautiques)
+	switch ($unit) {
 		case 'km':
-			$distance = $degrees * 111.13384; // 1 degrÈ = 111,13384 km, sur base du diamËtre moyen de la Terre (12735 km)
+			$distance = $degrees * 111.13384; // 1 degr√© = 111,13384 km, sur base du diam√®tre moyen de la Terre (12735 km)
 			break;
 		case 'mi':
-			$distance = $degrees * 69.05482; // 1 degrÈ = 69,05482 milles, sur base du diamËtre moyen de la Terre (7913,1 milles)
+			$distance = $degrees * 69.05482; // 1 degr√© = 69,05482 milles, sur base du diam√®tre moyen de la Terre (7913,1 milles)
 			break;
 		case 'nmi':
-			$distance =  $degrees * 59.97662; // 1 degrÈ = 59.97662 milles nautiques, sur base du diamËtre moyen de la Terre (6,876.3 milles nautiques)
+			$distance =  $degrees * 59.97662; // 1 degr√© = 59.97662 milles nautiques, sur base du diam√®tre moyen de la Terre (6,876.3 milles nautiques)
 	}
 	return round($distance, $decimals);
 }
 
 // Ajoute le modificateur de nom de fichier
-function construit_fic($chemin,$nom_fic,$ext='') {
+function construit_fic($chemin, $nom_fic, $ext = '')
+{
 	global $mod_nom_fic;
-	$nom_fic = str_replace('#',$mod_nom_fic,$nom_fic);
-	$nom_fic_out = $chemin.$nom_fic;
-	if ($ext != '') $nom_fic_out .= '.'.$ext;
+	$nom_fic = str_replace('#', $mod_nom_fic, $nom_fic);
+	$nom_fic_out = $chemin . $nom_fic;
+	if ($ext != '') $nom_fic_out .= '.' . $ext;
 	return $nom_fic_out;
 }
 
-function aff_legend($lib) {
-	echo '<legend>'.my_html(ucfirst($lib)).'</legend>'."\n";
+function aff_legend($lib)
+{
+	echo '<legend>' . my_html(ucfirst($lib)) . '</legend>' . "\n";
 }
 
 // Affiche le conseil OpenStreetmap
-function aff_tip_carte() {
-	echo Affiche_Icone('tip',LG_TIP).' '.my_html(LG_TIP_OPENSTREETMAP).' <a href="http://www.OpenStreetMap.com" target="_blank">OpenStreetMap</a></td></tr>'."\n";
+function aff_tip_carte()
+{
+	echo Affiche_Icone('tip', LG_TIP) . ' ' . my_html(LG_TIP_OPENSTREETMAP) . ' <a href="http://www.OpenStreetMap.com" target="_blank">OpenStreetMap</a></td></tr>' . "\n";
 }
 
-// Demande l'affichage d'une carte OpenStreetMap si les coordonnÈes sont renseignÈes
-function appelle_carte_osm() {
+// Demande l'affichage d'une carte OpenStreetMap si les coordonn√©es sont renseign√©es
+function appelle_carte_osm()
+{
 	global $Lat_V, $Long_V, $LG_Show_On_Map;
 	if (($Lat_V != 0) or ($Long_V != 0)) {
-		echo '&nbsp;'.
-			Affiche_Icone_Lien('href="http://www.openstreetmap.org/'.'?lat='.$Lat_V.'&amp;lon='.$Long_V.'&amp;mlat='.$Lat_V.'&amp;mlon='.$Long_V.'&amp;zoom=10" target="_blank"',
-								'map_go',$LG_Show_On_Map);
+		echo ' ' .
+			Affiche_Icone_Lien(
+				'href="http://www.openstreetmap.org/' . '?lat=' . $Lat_V . '&amp;lon=' . $Long_V . '&amp;mlat=' . $Lat_V . '&amp;mlon=' . $Long_V . '&amp;zoom=10" target="_blank"',
+				'map_go',
+				$LG_Show_On_Map
+			);
 	}
 }
 
 
-header( 'content-type: text/html; charset='.$def_enc );
-
-?>
+header('content-type: text/html; charset=' . $def_enc);

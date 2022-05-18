@@ -2,7 +2,6 @@
 
 // =================================================
 // Vérification de la diffusabilité Internet absente
-// UTF-8
 // =================================================
 
 session_start();

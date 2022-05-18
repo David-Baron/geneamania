@@ -1,7 +1,6 @@
 <?php
 
 // Code commun générique pour le traitement des Gedcom
-// UTF-8
 
 // Libellé pour la France pour optimisation
 $lib_FR = '';

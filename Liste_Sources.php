@@ -1,10 +1,6 @@
 <?php
 //====================================================================
-// 
 //  Affichage de la liste des sources éventuellement par dépôt
-//
-// (c) JLS 2012
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

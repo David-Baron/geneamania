@@ -3,8 +3,6 @@
 //=====================================================================
 // Edition d'une requête
 // On ne peut que modifier le titre ou supprimer la requête
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
-// Gerard KESTER 2009
-//   FIche d'un document
-// Ajout JLS 2011
-// UTF-8
+// FIche d'un document
 //=====================================================================
 
 // Gestion standard des pages

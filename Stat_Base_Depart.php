@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
 // Statistiques de naissance, mariage et décès par département
-// (c) JLS
-// portions : Eric Lallement
-// UTF-8
 //=====================================================================
 
 session_start();

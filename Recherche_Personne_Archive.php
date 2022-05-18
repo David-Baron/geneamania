@@ -6,9 +6,6 @@
 //   - à l'écran avec les liens vers les personnes
 //   - au format texte pour impression
 //   - au format csv pour un import dans un tableur
-//
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

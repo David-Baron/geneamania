@@ -3,8 +3,6 @@
 // Fusion d'évènements
 // On peut fusionner les commentaires ayant des informations communes mais pas de commentaires
 // En effet, un seul commentaire est autorisé par évènement
-// JL Servin
-// UTF-8
 //=====================================================================
 
 function aff_nb_enr($lib1, $accord)

@@ -4,8 +4,6 @@
 // Liste patronymique
 // Tous les patronymes dans l'ascendance du de cujus sont affichés ;
 // pour chaque patronyme, on affiche les unions en descendant vers le de cujus
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -1,10 +1,7 @@
 <?php
 
 //=====================================================================
-//   Affichage d'une actualité (évènement spécialisé)
-//
-// (c) JLS 2009
-// UTF-8
+// Affichage d'une actualité (évènement spécialisé)
 //=====================================================================
 
 session_start();

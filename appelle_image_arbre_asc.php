@@ -1,5 +1,4 @@
 <?php
-// UTF-8
 // Appel de l'image générée pour un arbre ascendant
 
 session_start();

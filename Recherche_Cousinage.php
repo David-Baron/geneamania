@@ -3,8 +3,6 @@
 //=====================================================================
 // Recherche de cousinage entre 2 personnes
 // La profondeur de recherche est paramétrable $max_gen_int/$max_gen_loc
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -1,5 +1,4 @@
 <?php
-// UTF-8
 session_start();
 
 $imp_mar = 1;

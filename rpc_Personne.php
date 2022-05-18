@@ -1,7 +1,6 @@
 <?php
 
 // appelé en ajax pour avoir les personnes correspondant à un nom 
-// UTF-8
 
 include_once('fonctions.php');
 

@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
 // Edition d'une fiche filiation
-//  JL Servin
-// + G Kester : adaptations
-// UTF-8
 //=====================================================================
 
 session_start();                       // Démarrage de la session

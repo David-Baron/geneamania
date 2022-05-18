@@ -1,44 +1,5 @@
 <?php
 
-/*========================================================================================================================================
-Généamania, gestion et présentation de généalogie
-Copyright (C) 2006-2013 JL Servin
-
-This file is part of Généamania.
-
-Généamania is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
-
-Généamania is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with Généamania; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-== Traduction libre de la mention par JL Servin (non contractuelle) ==
-Ce fichier fait partie de Généamania.
-
-Généamania est un logiciel libre ; vous pouvez le redistribuer et / ou le modifier dans le cadre de licence publique générale GNU (GNU GPL)
-telle qu'elle a été publiée par la Free Software Foundation (fondation du logiciel libre) ; soit sous la version 2 de la licence, soit
-sous une version ultérieure selon votre choix.
-
-Généamania est distribué en espérant qu'il sera utile, mais SANS AUCUNE GARANTIE ;
-y compris la garantie implicite de valeur commerciale ou d'adaptation à un but particulier. Référez-vous à la Licence pour plus de détails.
-
-Vous devez avoir reçu une copie de la Licence avec Généamania. Si ce n'est pas le cas, vous pouvez en obtenir une
-en écrivant à la Free Software Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-
-== Résumé des conditions GPL (non contractuel) ==
-- Liberté d’utilisation du logiciel pour tous usages
-- Liberté d’étudier le fonctionnement du logiciel
-- Liberté de modifier, ou de faire modifier par un tiers, le logiciel
-- Liberté de copie et de redistribution illimitées de la version originale ou modifiée du logiciel
-- Obligation de respecter le droit d’auteur des développeurs du logiciel en laissant la mention de leurs noms et commentaires
-- Obligation, dans le cas où l’on publie une version modifiée du logiciel, de fournir gratuitement
-(hors frais d’enregistrement sur support physique et de distribution postale) l’accès au source à tous ceux qui en font la demande
-========================================================================================================================================*/
-// UTF-8
-
 // Initilisation des infirmations de connexion
 function Init_infos_cnx()
 {

@@ -4,7 +4,6 @@
 // - Démarrage_Rapide
 // - Prop_Design
 // Partie proposition de design
-// (c) JLS
 //=====================================================================
 
 // Graphisme

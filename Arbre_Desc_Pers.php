@@ -3,9 +3,6 @@
 //=====================================================================
 // Arbre descendant d'une personne
 // La sortie peut s'effectuer au format HTML ou au format texte
-//  JL Servin
-// + G Kester : adaptations
-// UTF-8
 //=====================================================================
 
 session_start();

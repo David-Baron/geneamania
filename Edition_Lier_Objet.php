@@ -2,12 +2,10 @@
 
 //=====================================================================
 // Lien d'un évènement à un objet (union ou filiation)
-//   Jean-Luc Servin mars 2007
 // Parametres a renseigner :
 // - refEvt : évènement (mettre -1 pour creer un lien depuis 1 fiche filiation ou union)
 // - refObjet : objet concerné (mettre -1 pour creer un lien depuis 1 fiche évènement)
 // - TypeObjet : type de l'objet concerné
-// UTF-8
 //=====================================================================
 
 session_start();

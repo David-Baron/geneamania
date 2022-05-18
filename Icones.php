@@ -1,5 +1,5 @@
 <?php
-// UTF-8
+
 // Déclaration des icones utilisées par l'application
 
 $Icones['home'] = 'house.png';

@@ -1,20 +1,19 @@
 <?php
 //=====================================================================
 // Affichage d'un document, quel que soit sa nature
-// JG�rard 2009
-//	param�tre : refDoc = r�f�rence du document � afficher
+//	paramètre : refDoc = référence du document à afficher
 //=====================================================================
 
 // Gestion standard des pages
-session_start();                       // D�marrage de la session
+session_start();                       // Démarrage de la session
 
-include('fonctions.php');              // Appel des fonctions g�n�rales
-$acces = 'L';                          // Type d'acc�s de la page : (M)ise � jour, (L)ecture
+include('fonctions.php');              // Appel des fonctions générales
+$acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Voir un document'; 		   // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
 include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
-// R�cup�ration des variables de l'affichage pr�c�dent
+// Récupération des variables de l'affichage précédent
 $tab_variables = array('Horigine');
 foreach ($tab_variables as $nom_variables) {
   if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
@@ -22,7 +21,7 @@ foreach ($tab_variables as $nom_variables) {
 }
 $Horigine = Secur_Variable_Post($Horigine,100,'S');
 
-// Recup de la variable pass�e dans l'URL : r�f�rence de la personne
+// Recup de la variable passée dans l'URL : référence de la personne
 $refDoc = Recup_Variable('refDoc','N');
 
 $compl = "";

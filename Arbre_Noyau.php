@@ -4,8 +4,6 @@
 // Parents des conjoints
 // Conjoints
 // Enfants du couple
-// (c) JL Servin
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -2,8 +2,6 @@
 //=====================================================================
 // Statistiques de la base
 // et lien vers d'autres pages de statistiques
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

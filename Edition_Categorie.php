@@ -1,8 +1,6 @@
 <?php
 //=====================================================================
 // Edition d'une catégorie ; pas de création ni de suppression possible
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

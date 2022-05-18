@@ -1,7 +1,6 @@
 <?php
 //=====================================================================
 // Affichage d'un camembert de statistiques
-// (c) JL Servin
 // Paramètres :
 // - $data : liste des données séparées par des *
 // - $labels : liste des libellés séparées par des *
@@ -11,7 +10,6 @@
 // - suffixe : pour le nom du canvas
 // - $larg_legende : largeur en pixels pris par la légende à droite
 // - $texte_ajout : texte constant à afficher sur les lignes de légendes
-// UTF-8
 //=====================================================================
 
 function aff_degrade($datas, $labels, $couleur, $larg_image, $haut_image, $suffixe, $larg_legende, $texte_ajout) {

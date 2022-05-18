@@ -4,8 +4,6 @@
 // - Calcul du jour de la semaine
 // - Conversion de calendrier républicain
 // - Calcul de la date de Pâques et des dates associées
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

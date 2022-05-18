@@ -3,7 +3,6 @@
 //=====================================================================
 // Cette page permet à un utilisateur d'obtenir une vue personnalisée 
 // de la base à partir de la fiche d'une personne
-// UTF-8
 //=====================================================================
 
 session_start();

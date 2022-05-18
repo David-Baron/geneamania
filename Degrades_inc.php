@@ -1,5 +1,4 @@
 <?php
-// UTF-8
 
 // Déclaration des dégradés de couleurs
 

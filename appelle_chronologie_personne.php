@@ -3,9 +3,7 @@ session_start();
 
 //=====================================================================
 // Frise Chronologique
-// (c) JLS
 // Pour les évènements de la personne et les dates de naissance des enfants
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

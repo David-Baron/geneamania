@@ -3,8 +3,6 @@
 //=====================================================================
 // Liste des liens ; ceux-ci sont regroupés par type lors de l'affichage
 // Une image éventuelle est associée à chaque lien
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

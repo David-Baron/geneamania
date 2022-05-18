@@ -1,11 +1,6 @@
 <?php
 //====================================================================
-// 
 //  Affichage de la liste des documents éventuellement par type
-//
-// (c) Gérard 2009
-// Ajouts JLS 2010
-// UTF-8
 //=====================================================================
 
 session_start();

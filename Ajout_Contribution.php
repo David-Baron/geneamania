@@ -3,9 +3,6 @@
 //=====================================================================
 // Ajout contribution
 // Un utilisateur du net peut poster des contributions pour une personne
-// JL Servin
-//  + G Kester pour parties
-// UTF-8
 //=====================================================================
 
 session_start();

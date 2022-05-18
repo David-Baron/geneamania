@@ -3,8 +3,6 @@ session_start();
 
 //=====================================================================
 // Affichage d'un arbre en PDF
-// Par Eric Lallement, ajouts JLS
-// UTF-8
 //=====================================================================
 
 include('fonctions.php');

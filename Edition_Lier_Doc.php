@@ -2,14 +2,11 @@
 
 //=====================================================================
 // Lien d'un objet à un document
-// (c) gérard 2009
-// intégration JLS
 // Parametres à renseigner :
 // - refObjet : référence de l'objet
 // - typeObjet : P => personne - U => union - F => filiation
 //               V => ville - E => évènement
 // - refDoc : référence du document (-1 pour la création du lien)
-// UTF-8
 //=====================================================================
 
 session_start();

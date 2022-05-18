@@ -1,7 +1,6 @@
 <?php
 
 // Rectification UTF_8, partie commune
-// UTF-8
 
 function rectif_UTF8() {
 	global $nb_req;

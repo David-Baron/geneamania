@@ -1,11 +1,5 @@
 <?php
 
-//===========================================
-// Gerard KESTER le 02/11/2006
-// intégration et compléments : JLS
-// UTF-8
-//===========================================
-
 session_start();
 
 // Récupération des variables de l'affichage précédent

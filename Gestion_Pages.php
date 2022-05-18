@@ -2,7 +2,6 @@
 
 // Gestion de l'empilage des pages
 // + entete + javascript
-// UTF-8
 
 // Entête de document des pages
 function Ecrit_Entete_Page($titre,$contenu,$mots,$index_follow='IF') {

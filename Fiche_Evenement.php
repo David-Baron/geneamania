@@ -1,10 +1,6 @@
 <?php
 //=====================================================================
-// Gerard KESTER Mars 2007
 //   Affichage d'un évènement
-//
-// Intégration et ajouts JL Servin
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

@@ -1,10 +1,6 @@
 <?php
 //=====================================================================
 // Complétude des personnes par génération
-// (c) Christophe G
-// JLS ajout et intégration
-// mbuono - nov 2017 ajout d'un pourcentage par rapport à la génération précédente
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -2,11 +2,9 @@
 
 //=====================================================================
 // Lien d'une personne à un nom secondaire
-// (c) JLS
 // Parametres à renseigner :
 // - refPers : référence de la personne
 // - refNom : référence du nom (-1 pour la création du lien)
-// UTF-8
 //=====================================================================
 
 session_start();

@@ -3,8 +3,6 @@
 //=====================================================================
 // Affichage de l'historique du nombre d'enfants par femme
 // en fonction de l'année de naissance
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

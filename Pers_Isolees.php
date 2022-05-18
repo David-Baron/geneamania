@@ -3,8 +3,6 @@
 //=====================================================================
 // Liste des personnes isolées
 // c'est à dire non référencées dans les unions, filiations ou liens personnes
-// JL Servin mars 2007
-// UTF-8
 //=====================================================================
 
 session_start();

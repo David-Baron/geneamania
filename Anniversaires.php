@@ -2,9 +2,6 @@
 //=====================================================================
 // Affichage des anniversaires de naissance, mariage et décès
 // du mois en cours
-//  JL Servin
-// + G Kester : adaptations
-// UTF-8
 //=====================================================================
 
 session_start();

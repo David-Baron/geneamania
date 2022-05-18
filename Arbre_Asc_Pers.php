@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
 // Arbre ascendant d'une personne
-//  JL Servin
-// + G Kester : adaptations
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

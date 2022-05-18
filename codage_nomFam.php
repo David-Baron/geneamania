@@ -1,5 +1,4 @@
 <?php
-// UTF-8
 
 include('phonetique.php');	//	Appel de la classe de codage phonétique
 

@@ -2,8 +2,6 @@
 //=====================================================================
 // Import d'une sauvegarde de la base
 // éventuellement sur une base distante
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

@@ -1,10 +1,6 @@
 <?php
 //====================================================================
-//
 //  Affichage de la liste des évènements éventuellement par type
-//
-// (c) JLS 2008
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

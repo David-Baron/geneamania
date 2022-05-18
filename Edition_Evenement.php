@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
-// Gerard KESTER    Fevrier 2007
-// JLS              mai 2008 pour version > 2.2
 // Création et modification d'un evenement
-// UTF-8
 //=====================================================================
 
 session_start();

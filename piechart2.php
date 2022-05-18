@@ -1,7 +1,6 @@
 <?php
 //=====================================================================
 // Affichage d'un camembert de statistiques
-// (c) JL Servin
 // Paramètres :
 // - $data : liste des données séparées par des *
 // - $label : liste des libellés séparées par des *

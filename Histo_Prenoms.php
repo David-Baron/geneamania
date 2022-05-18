@@ -3,8 +3,6 @@
 //=====================================================================
 // Prénoms au cours du temps en fonction de l'année de naissance
 // ==> prénoms les plus portés pour les hommes et les femmes
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

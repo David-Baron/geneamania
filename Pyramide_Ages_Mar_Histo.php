@@ -4,8 +4,6 @@
 // Affichage de l'historique de l'âge au 1er mariage 
 // pour les femmes et les hommes
 // en fonction de l'année de naissance
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

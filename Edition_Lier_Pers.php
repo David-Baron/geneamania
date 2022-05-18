@@ -1,16 +1,11 @@
 <?php
 
 //=====================================================================
-// Gerard KESTER    Mars 2007
-//   Lien entre deux persones
+// Lien entre deux persones
 // Parametres a renseigner :
 // - refPers1 : la reference de la 1re personne
 // - refPers2 : la reference de la 2e personne (mettre -1 pour creer un lien)
 // - refRolePar : l'identifiant de la table role
-//
-// Intégration et révision JL Servin : mars 2007
-//
-// UTF-8
 //=====================================================================
 
 session_start();

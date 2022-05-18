@@ -3,13 +3,11 @@ session_start();
 
 //=====================================================================
 // Lien d'un objet à une source
-// (c) JLS 2012
 // Parametres à renseigner :
 // - refObjet : référence de l'objet
 // - typeObjet : P => personne - E => évènement - U => union - F => filiation
 //               V => ville
 // - refSrc : référence de la source (-1 pour la création du lien)
-// UTF-8
 //=====================================================================
 
 function Lire_Nom_Prenoms_Unions($refUnion)

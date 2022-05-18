@@ -1,7 +1,6 @@
 <?php
 
 // Coordonnées des départements français
-// UTF-8
 
 $coord = array(
     '01' => '310,220',

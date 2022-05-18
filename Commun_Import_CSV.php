@@ -1,6 +1,5 @@
 <?php
 // Code commun générique pour l'import d'un fichier CSV
-// UTF-8
 
 function insert_champs()
 {

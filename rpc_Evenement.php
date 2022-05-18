@@ -1,7 +1,6 @@
 <?php
 
 // appelé en ajax pour avoir les évènements correspondant à un type
-// UTF-8
 
 include_once('fonctions.php');
 

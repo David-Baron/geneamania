@@ -2,8 +2,6 @@
 //====================================================================
 // Ré-initialisation des noms, au cas où certains imports fonctionnent mal...
 // L'identifiant est alors à null
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

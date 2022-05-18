@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
 // Exportation au format Gedcom d'une personne
-//  JL Servin
-// + G Kester : adaptations
-// UTF-8
 //=====================================================================
 
 session_start();

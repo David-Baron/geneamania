@@ -2,13 +2,11 @@
 //=====================================================================
 //	Vérification si un nom de famille existe ou non dans la base
 //		utilisé dans Edition_NomFam.php
-// (c) Gérard KESTER - Mai 2009
 //=====================================================================
 //	Retourne :
 //		Erreur si les paramètres sont mal passés
 //		L'identifiant si le nom de famille existe
 //		OK si le nom de famille n'existe pas
-// UTF-8
 //=====================================================================
 session_start();
 

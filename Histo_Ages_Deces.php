@@ -3,8 +3,6 @@
 //=====================================================================
 // Répartition des âges de décès sur une période donnée
 // en fonction de l'année de naissance
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

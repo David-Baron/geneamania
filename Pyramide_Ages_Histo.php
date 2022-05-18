@@ -3,8 +3,6 @@
 //=====================================================================
 // Affichage de l'historique de l'âge au décès pour les femmes et le hommes
 // en fonction de l'année de naissance
-// (c) JLS
-// UTF-8
 //=====================================================================
 
 session_start();

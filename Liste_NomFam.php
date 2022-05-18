@@ -1,9 +1,6 @@
 <?php
 //=====================================================================
 // Liste des noms de famille
-// (c) Gérard KESTER - Avril 2009
-// Intégration JLS
-// UTF-8
 //=====================================================================
 
 // Gestion standard des pages

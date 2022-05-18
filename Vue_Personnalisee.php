@@ -3,7 +3,6 @@
 //=====================================================================
 // Cette page permet à un utilisateur d'obtenir une vue personnalisée de la base
 // Pour cela, il choisit le de cujus sui peut être différent de celui prévu par le gestionnaire du site
-// UTF-8
 //=====================================================================
 
 session_start();

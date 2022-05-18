@@ -2,7 +2,6 @@
 
 // Génération de l'image pour la carte
 // Appelé par appelle_image_france_dep.php
-// UTF-8
 
 session_start();
 

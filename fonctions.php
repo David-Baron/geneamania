@@ -340,7 +340,10 @@ function Retourne_Date_CSV($la_date)
 	return $ret;
 }
 
-/* Lit l'environnement en cours : Local ou Internet */
+/**
+ * Lit l'environnement en cours : Local ou Internet
+ * Database connection
+ */
 function Lit_Env()
 {
 	global $db, $linkid,
@@ -355,7 +358,7 @@ function Lit_Env()
 		$Base_Vide,
 		$connexion, $def_enc;
 	$Acces = 0;
-	include('connexion_inc.php');
+	include __DIR__ .'/config/database.php';
 	if ($ndb != '') {
 		$db      = $ndb;
 		$util    = $nutil;

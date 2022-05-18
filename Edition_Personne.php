@@ -763,10 +763,9 @@ if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 
 	// Récupération de la liste des types
 	Recup_Types_Evt('P');
-
-	include('jscripts/Edition_Personne.js');
-	include('jscripts/Ajout_Evenement.js');
-	include('Insert_Tiny.js');
+	echo '<script src="jscripts/Edition_Personne.js"></script>';
+	echo '<script src="jscripts/Ajout_Evenement.js"></script>';
+	echo '<script src="Insert_Tiny.js"></script>';
 
 	// Récupération des données de la personne
 	$sql = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Refer . ' limit 1';
@@ -834,7 +833,7 @@ if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 	echo "<body bgcolor=\"#FFFFFF\">";
 }
 
-include('gest_onglets.js');
+echo '<script src="gest_onglets.js"></script>';
 ?>
 
 <!-- On cache les div d'ajout des villes et du nom et on positionne l'onglet par défaut -->

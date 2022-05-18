@@ -37,7 +37,7 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 if ($Ident != -1) $titre = $LG_Menu_Title['Town_Edit'];
 else $titre = $LG_Menu_Title['Town_Add'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');
+include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
@@ -386,7 +386,7 @@ if (($ok == '') && ($annuler == '')) {
 	}
 	Insere_Bas($compl);
 }
-include('gest_onglets.js');
+echo '<script src="gest_onglets.js"></script>';
 
 function champ_carte($libelle, $nom_champ, $valeur)
 {

@@ -122,7 +122,7 @@
 	$msgMaj = '';
 	$msgEff = '';
 
-	include_once('fonctions.php');
+	include_once __DIR__ .'/fonctions.php';
 
 	// Lit la version contenu dans le fichier de référence
 	$LaVersion = lit_fonc_fichier();
@@ -182,7 +182,7 @@
 	// L'utilisateur a cliqué sur Mettre à jour les paramètres
 	if ($majparam == 'Mettre à jour') {
 		$gz = false;
-		$nom_fic = 'connexion_inc.php';
+		$nom_fic = 'config/database.php';
 		if ($gz) $fp1 = @gzopen($nom_fic, "wb");
 		else $fp1 = fopen($nom_fic, "wb");
 		if (!$fp1) die("impossible de créer $nom_fic.");
@@ -205,7 +205,7 @@
 
 	// L'utilsateur a cliqué sur Initialisation
 	if ($maj == 'Initialisation') {
-		include_once('connexion_inc.php');
+		include_once __DIR__ .'/config/database.php';
 		$cnx = db_connect($nserveur, $ndb, $nutil, $nmdp);
 		if ($cnx) {
 			// Ecriture du fichier de préfixe en cas de changement de préfixe
@@ -277,7 +277,7 @@
 		$n_evenements   = nom_table('evenements');
 		$n_images       = nom_table('images');
 
-		include_once('connexion_inc.php');
+		include_once __DIR__ .'/config/database.php';
 		$cnx = db_connect($nserveur, $ndb, $nutil, $nmdp);
 		if ($msg == $msg_cnx_ok) $msg = '';
 
@@ -1532,7 +1532,7 @@
 		$msgMod = $msg;
 	}
 
-	include_once('connexion_inc.php');
+	include_once __DIR__ .'/config/database.php';
 	if (!$cnx) {
 		// Les paramètres de connexion sont-ils OK ?
 		$cnx = db_connect($nserveur, $ndb, $nutil, $nmdp);

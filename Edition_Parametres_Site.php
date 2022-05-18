@@ -140,7 +140,7 @@ if ($bt_OK) {
 // Première entrée : affichage pour saisie
 if ((!$bt_OK) && (!$bt_An)) {
 
-	include('jscripts/Edition_Parametres_Graphiques.js');
+	echo '<script src="jscripts/Edition_Parametres_Graphiques.js"></script>'; //include('jscripts/Edition_Parametres_Graphiques.js');
 	include('Insert_Tiny.js');
 
 	$compl = Ajoute_Page_Info(600, 150);

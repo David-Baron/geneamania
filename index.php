@@ -85,11 +85,12 @@ if ($geneGraphe == 'exec') {
 
 $_SESSION['sens'] = '>';
 
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . "\n" .
-	'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+/* echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . "\n" .
+	'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'; */
+echo '<!DOCTYPE html>';
 echo '<html>' . "\n";
 echo '<head>' . "\n";
-
+echo '<meta charset=UTF-8"/>' . "\n";
 // On vide l'empilement des pages
 if (isset($_SESSION['pages'])) unset($_SESSION['pages']);
 
@@ -293,12 +294,13 @@ echo '</table>' . "\n";
 // Menus...
 if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 
-	$Existe_Commentaire = false;
+	// TODO: ERR:1 cause break in front
+	/* $Existe_Commentaire = false;
 	$Presence_Commentaire = Rech_Commentaire(0, 'G');
 	if (($Presence_Commentaire) and (($_SESSION['estPrivilegie']) or ($Diffusion_Commentaire_Internet == 'O'))) {
 		$anniv_comment = true;
 		$Existe_Commentaire = true;
-	}
+	} */
 
 	// Récupération des anniversaires de naissance du jour et du lendemain
 	$nbAuj    = 0;
@@ -418,7 +420,8 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 	}
 
 	// Affichage du commentaire et de l'image
-	$Existe_Image_Gen = ($Image_Index != '') ? true : false;
+	// TODO: ERR:1 cause break in front
+	/* $Existe_Image_Gen = ($Image_Index != '') ? true : false;
 	if (!file_exists($chemin_images_util . $Image_Index)) $Existe_Image_Gen = false;
 	if ($Existe_Commentaire or $Existe_Image_Gen) {
 		if ($Existe_Commentaire and $Existe_Image_Gen)
@@ -438,15 +441,17 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 			echo '</td>';
 		}
 		echo '</tr></table>' . "\n";
-	}
+	} */
 	$date_mod = '';
 	if ($Modif_Site != '0000-00-00 00:00:00') {
 		$date_mod = my_html($LG_index_last_update) . ' ' . DateTime_Fr($Modif_Site);
 	}
 
+
+	//============================================================ DEPRECATED =========================================================================
 	// Affichage des actualités
 	// On va chercher en base les actualités ; pour les sites gratuits non Premium, les actualités sont centralisées (préfixe spécial)
-	$memo_pref = $pref_tables;
+	/* $memo_pref = $pref_tables;
 	if (($SiteGratuit) and (!$Premium)) $pref_tables = 'gra_sg_';
 	$requete = 'SELECT Reference , Titre, Debut, Fin, Identifiant_zone ' . 'from ' . nom_table('evenements') .
 		' where Code_Type = "' . $TypeEv_actu . '" ORDER BY Reference desc limit 4';
@@ -462,6 +467,7 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 	echo '<tr><td>' . "\n";
 	echo '<div id="liste">';
 	echo '<ul class="puces">';
+
 	// if ($date_mod != '') {
 	// echo '<li>'.$date_mod.'</li>';
 	// }
@@ -488,7 +494,7 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 	echo '</div>';
 	echo '</td>';
 	//echo '<td> </td>';
-	echo '<td';
+	echo '<td'; 
 	if ($nbAuj or $nbDemain or ($date_mod != ''))
 		echo ' rowspan="2"';
 	echo '>';
@@ -533,7 +539,8 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 		}
 		echo '</td></tr>';
 	}
-	echo '</table>';
+	echo '</table>';*/
+	//================================================================ END DEPREATED ============================================================
 } else {
 	if ($vers_fic != $Version) {
 		echo '<br />';
@@ -552,12 +559,13 @@ if (!isset($_SESSION['decujus'])) {
 if ($vers_fic == $Version) {
 	echo '<table width="80%" align="center">' . "\n";
 	echo '<tr>';
-	echo '<td width="30%" align="center" valign="middle">' . "\n";
+	// ============================================================ DEPRECATED ===================================================================
+	/* echo '<td width="30%" align="center" valign="middle">' . "\n";
 	echo Affiche_Icone('email', 'Mail') . ' ';
 	echo '<a href="mailto:' . cryptmail($Adresse_Mail) . '">' . str_replace('@', '-AT-', $Adresse_Mail) . '</a>' . "\n";
 	echo Affiche_Icone('email', 'Mail');
-	echo '</td>' . "\n";
-
+	echo '</td>' . "\n"; */
+	// ============================================================ END DEPRECATED ===================================================================
 	echo '<td width="30%" align="center" valign="middle">' . "\n";
 
 	// Affichage du formulaire de saisie de code utilisateur ; uniquement sur internet
@@ -597,14 +605,18 @@ if ($vers_fic == $Version) {
 			}
 		}
 		// Site verrouillé
-		else {
+		// ============================================================ DEPRECATED ===================================================================
+		/* else {
 			echo '<tr align="center"><td colspan="2"><font color="red" size="+2"><br />' . my_html($LG_index_contact_support) . '</font></td></tr>';
-		}
+		} */
+		// ============================================================ END DEPRECATED ===================================================================
 		echo '</table>';
 		echo '</form>' . "\n";
 	}
+
+	// ============================================================ DEPRECATED ===================================================================
 	// En local, on offre la possibilité d'appeler GénéGraphe si celui-ci est présent sur le poste de travail
-	else {
+	/* 	else {
 		if (file_exists('GeneGraphe.jar')) {
 			echo '<form id="f1" action="' . $self . '" method="post">' . "\n";
 			echo '<input type="hidden" name="geneGraphe" value="exec"/>' . "\n";
@@ -614,16 +626,20 @@ if ($vers_fic == $Version) {
 			echo ' ' . Affiche_Icone_Lien('href="' . $RepGenSite . 'documentation/index.php" target="_blank"', 'help', $LG_index_doc_genegraphe);
 			echo '</form>' . "\n";
 		}
-	}
-
+	} */
+	// ============================================================ END DEPRECATED ===================================================================
 	echo '</td>' . "\n";
-	echo '<td align="center" valign="middle">' . my_html($LG_help) . ' G&eacute;n&eacute;amania ' . "\n";
-	echo Affiche_Icone_Lien('href="' . $RepGenSite . 'Aide_Geneamania.php"', 'help', $LG_help . ' Généamania');
-	echo '</td></tr>' . "\n";
+	// ============================================================ DEPRECATED ===================================================================
+	//echo '<td align="center" valign="middle">' . my_html($LG_help) . ' Généamania ' . "\n";
+	//echo Affiche_Icone_Lien('href="' . $RepGenSite . 'Aide_Geneamania.php"', 'help', $LG_help . ' Généamania');
+	//echo '</td>' . "\n";
+	// ============================================================ END DEPRECATED ===================================================================
+	echo '</tr>' . "\n";
 
-	if ($SiteGratuit)
-		echo '<tr><td colspan="3" align="center"><i>' . my_html($LG_index_responsability) . '</i></td></tr>' . "\n";
-
+	// ============================================================ DEPRECATED ===================================================================
+	/* if ($SiteGratuit)
+		echo '<tr><td colspan="3" align="center"><i>' . my_html($LG_index_responsability) . '</i></td></tr>' . "\n"; */
+	// ============================================================ END DEPRECATED ===================================================================
 	echo '</table>' . "\n";
 }
 
@@ -636,6 +652,7 @@ echo 'Pages mémo : '.count($_SESSION['pages']).'<br />';
 for ($nb=0;$nb<count($_SESSION['pages']);$nb++) echo 'Page '.$nb.' : '.$_SESSION['pages'][$nb]."<br />\n";
 */
 
+// @Deprecated Don't use sha encryption anymore!
 include 'jscripts/ctrlMotPasse.js';
 ?>
 </body>

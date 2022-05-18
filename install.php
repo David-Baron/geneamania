@@ -1,11 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="fr">
 
 <head>
 	<?php
-
-	// UTF-8
-
 	$cnx = false;
 	$msg_cnx_ok = 'Connexion OK';
 
@@ -13,7 +10,6 @@
 	{
 		global $msg, $connexion, $msg_cnx_ok;
 		$cnx = false;
-		//echo $host.'/'.$dbname.'/'.$user.'/'.$pswd.'<br />';
 		$msg = $msg_cnx_ok;
 		try {
 			$connexion = new PDO("mysql:host=$host;dbname=$dbname", $user, $pswd);
@@ -21,7 +17,6 @@
 		} catch (PDOException $ex) {
 			$msg = 'Echec de la connexion à la base de donnnées !' . $ex->getMessage();
 		}
-		//if ($connexion) echo 'OK<br />'; else echo 'échec<br />';
 		return $cnx;
 	}
 
@@ -42,7 +37,7 @@
 			copy('Images/index.html', $nom_rep . '/index.html');
 		}
 		if (!is_writable($nom_rep)) {
-			echo 'Le r&acute;pertoire ' . $nom_rep . 'n\'est pas accessible en écriture ; veuillez corriger le problème.';
+			echo 'Le répertoire ' . $nom_rep . 'n\'est pas accessible en écriture ; veuillez corriger le problème.';
 		}
 	}
 
@@ -1496,6 +1491,10 @@
 
 			if ($Num_Gen == '2021.06 RC 1') {
 				$Num_Gen = req_maj_vers('2021.06');
+			}
+
+			if ($Num_Gen == '2021.06') {
+				$Num_Gen = req_maj_vers('2021.06#0001');
 			}
 
 			// Rectifications

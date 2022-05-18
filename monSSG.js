@@ -1,4 +1,5 @@
-// Ouverture d'une fen�tre
+<script type="text/javascript">
+// Ouverture d'une fenêtre
 function PopupCentrer(page,largeur,hauteur,options) {
 	var top=(screen.height-hauteur)/2;
 	var left=(screen.width-largeur)/2;
@@ -24,7 +25,7 @@ function inverse_div(id_div) {
 	else cache_div(id_div);
 }
 
-// En fonction du comportement autoris�, on va inverser la visibilit� du div
+// En fonction du comportement autorisé, on va inverser la visibilité du div
 function Survole_Clic_Div(id_div,evenement,comportement) {
 	if (
 		((evenement == 'CL') && (comportement == 'C'))
@@ -49,8 +50,8 @@ function pair(nombre) {
 	return ((nombre-1)%2);
 }
 
-// Etend le num�ro Sosa s'il commence par '='
-// Fonctions support�es : p�re, m�re, enfant ; le tout en ligne directe d'ascendance
+// Etend le numéro Sosa s'il commence par '='
+// Fonctions supportées : père, mère, enfant ; le tout en ligne directe d'ascendance
 function etend_num_sosa() {
 	var contenu = document.getElementById("NumeroP").value;
 	var l_contenu = contenu.length;
@@ -78,8 +79,8 @@ function etend_num_sosa() {
 }
 
 // Ajout d'une valeur dans 2 select
-// Dans le 1er, la valeur est ajout�e � la fin, dans le 2�me, la valeur est ins�r�e tri�e
-// Pas r�ussi � trier dans le 1er en affichant la valeur en retour ; select OK mais valeur non affich�e dans FF 20 ;-(
+// Dans le 1er, la valeur est ajoutée à la fin, dans le 2ème, la valeur est insérée triée
+// Pas réussi à trier dans le 1er en affichant la valeur en retour ; select OK mais valeur non affichée dans FF 20 ;-(
 function Insert_Sel_1_2(NomSel1, NomSel2, nouv_val) {
 	var n_sel = document.getElementById(NomSel1);
 	n_sel.options[n_sel.length] = new Option(nouv_val,nouv_val,false,true);
@@ -163,7 +164,7 @@ function aff_openstreetmap(latitude,longitude) {
 						'_blank', chParam);
 }
 
-// Appel d'une carte OpenStreetMap si la latitude ou la longitude sont renseign�es
+// Appel d'une carte OpenStreetMap si la latitude ou la longitude sont renseignées
 function apelle_carte(zLat, zlong) {
 	var latitude = document.getElementById(zLat).value;
 	var longitude = document.getElementById(zlong).value;
@@ -171,3 +172,4 @@ function apelle_carte(zLat, zlong) {
 		aff_openstreetmap(latitude,longitude);
 	}
 }
+</script>

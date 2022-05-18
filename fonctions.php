@@ -73,7 +73,7 @@ $Natures_Docs = array(
 function is_info()
 {
 	global $suffixe_info;
-	if (strpos(my_self(), $suffixe_info) !== false)
+	if ($suffixe_info && strpos(my_self(), $suffixe_info) !== false)
 		return true;
 	else
 		return false;
@@ -195,7 +195,7 @@ function lect_sql($sql)
 		echo 'Requête en erreur : ' . $sql . '<br />';
 		echo $err . '<br />';
 		if (strpos($err, 'exist') !== false) {
-			echo 'Avez-vous bien suivi la proc�dure <a href="install.php">d\'installation</a>, <a href="lisezmoi.html">Cf. lisezmoi.html</a> ?';
+			echo 'Avez-vous bien suivi la procédure <a href="install.php">d\'installation</a>, <a href="lisezmoi.html">Cf. lisezmoi.html</a> ?';
 		}
 	}
 	return $res;
@@ -363,7 +363,7 @@ function Lit_Env()
 		$serveur = $nserveur;
 		$aj_charset = '';
 		if ($def_enc == 'UTF-8')
-			$aj_charset = ';charset=utf8';
+			$aj_charset = ';charset=UTF-8';
 		try {
 			$connexion = new PDO("mysql:host=$serveur;dbname=$db$aj_charset", $util, $mdp);
 			$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -380,7 +380,7 @@ function Lit_Env()
 					$Acces = 1;
 					$Lettre_B = $enreg['Lettre_B'];
 					if ($Lettre_B != '') $Lettre_B = 'lettres/' . $Lettre_B;
-					else                 $Lettre_B = '-';
+					else $Lettre_B = '-';
 					$Image_Fond = 'fonds/' . $enreg['Image_Fond'];
 					$coul_fond_table = $enreg['Coul_Fond_Table'];
 					$Nom = $enreg['Nom'];
@@ -1019,14 +1019,16 @@ function lib_region($num_region, $html = 'O')
 	return $lib;
 }
 
-// Retourne le libellé d'un pays
-function lib_pays($num_pays, $html = 'O')
+/**
+ * Retourne le libellé d'un pays
+ */
+function lib_pays(int $num_pays, string $html = 'O')
 {
 	global $Z_Mere;
 	$lib = '';
 	$Z_Mere = 0;
 	if ($num_pays != 0) {
-		$sql = 'select Nom_Pays from ' . nom_table('pays') . ' where identifiant_zone = ' . $num_pays . ' limit 1';
+		$sql = 'SELECT Nom_Pays FROM ' . nom_table('pays') . ' WHERE identifiant_zone = ' . $num_pays . ' LIMIT 1';
 		if ($res = lect_sql($sql)) {
 			if ($enr = $res->fetch(PDO::FETCH_NUM)) {
 				if ($html == 'O') $lib = my_html($enr[0]);
@@ -1038,7 +1040,9 @@ function lib_pays($num_pays, $html = 'O')
 	return $lib;
 }
 
-/* Retourne le premier prénom */
+/**
+ * Retourne le premier prénom
+ */
 function UnPrenom($LesPrenoms)
 {
 	$pblanc = false;
@@ -1124,18 +1128,18 @@ function Rech_Image_Defaut($Reference, $Type_Ref)
 // U : union
 // V : ville
 // L : lien
-function Rech_Commentaire($Reference, $Type_Ref)
+function Rech_Commentaire(int $Reference, string $Type_Objet)
 {
 	global $Commentaire, $Diffusion_Commentaire_Internet;
 	$Result = false;
 	$Commentaire = '';
 	$Diffusion_Commentaire_Internet = 'N';
 	$Reference++; // Sinon, si la référence vaut 0, la requête n'est pas appelée :-(
-	if (($Reference != '') and ($Reference != -1)) {
-		$sqlN = 'select Note, Diff_Internet_Note from ' . nom_table('commentaires') .
-			' where Reference_Objet = ' . --$Reference . ' and Type_Objet = \'' . $Type_Ref . '\' limit 1';
+	if ($Reference) {
+		$sqlN = 'SELECT Note, Diff_Internet_Note FROM ' . nom_table('commentaires') .
+			' WHERE Reference_Objet = ' . $Reference . ' AND Type_Objet = \'' . $Type_Objet . '\' LIMIT 1';
 		if ($resN = lect_sql($sqlN)) {
-			$comment = $resN->fetch(PDO::FETCH_NUM);
+			$comment = $resN->fetch();
 			$Commentaire = $comment[0];
 			$Diffusion_Commentaire_Internet = $comment[1];
 			if ($Commentaire != '') $Result = true;
@@ -3013,7 +3017,9 @@ function PDF_AddPolice($PDF)
 // Renvoye un Query String compatible W3C
 function Query_Str()
 {
-	return str_replace('&', '&amp;', $_SERVER['QUERY_STRING']);
+	if (isset($_SERVER['QUERY_STRING'])) {
+		return str_replace('&', '&amp;', $_SERVER['QUERY_STRING']);
+	}
 }
 
 // Appel de my_html// Appel de htmlentities
@@ -3238,4 +3244,5 @@ function appelle_carte_osm()
 }
 
 
-header('content-type: text/html; charset=' . $def_enc);
+// header('content-type: text/html; charset=' . $def_enc);
+header('content-type: text/html; charset=utf-8');

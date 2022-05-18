@@ -1,8 +1,5 @@
-<script type="text/javascript">
-<!--
-
 // JavaScript pour Demarrage_Rapide et Prop_Design
-// qui ont les fonctions communes de pré-visualisation
+// qui ont les fonctions communes de prï¿½-visualisation
 
 function change_barre(col_barre) {
 	document.getElementById('barre').style.backgroundImage = "url('"+col_barre+"')";
@@ -53,7 +50,3 @@ function remet_code_coul(cible) {
 	//window.alert(la_source+' > '+la_val+' > '+cible);
 	document.getElementById(la_cible).value = la_val;
 }
-
-//-->
-</script> 
-

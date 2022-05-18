@@ -1,5 +1,4 @@
-<script type="text/javascript">
-<!--
+
 /**
 *
 *  Secure Hash Algorithm (SHA256)
@@ -227,5 +226,3 @@ function generer_passe() {
 		temp+=keylist.charAt(Math.floor(Math.random()*keylist.length));
 	document.getElementById('PasseGen').value = temp;
 }
-//-->
-</script>

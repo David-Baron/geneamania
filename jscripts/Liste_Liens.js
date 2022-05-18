@@ -1,10 +1,7 @@
-<script type="text/javascript">
-<!--
-
-// Javascript spécialisé pour la liste des liens
+// Javascript spï¿½cialisï¿½ pour la liste des liens
 // affiche / masque le bouton supprimer
 
-// Ajoute une ligne à la table des évènements
+// Ajoute une ligne ï¿½ la table des ï¿½vï¿½nements
 function traite(num_lig) {
 	//var zone = document.getElementsByName('S_Sup['+ligne+']');
 	if (document.getElementById('S_Sup_'+num_lig).checked) {
@@ -21,7 +18,4 @@ function traite(num_lig) {
 	}
 }
 
-
-//-->
-</script>
 

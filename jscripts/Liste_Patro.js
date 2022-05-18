@@ -1,6 +1,3 @@
-<script type="text/javascript">
-<!--
-
 // Cache tous les div
 function Cache_Tous() {
 	var NumDiv = 1;
@@ -36,5 +33,3 @@ function Survole_Clic_Div_Tous(evenement,comportement) {
     Inverse_Tous();
 }
 
-//-->
-</script>

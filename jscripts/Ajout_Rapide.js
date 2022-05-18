@@ -1,7 +1,4 @@
-<script type="text/javascript">
-<!--
-
-// Javascript spécialisé pour l'ajout rapide
+// Javascript spï¿½cialisï¿½ pour l'ajout rapide
 // sorti du PHP pour en conditionner l'appel
 
 function Calendrier_Naissance(cible) {
@@ -62,12 +59,10 @@ function NomMaj(cible) {
 	document.getElementById("nouveau_nom"+cible).value = document.getElementById("nouveau_nom"+cible).value.toUpperCase();
 }
 
-// Reprend le nom saisi précédemment
+// Reprend le nom saisi prï¿½cï¿½demment
 function reprend_nom(cible) {
   nouv_text = document.forms.saisie.Nom_Prec.value;
   document.getElementById("Nom"+cible).value = nouv_text;
   document.getElementById("NomSel"+cible).value = nouv_text;
 }
 
-//-->
-</script> 

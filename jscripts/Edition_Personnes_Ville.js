@@ -1,8 +1,5 @@
-<script type="text/javascript">
 
-// Javascript spécialisé pour l'ajout rapide de personnes d'une ville
-
-<!--
+// Javascript spï¿½cialisï¿½ pour l'ajout rapide de personnes d'une ville
 
 function Calendrier_Pers_N(iteration) {
 	var defaut = document.getElementById('Cd_def').value;
@@ -16,6 +13,4 @@ function Calendrier_Pers_D(iteration) {
 	else x=Calendrier('CDecede_leP_'+iteration,defaut,'Decede_leP_'+iteration);
 }
 
-//-->
-</script>
 

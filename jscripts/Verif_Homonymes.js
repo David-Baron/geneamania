@@ -1,5 +1,5 @@
-<script type="text/javascript">
-// Contrôle au clic sur le bouton pour afficher 2 personnes
+
+// Contrï¿½le au clic sur le bouton pour afficher 2 personnes
 function controle(formulaire)
 {
 	nbRef1 = 0;
@@ -24,7 +24,3 @@ function controle(formulaire)
 	return true;
 	//	submit();
 }
-
-//-->
-</script> 
-

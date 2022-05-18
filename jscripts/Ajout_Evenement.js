@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 
 // Javascript spécialisé pour l'ajout rapide d'évènement
 // appelé sur les boutons + et -
@@ -47,6 +45,3 @@ function removeRowFromTable() {
   var lastRow = tbl.rows.length;
   if (lastRow > 2) tbl.deleteRow(lastRow - 1);
 }
-
-//-->
-</script>

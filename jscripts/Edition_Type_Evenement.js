@@ -1,7 +1,5 @@
-<script type="text/javascript">
-<!--
 
-// Javascript spécialisé pour l'édition de type d'évènement
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition de type d'ï¿½vï¿½nement
 
 
 
@@ -9,13 +7,9 @@ function verification_code(zone) {
 	var codes = document.forms.saisie.codes.value;
 	var posi  = codes.indexOf(zone.value);
 	if (posi > -1) {
-		window.alert('Attention, code déjà utilisé (codes présents :'+codes+').');
+		window.alert('Attention, code dï¿½jï¿½ utilisï¿½ (codes prï¿½sents :'+codes+').');
 		zone.value = '';
 	}
 
 }
-
-
-//-->
-</script> 
 

@@ -1,7 +1,5 @@
-<script type="text/javascript">
-<!--
 
-// Javascript spécialisé pour l'édition de rôle
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition de rï¿½le
 
 
 function dupplique() {
@@ -14,13 +12,9 @@ function verification_code(zone) {
 	var codes = document.forms.saisie.codes.value;
 	var posi  = codes.indexOf(zone.value);
 	if (posi > -1) {
-		window.alert('Attention, code déjà utilisé (codes présents :'+codes+').');
+		window.alert('Attention, code dï¿½jï¿½ utilisï¿½ (codes prï¿½sents :'+codes+').');
 		zone.value = '';
 	}
 
 }
-
-
-//-->
-</script> 
 

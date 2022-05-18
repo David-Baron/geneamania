@@ -1,8 +1,5 @@
-<script type="text/javascript">
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition des liens de personnes
 
-// Javascript spécialisé pour l'édition des liens de personnes
-
-<!--
 
 function updatePersonnes(id) {
 	//window.alert('rpc_Personne.php?idNomFam=' + id);
@@ -14,7 +11,7 @@ function updatePersonnes(id) {
 
 function handleResponse() {
 	if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
-		// Récupération de la liste des évènements
+		// Rï¿½cupï¿½ration de la liste des ï¿½vï¿½nements
 		var data = xhr.responseXML.getElementsByTagName('personnes');
 		document.getElementById('personnes').innerHTML = '';
 		for(var i=0;i<data.length;i++) {
@@ -25,7 +22,7 @@ function handleResponse() {
 			document.getElementById('personnes').appendChild(option);
 		}
 		//window.alert(document.getElementById('personnes').innerHTML);
-		// Récupération du maxi des évènements
+		// Rï¿½cupï¿½ration du maxi des ï¿½vï¿½nements
 		var data2 = xhr.responseXML.getElementsByTagName('maxi');
 		document.getElementById('maxi').value = data2[0].firstChild.nodeValue;
 
@@ -63,6 +60,3 @@ function copieDate() {
 }
 
 var xhr = getXMLHttpRequest();
-
-//-->
-</script>

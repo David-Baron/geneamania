@@ -1,14 +1,12 @@
-<script type="text/javascript">
-<!-- 
 
-// Ajout d'un texte à la fin d'un TextArea
-// Paramètres : le texte et le nom du TextArea
+// Ajout d'un texte ï¿½ la fin d'un TextArea
+// Paramï¿½tres : le texte et le nom du TextArea
 function AjoutTxt(LeTxt,nom_TxtArea) {
  document.forms[0].elements[nom_TxtArea].value = document.forms[0].elements[nom_TxtArea].value + LeTxt;
 }
 
-// Sur le clic sur l'image URL, on affiche début ou fin de balise dans le TextArea
-// Le nom de la zone debUrl est fixe (un seul TextArea autorisé pour le moment...)
+// Sur le clic sur l'image URL, on affiche dï¿½but ou fin de balise dans le TextArea
+// Le nom de la zone debUrl est fixe (un seul TextArea autorisï¿½ pour le moment...)
 function Aj_URL(nom_TxtArea) {
   if (document.forms[0].debUrl.value == 0) {
     document.forms[0].debUrl.value = 1;
@@ -20,19 +18,19 @@ function Aj_URL(nom_TxtArea) {
   }
 }
 
-// On écrit le bloc début fin d'un coup...
+// On ï¿½crit le bloc dï¿½but fin d'un coup...
 function Aj_URL2(nom_TxtArea) {
-    AjoutTxt('[URL]Insérez l\'adresse ici...[/URL]',nom_TxtArea);
+    AjoutTxt('[URL]Insï¿½rez l\'adresse ici...[/URL]',nom_TxtArea);
 }
 
 // Affichage d'un message de confirmation sur une demande de suppression
 function confirmer(quoi,nom_btsup) {
-	//if(confirm("Etes-vous sûr(e) de vouloir supprimer "+quoi+" ?")) return true;
+	//if(confirm("Etes-vous sï¿½r(e) de vouloir supprimer "+quoi+" ?")) return true;
 	//else {
 	//  nom_btsup.value = '-';
 	//  return false;
 	//}
-	if(confirm("Etes-vous sûr(e) de vouloir supprimer "+quoi+" ?")) {
+	if(confirm("Etes-vous sï¿½r(e) de vouloir supprimer "+quoi+" ?")) {
 		document.forms.saisie.supprimer.value = "Supprimer";
 		return true;
 	}
@@ -42,7 +40,7 @@ function confirmer(quoi,nom_btsup) {
 	}
  }
 
-//ouverture popup centrée de saisie de date
+//ouverture popup centrï¿½e de saisie de date
 function Calendrier(zone,contenu,zoneaff) {
 	var h=450; var w=500;
 	var pleft = (screen.width/2)-(w/2);
@@ -61,7 +59,7 @@ function Calendrier2(zone,zoneaff) {
 	FenCalend=window.open('cal.php?zone='+zone+'&contenu='+contenu+'&zoneaff='+zoneaff, 'FenCalend', chParam);
 }
 
-// Vérification de la présence d'une zone
+// Vï¿½rification de la prï¿½sence d'une zone
 function verification_zone_oblig(zone) {
 	var ko = false;
 	//window.alert(zone.name);
@@ -101,7 +99,7 @@ function verification_zone_oblig_sel(zone) {
 	return ko;
 }
 
-// Vérification des zones obligatoires seulement sur le bouton ok
+// Vï¿½rification des zones obligatoires seulement sur le bouton ok
 function verification_form(formulaire,zones) {
 	var retour = true;
 	var absentes = 0;
@@ -112,18 +110,18 @@ function verification_form(formulaire,zones) {
 			absentes += verification_zone_oblig(formulaire[LesZones[num]]);
 		}
 		if (absentes > 0) {	
-			window.alert('Pensez à remplir les champs obligatoires...');
+			window.alert('Pensez ï¿½ remplir les champs obligatoires...');
 			retour = false;
 		}
 	}
 	return retour;
 }
 
-// Contrôle de numéricité d'une zone
+// Contrï¿½le de numï¿½ricitï¿½ d'une zone
 function verification_num(zone) {
 	var ko = isNaN(zone.value);
 	if (ko) {	
-		window.alert('Attention, zone non numérique...');
+		window.alert('Attention, zone non numï¿½rique...');
 		zone.value = 0;
 	}
 }
@@ -138,7 +136,7 @@ function readURL(input,id_image) {
 	}
 }
 
-// Déclaration d'un objet pour Ajax
+// Dï¿½claration d'un objet pour Ajax
 function getXMLHttpRequest() {
     var xhr = null;
     if (window.XMLHttpRequest || window.ActiveXObject) {
@@ -157,6 +155,3 @@ function getXMLHttpRequest() {
     }
     return xhr;
 }
-
-//-->
-</script>

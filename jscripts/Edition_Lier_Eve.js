@@ -1,7 +1,5 @@
-<script type="text/javascript">
 
 // Javascript spécialisé pour la liaison d'un évènement avec une personne
-<!--
 
 var debug = false;
 
@@ -81,6 +79,3 @@ function Zone_Geo(zoneLib,zoneValue,valZone,valNiveau) {
 }
 
 var xhr = getXMLHttpRequest();
-
-//-->
-</script> 

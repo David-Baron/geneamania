@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 // Vérification des zones obligatoires seulement sur le bouton ok
 function verification_form(formulaire)
 {
@@ -41,6 +39,3 @@ function verification_form(formulaire)
 	}
 	return true;
 }
-
-//-->
-</script> 

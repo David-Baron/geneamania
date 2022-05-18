@@ -1,7 +1,5 @@
-<script type="text/javascript">
-<!--
 
-// Vérification des zones obligatoires seulement sur le bouton ok
+// Vï¿½rification des zones obligatoires seulement sur le bouton ok
 // non standard car FF se comporte bizarrement avec la value du type file
 function verification_form_image(formulaire) {
 	var retour = true;
@@ -24,6 +22,3 @@ function verification_form_image(formulaire) {
 	}
 	return retour;
 }
-
-//-->
-</script>

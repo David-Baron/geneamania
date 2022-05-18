@@ -1,8 +1,5 @@
-<script type="text/javascript">
-
 // Javascript spécialisé pour l'édition d'une filiation
 
-<!--
 // Reprise du dernier couple saisi
 function sel_der() {
   document.forms.saisie.PereP.value = document.forms.saisie.MaxConjoint_1.value;
@@ -49,5 +46,3 @@ function removeM(nom) {
 	}
 	document.forms.saisie.RM.style.visibility = 'hidden' ;
 }
-//-->
-</script>

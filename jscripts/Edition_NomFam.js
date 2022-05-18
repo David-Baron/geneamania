@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 <?php
 echo "var def_enc = '".strtolower($def_enc)."';";
 echo "var name_exists = '".LG_CTRL_NAME_EXISTS."';";
@@ -209,5 +207,3 @@ function clicOK()
 	doc.cache.value='ok';
 	doc.codePho.value = tabSons.join('-');
 }
-// -->
-</script>

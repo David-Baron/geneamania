@@ -1,10 +1,6 @@
-<script type="text/javascript">
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition des unions
 
-// Javascript spécialisé pour l'édition des unions
-
-<!--
-
-//== Ajoute la ville saisie à la fin des listbox
+//== Ajoute la ville saisie ï¿½ la fin des listbox
 function ajoute1() {
   	inverse_div('id_div_ajout1');
 	nouv_val = document.forms.saisie.nouvelle_ville1.value;
@@ -53,13 +49,11 @@ function verification_form_union(formulaire,zones) {
 			absentes += verification_zone_oblig_sel(formulaire[LesZones[num]]);
 		}
 		if (absentes > 0) {
-			window.alert('Pensez à remplir les champs obligatoires...');
+			window.alert('Pensez ï¿½ remplir les champs obligatoires...');
 			retour = false;
 		}
 	}
 	return retour;
 }
 
-//-->
-</script>
 

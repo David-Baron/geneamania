@@ -1,6 +1,3 @@
-<script type="text/javascript">
-
-<!--
 
 function updatePersonnes(Nom) {
 	xhr.open('get', 'rpc_Personne.php?idNomFam=' + Nom);
@@ -52,6 +49,3 @@ if (window.addEventListener) {
 }
 
 var xhr = getXMLHttpRequest();
-
-//-->
-</script>

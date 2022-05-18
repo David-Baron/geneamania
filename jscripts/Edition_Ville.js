@@ -1,8 +1,5 @@
-<script type="text/javascript">
 
-// Javascript spécialisé pour l'édition des villes, sorti du PHP pour en conditionner l'appel
-
-<!--
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition des villes, sorti du PHP pour en conditionner l'appel
 
 //== Appel d'une carte OpenStreetMap
 function apelle_carte() {
@@ -20,6 +17,4 @@ function apelle_carte() {
 	                                                   '_blank', chParam);
 }
 
-//-->
-</script> 
 

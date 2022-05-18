@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 
 // Ajoute le nom saisi dans la liste des noms de famille
 function ajoute_nom() {
@@ -18,6 +16,3 @@ function NomMaj() {
 	document.forms.saisie.nouveau_nom.value = document.forms.saisie.nouveau_nom.value.toUpperCase();
 }
  
-//-->
-</script> 
-

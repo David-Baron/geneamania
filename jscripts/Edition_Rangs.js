@@ -1,9 +1,7 @@
-<script type="text/javascript">
 
-// Javascript spécialisé pour l'édition des rangs d'une union
+// Javascript spï¿½cialisï¿½ pour l'ï¿½dition des rangs d'une union
 
-<!--
-// Accepter les rangs théoriques calculés par le programme 
+// Accepter les rangs thï¿½oriques calculï¿½s par le programme 
 function Accepter(theElement) {
   for (var i = 0; i < document.forms["saisie"].length; i++) {
     LeNom = document.forms["saisie"].elements[i].name.substring(0,6);
@@ -15,6 +13,3 @@ function Accepter(theElement) {
     }
   }
 }
-
-//-->
-</script> 

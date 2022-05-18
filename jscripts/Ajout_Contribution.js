@@ -1,7 +1,4 @@
-<script type="text/javascript">
-<!--
-
-// Javascript spécialisé pour l'ajout rapide
+// Javascript spï¿½cialisï¿½ pour l'ajout rapide
 // sorti du PHP pour en conditionner l'appel
 
 // Appel de la popup des calendriers
@@ -19,7 +16,7 @@ function Calendrier_Union(cible) {
 }
 
 
-// Appel de la popup de sélection de ville
+// Appel de la popup de sï¿½lection de ville
 function Appelle_Zone_Naissance(cible) {
 	x = Zone_Geo('Ne'+cible,'idNeZone'+cible,document.getElementsByName('idNeZone'+cible).value,4);
 }
@@ -33,7 +30,7 @@ function Appelle_Zone_Union(cible) {
 	x = Zone_Geo('Union'+cible,'idUnionZone'+cible,document.getElementsByName('idUnionZone'+cible).value,4);
 }
 
-// Ouverture d'une PopUp de saisie de zone géographique
+// Ouverture d'une PopUp de saisie de zone gï¿½ographique
 function Zone_Geo(zoneLib,zoneValue,valZone,valNiveau) {
   var h=40; var w=430;
   var chParam="resizable=no, location=no, menubar=no, directories=no, scrollbars=no, status=no, ";
@@ -42,19 +39,17 @@ function Zone_Geo(zoneLib,zoneValue,valZone,valNiveau) {
   FenCalend=window.open('sel_zone_geo.php?zoneLib='+zoneLib+'&zoneValue='+zoneValue+'&valZone='+valZone+'&valNiveau='+valNiveau,'FenCalend', chParam);
 }
 
- // Vérification des zones obligatoires seulement sur le bouton ok
+ // Vï¿½rification des zones obligatoires seulement sur le bouton ok
 function verification_form(formulaire) {
 	var retour = true;
 	var absentes = 0;
 	if (formulaire.cache.value == 'ok') {
 		absentes += verification_zone_oblig(formulaire.mail);
 		if (absentes > 0) {	
-			window.alert('Pensez à remplir les champs obligatoires...');
+			window.alert('Pensez ï¿½ remplir les champs obligatoires...');
 			retour = false;
 		}
 	}
 	return retour;
  }
 
-//-->
-</script> 

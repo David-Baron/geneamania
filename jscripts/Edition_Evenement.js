@@ -1,8 +1,6 @@
-<script type="text/javascript">
 
 // Javascript spécialisé pour l'édition des évènements ou l'import CSV des évènements
 
-<!--
 function copieDate() {
 	document.forms.saisie.dFinAff.value = document.forms.saisie.dDebAff.value;
 	document.forms.saisie.dFinCache.value = document.forms.saisie.dDebCache.value;
@@ -55,5 +53,3 @@ function montre_image_zone() {
 	img.style.visibility = 'visible';
 	img.style.display = 'inline';
 }
-//-->
-</script> 

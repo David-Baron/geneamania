@@ -1,8 +1,6 @@
-<script type="text/javascript">
 
 // Javascript spécialisé pour la liaison d'un document avec un objet
 
-<!--
 var debug = false;
 
 function updateDocs(type_doc) {
@@ -48,5 +46,3 @@ if (window.addEventListener) {
 
 var xhr = getXMLHttpRequest();
 
-//-->
-</script>

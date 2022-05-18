@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 
 // Javascript spécialisé pour l'édition des personnes
 
@@ -57,5 +55,3 @@ function NomMaj() {
 	document.forms.saisie.nouveau_nom.value = document.forms.saisie.nouveau_nom.value.toUpperCase();
 }
  
-//-->
-</script> 

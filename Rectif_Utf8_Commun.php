@@ -16,10 +16,10 @@ function rectif_UTF8() {
 	$champs[] = 'commentaires,Note';
 
 	$lettre_A = array('Ã©', 'Ã¨', 'Ã§', 'Ã¯', 'Ã®', 'Ãª', 'Ã´', 'Ã¢', 'Ã‰', 'Ã«', 'ÃŠ', 'Ã¶');
-	$lettre_B = array('é' ,  'è',  'ç',  'ï',  'î', 'ê' ,  'ô',  'â', 'É',  'ë',  'Ê' ,  'ö');
-	//Ã ==> à, e, attente
+	$lettre_B = array('ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½' , 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½', 'ï¿½');
+	//ï¿½ ==> ï¿½, e, attente
 	
-	//ö
+	//ï¿½
 
 	$c_champ = count($champs);
 	$c_lettres = count($lettre_A);
@@ -39,4 +39,3 @@ function rectif_UTF8() {
 		}
 	}
 }
-?>

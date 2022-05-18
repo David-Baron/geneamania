@@ -9,7 +9,7 @@ $cr = "\r\n"; // version Windows
 // ==> on est sur genealogies.geneamania.net
 // ==> présence d'un fichier site_gratuit.txt
 $SiteGratuit = false;
-if (strpos($_SERVER['SERVER_NAME'],'genealogies.geneamania.net') !== false) $SiteGratuit = true;
+if (strpos($_SERVER['SERVER_NAME'], 'genealogies.geneamania.net') !== false) $SiteGratuit = true;
 else {
 	if (file_exists('site_gratuit.txt')) $SiteGratuit = true;
 }
@@ -19,12 +19,12 @@ $Premium = false;
 if (file_exists('premium.txt')) $Premium = true;
 
 // Taille maxi d'une image à télécharger
-$taille_maxi_image = 150*1024; // 150Ko
+$taille_maxi_image = 150 * 1024; // 150Ko
 
 // Hauteur, largeur, poids pour la version standard
 $taille_maxi_images['w'] = 800;
 $taille_maxi_images['h'] = 600;
-$taille_maxi_images['s'] = 150*1024;
+$taille_maxi_images['s'] = 150 * 1024;
 
 // Pour la version Premium
 if (($Premium) or (!$SiteGratuit)) {
@@ -45,8 +45,8 @@ $rep_src = '';
 
 // Chemins des images
 $chemin_images_util = 'Images_Util/';
-$chemin_images      = $rep_src.'Images/';
-$chemin_images_a_asc = $chemin_images.'arbres_asc/';
+$chemin_images      = $rep_src . 'Images/';
+$chemin_images_a_asc = $chemin_images . 'arbres_asc/';
 
 // Chemin des Gedcom
 $chemin_Gedcom = 'Gedcom/';
@@ -67,14 +67,14 @@ $chemin_docs_TXT = 'documents/TXT/';
 // Ajout automatique de sous-répertoire en local
 $ajout = '';
 $self  = my_self();
-if ($self[strlen($self)-1]=='/') $self = substr($self,0,strlen($self)-1); // Au cas où l'utilsateur mettrait un / en dernière position on le supprime...
+if ($self[strlen($self) - 1] == '/') $self = substr($self, 0, strlen($self) - 1); // Au cas où l'utilsateur mettrait un / en dernière position on le supprime...
 $dpos  = strrpos($self, '/');
 if ($dpos !== false) {
-  if ($dpos > 0) {
-    $ajout = substr($self,1,$dpos);
-  }
+	if ($dpos > 0) {
+		$ajout = substr($self, 1, $dpos);
+	}
 }
-$RepGenSiteLoc = 'http://localhost/'.$ajout;
+$RepGenSiteLoc = 'http://localhost/' . $ajout;
 $RepGenSiteInt = '';
 
 // Nombre de générations maximum à remonter pour la recherche de cousinage
@@ -144,7 +144,7 @@ $J = date('d');
 $xA = str_pad($A, 4, '0', STR_PAD_LEFT);
 $xM = str_pad($M, 2, '0', STR_PAD_LEFT);
 $xJ = str_pad($J, 2, '0', STR_PAD_LEFT);
-$date_lim_vivant = $xA.$xM.$xJ;
+$date_lim_vivant = $xA . $xM . $xJ;
 
 // Tyoe d'évènement des actualités
 $TypeEv_actu = 'AC3U';
@@ -156,23 +156,23 @@ $FromTo_Texte = 'Support Geneamania';
 $def_enc = 'ISO-8859-1';
 
 // Polices intallées par défaut pour les pdf
-$list_font_pdf = array('Courier','Helvetica','Arial','Times');
+$list_font_pdf = array('Courier', 'Helvetica', 'Arial', 'Times');
 //$coul_pdf = '#4F95B0';
 
 // Proposition pour les graphismes pré-définis
-$dominantes = array('bleu','rouge','marron','vert','violet','gris');
-$ch_barre = $chemin_images.'fonds_barre/';
-$ch_fond = $chemin_images.'fonds/';
-$ch_lettre = $chemin_images.'lettres/';
+$dominantes = array('bleu', 'rouge', 'marron', 'vert', 'violet', 'gris');
+$ch_barre = $chemin_images . 'fonds_barre/';
+$ch_fond = $chemin_images . 'fonds/';
+$ch_lettre = $chemin_images . 'lettres/';
 // Base bleue
 $dominante = 'bleu';
 $gra_description[$dominante] = 'Bleu, fond blanc';
 $gra_coul_bord[$dominante] = '#6699FF';
 $gra_coul_lib[$dominante] = '#94B8FF';
 $gra_coul_val[$dominante] = '#B2CCFF';
-$gra_barre[$dominante] = $ch_barre.'bar_off_bleu.gif';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_bleu.gif';
 $gra_fond[$dominante] = '';
-$gra_lettre[$dominante] = $ch_lettre.'B_bleu.gif';
+$gra_lettre[$dominante] = $ch_lettre . 'B_bleu.gif';
 // Avec $coul_lib_bleu = '#ABC8E2';, on codera ${'coul_lib_'.$dominante} pour accéder au contenu ; plus compliqué que les arrays...
 // Base rouge et calque
 $dominante = 'rouge';
@@ -180,45 +180,45 @@ $gra_description[$dominante] = 'Rouge, fond calque';
 $gra_coul_bord[$dominante] = '#CC0000';
 $gra_coul_lib[$dominante] = '#FFB6C1';	//#D63333
 $gra_coul_val[$dominante] = '#FF8B8B';	//#E06666
-$gra_barre[$dominante] = $ch_barre.'bar_off_rouge.gif';
-$gra_fond[$dominante] = $ch_fond.'calque.jpg';
-$gra_lettre[$dominante] = $ch_lettre.'B_rouge.gif';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_rouge.gif';
+$gra_fond[$dominante] = $ch_fond . 'calque.jpg';
+$gra_lettre[$dominante] = $ch_lettre . 'B_rouge.gif';
 // Base marron et parchemin
 $dominante = 'marron';
 $gra_description[$dominante] = 'Marron, fond parchemin';
 $gra_coul_bord[$dominante] = '#A6915B';
 $gra_coul_lib[$dominante] = '#B8A165';
 $gra_coul_val[$dominante] = '#F6E497';
-$gra_barre[$dominante] = $ch_barre.'bar_off_bistre.gif';
-$gra_fond[$dominante] = $ch_fond.'parchemin2.jpg';
-$gra_lettre[$dominante] = $ch_lettre.'LettreB41.jpg';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_bistre.gif';
+$gra_fond[$dominante] = $ch_fond . 'parchemin2.jpg';
+$gra_lettre[$dominante] = $ch_lettre . 'LettreB41.jpg';
 // Base vert et cuir
 $dominante = 'vert';
 $gra_description[$dominante] = 'Vert, fond cuir';
 $gra_coul_bord[$dominante] = '#2EB82E';
 $gra_coul_lib[$dominante] = '#47D147';
 $gra_coul_val[$dominante] = '#70DB70';
-$gra_barre[$dominante] = $ch_barre.'bar_off_vert_fonce.gif';
-$gra_fond[$dominante] = $ch_fond.'cuir_vert.jpg';
-$gra_lettre[$dominante] = $ch_lettre.'B01.gif';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_vert_fonce.gif';
+$gra_fond[$dominante] = $ch_fond . 'cuir_vert.jpg';
+$gra_lettre[$dominante] = $ch_lettre . 'B01.gif';
 // Base violet et fond coton
 $dominante = 'violet';
 $gra_description[$dominante] = 'Violet, fond cotton';
 $gra_coul_bord[$dominante] = '#D119A3';
 $gra_coul_lib[$dominante] = '#DA70D6';
 $gra_coul_val[$dominante] = '#EFAEDF';  //EE82EE';
-$gra_barre[$dominante] = $ch_barre.'bar_off_violet.gif';
-$gra_fond[$dominante] = $ch_fond.'coton.jpg';
-$gra_lettre[$dominante] = $ch_lettre.'B_pastel.gif';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_violet.gif';
+$gra_fond[$dominante] = $ch_fond . 'coton.jpg';
+$gra_lettre[$dominante] = $ch_lettre . 'B_pastel.gif';
 // Base grise et pierre
 $dominante = 'gris';
 $gra_description[$dominante] = 'Gris, fond pierre';
 $gra_coul_bord[$dominante] = '#FFFFFF';
 $gra_coul_lib[$dominante] = '#CCCCCC';
-$gra_coul_val[$dominante] = '#F0F0F0';	
-$gra_barre[$dominante] = $ch_barre.'bar_off_gris.gif';
-$gra_fond[$dominante] = $ch_fond.'pierre02.jpg';
-$gra_lettre[$dominante] = $ch_lettre.'B_gris.gif';
+$gra_coul_val[$dominante] = '#F0F0F0';
+$gra_barre[$dominante] = $ch_barre . 'bar_off_gris.gif';
+$gra_fond[$dominante] = $ch_fond . 'pierre02.jpg';
+$gra_lettre[$dominante] = $ch_lettre . 'B_gris.gif';
 
 //Couleur de fond des calculatrices
 $fond_calc = '#DCDCDC';
@@ -227,14 +227,14 @@ $fond_calc = '#DCDCDC';
 // (I)cone, (P)arenthèse, (N)on
 $aff_rev = 'I';
 
-$adr_rech_gratuits ='http://www.geneamania.net/gratuits_recherche_nom.php';
-$adr_rech_ville ='http://www.geneamania.net/recherche_ville_geneamania.php';
+$adr_rech_gratuits = 'http://www.geneamania.net/gratuits_recherche_nom.php';
+$adr_rech_ville = 'http://www.geneamania.net/recherche_ville_geneamania.php';
 
 // Affichage des notes "à l'ancienne mode"
 $aff_note_old = false;
 
-$barre_homme = $chemin_images.'bb3.jpg';
-$barre_femme = $chemin_images.'br2.jpg';
+$barre_homme = $chemin_images . 'bb3.jpg';
+$barre_femme = $chemin_images . 'br2.jpg';
 
 // Répertoire des pages d'information
 //$rep_Infos = 'pages_info/';
@@ -256,5 +256,3 @@ $hidden = (!$debug ? 'hidden' : 'text');
 
 if (!isset($mod_nom_fic)) $mod_nom_fic = '';
 if (!isset($n_sv_img_gd)) $n_sv_img_gd = '';
-
-?>

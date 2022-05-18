@@ -170,5 +170,3 @@ if (isset($Environnement)) {
 	$est_gestionnaire = ($_SESSION['estGestionnaire'] === true ? true : false);
 	if (!isset($_SESSION['estCnx'])) $_SESSION['estCnx'] = false;
 	$est_cnx          = ($_SESSION['estCnx'] === true ? true : false);
-
-?>

@@ -8,12 +8,13 @@
 
 session_start();
 
-function affiche($indice) {
-	global $match;
-	echo '<td>';
-	if (isset($match[$indice])) echo $match[$indice];
-	else echo '&nbsp;';
-	echo '</td>';
+function affiche($indice)
+{
+    global $match;
+    echo '<td>';
+    if (isset($match[$indice])) echo $match[$indice];
+    else echo '&nbsp;';
+    echo '</td>';
 }
 
 include('fonctions.php');
@@ -24,14 +25,14 @@ $x = Lit_Env();
 
 include('Gestion_Pages.php');
 
-$compl = Ajoute_Page_Info(600,150);
-Insere_Haut($titre,$compl,'Infos_Tech','');
+$compl = Ajoute_Page_Info(600, 150);
+Insere_Haut($titre, $compl, 'Infos_Tech', '');
 
-echo '<br />'."\n";
-echo my_html(LG_TECH_INFO_VERSION).LG_SEMIC.$Version.'<br />';
+echo '<br />' . "\n";
+echo my_html(LG_TECH_INFO_VERSION) . LG_SEMIC . $Version . '<br />';
 if ($Environnement == 'I') echo my_html(LG_TECH_INFO_ENVIR_INTERNET);
 else echo my_html(LG_TECH_INFO_ENVIR_LOCAL);
-echo '<br /><br /><br />'."\n";
+echo '<br /><br /><br />' . "\n";
 
 ob_start();
 /*
@@ -45,36 +46,38 @@ INFO_LICENSE 64 PHP License information. See also the license FAQ.
 INFO_ALL -1 Shows all of the above. This is the default value.
 */
 phpinfo(
- INFO_GENERAL
-//+INFO_CREDITS
-+INFO_CONFIGURATION
-+INFO_MODULES
-+INFO_ENVIRONMENT
-+INFO_VARIABLES
+    INFO_GENERAL
+        //+INFO_CREDITS
+        + INFO_CONFIGURATION
+        + INFO_MODULES
+        + INFO_ENVIRONMENT
+        + INFO_VARIABLES
 );
 
-preg_match ('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
+preg_match('%<style type="text/css">(.*?)</style>.*?(<body>.*</body>)%s', ob_get_clean(), $matches);
 
 # $matches [1]; # Style information
 # $matches [2]; # Body information
 
 echo "<div class='phpinfodisplay'><style type='text/css'>\n",
-    join( "\n",
-        array_map(
-            create_function(
-                '$i',
-                'return ".phpinfodisplay " . preg_replace( "/,/", ",.phpinfodisplay ", $i );'
-                ),
-            preg_split( '/\n/', $matches[1] )
-            )
+join(
+    "\n",
+    array_map(
+        create_function(
+            '$i',
+            'return ".phpinfodisplay " . preg_replace( "/,/", ",.phpinfodisplay ", $i );'
         ),
-    "</style>\n",
-    $matches[2],
-    "\n</div>\n";
+        preg_split('/\n/', $matches[1])
+    )
+),
+"</style>\n",
+$matches[2],
+"\n</div>\n";
 
-echo '<br />'."\n";
+echo '<br />' . "\n";
 
 Insere_Bas($compl);
 ?>
 </body>
+
 </html>

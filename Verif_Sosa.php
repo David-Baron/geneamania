@@ -8,20 +8,21 @@
 session_start();
 
 // Récupération des variables de l'affichage précédent
-$tab_variables = array('ok','annuler','modif',
-			             'Horigine',
-		             );
+$tab_variables = array(
+	'ok', 'annuler', 'modif',
+	'Horigine',
+);
 foreach ($tab_variables as $nom_variables) {
-  if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
-  else $$nom_variables = '';
+	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
+	else $$nom_variables = '';
 }
 
 include('fonctions.php');
 
 // Sécurisation des variables postées
-$ok       = Secur_Variable_Post($ok,strlen($lib_Rectifier),'S');
-$annuler  = Secur_Variable_Post($annuler,strlen($lib_Annuler),'S');
-$Horigine = Secur_Variable_Post($Horigine,100,'S');
+$ok       = Secur_Variable_Post($ok, strlen($lib_Rectifier), 'S');
+$annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
+$Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
 // On retravaille le libellé du bouton pour être standard...
 if ($ok == $lib_Rectifier) $ok = 'OK';
@@ -34,13 +35,14 @@ include('Gestion_Pages.php');
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 
-$echo_modif = Affiche_Icone('fiche_edition',my_html($LG_modify)).'</a>';
+$echo_modif = Affiche_Icone('fiche_edition', my_html($LG_modify)) . '</a>';
 $n_pers = nom_table('personnes');
 
 // Accède à une personne et l'affiche
-function Accede_Personne($Reference) {
+function Accede_Personne($Reference)
+{
 	global $db, $Personne, $Sosa, $echo_modif, $num_lig, $def_enc, $n_pers;
-	$Sql = 'select Reference, Nom, Prenoms, Numero from '.$n_pers.' where Reference = '.$Reference.' limit 1';
+	$Sql = 'select Reference, Nom, Prenoms, Numero from ' . $n_pers . ' where Reference = ' . $Reference . ' limit 1';
 	$Res = lect_sql($Sql);
 	if ($Personne = $Res->fetch(PDO::FETCH_NUM)) {
 		//echo 'Sosa lu : '.$Personne[3].', attendu : '.$Sosa.'<br />';
@@ -48,52 +50,52 @@ function Accede_Personne($Reference) {
 			$Ref = $Personne[0];
 			if (pair($num_lig++)) $style = 'liste';
 			else                $style = 'liste2';
-			echo '<tr class="'.$style.'">';
-			echo '<td align="center" width="10%"><input type="checkbox" name="modif[]" value="'.$Ref.'_'.$Sosa.'"/></td>';
-			echo '<td width="20%">'.$Personne[3].'</td>';
-			echo '<td width="20%">'.$Sosa.'</td>';
+			echo '<tr class="' . $style . '">';
+			echo '<td align="center" width="10%"><input type="checkbox" name="modif[]" value="' . $Ref . '_' . $Sosa . '"/></td>';
+			echo '<td width="20%">' . $Personne[3] . '</td>';
+			echo '<td width="20%">' . $Sosa . '</td>';
 			echo '<td width="50%">';
-			echo '<a '.Ins_Ref_Pers($Ref).'>'.my_html($Personne[2].' '.$Personne[1]).'</a>';
-			echo '&nbsp;<a '.Ins_Edt_Pers($Ref).'>'.$echo_modif;
+			echo '<a ' . Ins_Ref_Pers($Ref) . '>' . my_html($Personne[2] . ' ' . $Personne[1]) . '</a>';
+			echo ' <a ' . Ins_Edt_Pers($Ref) . '>' . $echo_modif;
 			//echo 'mem : '.memory_get_usage();
-			echo '</td></tr>'."\n";
+			echo '</td></tr>' . "\n";
 		}
 	}
 	$Res->closeCursor();
 }
 
-$compl = Ajoute_Page_Info(600,200);
+$compl = Ajoute_Page_Info(600, 200);
 
 $Ind_Ref = 0;
 
 if ($bt_OK) {
-	Ecrit_Entete_Page(my_html($titre),$contenu,$mots);
+	Ecrit_Entete_Page(my_html($titre), $contenu, $mots);
 	include('monSSG.js');
 }
 
-Insere_Haut(my_html($titre),$compl,'Verif_Sosa','');
+Insere_Haut(my_html($titre), $compl, 'Verif_Sosa', '');
 
 // Demande de rectification
 if ($bt_OK) {
 	$dem_mod = 0;
 	$nb_mod  = 0;
-	$deb_upd = 'update '.nom_table('personnes').' set numero = ';
+	$deb_upd = 'update ' . nom_table('personnes') . ' set numero = ';
 	if (isset($_POST['modif'])) {
 		$tab_modif = $_POST['modif'];
-		foreach($tab_modif as $lamodif) {
-			$p    = strpos($lamodif,'_');
-			$ref  = substr($lamodif,0,$p);
-			$ref = Secur_Variable_Post($ref,1,'N');
-			$theo = substr($lamodif,$p + 1);
-			$theo = Secur_Variable_Post($theo,1,'N');
+		foreach ($tab_modif as $lamodif) {
+			$p    = strpos($lamodif, '_');
+			$ref  = substr($lamodif, 0, $p);
+			$ref = Secur_Variable_Post($ref, 1, 'N');
+			$theo = substr($lamodif, $p + 1);
+			$theo = Secur_Variable_Post($theo, 1, 'N');
 			if ($ref and $theo) {
-				$req = $deb_upd.$theo.' where reference = '.$ref.';';
+				$req = $deb_upd . $theo . ' where reference = ' . $ref . ';';
 				$dem_mod++;
 				$Res = maj_sql($req);
 				$nb_mod += $enr_mod;
 			}
 		}
-		echo '<br />'.$dem_mod.' '.my_html(LG_CHK_SOSA_RESULT_1.' ; '.$nb_mod.' '.LG_CHK_SOSA_RESULT_2).'<br />';
+		echo '<br />' . $dem_mod . ' ' . my_html(LG_CHK_SOSA_RESULT_1 . ' ; ' . $nb_mod . ' ' . LG_CHK_SOSA_RESULT_2) . '<br />';
 	}
 }
 
@@ -104,24 +106,24 @@ $Sosa = 1;
 $num_lig = 0;
 
 // Récupération de la référence de la personne '1'
-$Sql = 'select Reference from '.nom_table('personnes').' where Numero = \'1\'';
+$Sql = 'select Reference from ' . nom_table('personnes') . ' where Numero = \'1\'';
 $Res = lect_sql($Sql);
 
 if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 
-	echo '<form id="saisie" method="post" action="'.my_self().'">'."\n";
+	echo '<form id="saisie" method="post" action="' . my_self() . '">' . "\n";
 
-	bt_ok_an_sup($lib_Rectifier,$lib_Annuler,'','',false);
+	bt_ok_an_sup($lib_Rectifier, $lib_Annuler, '', '', false);
 
-	echo '<br /><br />'.my_html(LG_CHK_SOSA_NON_MATCHING).'<br /><br />';
+	echo '<br /><br />' . my_html(LG_CHK_SOSA_NON_MATCHING) . '<br /><br />';
 
-	echo '<table width="95%" border="0" class="classic" align="center">'."\n";
+	echo '<table width="95%" border="0" class="classic" align="center">' . "\n";
 	echo '<tr>';
-	echo '<th width="10%"><input type="checkbox" name="selTous" value="on" onclick="checkUncheckAll(this);"/>&nbsp;'.my_html($LG_All).'</th>';
-	echo '<th width="20%">'.my_html(LG_CHK_SOSA_NUMBER).'</th>';
-	echo '<th width="20%">'.my_html(LG_CHK_SOSA_CALC_NUMBER).'</th>';
-	echo '<th width="50%">'.my_html(LG_CHK_SOSA_PERSON).'</th>';
-	echo '</tr>'."\n";
+	echo '<th width="10%"><input type="checkbox" name="selTous" value="on" onclick="checkUncheckAll(this);"/> ' . my_html($LG_All) . '</th>';
+	echo '<th width="20%">' . my_html(LG_CHK_SOSA_NUMBER) . '</th>';
+	echo '<th width="20%">' . my_html(LG_CHK_SOSA_CALC_NUMBER) . '</th>';
+	echo '<th width="50%">' . my_html(LG_CHK_SOSA_PERSON) . '</th>';
+	echo '</tr>' . "\n";
 
 	// 2 paires d'indices min / max
 	// C : sur la génération courante
@@ -145,14 +147,16 @@ if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 			//echo '$MinP : '.$MinP.', ';
 			//echo '$MaxP : '.$MaxP.'<br />';
 			$PersC = $Pers[$nb];
-			$Pere_GP = 0; $Mere_GP = 0; $Rang_GP = 0;
+			$Pere_GP = 0;
+			$Mere_GP = 0;
+			$Rang_GP = 0;
 			// Recherche des parents si la personne est définie
-			$c1 = substr($PersC,0,1);
+			$c1 = substr($PersC, 0, 1);
 			//echo 'Perc : '.$PersC.', ';
 			//echo 'c1 : '.$c1.'<br />';
 			if ($c1 != '^') {
 				//echo 'Rech parents de '.$PersC.'<br />';
-				$x = Get_Parents($PersC,$Pere_GP,$Mere_GP,$Rang_GP);
+				$x = Get_Parents($PersC, $Pere_GP, $Mere_GP, $Rang_GP);
 				//echo 'parents : '.$Pere_GP.', '.$Mere_GP.'<br />';
 				++$Ind_Cour;
 				++$Sosa;
@@ -160,29 +164,25 @@ if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 					$Pers[$Ind_Cour] = $Pere_GP;
 					$trouve = true;
 					Accede_Personne($Pere_GP);
-				}
-				else $Pers[$Ind_Cour] = '^1';
+				} else $Pers[$Ind_Cour] = '^1';
 				++$Ind_Cour;
 				++$Sosa;
 				if ($Mere_GP) {
 					$Pers[$Ind_Cour] = $Mere_GP;
 					$trouve = true;
 					Accede_Personne($Mere_GP);
-				}
-				else $Pers[$Ind_Cour] = '^1';
-			}
-			else {
+				} else $Pers[$Ind_Cour] = '^1';
+			} else {
 				// Combien de postes concaténés ?
-				$nb_concat = substr($PersC,1);
+				$nb_concat = substr($PersC, 1);
 				//echo 'nombre : '.$nb_concat.', ';
-				$Sosa += $nb_concat*2;
+				$Sosa += $nb_concat * 2;
 				// Principe : dans $Pers, on a ^ et un nombre si la personne est inconnue ; le nombre représente le nombre de personnes inconnues
 				// A la première passe, on a ^1 ==> 1 personne inconnue ; les parents le sont aussi ==> ^2, les grands parents aussi ==> ^4
 				// Dans cet exemple, 3 postes en remplacent 1 + 2 + 4, donc 7 ; intéressant car un poste prend beaucoup de place en PHP
-				$Pers[++$Ind_Cour] = '^'.$nb_concat*2;
+				$Pers[++$Ind_Cour] = '^' . $nb_concat * 2;
 				//echo 'Resultat concat : '.$Pers[$Ind_Cour].'<br />';
 			}
-
 		}
 		$MaxC = $Ind_Cour;
 	} while ($trouve);
@@ -192,15 +192,15 @@ if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 	echo '<br />';
 	aff_origine();
 
-	bt_ok_an_sup($lib_Rectifier,$lib_Annuler,'','',false,true);
+	bt_ok_an_sup($lib_Rectifier, $lib_Annuler, '', '', false, true);
 
 	echo '</form>';
-	
-	echo '<br /><a href="Init_Sosa.php">'.my_html($LG_Menu_Title['Delete_Sosa']).'</a>';
-}
-else $x = Erreur_DeCujus();
+
+	echo '<br /><a href="Init_Sosa.php">' . my_html($LG_Menu_Title['Delete_Sosa']) . '</a>';
+} else $x = Erreur_DeCujus();
 
 Insere_Bas($compl);
 ?>
 </body>
+
 </html>

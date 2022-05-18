@@ -5,8 +5,7 @@ include('phonetique.php');	//	Appel de la classe de codage phonétique
 
 //	Récupération du nom
 $nom = '';
-if (!isset($_POST['nom']))
-{
+if (!isset($_POST['nom'])) {
 	echo 'Erreur';
 	return;
 }
@@ -16,4 +15,3 @@ $codePho = new phonetique();
 //
 $code = $codePho->calculer($nom);
 echo $codePho->codeVersPhon($code);
-?>

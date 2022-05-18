@@ -1,20 +1,20 @@
 <?php
 //=====================================================================
 // Affichage d'un document, quel que soit sa nature
-// JGérard 2009
-//	paramètre : refDoc = référence du document à afficher
+// JGï¿½rard 2009
+//	paramï¿½tre : refDoc = rï¿½fï¿½rence du document ï¿½ afficher
 //=====================================================================
 
 // Gestion standard des pages
-session_start();                       // Démarrage de la session
+session_start();                       // Dï¿½marrage de la session
 
-include('fonctions.php');              // Appel des fonctions générales
-$acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
+include('fonctions.php');              // Appel des fonctions gï¿½nï¿½rales
+$acces = 'L';                          // Type d'accï¿½s de la page : (M)ise ï¿½ jour, (L)ecture
 $titre = 'Voir un document'; 		   // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
 include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
-// Récupération des variables de l'affichage précédent
+// Rï¿½cupï¿½ration des variables de l'affichage prï¿½cï¿½dent
 $tab_variables = array('Horigine');
 foreach ($tab_variables as $nom_variables) {
   if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
@@ -22,7 +22,7 @@ foreach ($tab_variables as $nom_variables) {
 }
 $Horigine = Secur_Variable_Post($Horigine,100,'S');
 
-// Recup de la variable passée dans l'URL : référence de la personne
+// Recup de la variable passï¿½e dans l'URL : rï¿½fï¿½rence de la personne
 $refDoc = Recup_Variable('refDoc','N');
 
 $compl = "";
@@ -63,7 +63,7 @@ function afficheHTM()
 		$position = stripos($contenu , '>' , $position);
 		$contenu = substr($contenu , $position + 1 , strlen($contenu));
 	}
-	//	Suppression de tout ce qui est après la balise de fin BODY
+	//	Suppression de tout ce qui est aprï¿½s la balise de fin BODY
 	$position = stripos($contenu , "</body>");
 	if ($position)
 	{
@@ -77,7 +77,7 @@ function afficheHTM()
 //
 $sql = 'SELECT * FROM '.nom_table('documents').' WHERE id_document = '.$refDoc;
 $res = lect_sql($sql);
-$enreg        = $res->fetch(PDO::FETCH_ASSOC)
+$enreg        = $res->fetch(PDO::FETCH_ASSOC);
 $natureDoc    = $enreg['Nature_Document'];
 $titreDoc     = $enreg['Titre'];
 $nomFichier   = $enreg['Nom_Fichier'];
@@ -100,7 +100,7 @@ if ($natureDoc == 'PDF') {
 	echo '&nbsp;<br />';
 	echo '&nbsp;</div>';
 	
-	//<a href="chemin/vers/ton/document.doc" type="application/msword">intitulé de ton document (format Word, poids du document)</a>
+	//<a href="chemin/vers/ton/document.doc" type="application/msword">intitulï¿½ de ton document (format Word, poids du document)</a>
 	
 	/*
 	<iframe

@@ -15,11 +15,11 @@ $acces = 'M';
 //$titre = 'Rectification des caractères UTF-8';
 $titre = $LG_Menu_Title['Rect_Utf'];
 $x = Lit_Env();
-$niv_requis = 'G';				// Page réservée au profil gestionnaire
+$niv_requis = 'G';                // Page réservée au profil gestionnaire
 include('Gestion_Pages.php');
 
-$compl = Ajoute_Page_Info(600,250);
-Insere_Haut(my_html($titre),$compl,'Rectif_Utf8','');
+$compl = Ajoute_Page_Info(600, 250);
+Insere_Haut(my_html($titre), $compl, 'Rectif_Utf8', '');
 
 rectif_UTF8();
 
@@ -30,4 +30,5 @@ Insere_Bas($compl);
 
 ?>
 </body>
+
 </html>

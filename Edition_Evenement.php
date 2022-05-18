@@ -10,35 +10,36 @@ session_start();
 include('fonctions.php');
 
 // Récupération des variables de l'affichage précédent
-$tab_variables = array('ok','annuler', 'supprimer' ,
-						//  Parametre d'appel de la page
-						'refPar' ,
-						//  Anciennes valeurs des zones
-						'idZoneAnc' , 'codeTypeAnc' , 'titreAnc' , 'dDebAnc' , 'dFinAnc' ,
-						'diversAnc' , 'diffNoteAnc' , 'AStatut_Fiche' , 'idNiveauAnc',
-						//  Valeurs saisies
-						'idZoneF' , 'codeTypeF' , 'titreF' , 'dDebCache' , 'dFinCache' ,
-						'diversF' , 'diffNoteF' , 'Statut_Fiche' , 'idNiveauF',
-						'Horigine'
-  );
+$tab_variables = array(
+	'ok', 'annuler', 'supprimer',
+	//  Parametre d'appel de la page
+	'refPar',
+	//  Anciennes valeurs des zones
+	'idZoneAnc', 'codeTypeAnc', 'titreAnc', 'dDebAnc', 'dFinAnc',
+	'diversAnc', 'diffNoteAnc', 'AStatut_Fiche', 'idNiveauAnc',
+	//  Valeurs saisies
+	'idZoneF', 'codeTypeF', 'titreF', 'dDebCache', 'dFinCache',
+	'diversF', 'diffNoteF', 'Statut_Fiche', 'idNiveauF',
+	'Horigine'
+);
 
 foreach ($tab_variables as $nom_variables) {
-  if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
-  else $$nom_variables = '';
+	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
+	else $$nom_variables = '';
 }
 
 // Sécurisation des variables postées
-$ok        = Secur_Variable_Post($ok,strlen($lib_Okay),'S');
-$annuler   = Secur_Variable_Post($annuler,strlen($lib_Annuler),'S');
-$supprimer = Secur_Variable_Post($supprimer,strlen($lib_Supprimer),'S');
-$Horigine  = Secur_Variable_Post($Horigine,100,'S');
+$ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
+$annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
+$supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
+$Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
 
 // Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
 // Recup de la variable passée dans l'URL : référence de l'évènement, actualité o/n
-$refPar = Recup_Variable('refPar','N');
-$actu = Recup_Variable('actu','C','xo');
+$refPar = Recup_Variable('refPar', 'N');
+$actu = Recup_Variable('actu', 'C', 'xo');
 $actualite = ($actu === 'o' ? true : false);
 
 // Titre pour META
@@ -58,25 +59,25 @@ include('Gestion_Pages.php');
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 
-$refPar        = Secur_Variable_Post($refPar,1,'N');
-$idZoneAnc     = Secur_Variable_Post($idZoneAnc,1,'N');
-$codeTypeAnc   = Secur_Variable_Post($codeTypeAnc,4,'S');
-$titreAnc      = Secur_Variable_Post($titreAnc,80,'S');
-$dDebAnc       = Secur_Variable_Post($dDebAnc,10,'S');
-$dFinAnc       = Secur_Variable_Post($dFinAnc,10,'S');
-$diversAnc     = Secur_Variable_Post($diversAnc,65535,'S');
-$diffNoteAnc   = Secur_Variable_Post($diffNoteAnc,1,'S');
-$AStatut_Fiche = Secur_Variable_Post($AStatut_Fiche,1,'S');
-$idNiveauAnc   = Secur_Variable_Post($idNiveauAnc,1,'N');
-$idZoneF       = Secur_Variable_Post($idZoneF,50,'S');
-$codeTypeF     = Secur_Variable_Post($codeTypeF,50,'S');
-$titreF        = Secur_Variable_Post($titreF,80,'S');
-$dDebCache     = Secur_Variable_Post($dDebCache,10,'S');
-$dFinCache     = Secur_Variable_Post($dFinCache,10,'S');
-$diversF       = Secur_Variable_Post($diversF,65535,'S');
-$diffNoteF     = Secur_Variable_Post($diffNoteF,1,'S');
-$Statut_Fiche  = Secur_Variable_Post($Statut_Fiche,1,'S');
-$idNiveauF     = Secur_Variable_Post($idNiveauF,1,'N');
+$refPar        = Secur_Variable_Post($refPar, 1, 'N');
+$idZoneAnc     = Secur_Variable_Post($idZoneAnc, 1, 'N');
+$codeTypeAnc   = Secur_Variable_Post($codeTypeAnc, 4, 'S');
+$titreAnc      = Secur_Variable_Post($titreAnc, 80, 'S');
+$dDebAnc       = Secur_Variable_Post($dDebAnc, 10, 'S');
+$dFinAnc       = Secur_Variable_Post($dFinAnc, 10, 'S');
+$diversAnc     = Secur_Variable_Post($diversAnc, 65535, 'S');
+$diffNoteAnc   = Secur_Variable_Post($diffNoteAnc, 1, 'S');
+$AStatut_Fiche = Secur_Variable_Post($AStatut_Fiche, 1, 'S');
+$idNiveauAnc   = Secur_Variable_Post($idNiveauAnc, 1, 'N');
+$idZoneF       = Secur_Variable_Post($idZoneF, 50, 'S');
+$codeTypeF     = Secur_Variable_Post($codeTypeF, 50, 'S');
+$titreF        = Secur_Variable_Post($titreF, 80, 'S');
+$dDebCache     = Secur_Variable_Post($dDebCache, 10, 'S');
+$dFinCache     = Secur_Variable_Post($dFinCache, 10, 'S');
+$diversF       = Secur_Variable_Post($diversF, 65535, 'S');
+$diffNoteF     = Secur_Variable_Post($diffNoteF, 1, 'S');
+$Statut_Fiche  = Secur_Variable_Post($Statut_Fiche, 1, 'S');
+$idNiveauF     = Secur_Variable_Post($idNiveauF, 1, 'N');
 
 //  ========== Mise a jour de la base ==========
 $retourPreced = false;
@@ -92,15 +93,15 @@ $largP = 20;
 // Suppression demandée
 if ($bt_Sup) {
 
-	$fin_req = ' where Reference_Objet = '.$refPar." and Type_Objet = 'E'";
+	$fin_req = ' where Reference_Objet = ' . $refPar . " and Type_Objet = 'E'";
 	// Suppression des commentaires
 	if ($diversAnc != '') {
-		$res = maj_sql('delete from '.nom_table('commentaires').$fin_req);
+		$res = maj_sql('delete from ' . nom_table('commentaires') . $fin_req);
 	}
 	// Suppression des liens vers les documents
-	$res = maj_sql('delete from '.nom_table('concerne_doc').$fin_req);
+	$res = maj_sql('delete from ' . nom_table('concerne_doc') . $fin_req);
 	// Suppression des liens vers les images
-	$req = 'delete from '.nom_table('images').' where Reference = '.$refPar." and Type_Ref = 'E'";
+	$req = 'delete from ' . nom_table('images') . ' where Reference = ' . $refPar . " and Type_Ref = 'E'";
 	$res = maj_sql($req);
 
 	// Suppression de l'évènement
@@ -113,13 +114,23 @@ if ($bt_Sup) {
 
 if ($bt_OK) {
 	// Vérification si création d'une zone géographique
-	var_dump ($idNiveauF);
+	var_dump($idNiveauF);
 	switch ($idNiveauF) {
-		case 1 : $idZoneF = Ajoute_Pays($idZoneF); break ;
-		case 2 : $idZoneF = Ajoute_Region($idZoneF); break ;
-		case 3 : $idZoneF = Ajoute_Departement($idZoneF); break ;
-		case 4 : $idZoneF = Ajoute_Ville($idZoneF); break ;
-		case 5 : $idZoneF = Ajoute_Subdivision($idZoneF); break ;
+		case 1:
+			$idZoneF = Ajoute_Pays($idZoneF);
+			break;
+		case 2:
+			$idZoneF = Ajoute_Region($idZoneF);
+			break;
+		case 3:
+			$idZoneF = Ajoute_Departement($idZoneF);
+			break;
+		case 4:
+			$idZoneF = Ajoute_Ville($idZoneF);
+			break;
+		case 5:
+			$idZoneF = Ajoute_Subdivision($idZoneF);
+			break;
 	}
 
 	// Init des zones de requête ==> valeurs par défaut
@@ -130,23 +141,23 @@ if ($bt_OK) {
 
 	$maj_site = false;
 
-  // Sur niveau zone 0, mise à zéro lieu
-  if ($idNiveauF == 0) $idZoneF = 0;
+	// Sur niveau zone 0, mise à zéro lieu
+	if ($idNiveauF == 0) $idZoneF = 0;
 
 	//  Mise a jour de la base
 	if ($refPar == -1) {
 		//    Creation
-		Ins_Zone_Req($idZoneF , 'N' , $valeurs);
-		Ins_Zone_Req($idNiveauF , 'N' , $valeurs);
-		Ins_Zone_Req($codeTypeF , 'A' , $valeurs);
-		Ins_Zone_Req($titreF , 'A' , $valeurs);
-		Ins_Zone_Req($dDebCache , 'A' , $valeurs);
-		Ins_Zone_Req($dFinCache , 'A' , $valeurs);
-		Ins_Zone_Req($Statut_Fiche , 'A' , $valeurs);
-		$requete  = 'INSERT INTO ' . nom_table('evenements').
-		            ' (identifiant_zone , Identifiant_Niveau, Code_Type , Titre , Debut , Fin , '.
-		            ' Statut_Fiche , Date_Creation , Date_Modification) '.
-		            'VALUES ('.$valeurs.' , current_timestamp , current_timestamp)';
+		Ins_Zone_Req($idZoneF, 'N', $valeurs);
+		Ins_Zone_Req($idNiveauF, 'N', $valeurs);
+		Ins_Zone_Req($codeTypeF, 'A', $valeurs);
+		Ins_Zone_Req($titreF, 'A', $valeurs);
+		Ins_Zone_Req($dDebCache, 'A', $valeurs);
+		Ins_Zone_Req($dFinCache, 'A', $valeurs);
+		Ins_Zone_Req($Statut_Fiche, 'A', $valeurs);
+		$requete  = 'INSERT INTO ' . nom_table('evenements') .
+			' (identifiant_zone , Identifiant_Niveau, Code_Type , Titre , Debut , Fin , ' .
+			' Statut_Fiche , Date_Creation , Date_Modification) ' .
+			'VALUES (' . $valeurs . ' , current_timestamp , current_timestamp)';
 		$result = maj_sql($requete);
 		if ($result == 1) {
 			$retourPreced = true;
@@ -155,44 +166,40 @@ if ($bt_OK) {
 
 		// Création d'un enregistrement dans la table commentaires
 		if ($diversF != '') {
-			insere_commentaire($connexion->lastInsertId(),$Type_Ref,$diversF,$diffNoteF);
+			insere_commentaire($connexion->lastInsertId(), $Type_Ref, $diversF, $diffNoteF);
 		}
+	} else {
+		//    Modification
+		// S'il n'y a pas de changement de zone, il ne peut y avoir changement de niveau...
+		if (($idZoneF == $idZoneAnc) and ($idNiveauF != 0))
+			$idNiveauF = $idNiveauAnc;
+		Aj_Zone_Req('Identifiant_zone', $idZoneF, $idZoneAnc, 'N', $valeurs);
+		Aj_Zone_Req('Identifiant_Niveau', $idNiveauF, $idNiveauAnc, 'N', $valeurs);
+		Aj_Zone_Req('Code_Type', $codeTypeF, $codeTypeAnc, 'A', $valeurs);
+		Aj_Zone_Req('Titre', $titreF, $titreAnc, 'A', $valeurs);
+		Aj_Zone_Req('Debut', $dDebCache, $dDebAnc, 'A', $valeurs);
+		Aj_Zone_Req('Fin', $dFinCache, $dFinAnc, 'A', $valeurs);
+		Aj_Zone_Req('Statut_Fiche', $Statut_Fiche, $AStatut_Fiche, 'A', $valeurs);
+		if ($valeurs == '') $retourPreced = true;
+		else {
+			$requete  = 'UPDATE ' . nom_table('evenements') . " SET $valeurs , Date_Modification=current_timestamp";
+			$requete .= " WHERE Reference = $refPar";
+			$result = maj_sql($requete);
+			if ($result == 1) {
+				$retourPreced = true;
+				$maj_site = true;
+			}
+		}
+		// Traitement des commentaires
+		maj_commentaire($refPar, $Type_Ref, $diversF, $diversAnc, $diffNoteF, $diffNoteAnc);
+	}
+	// Exécution de la requête sur les commentaires
+	if ($req_comment != '') {
+		$res = maj_sql($req_comment);
+		$maj_site = true;
+	}
 
-  	}
-  	else {
-    //    Modification
-    // S'il n'y a pas de changement de zone, il ne peut y avoir changement de niveau...
-    if (($idZoneF == $idZoneAnc) and ($idNiveauF != 0))
-      $idNiveauF = $idNiveauAnc;
-    Aj_Zone_Req('Identifiant_zone', $idZoneF , $idZoneAnc , 'N' , $valeurs);
-    Aj_Zone_Req('Identifiant_Niveau', $idNiveauF , $idNiveauAnc , 'N' , $valeurs);
-    Aj_Zone_Req('Code_Type' , $codeTypeF , $codeTypeAnc , 'A' , $valeurs);
-    Aj_Zone_Req('Titre' , $titreF , $titreAnc , 'A' , $valeurs);
-    Aj_Zone_Req('Debut' , $dDebCache , $dDebAnc , 'A' , $valeurs);
-    Aj_Zone_Req('Fin' , $dFinCache , $dFinAnc , 'A' , $valeurs);
-    Aj_Zone_Req('Statut_Fiche' , $Statut_Fiche , $AStatut_Fiche , 'A' , $valeurs);
-    if ($valeurs == '') $retourPreced = true;
-    else {
-      $requete  = 'UPDATE ' . nom_table('evenements')." SET $valeurs , Date_Modification=current_timestamp";
-      $requete .= " WHERE Reference = $refPar";
-      $result = maj_sql($requete);
-      if ($result == 1) {
-      	$retourPreced = true;
-      	$maj_site = true;
-      }
-    }
-    // Traitement des commentaires
-	maj_commentaire($refPar,$Type_Ref,$diversF,$diversAnc,$diffNoteF,$diffNoteAnc);
-
-  }
-  	// Exécution de la requête sur les commentaires
-    if ($req_comment != '') {
-    	$res = maj_sql($req_comment);
-    	$maj_site = true;
-    }
-
-    if ($maj_site) maj_date_site();
-
+	if ($maj_site) maj_date_site();
 }
 
 // Retour sur la page précédente
@@ -200,20 +207,19 @@ if ($retourPreced) Retour_Ar();
 
 //  ========== Programme principal ==========
 if (!$est_contributeur) {
-  Insere_Haut(my_html($titre),'','Edition_Evenement',"");
-  Affiche_Stop($LG_function_noavailable_profile);
-  Insere_Bas('');
-  return;
-}
-else {
+	Insere_Haut(my_html($titre), '', 'Edition_Evenement', "");
+	Affiche_Stop($LG_function_noavailable_profile);
+	Insere_Bas('');
+	return;
+} else {
 	include('jscripts/Edition_Evenement.js');
-	include ('gest_onglets.js');
-  	include('Insert_Tiny.js');
+	include('gest_onglets.js');
+	include('Insert_Tiny.js');
 
 	//  == Affiche les données propres à l'enregistrement de la fiche ==
-	$requete = 'SELECT * FROM ' . nom_table('evenements') . ' e, ' . nom_table('types_evenement') .' t'.
-	         " WHERE reference = $refPar" .
-	         ' AND e.Code_Type = t.Code_Type limit 1';
+	$requete = 'SELECT * FROM ' . nom_table('evenements') . ' e, ' . nom_table('types_evenement') . ' t' .
+		" WHERE reference = $refPar" .
+		' AND e.Code_Type = t.Code_Type limit 1';
 	$result = lect_sql($requete);
 	$enreg = $result->fetch(PDO::FETCH_ASSOC);
 	$enreg2 = $enreg;
@@ -232,99 +238,97 @@ else {
 	if ($refPar != -1) {
 		if ($objetCibleLu == 'P') {
 			//  Recherche de liens avec une personne
-			$requete = 'SELECT 1 FROM ' . nom_table('participe') . ' WHERE Evenement = '.$refPar.' limit 1';
+			$requete = 'SELECT 1 FROM ' . nom_table('participe') . ' WHERE Evenement = ' . $refPar . ' limit 1';
 			$result = lect_sql($requete);
 			$nbLiens += $result->rowCount();
 		}
 		//  Recherche de liens avec une filiation ou une union
 		if (($objetCibleLu == 'F') or ($objetCibleLu == 'U')) {
-			$requete = 'SELECT 1 FROM ' . nom_table('concerne_objet') . ' WHERE Evenement = '.$refPar.' limit 1';
+			$requete = 'SELECT 1 FROM ' . nom_table('concerne_objet') . ' WHERE Evenement = ' . $refPar . ' limit 1';
 			$result = lect_sql($requete);
 			$nbLiens += $result->rowCount();
 		}
-  	}
+	}
 
-	$compl = Ajoute_Page_Info(600,250);
+	$compl = Ajoute_Page_Info(600, 250);
 	if ($refPar != -1)
-		$compl .= Affiche_Icone_Lien(Ins_Ref_ImagesE($refPar),'images','Images') . '&nbsp;';
+		$compl .= Affiche_Icone_Lien(Ins_Ref_ImagesE($refPar), 'images', 'Images') . ' ';
 	if ($refPar != -1) {
 		$ajout = '';
 		//if ($actualite) $ajout = '&amp;actu=o';
-		//$compl .= Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Fiche_Evenement.php?refPar=' .$refPar . $ajout. '"','page','Fiche évènement') . '&nbsp;';
+		//$compl .= Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Fiche_Evenement.php?refPar=' .$refPar . $ajout. '"','page','Fiche évènement') . ' ';
 		if ($actualite)
-			$compl .= Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Fiche_Actualite.php?refPar=' .$refPar . '"','page',$LG_Menu_Title['New']) . '&nbsp;';
+			$compl .= Affiche_Icone_Lien('href="' . Get_Adr_Base_Ref() . 'Fiche_Actualite.php?refPar=' . $refPar . '"', 'page', $LG_Menu_Title['New']) . ' ';
 		else
-			$compl .= Affiche_Icone_Lien('href="'.Get_Adr_Base_Ref().'Fiche_Evenement.php?refPar=' .$refPar . '"','page',$LG_Menu_Title['Event']) . '&nbsp;';
-		
+			$compl .= Affiche_Icone_Lien('href="' . Get_Adr_Base_Ref() . 'Fiche_Evenement.php?refPar=' . $refPar . '"', 'page', $LG_Menu_Title['Event']) . ' ';
 	}
-		
-	Insere_Haut(my_html($titre), $compl, 'Edition_Evenement' , '');
 
-	echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'titreF,codeTypeF\')" action="' . my_self() .'?' . Query_Str().'">'."\n";
-	echo '<input type="'.$hidden.'" name="refPar" value="'.$refPar.'"/>'."\n";
+	Insere_Haut(my_html($titre), $compl, 'Edition_Evenement', '');
+
+	echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'titreF,codeTypeF\')" action="' . my_self() . '?' . Query_Str() . '">' . "\n";
+	echo '<input type="' . $hidden . '" name="refPar" value="' . $refPar . '"/>' . "\n";
 
 	// Dans le cas de création d'actualité, on ne présentera pas de select avec le type
 	if ($actualite) {
-		echo '<input type="'.$hidden.'" name="codeTypeF" value="'.$TypeEv_actu.'"/>'."\n";
-		echo '<input type="'.$hidden.'" name="codeTypeAnc" value="'.$TypeEv_actu.'"/>'."\n";
+		echo '<input type="' . $hidden . '" name="codeTypeF" value="' . $TypeEv_actu . '"/>' . "\n";
+		echo '<input type="' . $hidden . '" name="codeTypeAnc" value="' . $TypeEv_actu . '"/>' . "\n";
 	}
 
-	echo '<div id="content">'."\n";
-	echo '<table id="cols"  border="0" cellpadding="0" cellspacing="0" >'."\n";
-	echo '<tr>'."\n";
-	echo '<td style="border-right:0px solid #9cb0bb">'."\n";
-	echo '  <img src="'.$chemin_images.$Images['clear'].'" width="750" height="1" alt="clear"/>'."\n";
-	echo '</td></tr>'."\n";
+	echo '<div id="content">' . "\n";
+	echo '<table id="cols"  border="0" cellpadding="0" cellspacing="0" >' . "\n";
+	echo '<tr>' . "\n";
+	echo '<td style="border-right:0px solid #9cb0bb">' . "\n";
+	echo '  <img src="' . $chemin_images . $Images['clear'] . '" width="750" height="1" alt="clear"/>' . "\n";
+	echo '</td></tr>' . "\n";
 
-	echo '<tr>'."\n";
-	echo '<td class="left">'."\n";
-	echo '<div class="tab-container" id="container1">'."\n";
+	echo '<tr>' . "\n";
+	echo '<td class="left">' . "\n";
+	echo '<div class="tab-container" id="container1">' . "\n";
 	// Onglets
-	echo '<ul class="tabs">'."\n";
-	echo '<li><a href="#" onclick="return showPane(\'pane1\', this)" id="tab1">'.my_html($LG_Data_tab).'</a></li>'."\n";
+	echo '<ul class="tabs">' . "\n";
+	echo '<li><a href="#" onclick="return showPane(\'pane1\', this)" id="tab1">' . my_html($LG_Data_tab) . '</a></li>' . "\n";
 	if (!$actualite) {
 		if ($refPar != -1) {
 			// Texte à afficher en modification sur le type de lien
-			$txt = lib_pfu ($objetCibleLu);
-			echo '<li><a href="#" onclick="return showPane(\'pane4\', this)">'.my_html('Liens vers des '.$txt.'s').'</a></li>'."\n";
+			$txt = lib_pfu($objetCibleLu);
+			echo '<li><a href="#" onclick="return showPane(\'pane4\', this)">' . my_html('Liens vers des ' . $txt . 's') . '</a></li>' . "\n";
 		}
 	}
 	// Pas de document en création
 	if ($modif)
-		echo '<li><a href="#" onclick="return showPane(\'panDocs\', this)">'.my_html(LG_CH_DOCS).'</a></li>'."\n";
-	echo '<li><a href="#" onclick="return showPane(\'panFiche\', this)">'.my_html(LG_CH_FILE).'</a></li>'."\n";
-	echo '</ul>'."\n";
+		echo '<li><a href="#" onclick="return showPane(\'panDocs\', this)">' . my_html(LG_CH_DOCS) . '</a></li>' . "\n";
+	echo '<li><a href="#" onclick="return showPane(\'panFiche\', this)">' . my_html(LG_CH_FILE) . '</a></li>' . "\n";
+	echo '</ul>' . "\n";
 
-	echo '<div class="tab-panes">'."\n";
+	echo '<div class="tab-panes">' . "\n";
 	// Onglets données générales de l'évènement
-	echo '<div id="pane1">'."\n";
+	echo '<div id="pane1">' . "\n";
 	// Pavé données
-	echo '<fieldset>'."\n";
-	echo '<legend>'.my_html($LG_Data_tab).'</legend>';
-	echo '<table width="100%" border="0">'."\n";
+	echo '<fieldset>' . "\n";
+	echo '<legend>' . my_html($LG_Data_tab) . '</legend>';
+	echo '<table width="100%" border="0">' . "\n";
 	// Titre
-	col_titre_tab_noClass($LG_Event_Title,$largP);
-	echo '<td><input type="text" size="50" name="titreF" id="titreF" value="'.$titreLu.'" class="oblig"/>&nbsp;'."\n";
+	col_titre_tab_noClass($LG_Event_Title, $largP);
+	echo '<td><input type="text" size="50" name="titreF" id="titreF" value="' . $titreLu . '" class="oblig"/> ' . "\n";
 	Img_Zone_Oblig('imgObligNom');
 	if (!$actualite) {
 		if ($refPar != -1) {
 			// Texte à afficher en modification sur le type de lien
-			if ($txt != '') echo "&nbsp;&nbsp;&Agrave; lier &agrave; une $txt";
+			if ($txt != '') echo "  à lier à une $txt";
 		}
 	}
-	echo '<input type="'.$hidden.'" name="titreAnc" value="'.$titreLu.'"/>'."\n";
-	echo'</td>';
+	echo '<input type="' . $hidden . '" name="titreAnc" value="' . $titreLu . '"/>' . "\n";
+	echo '</td>';
 
 	// Affichage de l'image par défaut pour l'évènement
 	echo '<td rowspan="3" align="center" valign="middle">';
 	// Recherche de la présence d'une image par défaut
-	$image = Rech_Image_Defaut($refPar,'E');
+	$image = Rech_Image_Defaut($refPar, 'E');
 	if ($image != '') {
-		$image = $chemin_images_util.$image;
-		Aff_Img_Redim_Lien ($image,110,110,"id_".$refPar);
-	}
-	else echo '&nbsp;';
-	echo '</td>'."\n";
+		$image = $chemin_images_util . $image;
+		Aff_Img_Redim_Lien($image, 110, 110, "id_" . $refPar);
+	} else echo ' ';
+	echo '</td>' . "\n";
 
 	echo "</tr>\n";
 	//  ===== Type d'evenement
@@ -337,9 +341,9 @@ else {
 	$resultat = lect_sql($requete);
 
 	if (!$actualite) {
-		col_titre_tab_noClass($LG_Event_Type,$largP);
+		col_titre_tab_noClass($LG_Event_Type, $largP);
 		$objetCibleAff = '';
-		echo '<td><select class="oblig" name="codeTypeF">'."\n";
+		echo '<td><select class="oblig" name="codeTypeF">' . "\n";
 		$objetCibleAffC = '';
 		while ($enreg = $resultat->fetch(PDO::FETCH_ASSOC)) {
 			//  Affichage du type de cible
@@ -348,7 +352,7 @@ else {
 					echo "</optgroup>\n";
 				}
 				$objetCibleAff = $enreg['Objet_Cible'];
-				echo '<optgroup label="'.lib_pfu($objetCibleAff,false).'">';
+				echo '<optgroup label="' . lib_pfu($objetCibleAff, false) . '">';
 			}
 			//  affichage d'un type d'evenement
 			echo "<option value='" . $enreg['Code_Type'] . "'";
@@ -359,147 +363,157 @@ else {
 			echo '>';
 			echo my_html($enreg['Libelle_Type']) . "</option>\n";
 		}
-		echo "</optgroup></select>&nbsp;";
+		echo "</optgroup></select> ";
 		Img_Zone_Oblig('imgObligType');
-		echo '<input type="'.$hidden.'" name="codeTypeAnc" value="'.$codeTypeLu.'"/></td></tr>'."\n";
+		echo '<input type="' . $hidden . '" name="codeTypeAnc" value="' . $codeTypeLu . '"/></td></tr>' . "\n";
 	}
 	//
 	//  ===== Zone géographique
-	col_titre_tab_noClass($LG_Event_Where,$largP);
+	col_titre_tab_noClass($LG_Event_Where, $largP);
 	echo "<td>\n";
-	echo '<input type="'.$hidden.'" name="idZoneF" value="'.$idZoneLu.'"/>'."\n";
-	echo '<input type="'.$hidden.'" name="idZoneAnc" value="'.$idZoneLu.'"/>'."\n";
-  	echo '<input type="'.$hidden.'" name="idNiveauAnc" value="'.$idNiveauLu.'"/>'."\n";
+	echo '<input type="' . $hidden . '" name="idZoneF" value="' . $idZoneLu . '"/>' . "\n";
+	echo '<input type="' . $hidden . '" name="idZoneAnc" value="' . $idZoneLu . '"/>' . "\n";
+	echo '<input type="' . $hidden . '" name="idNiveauAnc" value="' . $idNiveauLu . '"/>' . "\n";
 
 	// Niveau de la zone géographique associée
 	echo '<input type="radio" name="idNiveauF" value="0"';
 	if ($idNiveauLu == 0) echo ' checked="checked"';
 	//echo ' onclick="bascule_image(\'img_zone\')"/> Pas de lieu '."\n";
-	echo ' onclick="cache_image_zone()"/> Pas de lieu '."\n";
-	$req = 'select * from '.nom_table('niveaux_zones');
+	echo ' onclick="cache_image_zone()"/> Pas de lieu ' . "\n";
+	$req = 'select * from ' . nom_table('niveaux_zones');
 	$result = lect_sql($req);
 	while ($enr_zone = $result->fetch(PDO::FETCH_ASSOC)) {
-    	echo '<input type="radio" name="idNiveauF" value="'.$enr_zone['Identifiant_Niveau'].'"';
-    	if ($enr_zone['Identifiant_Niveau'] == $idNiveauLu) echo ' checked="checked"';
-    	//echo ' onclick="bascule_image(\'img_zone\')"/>'.my_html($enr_zone['Libelle_Niveau']).'&nbsp;'."\n";
-    	echo ' onclick="montre_image_zone()"/>'.my_html($enr_zone['Libelle_Niveau']).'&nbsp;'."\n";
+		echo '<input type="radio" name="idNiveauF" value="' . $enr_zone['Identifiant_Niveau'] . '"';
+		if ($enr_zone['Identifiant_Niveau'] == $idNiveauLu) echo ' checked="checked"';
+		//echo ' onclick="bascule_image(\'img_zone\')"/>'.my_html($enr_zone['Libelle_Niveau']).' '."\n";
+		echo ' onclick="montre_image_zone()"/>' . my_html($enr_zone['Libelle_Niveau']) . ' ' . "\n";
 	}
 
 	// Recherche du libellé de la zone géographique
 	$lib_zone = '';
 	if ($idZoneLu != 0) {
 		switch ($idNiveauLu) {
-		  case 1 : $lib_zone = lib_pays($idZoneLu); break ;
-		  case 2 : $lib_zone = lib_region($idZoneLu); break ;
-		  case 3 : $lib_zone = lib_departement($idZoneLu); break ;
-		  case 4 : $lib_zone = lib_ville($idZoneLu); break ;
-		  case 5 : $lib_zone = lib_subdivision($idZoneLu); break ;
+			case 1:
+				$lib_zone = lib_pays($idZoneLu);
+				break;
+			case 2:
+				$lib_zone = lib_region($idZoneLu);
+				break;
+			case 3:
+				$lib_zone = lib_departement($idZoneLu);
+				break;
+			case 4:
+				$lib_zone = lib_ville($idZoneLu);
+				break;
+			case 5:
+				$lib_zone = lib_subdivision($idZoneLu);
+				break;
 		}
 	}
-	echo '<input type="text" readonly="readonly" name="zoneAff" id="zoneAff" value="' . $lib_zone . '"/>'."\n";
-	echo '<img id="img_zone" src="' . $chemin_images . $Icones['localisation'].'" alt="'.$LG_Place_Select.'" title="'.$LG_Place_Select.
-			'" onclick="Appelle_Zone();" ';
+	echo '<input type="text" readonly="readonly" name="zoneAff" id="zoneAff" value="' . $lib_zone . '"/>' . "\n";
+	echo '<img id="img_zone" src="' . $chemin_images . $Icones['localisation'] . '" alt="' . $LG_Place_Select . '" title="' . $LG_Place_Select .
+		'" onclick="Appelle_Zone();" ';
 	if ($idNiveauLu == 0) echo ' style="display:none; visibility:hidden;"';
-	echo '/>'."\n";
+	echo '/>' . "\n";
 	echo "</td></tr>\n";
-	echo '</table>'."\n";
-	echo '</fieldset>'."\n";
+	echo '</table>' . "\n";
+	echo '</fieldset>' . "\n";
 
 	// Pavé dates
-	echo '<fieldset>'."\n";
-	echo '<legend>'.$LG_Event_When.'</legend>'."\n";
-	echo '<table width="95%" border="0">'."\n";
+	echo '<fieldset>' . "\n";
+	echo '<legend>' . $LG_Event_When . '</legend>' . "\n";
+	echo '<table width="95%" border="0">' . "\n";
 	//  ===== Date de début de l'évènement
-	col_titre_tab_noClass($LG_Event_Event_Beg,$largP);
+	col_titre_tab_noClass($LG_Event_Event_Beg, $largP);
 	echo '<td>';
 	zone_date2('dDebAnc', 'dDebAff', 'dDebCache', $dDebLu);
 	echo "</td></tr>\n";
 	//  ===== Date de fin de l'évènement
-	col_titre_tab_noClass($LG_Event_Event_End,$largP);
+	col_titre_tab_noClass($LG_Event_Event_End, $largP);
 	echo '<td>';
 	zone_date2('dFinAnc', 'dFinAff', 'dFinCache', $dFinLu);
 	$lib = $LG_Event_Event_Copy_Date;
-	echo '&nbsp;&nbsp;<img src="' . $chemin_images .$Icones['copie_calend'].
-	   '" alt = "'.$lib.'" title = "'.$lib.'" onclick="copieDate();"/>'."\n";
+	echo '  <img src="' . $chemin_images . $Icones['copie_calend'] .
+		'" alt = "' . $lib . '" title = "' . $lib . '" onclick="copieDate();"/>' . "\n";
 	echo "</td></tr>\n";
-	
-	echo '</table>'."\n";
-	echo '</fieldset>'."\n";
+
+	echo '</table>' . "\n";
+	echo '</fieldset>' . "\n";
 
 	// === Commentaire
-	echo '<fieldset>'."\n";
+	echo '<fieldset>' . "\n";
 	aff_legend(LG_CH_COMMENT);
-	echo '<table width="95%" border="0">'."\n";
+	echo '<table width="95%" border="0">' . "\n";
 	//Divers
-	echo '<tr>'."\n";
+	echo '<tr>' . "\n";
 	echo '<td>';
 	// Accès au commentaire
-	$Existe_Commentaire = Rech_Commentaire($refPar,'E');
-	echo '<textarea cols="50" rows="4" name="diversF">'.$Commentaire.'</textarea>'."\n";
-	echo '<input type="'.$hidden.'" name="diversAnc" value="'.my_html($Commentaire).'"/>';
+	$Existe_Commentaire = Rech_Commentaire($refPar, 'E');
+	echo '<textarea cols="50" rows="4" name="diversF">' . $Commentaire . '</textarea>' . "\n";
+	echo '<input type="' . $hidden . '" name="diversAnc" value="' . my_html($Commentaire) . '"/>';
 	echo '</td></tr><tr>';
 	// Diffusion Internet commentaire
-	echo '<td>'.my_html(LG_CH_COMMENT_VISIBILITY).'&nbsp;<input type="checkbox" name="diffNoteF" value="O"';
+	echo '<td>' . my_html(LG_CH_COMMENT_VISIBILITY) . ' <input type="checkbox" name="diffNoteF" value="O"';
 	if ($Diffusion_Commentaire_Internet == 'O') echo ' checked="checked"';
 	echo "/>\n";
-  	echo '<input type="'.$hidden.'" name="diffNoteAnc" value="'.$Diffusion_Commentaire_Internet.'"/>'."\n";
-	echo '</td></tr>'."\n";
-	echo '</table>'."\n";
-	echo '</fieldset>'."\n";
-	echo '</div>'."\n";
+	echo '<input type="' . $hidden . '" name="diffNoteAnc" value="' . $Diffusion_Commentaire_Internet . '"/>' . "\n";
+	echo '</td></tr>' . "\n";
+	echo '</table>' . "\n";
+	echo '</fieldset>' . "\n";
+	echo '</div>' . "\n";
 
 	// Données des évènements
-	echo '<div id="pane4">'."\n";
+	echo '<div id="pane4">' . "\n";
 
 	// Affichage des personnes reliées à l'évènement          // PUF
 	if ($objetCibleAffC == 'P') {
-		aff_lien_pers($refPar,'O');
+		aff_lien_pers($refPar, 'O');
 
 		// Ajout de lien autorisé en mise à jour uniquement
 		if ($refPar != -1) {
 			echo '<br /><br />Ajouter une personne : ' .
-			         '<a href="Edition_Lier_Eve.php?refPers=-1&amp;refEvt='.$refPar.'">'.
-			'<img src="'.$chemin_images.$Icones['ajout'].'" border="0" alt="Ajouter un &eacute;v&egrave;nement"/></a>'."\n";
+				'<a href="Edition_Lier_Eve.php?refPers=-1&amp;refEvt=' . $refPar . '">' .
+				'<img src="' . $chemin_images . $Icones['ajout'] . '" border="0" alt="Ajouter un &eacute;v&egrave;nement"/></a>' . "\n";
 		}
 	}
 
 	// Affichage des filiations reliées à l'évènement          // PUF
 	if ($objetCibleAffC == 'F') {
-		aff_lien_filiations($refPar,'O');
+		aff_lien_filiations($refPar, 'O');
 	}
 
 	// Affichage des unions reliées à l'évènement          // PUF
 	if ($objetCibleAffC == 'U') {
-		aff_lien_unions($refPar,'O');
+		aff_lien_unions($refPar, 'O');
 	}
 
-	echo '</div>'."\n";
+	echo '</div>' . "\n";
 
 	// Documents liés à l'évènement
-	echo '<div id="panDocs">'."\n";
+	echo '<div id="panDocs">' . "\n";
 	//
-	Aff_Documents_Objet($refPar , 'E','N');
+	Aff_Documents_Objet($refPar, 'E', 'N');
 	// Possibilité de lier un document pour l'évènement
-	echo '<br />&nbsp;Lier un document existant &agrave; l\'&eacute;v&egrave;nement : ' .
-		Affiche_Icone_Lien('href="Edition_Lier_Doc.php?refObjet='.$refPar.
-			'&amp;typeObjet=E&amp;refDoc=-1"','ajout','Ajout d\'un document')."\n";
-	echo '</div>'."\n";
+	echo '<br /> Lier un document existant à l\'&eacute;v&egrave;nement : ' .
+		Affiche_Icone_Lien('href="Edition_Lier_Doc.php?refObjet=' . $refPar .
+			'&amp;typeObjet=E&amp;refDoc=-1"', 'ajout', 'Ajout d\'un document') . "\n";
+	echo '</div>' . "\n";
 
 	// Données de la fiche
-	echo '<div id="panFiche">'."\n";
+	echo '<div id="panFiche">' . "\n";
 	// Affiche les données propres à l'enregistrement de la fiche
-	$x = Affiche_Fiche($enreg2,1);
+	$x = Affiche_Fiche($enreg2, 1);
 	//  Sources lies à l'évènement
 	if ($refPar != -1) {
 		echo '<hr/>';
-		$x = Aff_Sources_Objet($refPar, 'E' , 'N');
+		$x = Aff_Sources_Objet($refPar, 'E', 'N');
 		// Possibilité de lier un document pour l'évènement
-		echo '<br />&nbsp;Lier une source existante &agrave; l\'&eacute;v&egrave;nement : ' .
-		Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet='.$refPar.'&amp;typeObjet=E&amp;refSrc=-1"','ajout','Ajout d\'une source')."\n";
+		echo '<br /> Lier une source existante à l\'&eacute;v&egrave;nement : ' .
+			Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet=' . $refPar . '&amp;typeObjet=E&amp;refSrc=-1"', 'ajout', 'Ajout d\'une source') . "\n";
 	}
-	echo '</div>'."\n";
+	echo '</div>' . "\n";
 
-	echo '</div>'."\n"; //  <!-- panes -->
+	echo '</div>' . "\n"; //  <!-- panes -->
 
 	// Affichge des boutons
 	$lib_sup = '';
@@ -508,19 +522,20 @@ else {
 	else $lib_this = $LG_Event_Event_This;
 	bt_ok_an_sup($lib_Okay, $lib_Annuler, $lib_sup, $lib_this, false);
 
-	echo '</div>'."\n";   //  <!-- tab container -->
-	echo '</td></tr></table></div>'."\n";
+	echo '</div>' . "\n";   //  <!-- tab container -->
+	echo '</td></tr></table></div>' . "\n";
 
-	echo '</form>'."\n";
+	echo '</form>' . "\n";
 
 	//include ('gest_onglets.js');
-	echo '<!-- On positionne l\'onglet par défaut -->'."\n";
-	echo '<script type="text/javascript">'."\n";
-	echo '	setupPanes("container1", "tab1", 40);'."\n";
-	echo '</script>'."\n";
+	echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
+	echo '<script type="text/javascript">' . "\n";
+	echo '	setupPanes("container1", "tab1", 40);' . "\n";
+	echo '</script>' . "\n";
 
 	Insere_Bas($compl);
 }
 ?>
 </body>
+
 </html>

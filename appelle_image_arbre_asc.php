@@ -1,25 +1,26 @@
 <?php
 // UTF-8
-// Appel de l'image générée pour un arbre ascendant
+// Appel de l'image gÃ©nÃ©rÃ©e pour un arbre ascendant
 
 session_start();
 include('fonctions.php');
-$acces = 'L';					// Type d'accès de la page : (M)ise à jour, (L)ecture
-$titre = $LG_assc_tree;			// Titre pour META
+$acces = 'L';                    // Type d'accÃ©s de la page : (M)ise Ã  jour, (L)ecture
+$titre = $LG_assc_tree;            // Titre pour META
 $x = Lit_Env();
 include('Gestion_Pages.php');
 
 $compl = '';
 
-// Recup de la variable passée dans l'URL : référence de la personne
-$Refer = Recup_Variable('Refer','N');
+// Recup de la variable passÃ©e dans l'URL : rÃ©fÃ©rence de la personne
+$Refer = Recup_Variable('Refer', 'N');
 
-Insere_Haut_texte ('&nbsp;');
+Insere_Haut_texte('&nbsp;');
 
 echo '<table width="90%">';
-echo '<tr><td align="center"><img src="image_arbre_asc.php?Refer='.$Refer.'" alt="Image"/></td></tr>';
+echo '<tr><td align="center"><img src="image_arbre_asc.php?Refer=' . $Refer . '" alt="Image"/></td></tr>';
 echo '</table>';
 
 ?>
 </body>
+
 </html>

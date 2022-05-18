@@ -1,11 +1,11 @@
 <?php
 require('fpdf.php');
 
-$red = array(255,0,0);
-$green = array(0,255,0);
-$blue = array(0,0,255);
-$black = array(0,0,0);
-$formatA4 = array(595.28,841.89);
+$red = array(255, 0, 0);
+$green = array(0, 255, 0);
+$blue = array(0, 0, 255);
+$black = array(0, 0, 0);
+$formatA4 = array(595.28, 841.89);
 
 function isInteger($val)
 {
@@ -14,29 +14,29 @@ function isInteger($val)
 }
 function plus10pourcentArrondi($valeur)
 {
-	if ($valeur > 10000) 		$ratio=1000;
-	else if ($valeur > 1000) 	$ratio=100;
-	else if ($valeur > 100) 	$ratio=10;
-	else 				$ratio=1;
+	if ($valeur > 10000) 		$ratio = 1000;
+	else if ($valeur > 1000) 	$ratio = 100;
+	else if ($valeur > 100) 	$ratio = 10;
+	else 				$ratio = 1;
 
-	$res = $valeur + (0.1*$valeur);
-	$res = round($res/$ratio) * $ratio;
+	$res = $valeur + (0.1 * $valeur);
+	$res = round($res / $ratio) * $ratio;
 
 	return $res;
 }
 
 function moins10pourcentArrondi($valeur)
 {
-	if ($valeur > 10000) 		$ratio=1000;
-	else if ($valeur > 1000) 	$ratio=100;
-	else if ($valeur > 100) 	$ratio=10;
-	else 				$ratio=1;
+	if ($valeur > 10000) 		$ratio = 1000;
+	else if ($valeur > 1000) 	$ratio = 100;
+	else if ($valeur > 100) 	$ratio = 10;
+	else 				$ratio = 1;
 
-	if ($valeur >0)
-		$res = $valeur - (0.1*$valeur);
-	else $res = $valeur + (0.1*$valeur);
-	
-	$res = round($res/$ratio) * $ratio;
+	if ($valeur > 0)
+		$res = $valeur - (0.1 * $valeur);
+	else $res = $valeur + (0.1 * $valeur);
+
+	$res = round($res / $ratio) * $ratio;
 	return $res;
 }
 
@@ -47,10 +47,10 @@ class phpToPDF extends FPDF
 	var $sum;
 	var $NbVal;
 
-	var $_toc=array();
-	var $_numbering=false;
-	var $_numberingFooter=false;
-	var $_numPageNum=1;
+	var $_toc = array();
+	var $_numbering = false;
+	var $_numberingFooter = false;
+	var $_numPageNum = 1;
 
 	var $tb_columns; 		//number of columns of the table
 	var $tb_header_type; 	//array which contains the header characteristics and texts
@@ -63,74 +63,81 @@ class phpToPDF extends FPDF
 	var $Draw_Header_Command;	//command which determines in the DrawData first the header draw
 	var $New_Page_Commit;	// = true/false if a new page has been comited
 	var $Data_On_Current_Page; // = true/false ... if on current page was some data written	
-	
-	function RoundedRect($x, $y, $w, $h, $r, $style = '') {
+
+	function RoundedRect($x, $y, $w, $h, $r, $style = '')
+	{
 		$k = $this->k;
 		$hp = $this->h;
-		if($style=='F')
-			$op='f';
-		elseif($style=='FD' || $style=='DF')
-			$op='B';
+		if ($style == 'F')
+			$op = 'f';
+		elseif ($style == 'FD' || $style == 'DF')
+			$op = 'B';
 		else
-			$op='S';
-		$MyArc = 4/3 * (sqrt(2) - 1);
-		$this->_out(sprintf('%.2F %.2F m',($x+$r)*$k,($hp-$y)*$k ));
-		$xc = $x+$w-$r ;
-		$yc = $y+$r;
-		$this->_out(sprintf('%.2F %.2F l', $xc*$k,($hp-$y)*$k ));
+			$op = 'S';
+		$MyArc = 4 / 3 * (sqrt(2) - 1);
+		$this->_out(sprintf('%.2F %.2F m', ($x + $r) * $k, ($hp - $y) * $k));
+		$xc = $x + $w - $r;
+		$yc = $y + $r;
+		$this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - $y) * $k));
 
-		$this->_Arc($xc + $r*$MyArc, $yc - $r, $xc + $r, $yc - $r*$MyArc, $xc + $r, $yc);
-		$xc = $x+$w-$r ;
-		$yc = $y+$h-$r;
-		$this->_out(sprintf('%.2F %.2F l',($x+$w)*$k,($hp-$yc)*$k));
-		$this->_Arc($xc + $r, $yc + $r*$MyArc, $xc + $r*$MyArc, $yc + $r, $xc, $yc + $r);
-		$xc = $x+$r ;
-		$yc = $y+$h-$r;
-		$this->_out(sprintf('%.2F %.2F l',$xc*$k,($hp-($y+$h))*$k));
-		$this->_Arc($xc - $r*$MyArc, $yc + $r, $xc - $r, $yc + $r*$MyArc, $xc - $r, $yc);
-		$xc = $x+$r ;
-		$yc = $y+$r;
-		$this->_out(sprintf('%.2F %.2F l',($x)*$k,($hp-$yc)*$k ));
-		$this->_Arc($xc - $r, $yc - $r*$MyArc, $xc - $r*$MyArc, $yc - $r, $xc, $yc - $r);
+		$this->_Arc($xc + $r * $MyArc, $yc - $r, $xc + $r, $yc - $r * $MyArc, $xc + $r, $yc);
+		$xc = $x + $w - $r;
+		$yc = $y + $h - $r;
+		$this->_out(sprintf('%.2F %.2F l', ($x + $w) * $k, ($hp - $yc) * $k));
+		$this->_Arc($xc + $r, $yc + $r * $MyArc, $xc + $r * $MyArc, $yc + $r, $xc, $yc + $r);
+		$xc = $x + $r;
+		$yc = $y + $h - $r;
+		$this->_out(sprintf('%.2F %.2F l', $xc * $k, ($hp - ($y + $h)) * $k));
+		$this->_Arc($xc - $r * $MyArc, $yc + $r, $xc - $r, $yc + $r * $MyArc, $xc - $r, $yc);
+		$xc = $x + $r;
+		$yc = $y + $r;
+		$this->_out(sprintf('%.2F %.2F l', ($x) * $k, ($hp - $yc) * $k));
+		$this->_Arc($xc - $r, $yc - $r * $MyArc, $xc - $r * $MyArc, $yc - $r, $xc, $yc - $r);
 		$this->_out($op);
 	}
-	
-	function AddPage($orientation='', $format='',$rotation=0) {
-		parent::AddPage($orientation, $format='',$rotation=0);
-		if($this->_numbering)
+
+	function AddPage($orientation = '', $format = '', $rotation = 0)
+	{
+		parent::AddPage($orientation, $format = '', $rotation = 0);
+		if ($this->_numbering)
 			$this->_numPageNum++;
 	}
 
-	function startPageNums() {
-		$this->_numbering=true;
-		$this->_numberingFooter=true;
+	function startPageNums()
+	{
+		$this->_numbering = true;
+		$this->_numberingFooter = true;
 	}
 
-	function stopPageNums() {
-		$this->_numbering=false;
+	function stopPageNums()
+	{
+		$this->_numbering = false;
 	}
 
-	function numPageNo() {
+	function numPageNo()
+	{
 		return $this->_numPageNum;
 	}
 
-	function TOC_Entry($txt,$level=0) {
-		$this->_toc[]=array('t'=>$txt,'l'=>$level,'p'=>$this->numPageNo());
+	function TOC_Entry($txt, $level = 0)
+	{
+		$this->_toc[] = array('t' => $txt, 'l' => $level, 'p' => $this->numPageNo());
 	}
 
-	function insertTOC( $location=1,
-						$labelSize=20,
-						$entrySize=10,
-						$tocfont='Times',
-						$label='Table des matières'
-						) {
+	function insertTOC(
+		$location = 1,
+		$labelSize = 20,
+		$entrySize = 10,
+		$tocfont = 'Times',
+		$label = 'Table des matières'
+	) {
 		//make toc at end
 		$this->stopPageNums();
 		$this->AddPage();
-		$tocstart=$this->page;
+		$tocstart = $this->page;
 
-		$this->SetFont($tocfont,'B',$labelSize);
-		$this->Cell(0,5,$label,0,1,'C');
+		$this->SetFont($tocfont, 'B', $labelSize);
+		$this->Cell(0, 5, $label, 0, 1, 'C');
 		$this->Ln(20);
 
 
@@ -138,92 +145,92 @@ class phpToPDF extends FPDF
 
 
 
-		foreach($this->_toc as $t) {
+		foreach ($this->_toc as $t) {
 
 			//Offset
-			$level=$t['l'];
-			if($level>0)
-				$this->Cell($level*8);
-			$weight='';
-			if($level==0)
-				$weight='B';
-			$str=$t['t'];
-			$this->SetFont($tocfont,$weight,$entrySize);
-			$strsize=$this->GetStringWidth($str);
-			$this->Cell($strsize+2,$this->FontSize+2,$str);
+			$level = $t['l'];
+			if ($level > 0)
+				$this->Cell($level * 8);
+			$weight = '';
+			if ($level == 0)
+				$weight = 'B';
+			$str = $t['t'];
+			$this->SetFont($tocfont, $weight, $entrySize);
+			$strsize = $this->GetStringWidth($str);
+			$this->Cell($strsize + 2, $this->FontSize + 2, $str);
 
 			//Filling dots
-			$this->SetFont($tocfont,'',$entrySize);
-			$PageCellSize=$this->GetStringWidth($t['p'])+2;
-			$w=$this->w-$this->lMargin-$this->rMargin-$PageCellSize-($level*8)-($strsize+2);
-			$nb=$w/$this->GetStringWidth('.');
-			$dots=str_repeat('.',$nb);
-			$this->Cell($w,$this->FontSize+2,$dots,0,0,'R');
+			$this->SetFont($tocfont, '', $entrySize);
+			$PageCellSize = $this->GetStringWidth($t['p']) + 2;
+			$w = $this->w - $this->lMargin - $this->rMargin - $PageCellSize - ($level * 8) - ($strsize + 2);
+			$nb = $w / $this->GetStringWidth('.');
+			$dots = str_repeat('.', $nb);
+			$this->Cell($w, $this->FontSize + 2, $dots, 0, 0, 'R');
 
 			//Page number
-			$this->Cell($PageCellSize,$this->FontSize+2,$t['p'],0,1,'R');
+			$this->Cell($PageCellSize, $this->FontSize + 2, $t['p'], 0, 1, 'R');
 
 			$this->Ln(2);
 		}
 
 		//grab it and move to selected location
-		$n=$this->page;
+		$n = $this->page;
 		$n_toc = $n - $tocstart + 1;
 		$last = array();
 
 		//store toc pages
-		for($i = $tocstart;$i <= $n;$i++)
-			$last[]=$this->pages[$i];
+		for ($i = $tocstart; $i <= $n; $i++)
+			$last[] = $this->pages[$i];
 
 		//move pages
-		for($i=$tocstart - 1;$i>=$location-1;$i--)
-			$this->pages[$i+$n_toc]=$this->pages[$i];
+		for ($i = $tocstart - 1; $i >= $location - 1; $i--)
+			$this->pages[$i + $n_toc] = $this->pages[$i];
 
 		//Put toc pages at insert point
-		for($i = 0;$i < $n_toc;$i++)
-			$this->pages[$location + $i]=$last[$i];
+		for ($i = 0; $i < $n_toc; $i++)
+			$this->pages[$location + $i] = $last[$i];
 	}
 
-	function Footer() {
-		if($this->_numberingFooter==false)
+	function Footer()
+	{
+		if ($this->_numberingFooter == false)
 			return;
 		//Go to 1.5 cm from bottom
 		$this->SetY(-15);
 		//Select Arial italic 8
-		$this->SetFont('Arial','I',8);
-		$this->Cell(0,7,$this->numPageNo(),0,0,'C'); 
-		if($this->_numbering==false)
-			$this->_numberingFooter=false;
+		$this->SetFont('Arial', 'I', 8);
+		$this->Cell(0, 7, $this->numPageNo(), 0, 0, 'C');
+		if ($this->_numbering == false)
+			$this->_numberingFooter = false;
 	}
 
-	function SetDash($black=false,$white=false)
+	function SetDash($black = false, $white = false)
 	{
-		if($black and $white)
-			$s=sprintf('[%.3f %.3f] 0 d',$black*$this->k,$white*$this->k);
+		if ($black and $white)
+			$s = sprintf('[%.3f %.3f] 0 d', $black * $this->k, $white * $this->k);
 		else
-			$s='[] 0 d';
+			$s = '[] 0 d';
 		$this->_out($s);
 	}
-	
+
 	function SetLegends($data, $format)
 	{
-		$this->legends=array();
-		$this->wLegend=0;
-		$this->sum=array_sum($data);
-		$this->NbVal=count($data);
-		foreach($data as $l=>$val)
-		{
-			$p=sprintf('%.2f',$val/$this->sum*100).'%';
-			$legend=str_replace(array('%l','%v','%p'),array($l,$val,$p),$format);
-			$this->legends[]=$legend;
-			$this->wLegend=max($this->GetStringWidth($legend),$this->wLegend);
+		$this->legends = array();
+		$this->wLegend = 0;
+		$this->sum = array_sum($data);
+		$this->NbVal = count($data);
+		foreach ($data as $l => $val) {
+			$p = sprintf('%.2f', $val / $this->sum * 100) . '%';
+			$legend = str_replace(array('%l', '%v', '%p'), array($l, $val, $p), $format);
+			$this->legends[] = $legend;
+			$this->wLegend = max($this->GetStringWidth($legend), $this->wLegend);
 		}
 	}
 
-	function DiagCirculaire($largeur, $hauteur, $data, $format, $couleurs=null, $legend=1)
+	function DiagCirculaire($largeur, $hauteur, $data, $format, $couleurs = null, $legend = 1)
 	{
 		$this->SetFont('Courier', '', 10);
-		$this->SetLegends($data,$format);
+		$this->SetLegends($data, $format);
 
 		$XPage = $this->GetX();
 		$YPage = $this->GetY();
@@ -233,10 +240,10 @@ class phpToPDF extends FPDF
 		$rayon = floor($rayon / 2);
 		$XDiag = $XPage + $marge + $rayon;
 		$YDiag = $YPage + $marge + $rayon;
-		if($couleurs == null) {
-			for($i = 0;$i < $this->NbVal; $i++) {
+		if ($couleurs == null) {
+			for ($i = 0; $i < $this->NbVal; $i++) {
 				$gray = $i * intval(255 / $this->NbVal);
-				$couleurs[$i] = array($gray,$gray,$gray);
+				$couleurs[$i] = array($gray, $gray, $gray);
 			}
 		}
 
@@ -245,11 +252,11 @@ class phpToPDF extends FPDF
 		$angleDebut = 0;
 		$angleFin = 0;
 		$i = 0;
-		foreach($data as $val) {
+		foreach ($data as $val) {
 			$angle = floor(($val * 360) / doubleval($this->sum));
 			if ($angle != 0) {
 				$angleFin = $angleDebut + $angle;
-				$this->SetFillColor($couleurs[$i][0],$couleurs[$i][1],$couleurs[$i][2]);
+				$this->SetFillColor($couleurs[$i][0], $couleurs[$i][1], $couleurs[$i][2]);
 				$this->Sector($XDiag, $YDiag, $rayon, $angleDebut, $angleFin);
 				$angleDebut += $angle;
 			}
@@ -260,27 +267,26 @@ class phpToPDF extends FPDF
 		}
 
 		//Légendes
-		if ($legend == 1)
-		{
+		if ($legend == 1) {
 			$this->SetFont('Courier', '', 10);
 			$x1 = $XPage + 2 * $rayon + 4 * $marge;
 			$x2 = $x1 + $hLegende + $marge;
-			$y1 = $YDiag - $rayon + (2 * $rayon - $this->NbVal*($hLegende + $marge)) / 2;
-			for($i=0; $i<$this->NbVal; $i++) {
-				$this->SetFillColor($couleurs[$i][0],$couleurs[$i][1],$couleurs[$i][2]);
+			$y1 = $YDiag - $rayon + (2 * $rayon - $this->NbVal * ($hLegende + $marge)) / 2;
+			for ($i = 0; $i < $this->NbVal; $i++) {
+				$this->SetFillColor($couleurs[$i][0], $couleurs[$i][1], $couleurs[$i][2]);
 				$this->Rect($x1, $y1, $hLegende, $hLegende, 'DF');
-				$this->SetXY($x2,$y1);
-				$this->Cell(0,$hLegende,$this->legends[$i]);
-				$y1+=$hLegende + $marge;
+				$this->SetXY($x2, $y1);
+				$this->Cell(0, $hLegende, $this->legends[$i]);
+				$y1 += $hLegende + $marge;
 			}
 		}
 	}
 
 
-	function DiagBatons($largeur, $hauteur, $data, $format, $couleur=null, $maxValRepere=0, $nbIndRepere=4)
+	function DiagBatons($largeur, $hauteur, $data, $format, $couleur = null, $maxValRepere = 0, $nbIndRepere = 4)
 	{
 		$this->SetFont('Courier', '', 10);
-		$this->SetLegends($data,$format);
+		$this->SetLegends($data, $format);
 
 		$XPage = $this->GetX();
 		$YPage = $this->GetY();
@@ -289,8 +295,8 @@ class phpToPDF extends FPDF
 		$hDiag = floor($hauteur - $marge * 2);
 		$XDiag = $XPage + $marge * 2 + $this->wLegend;
 		$lDiag = floor($largeur - $marge * 3 - $this->wLegend);
-		if($couleur == null)
-			$couleur=array(155,155,155);
+		if ($couleur == null)
+			$couleur = array(155, 155, 155);
 		if ($maxValRepere == 0) {
 			$maxValRepere = max($data);
 		}
@@ -307,9 +313,9 @@ class phpToPDF extends FPDF
 		$this->Rect($XDiag, $YDiag, $lDiag, $hDiag);
 
 		$this->SetFont('Courier', '', 10);
-		$this->SetFillColor($couleur[0],$couleur[1],$couleur[2]);
-		$i=0;
-		foreach($data as $val) {
+		$this->SetFillColor($couleur[0], $couleur[1], $couleur[2]);
+		$i = 0;
+		foreach ($data as $val) {
 			//Barre
 			$xval = $XDiag;
 			$lval = (int)($val * $unite);
@@ -318,7 +324,7 @@ class phpToPDF extends FPDF
 			$this->Rect($xval, $yval, $lval, $hval, 'DF');
 			//Légende
 			$this->SetXY(0, $yval);
-			$this->Cell($xval - $marge, $hval, $this->legends[$i],0,0,'R');
+			$this->Cell($xval - $marge, $hval, $this->legends[$i], 0, 0, 'R');
 			$i++;
 		}
 
@@ -331,118 +337,127 @@ class phpToPDF extends FPDF
 			$ypos = $YDiag + $hDiag - $marge;
 			$this->Text($xpos, $ypos, $val);
 		}
-	}	
+	}
 
-	function Sector($xc, $yc, $r, $a, $b, $style='FD', $cw=true, $o=90)
+	function Sector($xc, $yc, $r, $a, $b, $style = 'FD', $cw = true, $o = 90)
 	{
-		if($cw){
+		if ($cw) {
 			$d = $b;
 			$b = $o - $a;
 			$a = $o - $d;
-		}else{
+		} else {
 			$b += $o;
 			$a += $o;
 		}
-		$a = ($a%360)+360;
-		$b = ($b%360)+360;
+		$a = ($a % 360) + 360;
+		$b = ($b % 360) + 360;
 		if ($a > $b)
-			$b +=360;
-		$b = $b/360*2*M_PI;
-		$a = $a/360*2*M_PI;
-		$d = $b-$a;
-		if ($d == 0 )
-			$d =2*M_PI;
+			$b += 360;
+		$b = $b / 360 * 2 * M_PI;
+		$a = $a / 360 * 2 * M_PI;
+		$d = $b - $a;
+		if ($d == 0)
+			$d = 2 * M_PI;
 		$k = $this->k;
 		$hp = $this->h;
-		if($style=='F')
-			$op='f';
-		elseif($style=='FD' or $style=='DF')
-			$op='b';
+		if ($style == 'F')
+			$op = 'f';
+		elseif ($style == 'FD' or $style == 'DF')
+			$op = 'b';
 		else
-			$op='s';
-		if (sin($d/2))
-			$MyArc = 4/3*(1-cos($d/2))/sin($d/2)*$r;
+			$op = 's';
+		if (sin($d / 2))
+			$MyArc = 4 / 3 * (1 - cos($d / 2)) / sin($d / 2) * $r;
 		//first put the center
-		$this->_out(sprintf('%.2f %.2f m',($xc)*$k,($hp-$yc)*$k));
+		$this->_out(sprintf('%.2f %.2f m', ($xc) * $k, ($hp - $yc) * $k));
 		//put the first point
-		$this->_out(sprintf('%.2f %.2f l',($xc+$r*cos($a))*$k,(($hp-($yc-$r*sin($a)))*$k)));
+		$this->_out(sprintf('%.2f %.2f l', ($xc + $r * cos($a)) * $k, (($hp - ($yc - $r * sin($a))) * $k)));
 		//draw the arc
-		if ($d < M_PI/2){
-			$this->_Arc($xc+$r*cos($a)+$MyArc*cos(M_PI/2+$a),
-						$yc-$r*sin($a)-$MyArc*sin(M_PI/2+$a),
-						$xc+$r*cos($b)+$MyArc*cos($b-M_PI/2),
-						$yc-$r*sin($b)-$MyArc*sin($b-M_PI/2),
-						$xc+$r*cos($b),
-						$yc-$r*sin($b)
-						);
-		}else{
-			$b = $a + $d/4;
-			$MyArc = 4/3*(1-cos($d/8))/sin($d/8)*$r;
-			$this->_Arc($xc+$r*cos($a)+$MyArc*cos(M_PI/2+$a),
-						$yc-$r*sin($a)-$MyArc*sin(M_PI/2+$a),
-						$xc+$r*cos($b)+$MyArc*cos($b-M_PI/2),
-						$yc-$r*sin($b)-$MyArc*sin($b-M_PI/2),
-						$xc+$r*cos($b),
-						$yc-$r*sin($b)
-						);
+		if ($d < M_PI / 2) {
+			$this->_Arc(
+				$xc + $r * cos($a) + $MyArc * cos(M_PI / 2 + $a),
+				$yc - $r * sin($a) - $MyArc * sin(M_PI / 2 + $a),
+				$xc + $r * cos($b) + $MyArc * cos($b - M_PI / 2),
+				$yc - $r * sin($b) - $MyArc * sin($b - M_PI / 2),
+				$xc + $r * cos($b),
+				$yc - $r * sin($b)
+			);
+		} else {
+			$b = $a + $d / 4;
+			$MyArc = 4 / 3 * (1 - cos($d / 8)) / sin($d / 8) * $r;
+			$this->_Arc(
+				$xc + $r * cos($a) + $MyArc * cos(M_PI / 2 + $a),
+				$yc - $r * sin($a) - $MyArc * sin(M_PI / 2 + $a),
+				$xc + $r * cos($b) + $MyArc * cos($b - M_PI / 2),
+				$yc - $r * sin($b) - $MyArc * sin($b - M_PI / 2),
+				$xc + $r * cos($b),
+				$yc - $r * sin($b)
+			);
 			$a = $b;
-			$b = $a + $d/4;
-			$this->_Arc($xc+$r*cos($a)+$MyArc*cos(M_PI/2+$a),
-						$yc-$r*sin($a)-$MyArc*sin(M_PI/2+$a),
-						$xc+$r*cos($b)+$MyArc*cos($b-M_PI/2),
-						$yc-$r*sin($b)-$MyArc*sin($b-M_PI/2),
-						$xc+$r*cos($b),
-						$yc-$r*sin($b)
-						);
+			$b = $a + $d / 4;
+			$this->_Arc(
+				$xc + $r * cos($a) + $MyArc * cos(M_PI / 2 + $a),
+				$yc - $r * sin($a) - $MyArc * sin(M_PI / 2 + $a),
+				$xc + $r * cos($b) + $MyArc * cos($b - M_PI / 2),
+				$yc - $r * sin($b) - $MyArc * sin($b - M_PI / 2),
+				$xc + $r * cos($b),
+				$yc - $r * sin($b)
+			);
 			$a = $b;
-			$b = $a + $d/4;
-			$this->_Arc($xc+$r*cos($a)+$MyArc*cos(M_PI/2+$a),
-						$yc-$r*sin($a)-$MyArc*sin(M_PI/2+$a),
-						$xc+$r*cos($b)+$MyArc*cos($b-M_PI/2),
-						$yc-$r*sin($b)-$MyArc*sin($b-M_PI/2),
-						$xc+$r*cos($b),
-						$yc-$r*sin($b)
-						);
+			$b = $a + $d / 4;
+			$this->_Arc(
+				$xc + $r * cos($a) + $MyArc * cos(M_PI / 2 + $a),
+				$yc - $r * sin($a) - $MyArc * sin(M_PI / 2 + $a),
+				$xc + $r * cos($b) + $MyArc * cos($b - M_PI / 2),
+				$yc - $r * sin($b) - $MyArc * sin($b - M_PI / 2),
+				$xc + $r * cos($b),
+				$yc - $r * sin($b)
+			);
 			$a = $b;
-			$b = $a + $d/4;
-			$this->_Arc($xc+$r*cos($a)+$MyArc*cos(M_PI/2+$a),
-						$yc-$r*sin($a)-$MyArc*sin(M_PI/2+$a),
-						$xc+$r*cos($b)+$MyArc*cos($b-M_PI/2),
-						$yc-$r*sin($b)-$MyArc*sin($b-M_PI/2),
-						$xc+$r*cos($b),
-						$yc-$r*sin($b)
-						);
+			$b = $a + $d / 4;
+			$this->_Arc(
+				$xc + $r * cos($a) + $MyArc * cos(M_PI / 2 + $a),
+				$yc - $r * sin($a) - $MyArc * sin(M_PI / 2 + $a),
+				$xc + $r * cos($b) + $MyArc * cos($b - M_PI / 2),
+				$yc - $r * sin($b) - $MyArc * sin($b - M_PI / 2),
+				$xc + $r * cos($b),
+				$yc - $r * sin($b)
+			);
 		}
 		//terminate drawing
 		$this->_out($op);
 	}
 
-	function _Arc($x1, $y1, $x2, $y2, $x3, $y3 )
+	function _Arc($x1, $y1, $x2, $y2, $x3, $y3)
 	{
 		$h = $this->h;
-		$this->_out(sprintf('%.2f %.2f %.2f %.2f %.2f %.2f c',
-			$x1*$this->k,
-			($h-$y1)*$this->k,
-			$x2*$this->k,
-			($h-$y2)*$this->k,
-			$x3*$this->k,
-			($h-$y3)*$this->k));
-	}	
-	
+		$this->_out(sprintf(
+			'%.2f %.2f %.2f %.2f %.2f %.2f c',
+			$x1 * $this->k,
+			($h - $y1) * $this->k,
+			$x2 * $this->k,
+			($h - $y2) * $this->k,
+			$x3 * $this->k,
+			($h - $y3) * $this->k
+		));
+	}
+
 	//returns the width of the page in user units
-	function PageWidth(){
-		return (int) $this->w-$this->rMargin-$this->lMargin;
+	function PageWidth()
+	{
+		return (int) $this->w - $this->rMargin - $this->lMargin;
 	}
 
 	//constructor(not a real one, but have to call it first)
 	//we initialize all the variables that we use
-	function Table_Init($col_no = 0, $header_draw = true, $border_draw = true){
+	function Table_Init($col_no = 0, $header_draw = true, $border_draw = true)
+	{
 		$this->tb_columns = $col_no;
-		$this->tb_header_type = Array();
+		$this->tb_header_type = array();
 		$this->tb_header_draw = $header_draw;
 		$this->tb_border_draw = $border_draw;
-		$this->tb_data_type = Array();
-		$this->tb_type = Array();
+		$this->tb_data_type = array();
+		$this->tb_type = array();
 		$this->table_startx = $this->GetX();
 		$this->table_starty = $this->GetY();
 
@@ -452,7 +467,8 @@ class phpToPDF extends FPDF
 	}
 
 	//Sets the number of columns of the table
-	function Set_Table_Columns($nr){
+	function Set_Table_Columns($nr)
+	{
 		$this->tb_columns = $nr;
 	}
 
@@ -497,7 +513,8 @@ class phpToPDF extends FPDF
 	where 0,1... are the column number
 	*/
 
-	function Set_Header_Type($type_arr){
+	function Set_Header_Type($type_arr)
+	{
 		$this->tb_header_type = $type_arr;
 	}
 
@@ -539,7 +556,8 @@ class phpToPDF extends FPDF
 	where 0,1... are the column number
 	*/
 
-	function Set_Data_Type($type_arr){
+	function Set_Data_Type($type_arr)
+	{
 		$this->tb_data_type = $type_arr;
 	}
 
@@ -556,26 +574,27 @@ class phpToPDF extends FPDF
 					'L_MARGIN' => 0// left margin... reference from this->lmargin values
 					)
 	*/
-	function Set_Table_Type($type_arr){
+	function Set_Table_Type($type_arr)
+	{
 
 		if (isset($type_arr['TB_COLUMNS'])) $this->tb_columns = $type_arr['TB_COLUMNS'];
-		if (!isset($type_arr['L_MARGIN'])) $type_arr['L_MARGIN']=0;//default values
+		if (!isset($type_arr['L_MARGIN'])) $type_arr['L_MARGIN'] = 0; //default values
 
 		$this->tb_table_type = $type_arr;
-
 	}
 
 	//this functiondraws the exterior table border!!!!
-	function Draw_Table_Border(){
-	/*				"BRD_COLOR"=> array (120,120,120), //border color
+	function Draw_Table_Border()
+	{
+		/*				"BRD_COLOR"=> array (120,120,120), //border color
 					"BRD_SIZE"=>5), //border line width
 					"TB_COLUMNS"=>5), //the number of columns
 					"TB_ALIGN"=>"L"), //the align of the table, possible values = L, R, C equivalent to Left, Right, Center
 	*/
 
-		if ( ! $this->tb_border_draw ) return;
+		if (!$this->tb_border_draw) return;
 
-		if ( ! $this->Data_On_Current_Page) return; //there was no data on the current page
+		if (!$this->Data_On_Current_Page) return; //there was no data on the current page
 
 		//set the colors
 		list($r, $g, $b) = $this->tb_table_type['BRD_COLOR'];
@@ -589,14 +608,15 @@ class phpToPDF extends FPDF
 			$this->table_startx,
 			$this->table_starty,
 			$this->Get_Table_Width(),
-			$this->GetY()-$this->table_starty);
-
+			$this->GetY() - $this->table_starty
+		);
 	}
 
-	function End_Page_Border(){
-		if (isset($this->tb_table_type['BRD_TYPE_END_PAGE'])){
+	function End_Page_Border()
+	{
+		if (isset($this->tb_table_type['BRD_TYPE_END_PAGE'])) {
 
-			if (strpos($this->tb_table_type['BRD_TYPE_END_PAGE'], 'B') >= 0){
+			if (strpos($this->tb_table_type['BRD_TYPE_END_PAGE'], 'B') >= 0) {
 
 				//set the colors
 				list($r, $g, $b) = $this->tb_table_type['BRD_COLOR'];
@@ -616,21 +636,23 @@ class phpToPDF extends FPDF
 	{
 		//calculate the table width
 		$tb_width = 0;
-		for ($i=0; $i < $this->tb_columns; $i++){
+		for ($i = 0; $i < $this->tb_columns; $i++) {
 			$tb_width += $this->tb_header_type[$i]['WIDTH'];
 		}
 		return $tb_width;
 	}
 
 	//alignes the table to C, L or R(default is L)
-	function Table_Align(){
+	function Table_Align()
+	{
 		//check if the table is aligned
-		if (isset($this->tb_table_type['TB_ALIGN'])) $tb_align = $this->tb_table_type['TB_ALIGN']; else $tb_align='';
+		if (isset($this->tb_table_type['TB_ALIGN'])) $tb_align = $this->tb_table_type['TB_ALIGN'];
+		else $tb_align = '';
 
 		//set the table align
-		switch($tb_align){
+		switch ($tb_align) {
 			case 'C':
-				$this->SetX($this->lMargin + $this->tb_table_type['L_MARGIN'] + ($this->PageWidth() - $this->Get_Table_Width())/2);
+				$this->SetX($this->lMargin + $this->tb_table_type['L_MARGIN'] + ($this->PageWidth() - $this->Get_Table_Width()) / 2);
 				break;
 			case 'R':
 				$this->SetX($this->lMargin + $this->tb_table_type['L_MARGIN'] + ($this->PageWidth() - $this->Get_Table_Width()));
@@ -638,16 +660,18 @@ class phpToPDF extends FPDF
 			default:
 				$this->SetX($this->lMargin + $this->tb_table_type['L_MARGIN']);
 				break;
-		}//if (isset($this->tb_table_type['TB_ALIGN'])){
+		} //if (isset($this->tb_table_type['TB_ALIGN'])){
 	}
 
 	//Draws the Header
-	function Draw_Header(){
+	function Draw_Header()
+	{
 		$this->Draw_Header_Command = true;
 	}
 
 	//Draws the Header
-	function Draw_Header_( $next_line_height = 0 ){
+	function Draw_Header_($next_line_height = 0)
+	{
 
 		$this->Table_Align();
 
@@ -655,25 +679,26 @@ class phpToPDF extends FPDF
 		$this->table_starty = $this->GetY();
 
 		//if the header will be showed
-		if ( ! $this->tb_header_draw ) return;
+		if (!$this->tb_header_draw) return;
 
 		$h = 0;
 
 		//calculate the maximum height of the cells
-		for($i=0;$i<$this->tb_columns;$i++)
-		{
+		for ($i = 0; $i < $this->tb_columns; $i++) {
 
-			$this->SetFont(	$this->tb_header_type[$i]['T_FONT'],
-							$this->tb_header_type[$i]['T_TYPE'],
-							$this->tb_header_type[$i]['T_SIZE']);
+			$this->SetFont(
+				$this->tb_header_type[$i]['T_FONT'],
+				$this->tb_header_type[$i]['T_TYPE'],
+				$this->tb_header_type[$i]['T_SIZE']
+			);
 
 			$this->tb_header_type[$i]['CELL_WIDTH'] = $this->tb_header_type[$i]['WIDTH'];
 
-			if (isset($this->tb_header_type[$i]['COLSPAN'])){
+			if (isset($this->tb_header_type[$i]['COLSPAN'])) {
 
-				$colspan = (int) $this->tb_header_type[$i]['COLSPAN'];//convert to integer
+				$colspan = (int) $this->tb_header_type[$i]['COLSPAN']; //convert to integer
 
-				for ($j = 1; $j < $colspan; $j++){
+				for ($j = 1; $j < $colspan; $j++) {
 					//if there is a colspan, then calculate the number of lines also with the with of the next cell
 					if (($i + $j) < $this->tb_columns)
 						$this->tb_header_type[$i]['CELL_WIDTH'] += $this->tb_header_type[$i + $j]['WIDTH'];
@@ -681,15 +706,15 @@ class phpToPDF extends FPDF
 			}
 
 			$this->tb_header_type[$i]['CELL_LINES'] =
-				$this->NbLines($this->tb_header_type[$i]['CELL_WIDTH'],$this->tb_header_type[$i]['TEXT']);
+				$this->NbLines($this->tb_header_type[$i]['CELL_WIDTH'], $this->tb_header_type[$i]['TEXT']);
 
 			//this is the maximum cell height
 			$h = max($h, $this->tb_header_type[$i]['LN_SIZE'] * $this->tb_header_type[$i]['CELL_LINES']);
 
-//			if (isset($data[$i]['COLSPAN'])){
-				//just skip the other cells
-//				$i = $i + $colspan - 1;
-//			}
+			//			if (isset($data[$i]['COLSPAN'])){
+			//just skip the other cells
+			//				$i = $i + $colspan - 1;
+			//			}
 
 		}
 
@@ -698,8 +723,7 @@ class phpToPDF extends FPDF
 		$this->CheckPageBreak($h + $next_line_height, false);
 
 		//Draw the cells of the row
-		for($i=0; $i<$this->tb_columns; $i++)
-		{
+		for ($i = 0; $i < $this->tb_columns; $i++) {
 			//border size BRD_SIZE
 			$this->SetLineWidth($this->tb_header_type[$i]['BRD_SIZE']);
 
@@ -716,40 +740,40 @@ class phpToPDF extends FPDF
 			$this->SetTextColor($r, $g, $b);
 
 			//Set the font, font type and size
-			$this->SetFont(	$this->tb_header_type[$i]['T_FONT'],
-							$this->tb_header_type[$i]['T_TYPE'],
-							$this->tb_header_type[$i]['T_SIZE']);
+			$this->SetFont(
+				$this->tb_header_type[$i]['T_FONT'],
+				$this->tb_header_type[$i]['T_TYPE'],
+				$this->tb_header_type[$i]['T_SIZE']
+			);
 
 			//Save the current position
-			$x=$this->GetX();
-			$y=$this->GetY();
+			$x = $this->GetX();
+			$y = $this->GetY();
 
-			if ($this->New_Page_Commit){
-				if (isset($this->tb_header_type[$i]['BRD_TYPE_NEW_PAGE'])){
+			if ($this->New_Page_Commit) {
+				if (isset($this->tb_header_type[$i]['BRD_TYPE_NEW_PAGE'])) {
 					$this->tb_header_type[$i]['BRD_TYPE'] .= $this->tb_header_type[$i]['BRD_TYPE_NEW_PAGE'];
 				}
 			}
 
 			//Print the text
 			$this->MultiCellTable(
-					$this->tb_header_type[$i]['CELL_WIDTH'],
-					$this->tb_header_type[$i]['LN_SIZE'],
-					$this->tb_header_type[$i]['TEXT'],
-					$this->tb_header_type[$i]['BRD_TYPE'],
-					$this->tb_header_type[$i]['T_ALIGN'],
-					$this->tb_header_type[$i]['V_ALIGN'],
-					1,
-					$h - $this->tb_header_type[$i]['LN_SIZE'] * $this->tb_header_type[$i]['CELL_LINES']
-					);
+				$this->tb_header_type[$i]['CELL_WIDTH'],
+				$this->tb_header_type[$i]['LN_SIZE'],
+				$this->tb_header_type[$i]['TEXT'],
+				$this->tb_header_type[$i]['BRD_TYPE'],
+				$this->tb_header_type[$i]['T_ALIGN'],
+				$this->tb_header_type[$i]['V_ALIGN'],
+				1,
+				$h - $this->tb_header_type[$i]['LN_SIZE'] * $this->tb_header_type[$i]['CELL_LINES']
+			);
 
 			//Put the position to the right of the cell
-			$this->SetXY($x+$this->tb_header_type[$i]['CELL_WIDTH'],$y);
+			$this->SetXY($x + $this->tb_header_type[$i]['CELL_WIDTH'], $y);
 
-			if (isset($this->tb_header_type[$i]['COLSPAN'])){
+			if (isset($this->tb_header_type[$i]['COLSPAN'])) {
 				$i = $i + (int)$this->tb_header_type[$i]['COLSPAN'] - 1;
 			}
-
-
 		}
 
 		//Go to the next line
@@ -768,13 +792,13 @@ class phpToPDF extends FPDF
 			= false - > the header is not drawed
 	*/
 
-	function Draw_Data($data, $header = true){
+	function Draw_Data($data, $header = true)
+	{
 
 		$h = 0;
 
 		//calculate the maximum height of the cells
-		for($i=0; $i < $this->tb_columns; $i++)
-		{
+		for ($i = 0; $i < $this->tb_columns; $i++) {
 
 			if (!isset($data[$i]['T_FONT'])) $data[$i]['T_FONT'] = $this->tb_data_type[$i]['T_FONT'];
 			if (!isset($data[$i]['T_TYPE'])) $data[$i]['T_TYPE'] = $this->tb_data_type[$i]['T_TYPE'];
@@ -788,17 +812,19 @@ class phpToPDF extends FPDF
 			if (!isset($data[$i]['BRD_TYPE'])) $data[$i]['BRD_TYPE'] = $this->tb_data_type[$i]['BRD_TYPE'];
 			if (!isset($data[$i]['BG_COLOR'])) $data[$i]['BG_COLOR'] = $this->tb_data_type[$i]['BG_COLOR'];
 
-			$this->SetFont(	$data[$i]['T_FONT'],
-							$data[$i]['T_TYPE'],
-							$data[$i]['T_SIZE']);
+			$this->SetFont(
+				$data[$i]['T_FONT'],
+				$data[$i]['T_TYPE'],
+				$data[$i]['T_SIZE']
+			);
 
 			$data[$i]['CELL_WIDTH'] = $this->tb_header_type[$i]['WIDTH'];
 
-			if (isset($data[$i]['COLSPAN'])){
+			if (isset($data[$i]['COLSPAN'])) {
 
-				$colspan = (int) $data[$i]['COLSPAN'];//convert to integer
+				$colspan = (int) $data[$i]['COLSPAN']; //convert to integer
 
-				for ($j = 1; $j < $colspan; $j++){
+				for ($j = 1; $j < $colspan; $j++) {
 					//if there is a colspan, then calculate the number of lines also with the with of the next cell
 					if (($i + $j) < $this->tb_columns)
 						$data[$i]['CELL_WIDTH'] += $this->tb_header_type[$i + $j]['WIDTH'];
@@ -810,25 +836,23 @@ class phpToPDF extends FPDF
 			//this is the maximum cell height
 			$h = max($h, $data[$i]['LN_SIZE'] * $data[$i]['CELL_LINES']);
 
-			if (isset($data[$i]['COLSPAN'])){
+			if (isset($data[$i]['COLSPAN'])) {
 				//just skip the other cells
 				$i = $i + $colspan - 1;
 			}
-
 		}
 
 
 		$this->CheckPageBreak($h, $header);
 
-		if ($this->Draw_Header_Command){//draw the header
+		if ($this->Draw_Header_Command) { //draw the header
 			$this->Draw_Header_($h);
 		}
 
 		$this->Table_Align();
 
 		//Draw the cells of the row
-		for($i=0;$i<$this->tb_columns;$i++)
-		{
+		for ($i = 0; $i < $this->tb_columns; $i++) {
 
 			//border size BRD_SIZE
 			$this->SetLineWidth($data[$i]['BRD_SIZE']);
@@ -846,34 +870,35 @@ class phpToPDF extends FPDF
 			$this->SetTextColor($r, $g, $b);
 
 			//Set the font, font type and size
-			$this->SetFont(	$data[$i]['T_FONT'],
-							$data[$i]['T_TYPE'],
-							$data[$i]['T_SIZE']);
+			$this->SetFont(
+				$data[$i]['T_FONT'],
+				$data[$i]['T_TYPE'],
+				$data[$i]['T_SIZE']
+			);
 
 			//Save the current position
-			$x=$this->GetX();
-			$y=$this->GetY();
+			$x = $this->GetX();
+			$y = $this->GetY();
 
 			//print the text
 			$this->MultiCellTable(
-					$data[$i]['CELL_WIDTH'],
-					$data[$i]['LN_SIZE'],
-					$data[$i]['TEXT'],
-					$data[$i]['BRD_TYPE'],
-					$data[$i]['T_ALIGN'],
-					$data[$i]['V_ALIGN'],
-					1,
-					$h - $data[$i]['LN_SIZE'] * $data[$i]['CELL_LINES']
-					);
+				$data[$i]['CELL_WIDTH'],
+				$data[$i]['LN_SIZE'],
+				$data[$i]['TEXT'],
+				$data[$i]['BRD_TYPE'],
+				$data[$i]['T_ALIGN'],
+				$data[$i]['V_ALIGN'],
+				1,
+				$h - $data[$i]['LN_SIZE'] * $data[$i]['CELL_LINES']
+			);
 
 			//Put the position to the right of the cell
-			$this->SetXY($x + $data[$i]['CELL_WIDTH'],$y);
+			$this->SetXY($x + $data[$i]['CELL_WIDTH'], $y);
 
 			//if we have colspan, just ignore the next cells
-			if (isset($data[$i]['COLSPAN'])){
+			if (isset($data[$i]['COLSPAN'])) {
 				$i = $i + (int)$data[$i]['COLSPAN'] - 1;
 			}
-
 		}
 
 		$this->Data_On_Current_Page = true;
@@ -892,21 +917,21 @@ class phpToPDF extends FPDF
 	function CheckPageBreak($h, $header = true)
 	{
 		//If the height h would cause an overflow, add a new page immediately
-		if($this->GetY()+$h > $this->PageBreakTrigger){
+		if ($this->GetY() + $h > $this->PageBreakTrigger) {
 
-			$this->Draw_Table_Border();//draw the table border
+			$this->Draw_Table_Border(); //draw the table border
 
-			$this->End_Page_Border();//if there is a special handling for end page??? this is specific for me
+			$this->End_Page_Border(); //if there is a special handling for end page??? this is specific for me
 
-			$this->AddPage($this->CurOrientation);//add a new page
+			$this->AddPage($this->CurOrientation); //add a new page
 
 			$this->Data_On_Current_Page = false;
 
-			$this->New_Page_Commit = true;//new page commit
+			$this->New_Page_Commit = true; //new page commit
 
 			$this->table_startx = $this->GetX();
 			$this->table_starty = $this->GetY();
-			if ($header) $this ->Draw_Header();//if we have to draw the header!!!
+			if ($header) $this->Draw_Header(); //if we have to draw the header!!!
 		}
 
 		//align the table
@@ -919,53 +944,47 @@ class phpToPDF extends FPDF
 	                        $w - width
 	                        $txt - text
 	      @return           number
-	*/
-	function NbLines($w,$txt)
+	 */
+	function NbLines($w, $txt)
 	{
 		//Computes the number of lines a MultiCell of width w will take
-		$cw=&$this->CurrentFont['cw'];
-		if($w==0)
-			$w=$this->w-$this->rMargin-$this->x;
-		$wmax=($w-2*$this->cMargin)*1000/$this->FontSize;
-		$s=str_replace("\r",'',$txt);
-		$nb=strlen($s);
-		if($nb>0 and $s[$nb-1]=="\n")
+		$cw = &$this->CurrentFont['cw'];
+		if ($w == 0)
+			$w = $this->w - $this->rMargin - $this->x;
+		$wmax = ($w - 2 * $this->cMargin) * 1000 / $this->FontSize;
+		$s = str_replace("\r", '', $txt);
+		$nb = strlen($s);
+		if ($nb > 0 and $s[$nb - 1] == "\n")
 			$nb--;
-		$sep=-1;
-		$i=0;
-		$j=0;
-		$l=0;
-		$nl=1;
-		while($i<$nb)
-		{
-			$c=$s[$i];
-			if($c=="\n")
-			{
+		$sep = -1;
+		$i = 0;
+		$j = 0;
+		$l = 0;
+		$nl = 1;
+		while ($i < $nb) {
+			$c = $s[$i];
+			if ($c == "\n") {
 				$i++;
-				$sep=-1;
-				$j=$i;
-				$l=0;
+				$sep = -1;
+				$j = $i;
+				$l = 0;
 				$nl++;
 				continue;
 			}
-			if($c==' ')
-				$sep=$i;
-			$l+=$cw[$c];
-			if($l>$wmax)
-			{
-				if($sep==-1)
-				{
-					if($i==$j)
+			if ($c == ' ')
+				$sep = $i;
+			$l += $cw[$c];
+			if ($l > $wmax) {
+				if ($sep == -1) {
+					if ($i == $j)
 						$i++;
-				}
-				else
-					$i=$sep+1;
-				$sep=-1;
-				$j=$i;
-				$l=0;
+				} else
+					$i = $sep + 1;
+				$sep = -1;
+				$j = $i;
+				$l = 0;
 				$nl++;
-			}
-			else
+			} else
 				$i++;
 		}
 		return $nl;
@@ -985,52 +1004,47 @@ class phpToPDF extends FPDF
 	                        $vh - vertical adjustment - the Multicell Height will be with this VH Higher!!!!
 	                        $valign - Vertical Alignment - Top, Middle, Bottom
 	      @return           nothing
-	*/
-	function MultiCellTable($w, $h, $txt, $border=0, $align='J', $valign='T', $fill=0, $vh=0)
+	 */
+	function MultiCellTable($w, $h, $txt, $border = 0, $align = 'J', $valign = 'T', $fill = 0, $vh = 0)
 	{
 
-		$b1 = '';//border for top cell
-		$b2 = '';//border for middle cell
-		$b3 = '';//border for bottom cell
+		$b1 = ''; //border for top cell
+		$b2 = ''; //border for middle cell
+		$b3 = ''; //border for bottom cell
 
-		if($border)
-		{
-			if($border==1)
-			{
+		if ($border) {
+			if ($border == 1) {
 				$border = 'LTRB';
-				$b1 = 'LRT';//without the bottom
-				$b2 = 'LR';//without the top and bottom
-				$b3 = 'LRB';//without the top
-			}
-			else
-			{
-				$b2='';
-				if(is_int(strpos($border,'L')))
-					$b2.='L';
-				if(is_int(strpos($border,'R')))
-					$b2.='R';
-				$b1=is_int(strpos($border,'T')) ? $b2.'T' : $b2;
-				$b3=is_int(strpos($border,'B')) ? $b2.'B' : $b2;
-
+				$b1 = 'LRT'; //without the bottom
+				$b2 = 'LR'; //without the top and bottom
+				$b3 = 'LRB'; //without the top
+			} else {
+				$b2 = '';
+				if (is_int(strpos($border, 'L')))
+					$b2 .= 'L';
+				if (is_int(strpos($border, 'R')))
+					$b2 .= 'R';
+				$b1 = is_int(strpos($border, 'T')) ? $b2 . 'T' : $b2;
+				$b3 = is_int(strpos($border, 'B')) ? $b2 . 'B' : $b2;
 			}
 		}
 
-		switch ($valign){
+		switch ($valign) {
 			case 'T':
-				$wh_T = 0;//Top width
-				$wh_B = $vh - $wh_T;//Bottom width
+				$wh_T = 0; //Top width
+				$wh_B = $vh - $wh_T; //Bottom width
 				break;
 			case 'M':
-				$wh_T = $vh/2;
-				$wh_B = $vh/2;
+				$wh_T = $vh / 2;
+				$wh_B = $vh / 2;
 				break;
 			case 'B':
 				$wh_T = $vh;
 				$wh_B = 0;
 				break;
-			default://default is TOP ALIGN
-				$wh_T = 0;//Top width
-				$wh_B = $vh - $wh_T;//Bottom width
+			default: //default is TOP ALIGN
+				$wh_T = 0; //Top width
+				$wh_B = $vh - $wh_T; //Bottom width
 		}
 
 		//save the X position
@@ -1040,37 +1054,29 @@ class phpToPDF extends FPDF
 			draws the top and bottom borders
 		*/
 
-		if ($wh_T != 0)//only when there is a difference
+		if ($wh_T != 0) //only when there is a difference
 		{
 			//draw the top borders!!!
-			$this->Cell($w,$wh_T,'',$b1,2,$align,$fill);
+			$this->Cell($w, $wh_T, '', $b1, 2, $align, $fill);
 		}
 
-		$b2 = is_int(strpos($border,'T')) && ($wh_T == 0) ? $b2.'T' : $b2;
-		$b2 = is_int(strpos($border,'B')) && ($wh_B == 0) ? $b2.'B' : $b2;
+		$b2 = is_int(strpos($border, 'T')) && ($wh_T == 0) ? $b2 . 'T' : $b2;
+		$b2 = is_int(strpos($border, 'B')) && ($wh_B == 0) ? $b2 . 'B' : $b2;
 
-		$this->MultiCell($w,$h,$txt,$b2,$align,$fill);
+		$this->MultiCell($w, $h, $txt, $b2, $align, $fill);
 
-		if ($wh_B != 0){//only when there is a difference
+		if ($wh_B != 0) { //only when there is a difference
 
 			//go to the saved X position
 			//a multicell always runs to the begin of line
 			$this->x = $x;
 
-			$this->Cell($w, $wh_B, '', $b3, 2, $align,$fill);
+			$this->Cell($w, $wh_B, '', $b3, 2, $align, $fill);
 
-			$this->x=$this->lMargin;
+			$this->x = $this->lMargin;
 		}
+	}
 
-	}	
-	
-	
-	
-	
-	
-	
-	
-	
 	//***************************************************************************************************************
 	//  LES FONCTIONS AJOUTEES PAR JC CORNIC
 	//***************************************************************************************************************
@@ -1078,8 +1084,8 @@ class phpToPDF extends FPDF
 	function setRepere($titre, $posX, $posY, $sizeX, $sizeY, $datasX, $datasY, $droites)
 	{
 
-		$espaceX=25;
-		$espaceY=30;
+		$espaceX = 25;
+		$espaceY = 30;
 
 		// Si le min=max alors on change le nombre de découpage d'ordonnée
 		if ($datasY[0] == $datasY[1])
@@ -1087,141 +1093,129 @@ class phpToPDF extends FPDF
 			else $datasY[2] = 1;
 
 		// Le titre
-		$this->SetXY($posX+$espaceX, $posY - 10);
-		$this->Cell($sizeX , 10, $titre, 0, 2, "C");
+		$this->SetXY($posX + $espaceX, $posY - 10);
+		$this->Cell($sizeX, 10, $titre, 0, 2, "C");
 
-		if (($datasY[1]-$datasY[0]) != 0)
-			$ratioY = $sizeY/($datasY[1]-$datasY[0]);
-		else $ratioY = abs($sizeY/(2*$datasY[0]));
-		
+		if (($datasY[1] - $datasY[0]) != 0)
+			$ratioY = $sizeY / ($datasY[1] - $datasY[0]);
+		else $ratioY = abs($sizeY / (2 * $datasY[0]));
+
 		if ($datasY[0] < 0)
-			$decalageYNeg = $datasY[0]*$ratioY;
+			$decalageYNeg = $datasY[0] * $ratioY;
 		else $decalageYNeg = 0;
 
 
 		$this->SetDrawColor(0, 0, 0);
-		$this->Line($posX+$espaceX, $posY+$sizeY+$decalageYNeg, $posX+$espaceX+$sizeX, $posY+$sizeY+$decalageYNeg); // X
-		$this->Line($posX+$espaceX, $posY+$sizeY, $posX+$espaceX, $posY); // Y
+		$this->Line($posX + $espaceX, $posY + $sizeY + $decalageYNeg, $posX + $espaceX + $sizeX, $posY + $sizeY + $decalageYNeg); // X
+		$this->Line($posX + $espaceX, $posY + $sizeY, $posX + $espaceX, $posY); // Y
 
-		$this->SetTextColor(0,0,0);
+		$this->SetTextColor(0, 0, 0);
 		// Pour l'axe des X
-		switch (count($datasX))
-		{
+		switch (count($datasX)) {
 			case 1:
 				// Mettre la valeur au milieu de l'axe	
-				$this->SetXY($posX+$espaceX, $posY + $sizeY);
+				$this->SetXY($posX + $espaceX, $posY + $sizeY);
 				$this->Cell($sizeX, 10, $datasX[0], 0, 1, "C");
-			
-			break;
+
+				break;
 			case 2:
 				// Mettre les deux valeurs en début et fin d'axe	
-				$this->Text($posX+$espaceX, $posY + $sizeY + 10, $datasX[0]);	
-				$this->Text($posX+$espaceX + $sizeX, $posY + $sizeY + 10, $datasX[1]);	
-			break;
+				$this->Text($posX + $espaceX, $posY + $sizeY + 10, $datasX[0]);
+				$this->Text($posX + $espaceX + $sizeX, $posY + $sizeY + 10, $datasX[1]);
+				break;
 			default:
-			break;
+				break;
 		}
 
 		// Pour l'axe des Y
 		$yPos = $posY + $sizeY;
-		$xPos = $posX+$espaceX - 12;
+		$xPos = $posX + $espaceX - 12;
 		$value = $datasY[0];
 		$yInter = $sizeY / $datasY[2];
 		$valueInter = ($datasY[1] - $datasY[0]) / $datasY[2];
 
 		if ($datasY[2] == 5) //**** minY et maxY différents ****//
-			for ($i=0 ; $i <= $datasY[2] ; $i++)
-			{
+			for ($i = 0; $i <= $datasY[2]; $i++) {
 				// Mettre les $i valeurs entre le début et la fin de l'axe
 				$this->Text($xPos, $yPos, $value);
-		
+
 				// Mettre les petites barres correspondantes...
-				$this->Line($posX+$espaceX-2, $yPos, $posX+$espaceX+2, $yPos);
-			
+				$this->Line($posX + $espaceX - 2, $yPos, $posX + $espaceX + 2, $yPos);
+
 				$yPos -= $yInter;
-				
-				if ($i==4) $value=$datasY[1];
+
+				if ($i == 4) $value = $datasY[1];
 				else $value += $valueInter;
 			}
 		else //**** minY et maxY égaux --> 1 ou 2 intervalles au lieu de 5
 		{
 			//**** Droite horizontale y=0
-			if ($datasY[0] == 0)
-			{
+			if ($datasY[0] == 0) {
 				$this->Text($xPos, $yPos, $value);
-				$this->Line($posX-2, $yPos, $posX+2, $yPos);		
-			}
-			else //**** Droite horizontale y=$datasY[0]
+				$this->Line($posX - 2, $yPos, $posX + 2, $yPos);
+			} else //**** Droite horizontale y=$datasY[0]
 			{
-				if ($datasY[0] <0)
-				{
+				if ($datasY[0] < 0) {
 					//**** Y=$datasY[0] < 0
 					$this->Text($xPos, $yPos, $value);
-					$this->Line($posX-2, $yPos, $posX+2, $yPos);		
-					
-					$yPos -= $yInter/2;
+					$this->Line($posX - 2, $yPos, $posX + 2, $yPos);
+
+					$yPos -= $yInter / 2;
 					$value = 0;
-					
+
 					//**** Y=0
 					$this->Text($xPos, $yPos, $value);
-					$this->Line($posX-2, $yPos, $posX+2, $yPos);		
-				}
-				else	
-				{
+					$this->Line($posX - 2, $yPos, $posX + 2, $yPos);
+				} else {
 					//**** Y=0
 					$this->Text($xPos, $yPos, $value);
-					$this->Line($posX-2, $yPos, $posX+2, $yPos);		
-		
+					$this->Line($posX - 2, $yPos, $posX + 2, $yPos);
+
 					//**** Y=$datasY[0] > 0
 					$this->Text($xPos, $yPos, $value);
-					$this->Line($posX-2, $yPos, $posX+2, $yPos);		
-				}		
+					$this->Line($posX - 2, $yPos, $posX + 2, $yPos);
+				}
 			}
 		}
 
 		// Et on y met les droites...	
-		$legendX = $posX+$espaceX + $sizeX/2;
+		$legendX = $posX + $espaceX + $sizeX / 2;
 		$legendY = $posY + $sizeY + 20;
-		for ($i=0 ; $i<count($droites) ; $i++)
-		{
-			
-//			$j=4*$i+1;
-//			$k=4*$i+2;
-//			$col=4*$i+3;
-//			$l=4*$i+4;
+		for ($i = 0; $i < count($droites); $i++) {
 
-			if ($datasY[0] != $datasY[1])
-			{
-				$y1 = $posY+$sizeY - ( ($droites[$i][0]-$datasY[0])*$sizeY/($datasY[1]-$datasY[0]));
-				$y2 = $posY+$sizeY - ( ($droites[$i][1]-$datasY[0])*$sizeY/($datasY[1]-$datasY[0]));
-			}
-			else
-			{
-				$y1 = $posY+$sizeY;
-				$y2 = $posY+$sizeY;
+			//			$j=4*$i+1;
+			//			$k=4*$i+2;
+			//			$col=4*$i+3;
+			//			$l=4*$i+4;
+
+			if ($datasY[0] != $datasY[1]) {
+				$y1 = $posY + $sizeY - (($droites[$i][0] - $datasY[0]) * $sizeY / ($datasY[1] - $datasY[0]));
+				$y2 = $posY + $sizeY - (($droites[$i][1] - $datasY[0]) * $sizeY / ($datasY[1] - $datasY[0]));
+			} else {
+				$y1 = $posY + $sizeY;
+				$y2 = $posY + $sizeY;
 			}
 
 
 			$this->SetDrawColor($droites[$i][2][0], $droites[$i][2][1], $droites[$i][2][2]);
-			$this->Line($posX+$espaceX, $y1, $posX+$sizeX, $y2);
-			
+			$this->Line($posX + $espaceX, $y1, $posX + $sizeX, $y2);
+
 			// ajouter la légende si elle doit être
-			if ($droites[$i][3] != "")
-			{
+			if ($droites[$i][3] != "") {
 				$this->Line($legendX - 20, $legendY, $legendX - 3, $legendY);
-				
+
 				$this->SetTextColor($droites[$i][2][0], $droites[$i][2][1], $droites[$i][2][2]);
 				$this->Text($legendX, $legendY, $droites[$i][3]);
 				$legendY += 5;
 			}
-		}	
+		}
 
 		// Et on encadre le repere...
-		$this->SetDrawColor(0,0,0);
+		$this->SetDrawColor(0, 0, 0);
 		$espace_Y = 15;
-		$this->Line($posX, $posY - $espace_Y, $posX+$espaceX + $sizeX + $espaceX, $posY - $espace_Y); // -Y
-		$this->Line($posX+$espaceX + $sizeX + $espaceX, $posY - $espace_Y, $posX+$espaceX + $sizeX + $espaceX, $posY + $sizeY + $espaceY); // +X
-		$this->Line($posX+$espaceX + $sizeX + $espaceX, $posY + $sizeY + $espaceY, $posX, $posY + $sizeY + $espaceY); // +Y
+		$this->Line($posX, $posY - $espace_Y, $posX + $espaceX + $sizeX + $espaceX, $posY - $espace_Y); // -Y
+		$this->Line($posX + $espaceX + $sizeX + $espaceX, $posY - $espace_Y, $posX + $espaceX + $sizeX + $espaceX, $posY + $sizeY + $espaceY); // +X
+		$this->Line($posX + $espaceX + $sizeX + $espaceX, $posY + $sizeY + $espaceY, $posX, $posY + $sizeY + $espaceY); // +Y
 		$this->Line($posX, $posY + $sizeY + $espaceY, $posX, $posY - $espace_Y); // -X
 	}
 
@@ -1231,34 +1225,33 @@ class phpToPDF extends FPDF
 	// Fonction destinée à dessiner un tableau dans un file.pdf
 	function drawTableau(&$pdf, $tableType, $headerType, $headerDatas, $datasType, $datas)
 	{
-		$nbCol = count($headerDatas)/2;
+		$nbCol = count($headerDatas) / 2;
 
 		//we initialize the table class
 		$pdf->Table_Init($nbCol, true, true);
-		
+
 		//***************************************************************************
 		//TABLE HEADER SETTINGS
 		//***************************************************************************
 		$table_subtype = $tableType;
 		$pdf->Set_Table_Type($table_subtype);
 
-		for($i=0; $i<$nbCol; $i++) 
-		{
+		for ($i = 0; $i < $nbCol; $i++) {
 			$header_type[$i] = $headerType;
 			$header_type[$i]['WIDTH'] = $headerDatas[$i];
 
 			// Les contenus
-			$j = $nbCol+$i;
+			$j = $nbCol + $i;
 			$header_type[$i]['TEXT'] = $headerDatas[$j];
 
 			// Si une donnée == 0 alors on affiche rien...
-			if ($header_type[$i]['TEXT'] != "0") ;
+			if ($header_type[$i]['TEXT'] != "0");
 			else $header_type[$i]['TEXT'] = "";
-			
+
 			// par défaut, le texte est centré à gauche, non italic, non souligné et non gras.
 			// par défaut, les cellules ne sont pas fusionnées.
 			$header_type[$i]['T_TYPE'] = '';
-			$header_type[$i]['T_ALIGN'] = '';		
+			$header_type[$i]['T_ALIGN'] = '';
 			$header_type[$i]['COLSPAN'] = "1";
 		}
 
@@ -1269,156 +1262,143 @@ class phpToPDF extends FPDF
 		// Si l'utilisateur veut un fond coloré spécifique  pour la première colonne. Sinon, BG_COLOR  prend le dessus...
 		if (isset($headerType['BG_COLOR_COL0']))
 			$header_type[0]['BG_COLOR'] = $headerType['BG_COLOR_COL0'];
-				
+
 		// Si l'utilisateur précise un type ou un alignement pour une cellule précise du tableau, on l'applique ici
 		// Il faut utiliser les balises [I], [B], [U] pour Italic, Bold et Underline
 		// Il faut utiliser les balises [L], [C], [R] pour left, centered et rigth
-		for($i=0; $i<$nbCol; $i++) 
-		{
-			if (sscanf($header_type[$i]['TEXT'], "[%[a-zA-Z]]%s", $balise, $reste) != 0)
-			{
+		for ($i = 0; $i < $nbCol; $i++) {
+			if (sscanf($header_type[$i]['TEXT'], "[%[a-zA-Z]]%s", $balise, $reste) != 0) {
 				//echo "balise = " . $balise;
-				if ( (strpos($balise, "I")===FALSE) && (strpos($balise, "B")===FALSE) && (strpos($balise, "U")===FALSE)
-				  && (strpos($balise, "L")===FALSE) && (strpos($balise, "C")===FALSE) && (strpos($balise, "R")===FALSE) )
-					; // Mauvaise balise ou l'utilisateur veut mettre des crochets dans son tableau, c'est son droit...
-				else
-				{
+				if ((strpos($balise, "I") === FALSE) && (strpos($balise, "B") === FALSE) && (strpos($balise, "U") === FALSE)
+					&& (strpos($balise, "L") === FALSE) && (strpos($balise, "C") === FALSE) && (strpos($balise, "R") === FALSE)
+				); // Mauvaise balise ou l'utilisateur veut mettre des crochets dans son tableau, c'est son droit...
+				else {
 					//echo "balise = " . $balise . "<br>";
 					// On teste les différentes balises pour ajuster la cellule.
-					if (strpos($balise, "I") === FALSE) ;
+					if (strpos($balise, "I") === FALSE);
 					else $header_type[$i]['T_TYPE'] .= 'I';
-					if (strpos($balise, "B") === FALSE) ;
+					if (strpos($balise, "B") === FALSE);
 					else $header_type[$i]['T_TYPE'] .= 'B';
-					if (strpos($balise, "U") === FALSE) ;
+					if (strpos($balise, "U") === FALSE);
 					else $header_type[$i]['T_TYPE'] .= 'U';
-					if (strpos($balise, "L") === FALSE) ;
+					if (strpos($balise, "L") === FALSE);
 					else $header_type[$i]['T_ALIGN'] .= 'L';
-					if (strpos($balise, "C") === FALSE) ;
+					if (strpos($balise, "C") === FALSE);
 					else $header_type[$i]['T_ALIGN'] .= 'C';
-					if (strpos($balise, "R") === FALSE) ;
+					if (strpos($balise, "R") === FALSE);
 					else $header_type[$i]['T_ALIGN'] .= 'R';
 				}
-				
+
 				// On supprime la balise du texte de la cellule...
-				$header_type[$i]['TEXT'] = str_replace("[".$balise."]", "", $header_type[$i]['TEXT']);
+				$header_type[$i]['TEXT'] = str_replace("[" . $balise . "]", "", $header_type[$i]['TEXT']);
 			}
 		}
 		// Si l'utilsateur ne veut pas de header pour son tableau, il met NULL dans la premiere cellule...
-		if ($header_type[0]['TEXT'] == NULL)
-		{
-			for($i=0; $i<$nbCol; $i++)
-			{
+		if ($header_type[0]['TEXT'] == NULL) {
+			for ($i = 0; $i < $nbCol; $i++) {
 				$header_type[$i]['LN_SIZE'] = 0;
 				$header_type[$i]['TEXT'] = "";
 			}
 		}
-		
+
 
 		// Test si l'utilisateur veut fusionner DEUX cellules dans le header de son tableau. Il doit mettre "COLSPAN2" dans la première cellule à fusionner.
-		for($i=0 ; $i<$nbCol ; $i++)
-		{
-			$k=$nbCol+$i;
-			$i_1 = $i-1;
-			if ( ($k<count($headerDatas)) && ($headerDatas[$k] === "COLSPAN2") )
-			{
+		for ($i = 0; $i < $nbCol; $i++) {
+			$k = $nbCol + $i;
+			$i_1 = $i - 1;
+			if (($k < count($headerDatas)) && ($headerDatas[$k] === "COLSPAN2")) {
 				$header_type[$i_1]['COLSPAN'] = "2";
-				$header_type[$i]['TEXT']= "";
+				$header_type[$i]['TEXT'] = "";
 			}
 		}
 
 		//set the header type
 		$pdf->Set_Header_Type($header_type);
 		$pdf->Draw_Header();
-		
+
 		//***************************************************************************
 		//TABLE DATA SETTINGS
 		//***************************************************************************		
-		$data_type = Array();//reset the array
-		for ($i=0; $i<$nbCol; $i++) $data_type[$i] = $datasType;
+		$data_type = array(); //reset the array
+		for ($i = 0; $i < $nbCol; $i++) $data_type[$i] = $datasType;
 		$pdf->Set_Data_Type($data_type);
-		
+
 		//*********************************************************************
 		// Ce qui suit est valable pour toutes les cellules du tableau (hors header bien entendu).
 		//*********************************************************************
-		$data = Array();
-		for ($i=0 ; $i<count($datas) ; $i+=$nbCol)
-		{
+		$data = array();
+		for ($i = 0; $i < count($datas); $i += $nbCol) {
 			//*********************************************************************
 			// Ce qui suit est valable pour la première colonne du tableau
 			//*********************************************************************
 			// si l'utilisateur a précisé un alignement pour la première colonne, on l'applique ici
 			if (isset($datasType['T_ALIGN_COL0']))
 				$data[0]['T_ALIGN'] = $datasType['T_ALIGN_COL0'];
-				
+
 			// Si l'utilisateur a précisé une couleur de fond pour la première colonne, on l'applique ici.
 			if (isset($datasType['BG_COLOR_COL0']))
 				$data[0]['BG_COLOR'] = $datasType['BG_COLOR_COL0'];
-				
-			for ($j=$i ; $j<$i+$nbCol ; $j++)
-			{
-				$k = $j-$i;
+
+			for ($j = $i; $j < $i + $nbCol; $j++) {
+				$k = $j - $i;
 				$data[$k]['TEXT'] = $datas[$j];
 				$data[$k]['T_SIZE'] = $datasType['T_SIZE'];
 				$data[$k]['LN_SIZE'] = $datasType['LN_SIZE'];
-				
+
 				// par défaut, le texte est centré à gauche, non italic, non souligné et non gras.
 				// par défaut, les cellules ne sont pas fusionnées.
 				$data[$k]['T_TYPE'] = '';
-				$data[$k]['T_ALIGN'] = '';		
+				$data[$k]['T_ALIGN'] = '';
 				$data[$k]['COLSPAN'] = "1";
-					
+
 				// Si l'utilisateur a précisé une couleur de fond pour les autres colonnes, on l'applique ici.
-				if ( (isset($datasType['BG_COLOR'])) && ($k!=0) )
+				if ((isset($datasType['BG_COLOR'])) && ($k != 0))
 					$data[$k]['BG_COLOR'] = $datasType['BG_COLOR'];
-				
+
 				// Si l'utilisateur précise un type ou un alignement pour une cellule précise du tableau, on l'applique ici
 				// Il faut utiliser les balises [I], [B], [U] pour Italic, Bold et Underline
 				// Il faut utiliser les balises [L], [C], [R] pour left, centered et rigth
-				if (sscanf($data[$k]['TEXT'], "[%[a-zA-Z]]%s", $balise, $reste) != 0)
-				{
+				if (sscanf($data[$k]['TEXT'], "[%[a-zA-Z]]%s", $balise, $reste) != 0) {
 					//echo "balise = " . $balise;
-					if ( (strpos($balise, "I")===FALSE) && (strpos($balise, "B")===FALSE) && (strpos($balise, "U")===FALSE)
-					  && (strpos($balise, "L")===FALSE) && (strpos($balise, "C")===FALSE) && (strpos($balise, "R")===FALSE) )
-						; // Mauvaise balise ou l'utilisateur veut mettre des crochets dans son tableau, c'est son droit...
-					else
-					{
+					if ((strpos($balise, "I") === FALSE) && (strpos($balise, "B") === FALSE) && (strpos($balise, "U") === FALSE)
+						&& (strpos($balise, "L") === FALSE) && (strpos($balise, "C") === FALSE) && (strpos($balise, "R") === FALSE)
+					); // Mauvaise balise ou l'utilisateur veut mettre des crochets dans son tableau, c'est son droit...
+					else {
 						//echo "balise = " . $balise . "<br>";
 						// On teste les différentes balises pour ajuster la cellule.
-						if (strpos($balise, "I") === FALSE) ;
+						if (strpos($balise, "I") === FALSE);
 						else $data[$k]['T_TYPE'] .= 'I';
-						if (strpos($balise, "B") === FALSE) ;
+						if (strpos($balise, "B") === FALSE);
 						else $data[$k]['T_TYPE'] .= 'B';
-						if (strpos($balise, "U") === FALSE) ;
+						if (strpos($balise, "U") === FALSE);
 						else $data[$k]['T_TYPE'] .= 'U';
-						if (strpos($balise, "L") === FALSE) ;
+						if (strpos($balise, "L") === FALSE);
 						else $data[$k]['T_ALIGN'] .= 'L';
-						if (strpos($balise, "C") === FALSE) ;
+						if (strpos($balise, "C") === FALSE);
 						else $data[$k]['T_ALIGN'] .= 'C';
-						if (strpos($balise, "R") === FALSE) ;
+						if (strpos($balise, "R") === FALSE);
 						else $data[$k]['T_ALIGN'] .= 'R';
 					}
-					
+
 					// On supprime la balise du texte de la cellule...
-					$data[$k]['TEXT'] = str_replace("[".$balise."]", "", $data[$k]['TEXT']);
+					$data[$k]['TEXT'] = str_replace("[" . $balise . "]", "", $data[$k]['TEXT']);
 				}
 
 				// Si la valeur de la cellule est 0, le choix a été fait ICI de ne rien mettre dans la cellule.
 				if ($data[$k]['TEXT'] == "0")
-					$data[$k]['TEXT'] ="";
-					
+					$data[$k]['TEXT'] = "";
+
 				// Test si l'utilisateur veut fusionner deux cellules dans le header de son tableau. Il doit mettre le contenu
 				// de la cellule fusionnée dans la première cellule et "COLSPAN2" dans la deuxième cellule.
-				if ( ($k<$nbCol) && ($data[$k]['TEXT'] === "COLSPAN2") )
-				{
-					$k_1 = $k-1;
+				if (($k < $nbCol) && ($data[$k]['TEXT'] === "COLSPAN2")) {
+					$k_1 = $k - 1;
 					$data[$k_1]['COLSPAN'] = "2";
-					$data[$k]['TEXT']= "";
-				}				
+					$data[$k]['TEXT'] = "";
+				}
 			}
 			$pdf->Draw_Data($data);
 		}
-		
+
 		$pdf->Draw_Table_Border();
 	}
 }
-?>

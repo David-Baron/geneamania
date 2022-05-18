@@ -1,5 +1,3 @@
-<script type="text/javascript">
-<!--
 // Gestion des onglets fortement inspirée de http://jon.hedley.net/html-tabbed-dialog-widget
 var panes = new Array();
 function setupPanes(containerId, defaultTabId, ajHaut) {
@@ -59,5 +57,3 @@ function showPane(paneId, activeTab) {
 	}
 	return false;	
 }
--->
-</script>

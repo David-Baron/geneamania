@@ -83,5 +83,3 @@ function aff_degrade($datas, $labels, $couleur, $larg_image, $haut_image, $suffi
 	echo '	legende('.$suffixe.',"'.$texte_ajout.'", mesDonnees, mesLabels, true);'."\n";
 	echo '</script>'."\n";
 }
-
-?>

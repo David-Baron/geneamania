@@ -15,20 +15,20 @@ $x = Lit_Env();
 include('Gestion_Pages.php');
 
 // Ecriture de la ligne à l'écran ou dans un fichier
-function Ecrit_GenWeb($texte) {
+function Ecrit_GenWeb($texte)
+{
 	global $fp, $cr, $exp_file;
 	if ($exp_file) {
 		if ($texte == "<br>") $texte = $cr;
-		fputs($fp,"$texte");
-	}
-	else {
+		fputs($fp, "$texte");
+	} else {
 		if ($texte == "<br>") echo '<br />';
-		else echo(my_html($texte));
+		else echo (my_html($texte));
 	}
 }
 
 // Récupération des variables de l'affichage précédent
-$tab_variables = array('Depart','destination','ut_suf');
+$tab_variables = array('Depart', 'destination', 'ut_suf');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) {
 		$$nom_variables = $_POST[$nom_variables];
@@ -36,15 +36,15 @@ foreach ($tab_variables as $nom_variables) {
 }
 
 // Sécurisation des variables postées
-$Depart = Secur_Variable_Post($Depart,1,'N');
-if (!$Depart) $Depart=-1;
-$destination = Secur_Variable_Post($destination,30,'S');
+$Depart = Secur_Variable_Post($Depart, 1, 'N');
+if (!$Depart) $Depart = -1;
+$destination = Secur_Variable_Post($destination, 30, 'S');
 // Destination écran par défaut
 if (!$destination) $destination = LG_GENWEB_SCREEN;
-$ut_suf = Secur_Variable_Post($ut_suf,2,'S');
+$ut_suf = Secur_Variable_Post($ut_suf, 2, 'S');
 
-$compl = Ajoute_Page_Info(600,150);
-Insere_Haut($titre,$compl,'exp_GenWeb',$Depart);
+$compl = Ajoute_Page_Info(600, 150);
+Insere_Haut($titre, $compl, 'exp_GenWeb', $Depart);
 
 // Sortie dans un fichier ou à l'écran ?
 $exp_file = false;
@@ -57,48 +57,48 @@ if ($debug) {
 
 // Création éventuelle du fichier d'export GenWeb
 if ($exp_file) {
-	$nom_fic = construit_fic($chemin_exports,$nom_fic_GenWeb);
+	$nom_fic = construit_fic($chemin_exports, $nom_fic_GenWeb);
 	// Ajout éventuel du suffixe
 	if ($ut_suf == 'on') {
-		$posi = strrpos($nom_fic,'.');
+		$posi = strrpos($nom_fic, '.');
 		if ($posi !== false) {
-			$nom_fic = substr($nom_fic,0,$posi).'_'.lib_departement($Depart,'n').substr($nom_fic,$posi);
+			$nom_fic = substr($nom_fic, 0, $posi) . '_' . lib_departement($Depart, 'n') . substr($nom_fic, $posi);
 		}
 	}
 	$fp = fopen($nom_fic, "wb");
-	if (! $fp) die(my_html(LG_GENWEB_ERROR_FILE).' '. $nom_fic);
+	if (!$fp) die(my_html(LG_GENWEB_ERROR_FILE) . ' ' . $nom_fic);
 }
 
 // Recherche de la liste des départements
-$sql ='select distinct d.Identifiant_zone, d.Nom_Depart_Min '.
-		'from '.nom_table('villes').' v, '.nom_table('departements').' d '.
-		'where d.Identifiant_zone <> 0 '.
-		'and d.identifiant_zone = v.zone_mere '.
-		'order by d.Nom_Depart_Min';
+$sql = 'select distinct d.Identifiant_zone, d.Nom_Depart_Min ' .
+	'from ' . nom_table('villes') . ' v, ' . nom_table('departements') . ' d ' .
+	'where d.Identifiant_zone <> 0 ' .
+	'and d.identifiant_zone = v.zone_mere ' .
+	'order by d.Nom_Depart_Min';
 $res = lect_sql($sql);
 
-echo '<form id="saisie" action="'.my_self().'?Depart='.$Depart.'" method="post">';
+echo '<form id="saisie" action="' . my_self() . '?Depart=' . $Depart . '" method="post">';
 echo '<br />';
-echo '<table border="0" width="80%" align="center">'."\n";
+echo '<table border="0" width="80%" align="center">' . "\n";
 echo '<tr class="rupt_table" align="center">';
-echo '<td>'.my_html(LG_COUNTY).LG_SEMIC."\n";
+echo '<td>' . my_html(LG_COUNTY) . LG_SEMIC . "\n";
 echo '<select  name="Depart">';
 while ($row = $res->fetch(PDO::FETCH_NUM)) {
 	$row_dep = $row[0];
-	echo "<option value=\"".$row_dep."\"";
+	echo "<option value=\"" . $row_dep . "\"";
 	if ($Depart == $row_dep) echo ' selected="selected" ';
-	echo ">".my_html($row[1]).'</option>'."\n";
+	echo ">" . my_html($row[1]) . '</option>' . "\n";
 }
 echo "</select>\n";
 $res->closeCursor();
 echo "</td>\n";
 
-echo '<td><input type="submit" value="'.my_html(LG_GENWEB_EXTRACT).'"/></td>'."\n";
-echo '<td align="left"><input type="radio" name="destination" value="'.LG_GENWEB_SCREEN.'" checked="checked"'
-	.' onclick="document.getElementById(\'ut_suf\').checked=false;" />'
-	.my_html(LG_GENWEB_SCREEN).'&nbsp;'."\n";
-echo '<input type="radio" name="destination" value="'.LG_GENWEB_FILE.'"/>'.my_html(LG_GENWEB_FILE);
-echo '&nbsp;( <input type="checkbox" name="ut_suf" id="ut_suf" onclick="document.forms.saisie.destination[1].checked=true;"/> '.my_html(LG_GENWEB_SUFFIX).' )'."\n";
+echo '<td><input type="submit" value="' . my_html(LG_GENWEB_EXTRACT) . '"/></td>' . "\n";
+echo '<td align="left"><input type="radio" name="destination" value="' . LG_GENWEB_SCREEN . '" checked="checked"'
+	. ' onclick="document.getElementById(\'ut_suf\').checked=false;" />'
+	. my_html(LG_GENWEB_SCREEN) . ' ' . "\n";
+echo '<input type="radio" name="destination" value="' . LG_GENWEB_FILE . '"/>' . my_html(LG_GENWEB_FILE);
+echo ' ( <input type="checkbox" name="ut_suf" id="ut_suf" onclick="document.forms.saisie.destination[1].checked=true;"/> ' . my_html(LG_GENWEB_SUFFIX) . ' )' . "\n";
 echo "</td></tr>\n";
 echo "</table>\n";
 echo "</form>\n";
@@ -106,18 +106,18 @@ echo "</form>\n";
 if ($Depart != -1) {
 	// Constitution de la requête d'extraction'
 	// on a 1 enreg par couple nom;ville
-	$sql ='select p.Nom, v.Nom_Ville '.
-			'from '.nom_table('personnes').' p , '.nom_table('villes').' v '.
-			'where p.Reference <> 0 '.
-			'  and v.zone_mere = '.$Depart.
-			'  and p.ville_naissance = v.identifiant_zone '.
-			'UNION '.
-			'select p.Nom, v.Nom_Ville '.
-			'from '.nom_table('personnes').' p , '.nom_table('villes').' v '.
-			'where p.Reference <> 0 '.
-			'  and v.zone_mere = '.$Depart.
-			'  and p.ville_deces = v.identifiant_zone '.
-			'order by Nom,Nom_Ville';
+	$sql = 'select p.Nom, v.Nom_Ville ' .
+		'from ' . nom_table('personnes') . ' p , ' . nom_table('villes') . ' v ' .
+		'where p.Reference <> 0 ' .
+		'  and v.zone_mere = ' . $Depart .
+		'  and p.ville_naissance = v.identifiant_zone ' .
+		'UNION ' .
+		'select p.Nom, v.Nom_Ville ' .
+		'from ' . nom_table('personnes') . ' p , ' . nom_table('villes') . ' v ' .
+		'where p.Reference <> 0 ' .
+		'  and v.zone_mere = ' . $Depart .
+		'  and p.ville_deces = v.identifiant_zone ' .
+		'order by Nom,Nom_Ville';
 
 	$res = lect_sql($sql);
 
@@ -134,10 +134,9 @@ if ($Depart != -1) {
 			if ($Anc_Nom != '') {
 				$x = Ecrit_GenWeb('<br>');
 			}
-			$x = Ecrit_GenWeb($Nouv_Nom.";");
+			$x = Ecrit_GenWeb($Nouv_Nom . ";");
 			$Anc_Nom   = $Nouv_Nom;
-		}
-		else {
+		} else {
 			$x = Ecrit_GenWeb(',');
 		}
 		if ($Nouv_Ville != $Anc_Ville) {
@@ -153,7 +152,7 @@ if ($Depart != -1) {
 	// Fermeture éventuelle du fichier d'export GenWeb
 	if ($exp_file) {
 		fclose($fp);
-		echo '<br /><br />'.my_html(LG_GENWEB_MSG).' <a href="'.$nom_fic.'">'.$nom_fic.'</a><br>'."\n";
+		echo '<br /><br />' . my_html(LG_GENWEB_MSG) . ' <a href="' . $nom_fic . '">' . $nom_fic . '</a><br>' . "\n";
 	}
 }
 
@@ -161,4 +160,5 @@ Insere_Bas($compl);
 
 ?>
 </body>
+
 </html>

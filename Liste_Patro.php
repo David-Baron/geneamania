@@ -19,7 +19,7 @@ $x = Lit_Env();
 // Sortie en pdf ?
 $sortie_pdf = false;
 if ((!$SiteGratuit) or ($Premium)) {
-	$s_pdf = Recup_Variable('pdf','C','O');
+	$s_pdf = Recup_Variable('pdf', 'C', 'O');
 	if (!$s_pdf) $s_pdf = 'n';
 	if ($s_pdf == 'O') $sortie_pdf = true;
 	if ($sortie_pdf) $no_entete = true;
@@ -33,89 +33,87 @@ $texte = Dem_Texte();
 $limiter = 0;
 if (isset($_POST['limiter'])) $limiter = 1;
 if ($texte) {
-	$nom_decujus = Recup_Variable('nom_decujus','C',1);
+	$nom_decujus = Recup_Variable('nom_decujus', 'C', 1);
 	if ($nom_decujus) $limiter = 1;
 }
 $lieux = 0;
 if (isset($_POST['lieux'])) $lieux = 1;
 if ($texte) {
-	$aff_lieux = Recup_Variable('aff_lieux','C',1);
+	$aff_lieux = Recup_Variable('aff_lieux', 'C', 1);
 	if ($aff_lieux) $lieux = 1;
 }
 
 $simu_invit = false;
 if (isset($_POST['simu_invit'])) $simu_invit = true;
 if ($texte) {
-	$simu_invit = Recup_Variable('simu_invit','C',1);
+	$simu_invit = Recup_Variable('simu_invit', 'C', 1);
 	if ($simu_invit) $simu_invit = true;
 }
 if ($simu_invit) $est_privilegie = false;
 
 // Stocke les infos  d'une personne dans la liste
-function Stocke_Personne($Personne) {
-	global $Num_Pers,$Longueur,$Liste_Pers;
+function Stocke_Personne($Personne)
+{
+	global $Num_Pers, $Longueur, $Liste_Pers;
 	$Liste_Pers[++$Num_Pers] = $Personne['Nom'] . '/' .
-								// On prend 1M-Num_Pers pour inverser les personnes sur une même famille
-								str_pad(1000000-$Num_Pers,$Longueur,' ',STR_PAD_LEFT) . '/' .
-								$Personne['Reference'].'/'.$Personne['idNomFam'];
+		// On prend 1M-Num_Pers pour inverser les personnes sur une même famille
+		str_pad(1000000 - $Num_Pers, $Longueur, ' ', STR_PAD_LEFT) . '/' .
+		$Personne['Reference'] . '/' . $Personne['idNomFam'];
 	return 1;
 }
 
 // Affiche une personne sur une ligne
-function Affiche_Personne2($Personne) {
-	global $Vil_Prec,$Ville,$texte,$lieux
-		,$est_privilegie
-		,$LG_Data_noavailable_profile, $h_LG_AT
-		,$sortie;
+function Affiche_Personne2($Personne)
+{
+	global $Vil_Prec, $Ville, $texte, $lieux, $est_privilegie, $LG_Data_noavailable_profile, $h_LG_AT, $sortie;
 	if (($est_privilegie) or ($Personne['Diff_Internet'] == 'O')) {
-		if (! $texte) {
-			echo '<a '.Ins_Ref_Pers($Personne['Reference']).'>'.my_html($Personne['Nom'].' '.$Personne['Prenoms']).'</a>';
+		if (!$texte) {
+			echo '<a ' . Ins_Ref_Pers($Personne['Reference']) . '>' . my_html($Personne['Nom'] . ' ' . $Personne['Prenoms']) . '</a>';
+		} else {
+			HTML_ou_PDF(my_html($Personne['Nom'] . ' ' . $Personne['Prenoms']), $sortie);
 		}
-		else {
-			HTML_ou_PDF(my_html($Personne['Nom'].' '.$Personne['Prenoms']), $sortie);
-		}
-		HTML_ou_PDF('<br />'."\n", $sortie);
+		HTML_ou_PDF('<br />' . "\n", $sortie);
 		$date = $Personne['Ne_le'];
 		$Vil_Cour = $Personne['Ville_Naissance'];
 		if (($date != '') or ($Vil_Cour != 0)) {
 			HTML_ou_PDF('&deg; ', $sortie);
-			if ($date != '') HTML_ou_PDF( Etend_date($date).'&nbsp;', $sortie);
+			if ($date != '') HTML_ou_PDF(Etend_date($date) . ' ', $sortie);
 			if (($lieux) and ($Vil_Cour != 0)) {
 				if ($Vil_Cour != $Vil_Prec) {
 					$Ville = lib_ville($Vil_Cour);
 					$Vil_Prec = $Vil_Cour;
 				}
-				HTML_ou_PDF($h_LG_AT.' '.$Ville, $sortie);
+				HTML_ou_PDF($h_LG_AT . ' ' . $Ville, $sortie);
 				if (!$texte) appelle_carte_osm();
 			}
-			HTML_ou_PDF('<br />'."\n", $sortie);
+			HTML_ou_PDF('<br />' . "\n", $sortie);
 		}
 		$date = $Personne['Decede_Le'];
 		$Vil_Cour = $Personne['Ville_Deces'];
 		if (($date != '') or ($Vil_Cour != 0)) {
 			HTML_ou_PDF('+ ', $sortie);
-			if ($date != '') HTML_ou_PDF(Etend_date($date).'&nbsp;', $sortie);
+			if ($date != '') HTML_ou_PDF(Etend_date($date) . ' ', $sortie);
 			if (($lieux) and ($Vil_Cour != 0)) {
 				if ($Vil_Cour != $Vil_Prec) {
 					$Ville = lib_ville($Vil_Cour);
 					$Vil_Prec = $Vil_Cour;
 				}
-				HTML_ou_PDF(my_html(LG_AT).' '.$Ville, $sortie);
+				HTML_ou_PDF(my_html(LG_AT) . ' ' . $Ville, $sortie);
 				if (!$texte) appelle_carte_osm();
 			}
-			HTML_ou_PDF('<br />'."\n", $sortie);
+			HTML_ou_PDF('<br />' . "\n", $sortie);
 		}
-	}
-	else {
-		echo HTML_ou_PDF(my_html($LG_Data_noavailable_profile).'<br />', $sortie);
+	} else {
+		echo HTML_ou_PDF(my_html($LG_Data_noavailable_profile) . '<br />', $sortie);
 	}
 	return 1;
 }
 
 // Accède à une personne et la stocke dans la liste
-function Accede_Personne($Reference) {
-	global $Personne,$n_personnes;
-	$Sql = 'select Reference, Nom, Diff_Internet, idNomFam from '.$n_personnes.' where Reference = '.$Reference.' limit 1';
+function Accede_Personne($Reference)
+{
+	global $Personne, $n_personnes;
+	$Sql = 'select Reference, Nom, Diff_Internet, idNomFam from ' . $n_personnes . ' where Reference = ' . $Reference . ' limit 1';
 	$Res = lect_sql($Sql);
 	if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 		$x = Stocke_Personne($Personne);
@@ -123,10 +121,11 @@ function Accede_Personne($Reference) {
 }
 
 // Accède à une personne et l'affiche
-function Accede_Personne2($Reference) {
+function Accede_Personne2($Reference)
+{
 	global $Personne, $Res, $DifU, $n_personnes, $est_privilegie;
-	$Sql = 'select Reference, Nom, Prenoms, Numero, Ne_le, Decede_Le, '.
-			'Diff_Internet, Ville_Naissance, Ville_Deces, Sexe, idNomFam from '.$n_personnes.' where Reference = '.$Reference.' limit 1';
+	$Sql = 'select Reference, Nom, Prenoms, Numero, Ne_le, Decede_Le, ' .
+		'Diff_Internet, Ville_Naissance, Ville_Deces, Sexe, idNomFam from ' . $n_personnes . ' where Reference = ' . $Reference . ' limit 1';
 	$Res = lect_sql($Sql);
 	if ($Personne = $Res->fetch(PDO::FETCH_ASSOC)) {
 		$x = Affiche_Personne2($Personne);
@@ -143,35 +142,35 @@ if ($limiter) $comp_texte .= '&amp;nom_decujus=O';
 if ($lieux) $comp_texte .= '&amp;aff_lieux=O';
 if ($simu_invit) $comp_texte .= '&amp;simu_invit=O';
 
-$lien = 'href="'.my_self().'?texte=O'.$comp_texte;
+$lien = 'href="' . my_self() . '?texte=O' . $comp_texte;
 
-$compl = Ajoute_Page_Info(600,150).
-		 Affiche_Icone_Lien($lien.'"','text',$LG_printable_format).'&nbsp;';
+$compl = Ajoute_Page_Info(600, 150) .
+	Affiche_Icone_Lien($lien . '"', 'text', $LG_printable_format) . ' ';
 if ((!$SiteGratuit) or ($Premium))
-	$compl .= Affiche_Icone_Lien($lien.'&amp;pdf=O"','PDF',$LG_pdf_format).'&nbsp;';
+	$compl .= Affiche_Icone_Lien($lien . '&amp;pdf=O"', 'PDF', $LG_pdf_format) . ' ';
 
 $Ind_Ref = 0;
 
 $sortie = 'H';
 
-if (! $texte) Insere_Haut($titre,$compl,'Liste_Patro','') ;
+if (!$texte) Insere_Haut($titre, $compl, 'Liste_Patro', '');
 else {
 	// Sortie dans un PDF
-	if($sortie_pdf) {
+	if ($sortie_pdf) {
 		require('html2pdfb.php');
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
-		$pdf->SetFont($font_pdf,'',12);
+		$pdf->SetFont($font_pdf, '', 12);
 		$pdf->AddPage();
-		$pdf->SetFont($font_pdf,'B',14);
+		$pdf->SetFont($font_pdf, 'B', 14);
 		PDF_Set_Def_Color($pdf);
-		$pdf->Cell(0, 5, $titre, 'LTRB' , 1, 'C');
-		$pdf->SetFont($font_pdf,'',11);
+		$pdf->Cell(0, 5, $titre, 'LTRB', 1, 'C');
+		$pdf->SetFont($font_pdf, '', 11);
 		$pdf->Ln();
 	}
 	// Sortie au format texte
 	else {
-	    Insere_Haut_texte ($titre);
+		Insere_Haut_texte($titre);
 		echo '<br />';
 	}
 }
@@ -179,7 +178,7 @@ else {
 // Initialisations
 $Num_Pere = 0;
 $Num_Mere = 0;
-$icone_Puis = Affiche_Icone('couple_donne',LG_PATRO_THEN).'&nbsp;'."\n";
+$icone_Puis = Affiche_Icone('couple_donne', LG_PATRO_THEN) . ' ' . "\n";
 
 // Max 1 000 000 (1 million) de personnes dans les filiations...
 // 6 car le premier a le num 1, ce qui fait max 6 chiffres lorsque l'on soustrait à 1 M
@@ -190,17 +189,17 @@ $Num_Pers = 0;
 $n_personnes = nom_table('personnes');
 
 // Récupération de la référence de la personne '1'
-if   ($decujus = get_decujus()) {
+if ($decujus = get_decujus()) {
 
-	$sql = 'select Reference, Nom, idNomFam from '.$n_personnes.' where Reference = '.$decujus.' limit 1';
+	$sql = 'select Reference, Nom, idNomFam from ' . $n_personnes . ' where Reference = ' . $decujus . ' limit 1';
 	$Res = lect_sql($sql);
 	$Personne = $Res->fetch(PDO::FETCH_ASSOC);
 	$x = Stocke_Personne($Personne);
 	$nom_decujus_base = $Personne['Nom'];
 
-	if (! $texte) {
-		echo '<form action="'.my_self().'" method="post">'."\n";
-		echo '<table border="0" width="80%" align="center">'."\n";
+	if (!$texte) {
+		echo '<form action="' . my_self() . '" method="post">' . "\n";
+		echo '<table border="0" width="80%" align="center">' . "\n";
 		echo '<tr align="center">';
 
 		echo '<td class="rupt_table">';
@@ -208,31 +207,31 @@ if   ($decujus = get_decujus()) {
 		if ($lieux) echo ' checked="checked"';
 		echo ' name="lieux" id="lieux" value="1"/>';
 		echo my_html(LG_PATRO_DISP_PLACE);
-		echo '</td>'."\n";
+		echo '</td>' . "\n";
 
 		echo '<td class="rupt_table">';
 		echo '<input type="checkbox"';
 		if ($limiter) echo ' checked="checked"';
 		echo ' name="limiter" id="limiter" value="1"/>';
-		echo my_html(LG_PATRO_RESTRICT).'&nbsp;('.my_html($nom_decujus_base).')';
-		echo '</td>'."\n";
-		
+		echo my_html(LG_PATRO_RESTRICT) . ' (' . my_html($nom_decujus_base) . ')';
+		echo '</td>' . "\n";
+
 		if ($est_contributeur) {
 			echo '<td class="rupt_table">';
 			echo '<input type="checkbox"';
 			if ($simu_invit) echo ' checked="checked"';
-			echo ' name="simu_invit" id="simu_invit" value="1"/>'.my_html($LG_Simu_No_Granted);
-			echo '</td>'."\n";
+			echo ' name="simu_invit" id="simu_invit" value="1"/>' . my_html($LG_Simu_No_Granted);
+			echo '</td>' . "\n";
 		}
-		
-		echo '<td class="rupt_table"><input type="submit" value="'.my_html($LG_modify_list).'"/>';
+
+		echo '<td class="rupt_table"><input type="submit" value="' . my_html($LG_modify_list) . '"/>';
 		$alt_img = my_html(LG_PATRO_SHOW_NOSHOW_FIL);
-		echo '&nbsp;&nbsp;&nbsp;&nbsp;<img id="masque" src="'.$chemin_images.$Icones['oeil'].'" alt="'.$alt_img.'" title="'.$alt_img.'"'.
-		      ' onmouseover="Survole_Clic_Div_Tous(\'MO\',\''.$Comportement.'\');" onclick="Survole_Clic_Div_Tous(\'CL\',\''.$Comportement.'\');"/>';
-		echo '</td>'."\n";
+		echo '    <img id="masque" src="' . $chemin_images . $Icones['oeil'] . '" alt="' . $alt_img . '" title="' . $alt_img . '"' .
+			' onmouseover="Survole_Clic_Div_Tous(\'MO\',\'' . $Comportement . '\');" onclick="Survole_Clic_Div_Tous(\'CL\',\'' . $Comportement . '\');"/>';
+		echo '</td>' . "\n";
 		echo '</tr></table>';
 		echo '<input type="hidden" id="memo_etat" name="memo_etat"/>';
-		echo '</form>'."\n";
+		echo '</form>' . "\n";
 	}
 
 
@@ -246,7 +245,7 @@ if   ($decujus = get_decujus()) {
 		$Ind_Cour = 0;
 		// Balayage des personnes du niveau précédent pour chercher les parents
 		for ($nb = 1; $nb <= $Prec_Max; $nb++) {
-			$x = Get_Parents($Precedent[$nb],$Num_Pere,$Num_Mere,$Rang);
+			$x = Get_Parents($Precedent[$nb], $Num_Pere, $Num_Mere, $Rang);
 			if ($Num_Pere != 0) {
 				$Courant[++$Ind_Cour] = $Num_Pere;
 			}
@@ -301,16 +300,16 @@ if   ($decujus = get_decujus()) {
 	$fin = false;
 	$deb = false;
 	$aff = true;
-	$deb_lien_nom = '<a href="'.Get_Adr_Base_Ref().'Liste_Pers2.php?Type_Liste=P&amp;idNom=';
-	
+	$deb_lien_nom = '<a href="' . Get_Adr_Base_Ref() . 'Liste_Pers2.php?Type_Liste=P&amp;idNom=';
+
 	$h_LG_PATRO_FILIATION = my_html(LG_PATRO_FILIATION);
 	$h_LG_show_noshow  = my_html($LG_show_noshow);
 	$h_LG_AT = my_html(LG_AT);
 	$h_LG_PATRO_THEN = my_html(LG_PATRO_THEN);
 
-	while (($i < $Num_Pers) and (!$fin))  {
+	while (($i < $Num_Pers) and (!$fin)) {
 		$Ligne = $Liste_Pers[$i];
-		$ar_ligne = explode('/',$Ligne);
+		$ar_ligne = explode('/', $Ligne);
 		//$P1 = strpos($Ligne,'/');
 		//$Nouv_Nom = substr($Ligne,0,$P1);
 		$Nouv_Nom = $ar_ligne[0];
@@ -325,28 +324,28 @@ if   ($decujus = get_decujus()) {
 				if (!$limiter) {
 					if ($Anc_Nom != '') {
 						HTML_ou_PDF('</table>', $sortie);
-						if (! $texte) echo '</div>'."\n";
-						HTML_ou_PDF('<br />'."\n", $sortie);
+						if (!$texte) echo '</div>' . "\n";
+						HTML_ou_PDF('<br />' . "\n", $sortie);
 					}
 				}
 				$num_div++;
 				if ($texte) $classe = 'tableau_imp';
 				else $classe = 'classic';
-				HTML_ou_PDF('<table width="95%" border="0" class="'.$classe.'" cellspacing="1" align="center" >', $sortie);
+				HTML_ou_PDF('<table width="95%" border="0" class="' . $classe . '" cellspacing="1" align="center" >', $sortie);
 				if (($texte) and (!$sortie_pdf)) echo '<thead>';
 				HTML_ou_PDF('<tr align="center">', $sortie);
 				if ($texte) HTML_ou_PDF('<th>', $sortie);
 				else echo '<td class="rupt_table">';
-				HTML_ou_PDF('<b>'.$h_LG_PATRO_FILIATION.' ', $sortie);
-				if (!$texte) echo $deb_lien_nom.$ar_ligne[3].'&amp;Nom='.$Nouv_Nom.'">'.$Nouv_Nom.'</a>';
+				HTML_ou_PDF('<b>' . $h_LG_PATRO_FILIATION . ' ', $sortie);
+				if (!$texte) echo $deb_lien_nom . $ar_ligne[3] . '&amp;Nom=' . $Nouv_Nom . '">' . $Nouv_Nom . '</a>';
 				if ($texte) HTML_ou_PDF($Nouv_Nom, $sortie);
 				HTML_ou_PDF('</b>', $sortie);
 				// Affichage de l'oeil pour afficher / masquer un patronyme
-				if (! $texte) oeil_div_simple('ajout'.$num_div,'ajout'.$i,$h_LG_show_noshow,'div'.$num_div);
+				if (!$texte) oeil_div_simple('ajout' . $num_div, 'ajout' . $i, $h_LG_show_noshow, 'div' . $num_div);
 				if (!$texte) HTML_ou_PDF('</td></tr>', $sortie);
 				if (($texte) and (!$sortie_pdf)) echo '</th></tr></thead><tr><td></td></tr>';
 				HTML_ou_PDF('</table>', $sortie);
-				if (!$texte) echo '<div id="div'.$num_div.'">';
+				if (!$texte) echo '<div id="div' . $num_div . '">';
 				HTML_ou_PDF('<table width="95%" border="0" class="classic" cellspacing="1" cellpadding="3" align="center">', $sortie);
 				$num_lig = 0;
 			}
@@ -355,19 +354,18 @@ if   ($decujus = get_decujus()) {
 		if ($aff) {
 			// Ligne du couple
 			$style = '';
-			if (! $texte) {
+			if (!$texte) {
 				if (pair($num_lig++)) $style = 'liste';
 				else $style = 'liste2';
 			}
-			  HTML_ou_PDF( '<tr class="'.$style.'" align="center">', $sortie);
+			HTML_ou_PDF('<tr class="' . $style . '" align="center">', $sortie);
 			// Gestion de la rupture sur le nom
 			if ($Anc_Nom != $Nouv_Nom) {
-			  HTML_ou_PDF('<td width="5%">&nbsp;</td>', $sortie);
-			}
-			else {
-				HTML_ou_PDF('<td width="5%">'."\n", $sortie);
-				if (! $texte) echo $icone_Puis;
-				HTML_ou_PDF($h_LG_PATRO_THEN .' ', $sortie);
+				HTML_ou_PDF('<td width="5%"> </td>', $sortie);
+			} else {
+				HTML_ou_PDF('<td width="5%">' . "\n", $sortie);
+				if (!$texte) echo $icone_Puis;
+				HTML_ou_PDF($h_LG_PATRO_THEN . ' ', $sortie);
 				HTML_ou_PDF('</td>', $sortie);
 			}
 			// Affichage de de la personne
@@ -376,7 +374,7 @@ if   ($decujus = get_decujus()) {
 			//$P2 = strpos($Ligne,'/',$P1+1);
 			//$Ref = substr($Ligne,$P2+1,strlen($Ligne)-$P1);
 			$Ref = $ar_ligne[2];
-			//echo "Ref : ".$Ref."&nbsp;";
+			//echo "Ref : ".$Ref." ";
 			$x = Accede_Personne2($Ref);
 			HTML_ou_PDF('</td>', $sortie);
 			// Affichage d'un conjoint
@@ -384,10 +382,14 @@ if   ($decujus = get_decujus()) {
 			$Aff_Union = '';
 			$SexePers = $Personne['Sexe'];
 			if (($SexePers == 'm') or ($SexePers == 'f')) {
-				$sqlU = 'select Conjoint_1, Conjoint_2, Maries_Le, Ville_Mariage from '.$n_union.' where ';
+				$sqlU = 'select Conjoint_1, Conjoint_2, Maries_Le, Ville_Mariage from ' . $n_union . ' where ';
 				switch ($SexePers) {
-					case 'm' : $sqlU = $sqlU.'Conjoint_1 = '.$Ref; break;
-					case 'f' : $sqlU = $sqlU.'Conjoint_2 = '.$Ref; break;
+					case 'm':
+						$sqlU = $sqlU . 'Conjoint_1 = ' . $Ref;
+						break;
+					case 'f':
+						$sqlU = $sqlU . 'Conjoint_2 = ' . $Ref;
+						break;
 				}
 				$sqlU .= ' limit 1';
 				$resU = lect_sql($sqlU);
@@ -395,14 +397,18 @@ if   ($decujus = get_decujus()) {
 					$Mari  = $rowU[0];
 					$Femme = $rowU[1];
 					switch ($SexePers) {
-						case 'm' : $Conj = $Femme; break;
-						case 'f' : $Conj = $Mari; break;
+						case 'm':
+							$Conj = $Femme;
+							break;
+						case 'f':
+							$Conj = $Mari;
+							break;
 					}
 					$x = Accede_Personne2($Conj);
 				}
 				$Aff_Union = 'x';
 				if ($rowU[2] != '') {
-					$Aff_Union = $Aff_Union.'&nbsp;'.Etend_date($rowU[2]);
+					$Aff_Union = $Aff_Union . ' ' . Etend_date($rowU[2]);
 				}
 				if ($lieux) {
 					$Vil_Cour = $rowU[3];
@@ -411,7 +417,8 @@ if   ($decujus = get_decujus()) {
 							$Ville = lib_ville($Vil_Cour);
 							$Vil_Prec = $Vil_Cour;
 						}
-						$Aff_Union = $Aff_Union . ' ' ; $h_LG_AT .' '.$Ville;
+						$Aff_Union = $Aff_Union . ' ';
+						$h_LG_AT . ' ' . $Ville;
 					}
 				}
 				$resU->closeCursor();
@@ -424,11 +431,9 @@ if   ($decujus = get_decujus()) {
 				if ($Aff_Union != 'x') {
 					HTML_ou_PDF($Aff_Union, $sortie);
 					if (($lieux) and (!$texte)) appelle_carte_osm();
-				}
-				else HTML_ou_PDF('&nbsp;', $sortie);
-			}
-			else {
-				echo HTML_ou_PDF(my_html($LG_Data_noavailable_profile).'<br />', $sortie);
+				} else HTML_ou_PDF(' ', $sortie);
+			} else {
+				echo HTML_ou_PDF(my_html($LG_Data_noavailable_profile) . '<br />', $sortie);
 			}
 			HTML_ou_PDF('</td></tr>', $sortie);
 		}
@@ -438,20 +443,19 @@ if   ($decujus = get_decujus()) {
 	}
 
 	HTML_ou_PDF('</table>', $sortie);
-	if (!$texte) echo '</div>'."\n";
+	if (!$texte) echo '</div>' . "\n";
 
 	if (!$texte) include('jscripts/Liste_Patro.js');
+} else $x = Erreur_DeCujus();
 
-}
-else $x = Erreur_DeCujus();
-
-if($sortie_pdf) {
+if ($sortie_pdf) {
 	//echo 'sortie pdf : '.$sortie_pdf;
 	$pdf->Output();
 	exit;
 }
 
-if (! $texte) Insere_Bas($compl);
+if (!$texte) Insere_Bas($compl);
 ?>
 </body>
+
 </html>

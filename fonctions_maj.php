@@ -1018,7 +1018,7 @@ function aff_corr_csv($nb)
 {
 	global $radical_variable_csv;
 	echo '<td><select name="' . $radical_variable_csv . $nb . '" id="' . $radical_variable_csv . $nb . '">' . "\n";
-	echo '<option value="-1">' . my_html('S�lectionnez une colonne') . '</option>' . "\n";
+	echo '<option value="-1">' . my_html('Sélectionnez une colonne') . '</option>' . "\n";
 	for ($nb2 = ord('A'); $nb2 <= ord('Z'); $nb2++) echo '<option>' . chr($nb2) . '</option>';
 	echo '</select></td>' . "\n";
 }
@@ -1027,7 +1027,7 @@ function aff_corr_csv2($nb)
 {
 	global $radical_variable_csv;
 	echo '<td><select name="' . $radical_variable_csv . $nb . '" id="' . $radical_variable_csv . $nb . '">' . "\n";
-	echo '<option value="-1">' . my_html('S�lectionnez une colonne') . '</option>' . "\n";
+	echo '<option value="-1">' . my_html('Sélectionnez une colonne') . '</option>' . "\n";
 	$num_col = 0;
 	for ($nb2 = ord('A'); $nb2 <= ord('Z'); $nb2++) echo '<option value="' . $num_col++ . '">' . chr($nb2) . '</option>';
 	echo '</select></td>' . "\n";

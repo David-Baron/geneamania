@@ -5,7 +5,7 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -44,7 +44,7 @@ $acces = 'M';                          					// Type d'accès de la page : (M)ise
 if ($Modif) $titre = $LG_Menu_Title['Person_Modify'];	// Titre pour META
 else $titre = $LG_Menu_Title['Person_Add'];
 $x = Lit_Env();
-include('Gestion_Pages.php');
+include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
@@ -763,8 +763,63 @@ if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 
 	// Récupération de la liste des types
 	Recup_Types_Evt('P');
+
 	echo '<script src="jscripts/Edition_Personne.js"></script>';
-	echo '<script src="jscripts/Ajout_Evenement.js"></script>';
+	// echo '<script src="jscripts/Ajout_Evenement.js"></script>'; // TODO: see the script after php code inside!!!
+	?>
+	<script>
+	
+// Javascript spécialisé pour l'ajout rapide d'évènement
+// appelé sur les boutons + et -
+
+// Ajoute une ligne à la table des évènements
+function addRowToTable() {
+
+	var tbl = document.getElementById('tblSample');
+	var lastRow = tbl.rows.length;
+	// if there's no header row in the table, then iteration = lastRow + 1
+	var iteration = lastRow - 1;
+	var row = tbl.insertRow(lastRow);
+	//row.class = "actif cotis-ok";
+	var num_cell = -1;
+
+	// Type
+	num_cell++;
+	var cell_2 = row.insertCell(num_cell);
+	var sel = document.createElement('select');
+	sel.name = 'Type_' + iteration;
+	sel.id = 'Type_' + iteration;
+	<?php
+		// Dans les options, on met la liste des types disponibles
+	    for ($nb=0;$nb<count($libelles_types);$nb++) {
+	    	echo 'sel.options['.$nb.'] = new Option(\''.addslashes($libelles_types[$nb]).'\', \''.$id_types[$nb].'\');';
+	    }
+	?>
+	cell_2.appendChild(sel);
+
+	// Titre
+	num_cell++;
+	var cell_3 = row.insertCell(num_cell);
+	var el = document.createElement('input');
+	el.type = 'text';
+	el.name = 'Titre_' + iteration;
+	el.id   = 'Titre_' + iteration;
+	el.size = 50;
+	cell_3.appendChild(el);
+
+}
+
+// Enlève une ligne de la table des évènements
+function removeRowFromTable() {
+  var tbl = document.getElementById('tblSample');
+  var lastRow = tbl.rows.length;
+  if (lastRow > 2) tbl.deleteRow(lastRow - 1);
+}
+
+	</script>
+	<?php
+	// Tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
 	echo '<script src="Insert_Tiny.js"></script>';
 
 	// Récupération des données de la personne

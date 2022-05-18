@@ -1,7 +1,7 @@
-<!-- Javascript d'appel du paramétrage de Tiny MCE pour les Text Area formattés -->
-<script type="text/javascript" src="<?php echo $rep_Tiny; ?>tiny_mce.js"></script>
-<script type="text/javascript">
-<!--
+// Javascript d'appel du paramétrage de Tiny MCE pour les Text Area formattés 
+
+
+
 tinyMCE.init({
 	mode : "textareas",
 	theme : "advanced",
@@ -17,5 +17,3 @@ tinyMCE.init({
 	theme_advanced_toolbar_align : "left",
 	extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]"
 });
-//-->
-</script>

@@ -1,3 +1,5 @@
+//// TODO: Don't use!!! php code inside!!!
+
 <?php
 echo "var def_enc = '".strtolower($def_enc)."';";
 echo "var name_exists = '".LG_CTRL_NAME_EXISTS."';";

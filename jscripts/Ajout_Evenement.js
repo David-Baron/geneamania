@@ -1,3 +1,4 @@
+// TODO: Don't use!!! php code inside!!!!
 
 // Javascript spécialisé pour l'ajout rapide d'évènement
 // appelé sur les boutons + et -

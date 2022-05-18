@@ -4,7 +4,7 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+include_once __DIR__ .'/fonctions.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -368,7 +368,9 @@ if (($ok == '') && ($annuler == '')) {
 		echo '<br/ >Ville supprim&eacutee<br/ >';
 		echo '<a href="Liste_Villes.php?Type_Liste=V">' . my_html(LG_SUBDIV_LIST) . '</a>';
 	} else {
-		include('Insert_Tiny.js');
+		// Tinymce
+		echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+		echo '<script src="Insert_Tiny.js"></script>';
 
 		echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'Nom_VilleV\')" action="' . my_self() . '?Ident=' . $Ident . '">' . "\n";
 		aff_origine();

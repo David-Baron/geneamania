@@ -5,8 +5,7 @@
 
 // Entête de document des pages
 function Ecrit_Entete_Page($titre,$contenu,$mots,$index_follow='IF') {
-	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"'."\n".
-    	'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+	echo '<!DOCTYPE html>';
 	echo '<html>';
 	echo '<head>'."\n";
 	Ecrit_Meta($titre,$contenu,$mots,$index_follow);
@@ -69,7 +68,7 @@ if (isset($Environnement)) {
 	}
 
 	// Intégration des fonctions spécifiques de mise à jour
-	if ($maj) include('fonctions_maj.php');
+	if ($maj) include_once __DIR__ .'/fonctions_maj.php';
 
 	// Initialisation des boutons
 	$bt_OK        = false;
@@ -97,7 +96,7 @@ if (isset($Environnement)) {
 	  else {
 		$avec_js = true;
 		Ecrit_Entete_Page($titre,$contenu,$mots,$index_follow);
-		include('jscripts/edition_geneamania.js');
+		echo '<script src="jscripts/edition_geneamania.js"></script>';
 	  }
 	}
 

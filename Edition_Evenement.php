@@ -4,7 +4,7 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+include_once __DIR__ .'/fonctions.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -51,7 +51,7 @@ if ($actualite) {
 }
 
 $x = Lit_Env();
-include('Gestion_Pages.php');
+include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
@@ -209,9 +209,11 @@ if (!$est_contributeur) {
 	Insere_Bas('');
 	return;
 } else {
-	include('jscripts/Edition_Evenement.js');
-	include('gest_onglets.js');
-	include('Insert_Tiny.js');
+	echo '<script src="jscripts/Edition_Evenement.js"></script>';
+	echo '<script src="gest_onglets.js"></script>';
+	// Tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="Insert_Tiny.js"></script>';
 
 	//  == Affiche les données propres à l'enregistrement de la fiche ==
 	$requete = 'SELECT * FROM ' . nom_table('evenements') . ' e, ' . nom_table('types_evenement') . ' t' .

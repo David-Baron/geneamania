@@ -6,13 +6,14 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/fonctions/rectif_utf8.php';
 
 $acces = 'M';
 //$titre = 'Rectification des caractères UTF-8';
 $titre = $LG_Menu_Title['Rect_Utf'];
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $niv_requis = 'G';                // Page réservée au profil gestionnaire
 $compl = Ajoute_Page_Info(600, 250);
 Insere_Haut(my_html($titre), $compl, 'Rectif_Utf8', '');

@@ -4,7 +4,7 @@
 <head>
 <?php
 // include('fonctions.php');
-// Recup de la variable passée dans l'URL : aide demandée
+// Recup de la variable passÃ©e dans l'URL : aide demandÃ©e
 $aide = Recup_Variable('aide','S');
 
 switch ($aide) {
@@ -12,48 +12,48 @@ switch ($aide) {
 	case 'Ajout_Rapide' : $objet = 'ajout rapide'; break;
 	case 'Anniversaires' : $objet = 'anniversaires'; break;
 	case 'Calc_So' : $objet = 'calculette sosa'; break;
-	case 'Completude_Nom' : $objet = 'Informations complétude des informations'; break;
+	case 'Completude_Nom' : $objet = 'Informations complÃ©tude des informations'; break;
 	case 'Conv_Romain' : $objet = 'Informations convertisseur romain - arabe'; break;
 	case 'Desc_Directe_Pers' : $objet = 'Informations descendance directe d\'une personne'; break;
-	case 'Edition_Contribution' : $objet = 'édition d\'une contribution'; break;
-	case 'Edition_Evenement' : $objet = 'édition d\'un évènement'; break;
-	case 'Edition_Image' : $objet = 'édition d\'une image'; break;
-	case 'Edition_Lier_Eve' : $objet = 'lien évènement à une personne'; break;
-	case 'Edition_Lier_Nom' : $objet = 'assigner un nom secondaire à une personne'; break;
-	case 'Edition_Lier_Pers' : $objet = 'créer des relations entre deux personnes'; break;
-	case 'Edition_NomFam' : $objet = 'édition d\'un nom de famille'; break;
-	case 'Edition_Personne' : $objet = 'édition d\'une personne'; break;
-	case 'Edition_Rangs' : $objet = 'édition des rangs'; break;
-	case 'Edition_Utilisateur' : $objet = 'édition d\'un utilisateur'; break;
+	case 'Edition_Contribution' : $objet = 'Ã©dition d\'une contribution'; break;
+	case 'Edition_Evenement' : $objet = 'Ã©dition d\'un Ã©vÃ¨nement'; break;
+	case 'Edition_Image' : $objet = 'Ã©dition d\'une image'; break;
+	case 'Edition_Lier_Eve' : $objet = 'lien Ã©vÃ¨nement Ã  une personne'; break;
+	case 'Edition_Lier_Nom' : $objet = 'assigner un nom secondaire Ã  une personne'; break;
+	case 'Edition_Lier_Pers' : $objet = 'crÃ©er des relations entre deux personnes'; break;
+	case 'Edition_NomFam' : $objet = 'Ã©dition d\'un nom de famille'; break;
+	case 'Edition_Personne' : $objet = 'Ã©dition d\'une personne'; break;
+	case 'Edition_Rangs' : $objet = 'Ã©dition des rangs'; break;
+	case 'Edition_Utilisateur' : $objet = 'Ã©dition d\'un utilisateur'; break;
 	case 'Export' : $objet = 'export'; break;
-	case 'Fusion_Evenements' : $objet = 'fusion d\'évènements'; break;
-	case 'Histo_Ages_Deces' : $objet = 'historique des âges de décès'; break;
-	case 'Histo_Ages_Mariage' : $objet = 'historique des âges de premier mariage'; break;
+	case 'Fusion_Evenements' : $objet = 'fusion d\'Ã©vÃ¨nements'; break;
+	case 'Histo_Ages_Deces' : $objet = 'historique des Ã¢ges de dÃ©cÃ¨s'; break;
+	case 'Histo_Ages_Mariage' : $objet = 'historique des Ã¢ges de premier mariage'; break;
 	case 'Import_CSV' : $objet = 'Import CSV'; break;
 	case 'Import_Docs' : $objet = 'import documents'; break;
 	case 'Import_Gedcom' : $objet = 'import Gedcom'; break;
 	case 'Import_Sauvegarde' : $objet = 'import d\'une sauvegarde'; break;
-	case 'Liste_Evenements' : $objet = 'liste des évènements'; break;
+	case 'Liste_Evenements' : $objet = 'liste des Ã©vÃ¨nements'; break;
 	case 'Liste_NomFam' : $objet = 'liste des noms de famille'; break;
 	case 'Liste_Nom_Vivants' : $objet = 'liste des personnes vivantes'; break;
-	case 'Naissances_Deces_Mois' : $objet = 'naissances et décès par mois'; break;
-	case 'Naissances_Mariages_Deces_Mois' : $objet = 'naissances et décès par mois'; break;
-	case 'Pers_Isolees' : $objet = 'Personnes isolées'; break;
-	case 'Pyramide_Ages_Histo' : $objet = 'historique de l\'âge au décès'; break;
-	case 'Pyramide_Ages' : $objet = 'pyramide des âges au décès'; break;
-	case 'Pyramide_Ages_Mar_Histo' : $objet = 'historique de l\'âge au décès'; break;
+	case 'Naissances_Deces_Mois' : $objet = 'naissances et dÃ©cÃ¨s par mois'; break;
+	case 'Naissances_Mariages_Deces_Mois' : $objet = 'naissances et dÃ©cÃ¨s par mois'; break;
+	case 'Pers_Isolees' : $objet = 'Personnes isolÃ©es'; break;
+	case 'Pyramide_Ages_Histo' : $objet = 'historique de l\'Ã¢ge au dÃ©cÃ¨s'; break;
+	case 'Pyramide_Ages' : $objet = 'pyramide des Ã¢ges au dÃ©cÃ¨s'; break;
+	case 'Pyramide_Ages_Mar_Histo' : $objet = 'historique de l\'Ã¢ge au dÃ©cÃ¨s'; break;
 	case 'Recherche_Commentaire' : $objet = 'recherche dans les commenatires'; break;
-	case 'Recherche_Cousinage' : $objet = 'recherche de parenté'; break;
+	case 'Recherche_Cousinage' : $objet = 'recherche de parentÃ©'; break;
 	case 'Recherche_Personne_Archive' : $objet = 'recherche de personnes aux archives'; break;
 	case 'Recherche_Personne' : $objet = 'recherche de personnes'; break;
 	case 'Recherche_Ville' : $objet = 'recherche de villes'; break;
-	case 'Stat_Base_Depart' : $objet = 'statistiques par département'; break;
+	case 'Stat_Base_Depart' : $objet = 'statistiques par dÃ©partement'; break;
 	case 'Stat_Base_Villes' : $objet = 'statistiques par ville'; break;
-	case 'Verif_Internet_Absente' : $objet = 'vérification de la diffusabilité Internet absente'; break;
-	case 'Verif_Internet' : $objet = 'vérification de la diffusabilité Internet'; break;
-	case 'Verif_Personne' : $objet = 'Vérification d\'une fiche personne'; break;
-	case 'Verif_Sosa' : $objet = 'vérification des numéros Sosa'; break;
-	case 'Vue_Personnalisee' : $objet = 'vue personnalisée'; break;
+	case 'Verif_Internet_Absente' : $objet = 'vÃ©rification de la diffusabilitÃ© Internet absente'; break;
+	case 'Verif_Internet' : $objet = 'vÃ©rification de la diffusabilitÃ© Internet'; break;
+	case 'Verif_Personne' : $objet = 'VÃ©rification d\'une fiche personne'; break;
+	case 'Verif_Sosa' : $objet = 'vÃ©rification des numÃ©ros Sosa'; break;
+	case 'Vue_Personnalisee' : $objet = 'vue personnalisÃ©e'; break;
 	default : $objet = '';
 }	
 if ($objet != '') $objet = 'Informations '.$objet; 
@@ -94,7 +94,7 @@ switch ($aide) {
 		echo "Les anniversaires sont tri&eacute;s par ordre chronologique.<br />";
 		echo "Les ic&ocirc;nes ".Affiche_Icone('anniv_nai','Anniversaire de naissance').'&nbsp;'
 								.Affiche_Icone('anniv_mar','Anniversaire de mariage').'&nbsp;'
-								.Affiche_Icone('anniv_dec','Anniversaire de décès');
+								.Affiche_Icone('anniv_dec','Anniversaire de dÃ©cÃ¨s');
 		echo " signifient que l'anniversaire de naissance, mariage ou d&eacute;c&egrave;s a lieu le jour m&ecirc;me du mois en cours.<br />";
 		echo "L'utilisateur a la possibilit&eacute; de ne pas afficher les personnes d&eacute;c&eacute;d&eacute;es ou pr&eacute;sum&eacute;es d&eacute;c&eacute;d&eacute;es (sur les anniversaires de naissance ou de mariage).<br />";
 		echo "NB : l'affichage des personnes dont la visibilit&eacute; internet est restreinte est fonction du profil de l'utilisateur.";
@@ -170,7 +170,7 @@ switch ($aide) {
 		echo "Les zones obligatoires sont le titre de l'&eacute;v&egrave;nement et son type.<br />";
 		echo "Le lieu de survenance de l'&eacute;v&egrave;nement peut &ecirc;tre choisi en cliquant sur l'ic&ocirc;ne ".Affiche_Icone('localisation','localisation')."<br />";
 		echo "Les dates de d&eacute;but et de fin peuvent &ecirc;tre choisis en cliquant sur l'ic&ocirc;ne ".Affiche_Icone('calendrier','calendrier')."&nbsp;";
-		echo "alors que l'ic&ocirc;ne ".Affiche_Icone('copie_calend','copie')." permet de copier la date de début dans la date de fin.<br />";
+		echo "alors que l'ic&ocirc;ne ".Affiche_Icone('copie_calend','copie')." permet de copier la date de dÃ©but dans la date de fin.<br />";
 		echo 'La zone "Visibilit&eacute; Internet du commentaire" permet de masquer ou non l\'affichage de la note sur internet ; elle n\'a aucun effet en local.<br />';
 		echo $auto_contrib;
 		break;
@@ -199,11 +199,11 @@ switch ($aide) {
 		break;
 	case 'Edition_Lier_Pers' : 
 		echo "";
-		echo "Cette page permet de créer des relations entre deux personnes.<br />";
+		echo "Cette page permet de crÃ©er des relations entre deux personnes.<br />";
 		echo "Vous pouvez d&eacute;finir plusieurs liens d'une personne avec une autre avec des r&ocirc;les diff&eacute;rents, mais pas avec le m&ecirc;me r&ocirc;le. <br />";
 		echo "Les zones obligatoires sont la personne li&eacute;e et le r&ocirc;le.<br />";
 		echo "Les dates de d&eacute;but et de fin peuvent &ecirc;tre choisies en cliquant sur l'ic&ocirc;ne ".Affiche_Icone('calendrier','calendrier')."&nbsp;";
-		echo "alors que l'ic&ocirc;ne ".Affiche_Icone('copie_calend','copie')." permet de copier la date de début dans la date de fin.<br />";
+		echo "alors que l'ic&ocirc;ne ".Affiche_Icone('copie_calend','copie')." permet de copier la date de dÃ©but dans la date de fin.<br />";
 		echo $auto_contrib;
 		break;
 	case 'Edition_NomFam' : 
@@ -241,7 +241,7 @@ switch ($aide) {
 	case 'Edition_Rangs' : 
 		echo "Cette page permet rectifier les rangs des enfants d'un couple.<br />";
 		echo "Pour chaque enfant, G&eacute;n&eacute;amania calcule un rang th&eacute;orique <b>si la date de naissance est connue de mani&egrave;re pr&eacute;cise</b>.<br />";
-		echo "En cas de divergence entre le rang th&eacute;orique et le rang saisi, la zone du rang calcul&eacute; est suivie de l'icône ".Affiche_Icone('warning','Alerte');
+		echo "En cas de divergence entre le rang th&eacute;orique et le rang saisi, la zone du rang calcul&eacute; est suivie de l'icÃ´ne ".Affiche_Icone('warning','Alerte');
 		echo "L'utilisateur peut rectifier en masse les rangs en cliquant sur le bouton &quot;Accepter les rangs calcul&eacute;s&quot;.";
 		echo "La mise &agrave; jour n'est effective qu'apr&egrave;s avoir cliqu&eacute; sur le bouton &quot;".$lib_Okay."&quot;.<br />";
 		echo "De m&ecirc;me, si les dates de naissance sont connues, G&eacute;n&eacute;amania calcule un &eacute;cart th&eacute;orique en mois / ann&eacute;es entre les naissances.";
@@ -315,7 +315,7 @@ switch ($aide) {
 		echo "Cette option permet d'int&eacute;grer dans la base des donn&eacute;es issues d'un tableur (Libre Office, Excel...).<br />";
 		echo "A ce jour, il est possible d'int&eacute;grer des donn&eacute;es concernant les personnes uniquement (&agrave; l'exclusion des filiations et unions).<br />";
 		echo "L'utilisateur doit indiquer la correspondance entre les colonnes du tableur et les champs de G&eacute;n&eacute;mania. Seules sont obligatoires les zones contenant les noms et pr&eacute;noms.<br />";
-		echo "Le s&eacute;parateur de champs est le caract&egrave;re Â« ; Â». Les dates sont au format JJ/MM/AAAA ou JJ-MM-AAAA. Les zones textuelles ne sont pas entour&eacute;es de guillemets.<br />";
+		echo "Le s&eacute;parateur de champs est le caract&egrave;re Ã‚Â« ; Ã‚Â». Les dates sont au format JJ/MM/AAAA ou JJ-MM-AAAA. Les zones textuelles ne sont pas entour&eacute;es de guillemets.<br />";
 		echo "Voici un exemple de contenu de fichier :<br />";
 		echo "Durand;Robert 1;30/11/1965;Amiens;m;27C<br />";
 		echo "Durand;Marcel;3-5-1966;Amiens;m;27D<br />";
@@ -400,10 +400,10 @@ switch ($aide) {
 	case 'Pers_Isolees' : 
 		echo "Cette page permet de lister les personnes isol&eacute;es de la base.<br />";
 		echo "Par personne isol&eacute;e, on entend une personne sans filiation, ni union, ni relation avec une autre personne.<br />";
-		echo "Cette page est accessible à partir du profil contributeur.";
+		echo "Cette page est accessible Ã  partir du profil contributeur.";
 		break;
 	case 'Pyramide_Ages_Histo' : 
-		echo "Cette page permet de visualiser l'&eacute;volution (en fonction de l'année de naissance) de l'&acirc;ge au d&eacute;c&egrave;s des personnes contenues dans la base.";
+		echo "Cette page permet de visualiser l'&eacute;volution (en fonction de l'annÃ©e de naissance) de l'&acirc;ge au d&eacute;c&egrave;s des personnes contenues dans la base.";
 		echo "Si l'utilisateur n'a pas de profil privil&eacute;gi&eacute;, seules sont prises en compte les personnes dont la visibilit&eacute; Internet est n'est pas restreinte.";
 		echo "De plus, les enfants d&eacute;c&eacute;d&eacute;s avant l'&acirc;ge de 1 an ne rentrent pas dans la statistique afin de ne pas biaiser la moyenne.<br />";
 		echo "Le survol &agrave; la souris des barres du graphique permet de visualiser le nombre de personnes concern&eacute;es sur la p&eacute;riode.<br />";
@@ -416,7 +416,7 @@ switch ($aide) {
 		echo "De plus, on peut se d&eacute;brancher sur la fiche de la doyenne ou du doyen.";
 		break;
 	case 'Pyramide_Ages_Mar_Histo' : 
-		echo "Cette page permet de visualiser l'&eacute;volution (en fonction de l'année de naissance) de l'&acirc;ge de premier mariage des personnes contenues dans la base.";
+		echo "Cette page permet de visualiser l'&eacute;volution (en fonction de l'annÃ©e de naissance) de l'&acirc;ge de premier mariage des personnes contenues dans la base.";
 		echo "Si l'utilisateur n'a pas de profil privil&eacute;gi&eacute;, seules sont prises en compte les personnes dont la visibilit&eacute; Internet est n'est pas restreinte.";
 		echo "Le survol &agrave; la souris des barres du graphique permet de visualiser le nombre de personnes concern&eacute;es sur la p&eacute;riode.<br />";
 		echo "En cliquant sur la p&eacute;riode mentionn&eacute;e au milieu, l'utilisateur peut visualiser la r&eacute;partition des &acirc;ges de premier mariage des personnes pour la p&eacute;riode concern&eacute;e.";
@@ -469,7 +469,7 @@ switch ($aide) {
 		echo "Exemple : pour avoir toutes les femmes de la base, on coche le bouton &quot;Femme&quot; et on lance la recherche.";
 		echo "Si on veut affiner la recherche et obtenir les femmes dont l'un des pr&eacute;noms est &quot;Marie', on ajoutera '*marie*' dans la zone Pr&eacute;noms.<br /><br />";
 		echo "<br />La recherche sur le nom peut &ecirc;tre orthographique, phon&eacute;tique exacte ou phon&eacute;tique approch&eacute;e.<br />";
-		echo "La recherche phonétique exacte donne tous les noms se pronon&ccedil;ant de la m&ecirc;me fa&ccedil;on.<br />";
+		echo "La recherche phonÃ©tique exacte donne tous les noms se pronon&ccedil;ant de la m&ecirc;me fa&ccedil;on.<br />";
 		echo "La recherche phon&eacute;tique approch&eacute;e fait des approximations sur la prononciation. Cela permet de rapprocher les sons suivants :";
 		echo "<ul>";
 		echo "<li>&laquo; a &raquo; et &laquo; &acirc; &raquo; ;</li>";
@@ -479,8 +479,8 @@ switch ($aide) {
 		echo "<li>&laquo; en &raquo; et &laquo; on &raquo; ;</li>";
 		echo "<li>&laquo; n &raquo; et &laquo; gn &raquo;.</li>";
 		echo "</ul>";
-		echo "La recherche donne alors tous les noms de famille dont la prononciation correspond à celle du nom saisi tout en tenant compte des approximations.<br />";
-		echo "<p>La sortie du résultat de la recherche peut s'effectuer sous liste cliquable (sortie &eacute;cran), sous format destin&eacute; &agrave; &ecirc;tre imprim&eacute; (sortie texte) ou sous forme de fichier CSV (pour un tableur, le s&eacute;parateur &eacute;tant le ";" ; disponible à partir du profil privilégié).</p>";
+		echo "La recherche donne alors tous les noms de famille dont la prononciation correspond Ã  celle du nom saisi tout en tenant compte des approximations.<br />";
+		echo "<p>La sortie du rÃ©sultat de la recherche peut s'effectuer sous liste cliquable (sortie &eacute;cran), sous format destin&eacute; &agrave; &ecirc;tre imprim&eacute; (sortie texte) ou sous forme de fichier CSV (pour un tableur, le s&eacute;parateur &eacute;tant le ";" ; disponible Ã  partir du profil privilÃ©giÃ©).</p>";
 		break;
 	case 'Recherche_Ville' : 
 		echo "Cette page permet &agrave; l'utilisateur d'effectuer une recherche multicrit&egrave;res sur les villes de la base.";
@@ -549,7 +549,7 @@ switch ($aide) {
 		echo 'Le de cujus personnalis&eacute; est m&eacute;moris&eacute; lorsque l\'utilisateur clique sur bouton "'.$lib_Okay.'". Il n\'est valable que pour la session en cours.';
 		break;
 	case 'Liste_Noms_Non_Ut' :
-		echo 'Cette page permet de visualiser et éventuellement supprimer les noms de famille, principaux ou secondaires, qui ne sont port&eacute;s par aucune personne.';
+		echo 'Cette page permet de visualiser et Ã©ventuellement supprimer les noms de famille, principaux ou secondaires, qui ne sont port&eacute;s par aucune personne.';
 		break;
 	case 'Rectif_Utf8' :
 		echo "Lorsque l'on importe un fichier, par exemple lors d'un import Gedcom d'un fichier en UTF-8 sans avoir s&eacute;lectionn&eacute; l'option ad-hoc, il peut arriver que les caract&egrave;res accentu&eacute;s et les \"&ccedil;\" sont mal retranscrits.<br />";
@@ -557,8 +557,8 @@ switch ($aide) {
 		break;
 	case 'Verif_Homonymes' :	
 		echo "Cette page permet d'afficher les homonymes pr&eacute;sents dans la base. Ceux-ci sont tri&eacute;s par nom, pr&eacute;noms, date de naissance et de date de d&eacute;c&egrave;s.";
-		echo 'La liste des personnes peut &ecirc;tre restreinte en cochant les cases "Date de naissance" et "Date de d&eacute;c&egrave;s". Ainsi, si l’on coche la case "Date de naissance", le contr&ocirc;le d’homonymie prendra également en compte la date de naissance ; il s’agit alors d’identifier les doublons r&eacute;els et plus seulement les homonymes.';
-		echo "Pour chaque couple nom – pr&eacute;noms, on peut afficher 2 personnes en parall&egrave;le en les s&eacute;lectionnant via les boutons radio et en cliquant sur l'ic&ocirc;ne ".Affiche_Icone('2personnes',$LG_Menu_Title['Compare_Persons']).".";
+		echo 'La liste des personnes peut &ecirc;tre restreinte en cochant les cases "Date de naissance" et "Date de d&eacute;c&egrave;s". Ainsi, si lâ€™on coche la case "Date de naissance", le contr&ocirc;le dâ€™homonymie prendra Ã©galement en compte la date de naissanceÂ ; il sâ€™agit alors dâ€™identifier les doublons r&eacute;els et plus seulement les homonymes.';
+		echo "Pour chaque couple nom â€“ pr&eacute;noms, on peut afficher 2 personnes en parall&egrave;le en les s&eacute;lectionnant via les boutons radio et en cliquant sur l'ic&ocirc;ne ".Affiche_Icone('2personnes',$LG_Menu_Title['Compare_Persons']).".";
 		break;
 	case 'Import_CSV_Evenements' :
 		echo "Il est possible de cr&eacute;er des &eacute;v&egrave;nements &agrave; partir d'un fichier csv issu d'un tableur.<br />";
@@ -567,16 +567,16 @@ switch ($aide) {
 		echo "titre;debut;fin<br /><br />";
 		echo "Exemple pour la suite du fichier : <br />";
 		echo "Prise de la Bastille;14.07.1789;14.07.1789<br />";
-		echo "Fête de la Saint-Jean;24.06.1802;24.06.1802<br />";
-		echo "essai évènement 3;01.01.1903;02.02.1903<br />";
+		echo "FÃªte de la Saint-Jean;24.06.1802;24.06.1802<br />";
+		echo "essai Ã©vÃ¨nement 3;01.01.1903;02.02.1903<br />";
 		break;
 	case 'Init_Sosa' :
 		echo "Cet utilitaire permet de supprimer les num&eacute;ros sosa de toutes les personnes de la base.<br />";
 		echo "Il est particuli&egrave;rement utile lorsque l'on change le decujus et peut &ecirc;tre appel&eacute; avant la v&eacute;rification de la num&eacute;rotation.<br />";
 		break;
 	case 'Init_Noms' :
-		echo "Sur certains imports qui ont mal fonctionn&eacute;, les liens vers les noms de famille sont incomplets ; il faut alors les compl&eacute;ter.<br />";
-		echo "C’est l’objet de cet utilitaire.<br />";
+		echo "Sur certains imports qui ont mal fonctionn&eacute;, les liens vers les noms de famille sont incompletsÂ ; il faut alors les compl&eacute;ter.<br />";
+		echo "Câ€™est lâ€™objet de cet utilitaire.<br />";
 		echo "Le param&egrave;tre ini=o permet en plus de refaire la table des noms de famille et des liens.<br />";
 		break;
 	default :

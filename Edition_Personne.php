@@ -7,7 +7,7 @@ session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -46,7 +46,7 @@ $acces = 'M';                          					// Type d'accès de la page : (M)ise
 if ($Modif) $titre = $LG_Menu_Title['Person_Modify'];	// Titre pour META
 else $titre = $LG_Menu_Title['Person_Add'];
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 
 if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 
@@ -116,8 +116,8 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	aff_legend(LG_PERS_DATA);
 	echo '<table width="98%" border="0">' . "\n";
 	// Nom
-	$c_zone = $enreg2['Nom'];
-	$id_nom = $enreg2['idNomFam'];
+	$c_zone = $enreg2['Nom'] ?? null;
+	$id_nom = $enreg2['idNomFam'] ?? null;
 	if ($id_nom == '') $id_nom = -1;
 	col_titre_tab_noClass(LG_PERS_NAME, $largP);
 	echo '<td><input type="hidden" name="NomP" id="NomP" value="' . $id_nom . '/' . $c_zone . '" class="oblig"/>' . "\n";
@@ -151,7 +151,7 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	echo '</td></tr>' . "\n";
 
 	// Prénoms
-	$c_zone = $enreg2['Prenoms'];
+	$c_zone = $enreg2['Prenoms'] ?? null;
 	col_titre_tab_noClass(LG_PERS_FIRST_NAME, $largP);
 	echo '<td colspan="2"><input type="text" size="50" name="PrenomsP" id="PrenomsP" value="' . $c_zone . '" class="oblig"/> ' . "\n";
 	Img_Zone_Oblig('imgObligPrenom');
@@ -159,14 +159,14 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	echo '</td></tr>' . "\n";
 
 	// Surnom
-	$c_zone = $enreg2['Surnom'];
+	$c_zone = $enreg2['Surnom'] ?? null;
 	col_titre_tab_noClass(LG_PERS_SURNAME, $largP);
 	echo '<td colspan="2"><input type="text" size="50" name="SurnomP" id="SurnomP" value="' . $c_zone . '"/>' . "\n";
 	echo '<input type="hidden" name="ASurnomP" value="' . $c_zone . '"/>' . "\n";
 	echo '</td></tr>' . "\n";
 
 	//Sexe
-	$SexePers = $enreg2['Sexe'];
+	$SexePers = $enreg2['Sexe'] ?? null;
 	col_titre_tab_noClass(LG_SEXE, $largP);
 	echo '<td colspan="2"><input type="radio" name="SexeP" id="SexeM" value="m"';
 	if ($enreg2['Sexe'] == 'm') echo ' checked="checked"';
@@ -372,15 +372,15 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 		echo '<fieldset>' . "\n";
 		aff_legend(LG_PERS_UNIONS);
 		if (($SexePers == 'm') or ($SexePers == 'f')) {
-			$sqlU = 'select Conjoint_1, Conjoint_2, Reference from ' . nom_table('unions') .
-				' where Conjoint_1=' . $Refer . ' or Conjoint_2=' . $Refer . ' order by Maries_Le';
+			$sqlU = 'SELECT Conjoint_1, Conjoint_2, Reference FROM ' . nom_table('unions') .
+				' WHERE Conjoint_1=' . $Refer . ' or Conjoint_2=' . $Refer . ' ORDER BY Maries_Le';
 			$resU = lect_sql($sqlU);
 			while ($rowU = $resU->fetch(PDO::FETCH_NUM)) {
 				$Existe_Union = true;
 				if ($Refer == $rowU[0]) $Conj = $rowU[1];
 				else $Conj = $rowU[0];
 				$Ref_U = $rowU[2];
-				$sqlC    = 'select Reference, Nom, Prenoms, Sexe from ' . nom_table('personnes') . ' where reference = ' . $Conj . ' limit 1';
+				$sqlC    = 'SELECT Reference, Nom, Prenoms, Sexe FROM ' . nom_table('personnes') . ' WHERE reference = ' . $Conj . ' LIMIT 1';
 				$resC    = lect_sql($sqlC);
 				$enregC  = $resC->fetch(PDO::FETCH_ASSOC);
 				$enreg2C = $enregC;
@@ -824,9 +824,10 @@ function removeRowFromTable() {
 	echo '<script src="assets/js/tinymce.js"></script>';
 
 	// Récupération des données de la personne
-	$sql = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Refer . ' limit 1';
+	$sql = 'SELECT * FROM ' . nom_table('personnes') . ' WHERE Reference = ' . $Refer . ' LIMIT 1';
 	$res = lect_sql($sql);
 	$enreg = $res->fetch(PDO::FETCH_ASSOC);
+	//print_r($enreg);exit;
 	$enreg2 = $enreg;
 	if ($Modif) {
 		Champ_car($enreg2, 'Nom');
@@ -834,7 +835,7 @@ function removeRowFromTable() {
 		Champ_car($enreg2, 'Surnom');
 	}
 	$EnrPers = $enreg2;
-	$Sexe = $enreg2['Sexe'];
+	$Sexe = $enreg2['Sexe'] ?? null;
 	$compl = Ajoute_Page_Info(650, 250);
 	if ($Modif) {
 		$compl .=
@@ -849,7 +850,7 @@ function removeRowFromTable() {
 	Insere_Haut($titre, $compl, 'Edition_Personne', $Refer);
 
 	// Mémorisation de la personne consultée
-	memo_pers($Refer, $enreg['Nom'], $enreg['Prenoms']);
+	memo_pers($Refer, $enreg['Nom'] ?? null, $enreg['Prenoms'] ?? null);
 
 	echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'NomP,PrenomsP\')" action="' . my_self() . '?Refer=' . $Refer . '" >' . "\n";
 	echo '<input type="hidden" name="Refer" value="' . $Refer . '"/>' . "\n";

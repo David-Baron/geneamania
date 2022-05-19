@@ -35,7 +35,6 @@ function Ins_Zone_Req($Rub, $TypRub, &$LaReq)
 	if ($LaReq != '') $LaReq = $LaReq . ',';
 	if ($Rub !== '') {
 		if ($TypRub == 'A') {
-			// if (!get_magic_quotes_gpc()) $Rub = addslashes($Rub);
 			$LaReq = $LaReq . '"' . $Rub . '"';
 		} else $LaReq = $LaReq . $Rub;
 	} else $LaReq = $LaReq . 'null';

@@ -15,10 +15,10 @@ function rectif_UTF8() {
 	$champs[] = 'commentaires,Note';
 
 	$lettre_A = array('é', 'è', 'ç', 'ï', 'î', 'ê', 'ô', 'â', 'É', 'ë', 'Ê', 'ö');
-	$lettre_B = array('�', '�', '�', '�', '�', '�' , '�', '�', '�', '�', '�', '�');
-	//� ==> �, e, attente
+	$lettre_B = array('�' ,  '�',  '�',  '�',  '�', '�' ,  '�',  '�', '�',  '�',  '�' ,  '�');
+	//? ==> ?, e, attente
 	
-	//�
+	//?
 
 	$c_champ = count($champs);
 	$c_lettres = count($lettre_A);

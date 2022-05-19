@@ -6,11 +6,17 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
-	'ok', 'annuler', 'nomPDec', 'prenomPDec', 'sexePDec', 'CnaissancePDec', 'LnaissancePDec', 'CdecesPDec', 'LdecesPDec', 'nomMDec', 'prenomMDec', 'sexeMDec', 'CnaissanceMDec', 'LnaissanceMDec', 'CdecesMDec', 'LdecesMDec', 'nomDec', 'prenomDec', 'sexeDec', 'CnaissanceDec', 'LnaissanceDec', 'CdecesDec', 'LdecesDec', 'nomConj', 'prenomConj', 'sexeConj', 'CnaissanceConj', 'LnaissanceConj', 'CdecesConj', 'LdecesConj', 'nomPConj', 'prenomPConj', 'sexePConj', 'CnaissancePConj', 'LnaissancePConj', 'CdecesPConj', 'LdecesPConj', 'nomMConj', 'prenomMConj', 'sexeMConj', 'CnaissanceMConj', 'LnaissanceMConj', 'CdecesMConj', 'LdecesMConj'
+	'ok', 'annuler', 
+	'nomPDec', 'prenomPDec', 'sexePDec', 'CnaissancePDec', 'LnaissancePDec', 'CdecesPDec', 'LdecesPDec', 
+	'nomMDec', 'prenomMDec', 'sexeMDec', 'CnaissanceMDec', 'LnaissanceMDec', 'CdecesMDec', 'LdecesMDec', 
+	'nomDec', 'prenomDec', 'sexeDec', 'CnaissanceDec', 'LnaissanceDec', 'CdecesDec', 'LdecesDec', 
+	'nomConj', 'prenomConj', 'sexeConj', 'CnaissanceConj', 'LnaissanceConj', 'CdecesConj', 'LdecesConj', 
+	'nomPConj', 'prenomPConj', 'sexePConj', 'CnaissancePConj', 'LnaissancePConj', 'CdecesPConj', 'LdecesPConj', 
+	'nomMConj', 'prenomMConj', 'sexeMConj', 'CnaissanceMConj', 'LnaissanceMConj', 'CdecesMConj', 'LdecesMConj'
 );
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
@@ -23,7 +29,7 @@ $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour
 $titre = $LG_Menu_Title['Decujus_And_Family'];
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
@@ -33,18 +39,6 @@ $n_personnes = nom_table('personnes');
 $n_villes = nom_table('villes');
 $n_noms_personnes = nom_table('noms_personnes');
 $noms_famille = nom_table('noms_famille');
-
-
-// Reset de la base pour les tests ; à supprimer !!!!
-/* if ($test) {
-	$res = maj_sql('delete from '.$n_unions);
-	$res = maj_sql('delete from '.$n_filiations);
-	$res = maj_sql('delete from '.$n_personnes);
-	$res = maj_sql('delete from '.$n_villes);
-	$res = maj_sql('delete from '.$n_noms_personnes);
-	$res = maj_sql('delete from '.$noms_famille);
-}
- */
 
 //Demande de mise à jour
 if ($bt_OK) {
@@ -99,33 +93,34 @@ if ($bt_OK) {
 	$LdecesMConj		= Secur_Variable_Post($LdecesMConj, 80, 'S');
 
 	//$id_ville = Nouvel_Identifiant('Identifiant_zone','villes')-1;
-	$max_id_pers = 1;		// Base à priori vide
+	//$max_id_pers = 1;		// Base à priori vide
 	$max_id_ville = 0;		// "
 
 	$Diff_InternetP = 'O';
 	$Statut_Fiche = 'N';
 
-	$deb_req_P = 'insert into ' . $n_personnes . ' values(';
-	$deb_req_F = 'insert into ' . $n_filiations . ' values(';
+	$deb_req_P = 'INSERT INTO ' . $n_personnes . ' VALUES (';
+	$deb_req_F = 'INSERT INTO ' . $n_filiations . ' VALUES (';
 	// On ne charge pas toutes les colonnes sur les unions
-	$deb_req_U = 'insert into ' . $n_unions . ' (Conjoint_1,Conjoint_2,Date_Creation,Date_Modification,Statut_Fiche) values(';
+	$deb_req_U = 'INSERT INTO ' . $n_unions . ' (Conjoint_1, Conjoint_2, Date_Creation, Date_Modification, Statut_Fiche) VALUES (';
 
 	$PDec = false;
-	if (($nomPDec != '') and ($prenomPDec != '')) $PDec = true;
+	if (($nomPDec != '') && ($prenomPDec != '')) $PDec = true;
 	if ($PDec) {
 		$Pdec = $max_id_pers;
-		$req = $deb_req_P . $max_id_pers++;			// Reference
-		Ins_Zone_Req($nomPDec, 'A', $req);			// Nom
-		Ins_Zone_Req($prenomPDec, 'A', $req);			// Prenoms
-		Ins_Zone_Req($sexePDec, 'A', $req);			// Sexe
-		Ins_Zone_Req('2', 'A', $req);					// Numero
-		Ins_Zone_Req($CnaissancePDec, 'A', $req);		// Ne_le
-		Ins_Zone_Req($CdecesPDec, 'A', $req);			// Decede_Le
+		$req1 = $deb_req_P . $max_id_pers++;			// Reference
+		//$req1 = $deb_req_P;			// Reference
+		Ins_Zone_Req($nomPDec, 'A', $req1);			// Nom
+		Ins_Zone_Req($prenomPDec, 'A', $req1);			// Prenoms
+		Ins_Zone_Req($sexePDec, 'A', $req1);			// Sexe
+		Ins_Zone_Req('2', 'A', $req1);					// Numero
+		Ins_Zone_Req($CnaissancePDec, 'A', $req1);		// Ne_le
+		Ins_Zone_Req($CdecesPDec, 'A', $req1);			// Decede_Le
 		$idV = cree_ville($LnaissancePDec);
-		Ins_Zone_Req($idV, 'N', $req);				// Ville_Naissance
+		Ins_Zone_Req($idV, 'N', $req1);				// Ville_Naissance
 		$idV = cree_ville($LdecesPDec);
-		Ins_Zone_Req($idV, 'N', $req);				// Ville_Deces
-		$req .= ",'" . $Diff_InternetP . "'" .			// Diff_Internet
+		Ins_Zone_Req($idV, 'N', $req1);				// Ville_Deces
+		$req1 .= ",'" . $Diff_InternetP . "'" .			// Diff_Internet
 			',current_timestamp' .				// Date_Creation
 			',current_timestamp' .				// Date_Modification
 			",'" . $Statut_Fiche . "'" .				// Statut_Fiche
@@ -133,11 +128,11 @@ if ($bt_OK) {
 			',0' .								// Categorie
 			',null' .							// Surnom
 			')';
-		$res = maj_sql($req);
+		$res = maj_sql($req1);
 	}
 
 	$MDec = false;
-	if (($nomMDec != '') and ($prenomMDec != '')) $MDec = true;
+	if (($nomMDec != '') && ($prenomMDec != '')) $MDec = true;
 	if ($MDec) {
 		$MDec = $max_id_pers;
 		$req = $deb_req_P . $max_id_pers++;			// Reference
@@ -163,7 +158,7 @@ if ($bt_OK) {
 	}
 
 	$Dec = false;
-	if (($nomDec != '') and ($prenomDec != '')) $Dec = true;
+	if (($nomDec != '') && ($prenomDec != '')) $Dec = true;
 	if ($Dec) {
 		$Dec = $max_id_pers;
 		$req = $deb_req_P . $max_id_pers++;			// Reference
@@ -178,18 +173,18 @@ if ($bt_OK) {
 		$idV = cree_ville($LdecesDec);
 		Ins_Zone_Req($idV, 'N', $req);				// Ville_Deces
 		$req .= ",'" . $Diff_InternetP . "'" .			// Diff_Internet
-			',current_timestamp' .				// Date_Creation
-			',current_timestamp' .				// Date_Modification
+			', current_timestamp' .				// Date_Creation
+			', current_timestamp' .				// Date_Modification
 			",'" . $Statut_Fiche . "'" .				// Statut_Fiche
-			',null' .							// idNomFam
-			',0' .								// Categorie
-			',null' .							// Surnom
+			', null' .							// idNomFam
+			', 0' .								// Categorie
+			', null' .							// Surnom
 			')';
 		$res = maj_sql($req);
 	}
 
 	$Conj = false;
-	if (($nomConj != '') and ($prenomConj != '')) $Conj = true;
+	if (($nomConj != '') && ($prenomConj != '')) $Conj = true;
 	if ($Conj) {
 		$Conj = $max_id_pers;
 		$req = $deb_req_P . $max_id_pers++;			// Reference
@@ -215,7 +210,7 @@ if ($bt_OK) {
 	}
 
 	$PConj = false;
-	if (($nomPConj != '') and ($prenomPConj != '')) $PConj = true;
+	if (($nomPConj != '') && ($prenomPConj != '')) $PConj = true;
 	if ($PConj) {
 		$PConj = $max_id_pers;
 		$req = $deb_req_P . $max_id_pers++;			// Reference
@@ -241,7 +236,7 @@ if ($bt_OK) {
 	}
 
 	$MConj = false;
-	if (($nomMConj != '') and ($prenomMConj != '')) $MConj = true;
+	if (($nomMConj != '') && ($prenomMConj != '')) $MConj = true;
 	if ($MConj) {
 		$MConj = $max_id_pers;
 		$req = $deb_req_P . $max_id_pers++;			// Reference
@@ -267,25 +262,25 @@ if ($bt_OK) {
 	}
 
 	// Création des filiations
-	if ((($Pdec) or ($MDec)) and ($Dec)) {
-		$req = $deb_req_F . $Dec . ',' . $PDec . ',' . $MDec . ",0,current_timestamp,current_timestamp,'" . $Statut_Fiche . "')";
+	if ((($Pdec) or ($MDec)) && ($Dec)) {
+		$req = $deb_req_F . $Dec . ',' . $PDec . ',' . $MDec . ", 0, current_timestamp, current_timestamp,'" . $Statut_Fiche . "')";
 		$res = maj_sql($req);
 	}
-	if ((($PConj) or ($MConj)) and ($Conj)) {
-		$req = $deb_req_F . $Conj . ',' . $PConj . ',' . $MConj . ",0,current_timestamp,current_timestamp,'" . $Statut_Fiche . "')";
+	if ((($PConj) or ($MConj)) && ($Conj)) {
+		$req = $deb_req_F . $Conj . ',' . $PConj . ',' . $MConj . ", 0, current_timestamp, current_timestamp,'" . $Statut_Fiche . "')";
 		$res = maj_sql($req);
 	}
 	// Création des unions
-	if (($Pdec) and ($MDec)) {
-		$req = $deb_req_U . $PDec . "," . $MDec . ",current_timestamp,current_timestamp,'" . $Statut_Fiche . "')";
+	if (($Pdec) && ($MDec)) {
+		$req = $deb_req_U . $PDec . "," . $MDec . ", current_timestamp, current_timestamp,'" . $Statut_Fiche . "')";
 		$res = maj_sql($req);
 	}
-	if (($Dec) and ($Conj)) {
-		$req = $deb_req_U . $Dec . "," . $Conj . ",current_timestamp,current_timestamp,'" . $Statut_Fiche . "')";
+	if (($Dec) && ($Conj)) {
+		$req = $deb_req_U . $Dec . "," . $Conj . ", current_timestamp, current_timestamp,'" . $Statut_Fiche . "')";
 		$res = maj_sql($req);
 	}
-	if (($PConj) and ($MConj)) {
-		$req = $deb_req_U . $PConj . "," . $MConj . ",current_timestamp,current_timestamp,'" . $Statut_Fiche . "')";
+	if (($PConj) && ($MConj)) {
+		$req = $deb_req_U . $PConj . "," . $MConj . ", current_timestamp, current_timestamp,'" . $Statut_Fiche . "')";
 		$res = maj_sql($req);
 	}
 
@@ -433,7 +428,7 @@ function exec_req_vide($req)
 function cree_ville($nom_ville)
 {
 	global $n_villes, $max_id_ville, $tab_villes, $debug;
-	if ($debug) echo 'cre ville : ' . $nom_ville . '<br />';
+
 	$id_ville = 0;
 	if ($nom_ville <> '') {
 		$nom_ville = ajoute_sl_rt($nom_ville);
@@ -448,8 +443,8 @@ function cree_ville($nom_ville)
 		else {
 			$tab_villes[$max_id_ville] = $nom_ville;
 			$max_id_ville++;
-			$req = 'insert into ' . $n_villes .
-				' values(' . $max_id_ville . ',' . "'" . $nom_ville . "'" . ',null,current_timestamp,current_timestamp,' . "'N'" . ',0,null,null)';
+			$req = 'INSERT INTO ' . $n_villes .
+				' VALUES (' . $max_id_ville . ',' . "'" . $nom_ville . "'" . ', null, current_timestamp, current_timestamp,' . "'N'" . ', 0, null, null)';
 			$id_ville = $max_id_ville;
 			$res = maj_sql($req);
 		}

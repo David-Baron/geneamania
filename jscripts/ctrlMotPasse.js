@@ -130,12 +130,12 @@ function SHA256(s){
 //	Ajout de Gérard KESTER
 //	Fonction pour la page Edition_Utilisateur.php
 
-<?php
+/* <?php
 echo "var mandatory_fields = '".LG_USER_MANDATORY."';";
 echo "var diff_psw = '".LG_USER_DIFF_PSW."';";
 echo "var short_psw = '".LG_USER_SHORT_PSW."';";
 echo "var psw_requested = '".LG_USER_PSW_REQUESTED."';";
-?>
+?> */
 
 function avantEnvoiEU(form)
 {

@@ -184,10 +184,9 @@ function Age_Annees_Mois($date_ref, $date_fin)
 
 function lect_sql($sql)
 {
-	global $aff_req, $connexion, $nb_req_ex;
+	global $connexion, $nb_req_ex;
 	if (!isset($nb_req_ex)) $nb_req_ex = 0;
 	$nb_req_ex++;
-	if ($aff_req) echo 'Requête : ' . $sql . '<br />';
 	try {
 		$res = $connexion->query($sql);
 	} catch (PDOException $ex) {
@@ -203,8 +202,7 @@ function lect_sql($sql)
 
 function maj_sql($sql, $plantage = true)
 {
-	global $aff_req, $connexion, $enr_mod, $err;
-	if ($aff_req) echo 'Requête : ' . $sql . '<br />';
+	global $connexion, $enr_mod, $err;
 	try {
 		$modif = $connexion->prepare($sql);
 		$res = $modif->execute();
@@ -3248,4 +3246,4 @@ function appelle_carte_osm()
 
 
 // header('content-type: text/html; charset=' . $def_enc);
-header('content-type: text/html; charset=UTF-8');
+// header('content-type: text/html; charset=UTF-8');

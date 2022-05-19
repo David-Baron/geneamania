@@ -6,17 +6,18 @@
 session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';
 $titre = LG_FFAM_OBJECT;		// Titre pour META
 $x = Lit_Env();
+
 controle_utilisateur('I');
 $index_follow = 'IN';			// NOFOLLOW demandé pour les moteurs
 
 $Refer = Recup_Variable('Refer', 'N');
 $req_sel = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Refer . ' limit 1';
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Affiche un div pour les notes
 function Div_Note_Old($nom_image, $nom_div, $texte)
 {
@@ -239,6 +240,7 @@ if ($Environnement == 'I') {
 	$txt_im = LG_FFAM_CONTRIBUTE . ' ' . $enreg['Prenoms'] . ' ' . $enreg['Nom'];
 	$compl .= '<a href="' . Get_Adr_Base_Ref() . 'Ajout_Contribution.php?Refer=' . $Refer . '">' . Affiche_Icone('contribuer', $txt_im) . '</a>  ';
 }
+
 $compl .= Affiche_Icone_Lien('href="Vue_Personnalisee_Rapide.php?Refer=' . $Refer . '"', 'vue_pers', LG_FFAM_SET_AS_DECUJUS) . "\n";
 $compl .= Lien_Chrono_Pers($Refer) . "\n";
 $compl .= Ajoute_Page_Info(600, 150);

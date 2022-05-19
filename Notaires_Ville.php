@@ -4,7 +4,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';
 
 $tab_variables = array('annuler', 'Horigine');
@@ -16,8 +19,8 @@ foreach ($tab_variables as $nom_variables) {
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
+
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
 
 // Recup des variables passées dans l'URL :
 $idVille = Recup_Variable('Ville', 'N');             // Ville
@@ -31,6 +34,7 @@ $x = Lit_Env();
 
 // Sortie en pdf ?
 $sortie_pdf = false;
+
 if ((!$SiteGratuit) or ($Premium)) {
 	$s_pdf = Recup_Variable('pdf', 'C', 'O');
 	if (!$s_pdf) $s_pdf = 'n';
@@ -38,11 +42,8 @@ if ((!$SiteGratuit) or ($Premium)) {
 	if ($sortie_pdf) $no_entete = true;
 }
 
-// Appel de la gestion standard des pages
-include('Gestion_Pages.php');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $lien = 'href="' . my_self() . '?texte=O' .
 	'&amp;Ville=' . $idVille .

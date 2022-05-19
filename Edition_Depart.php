@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -17,6 +19,7 @@ $tab_variables = array(
 	'Statut_Fiche', 'AStatut_Fiche',
 	'Horigine'
 );
+
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
@@ -39,7 +42,7 @@ else
 	$titre = $LG_Menu_Title['County_Add'];
 
 $x = Lit_Env();
-include('Gestion_Pages.php');
+
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

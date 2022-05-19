@@ -893,9 +893,9 @@ function Creation_Noms_Commun()
 		$n_personnes, $n_noms, $n_liens_noms;
 
 	//    Appel du fichier contenant la classe
-	include 'phonetique.php';
+	include_once __DIR__ .'/../classes/Phonetique.php';
 	//    Initialisation d'un objet de la classe
-	$codePho = new phonetique();
+	$codePho = new Phonetique();
 
 	$Anom = '';
 	$idNom = Nouvel_Identifiant('idNomFam', 'noms_famille') - 1;

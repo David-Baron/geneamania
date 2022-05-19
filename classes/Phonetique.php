@@ -7,7 +7,7 @@
 //	Pour élargir la recherche, vous pouvez faire une comparaison en mettant le code phonétique en minuscules ou en majuscules.
 //	Cela permet de rapprocher les sons "a" et "�", les sons "�" et "�",
 //		"o" et "�", "in" et "un", "en" et "on"
-class phonetique
+class Phonetique
 {
 	//	Mot en cours de traduction
 	private $mot;
@@ -615,4 +615,3 @@ class phonetique
 		return implode('' , $retour);
 	}
 }
-?>

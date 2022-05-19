@@ -6,6 +6,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 function affiche($indice)
 {
     global $match;
@@ -15,13 +18,10 @@ function affiche($indice)
     echo '</td>';
 }
 
-include('fonctions.php');
 $acces = 'L';
 $titre = $LG_Menu_Title['Tech_Info'];
 $niv_requis = 'G';
 $x = Lit_Env();
-
-include('Gestion_Pages.php');
 
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut($titre, $compl, 'Infos_Tech', '');

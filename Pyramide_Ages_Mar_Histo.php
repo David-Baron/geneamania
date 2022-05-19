@@ -8,13 +8,14 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
-
-include('fonctions.php');
 
 // Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
@@ -42,7 +43,6 @@ switch ($Type_Histo) {
 		break;
 }
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

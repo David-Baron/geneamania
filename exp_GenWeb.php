@@ -4,12 +4,14 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['exp_GenWeb'];	// Titre pour META
 $niv_requis = 'G';						// Page réservée au gestionnaire
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Ecriture de la ligne à l'écran ou dans un fichier
 function Ecrit_GenWeb($texte)

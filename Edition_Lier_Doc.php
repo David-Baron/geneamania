@@ -11,6 +11,9 @@
 
 session_start();
 
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 function Lire_Nom_Prenoms_Unions($refUnion)
 {
 	global $NomPere, $PrenomsPere, $NomMere, $PrenomsMere, $LG_Link_Doc_Fa_Not_Found, $LG_Link_Doc_Mo_Not_Found;
@@ -54,7 +57,6 @@ function lire_Evenement($refEvt)
 	}
 }
 
-include('fonctions.php');
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -62,24 +64,21 @@ $tab_variables = array(
 	'Defaut', 'ADefaut', 'refDoc', 'ArefDoc',
 	'typeObjet', 'refObjet'
 );
+
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
-// Gestion standard des pages
+
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Edition liaison document';   // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
-
-// Sécurisation des variables postées
-$ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
+$ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');// Sécurisation des variables postées
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $Defaut    = Secur_Variable_Post($Defaut, 1, 'S');
 $ADefaut   = Secur_Variable_Post($ADefaut, 1, 'S');

@@ -3,9 +3,11 @@
 // Recherche d'un nom sur les sites hébergés
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Recherche d\'un nom sur les sites hébergés'; // Titre pour META
 
@@ -23,7 +25,6 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
 $niv_requis = 'P';						// Page accessible à partir du niveau privilégié
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Verrouillage de la recherche sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();

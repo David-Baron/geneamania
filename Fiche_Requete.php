@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Request'];       // Titre pour META
 $niv_requis = 'P';
@@ -28,46 +30,39 @@ $reference = Recup_Variable('reference', 'N');
 
 $req_sel = 'select Titre, Criteres, Code_SQL from ' . nom_table('requetes') . ' where Reference = ' . $reference . ' limit 1';
 
-include('Gestion_Pages.php');
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
+if (!$enreg_sel) Retour_Ar(); // requête inconnue, retour...
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+$enreg = $enreg_sel;
 
-else {
+$compl = Ajoute_Page_Info(600, 150);
 
-	// requête inconnue, retour...
-	if (!$enreg_sel) Retour_Ar();
+// Possibilité de venir en modification pour les gestionnaires
+if ($est_gestionnaire)
+	$compl .= '<a href="Edition_Requete.php?reference=' . $reference . '">' . Affiche_Icone('fiche_edition', my_html($LG_Menu_Title['Request_Edit'])) . '</a>' . "\n";
 
-	$enreg = $enreg_sel;
+Insere_Haut(my_html($titre), $compl, 'Fiche_Requete', $reference);
 
-	$compl = Ajoute_Page_Info(600, 150);
+$larg_titre = 25;
+echo '<br />';
+echo '<table width="80%" class="table_form">' . "\n";
+echo colonne_titre_tab(LG_QUERY_TITLE) . my_html($enreg['Titre']) . '</td></tr>' . "\n";
 
-	// Possibilité de venir en modification pour les gestionnaires
-	if ($est_gestionnaire)
-		$compl .= '<a href="Edition_Requete.php?reference=' . $reference . '">' . Affiche_Icone('fiche_edition', my_html($LG_Menu_Title['Request_Edit'])) . '</a>' . "\n";
-
-	Insere_Haut(my_html($titre), $compl, 'Fiche_Requete', $reference);
-
-	$larg_titre = 25;
-	echo '<br />';
-	echo '<table width="80%" class="table_form">' . "\n";
-	echo colonne_titre_tab(LG_QUERY_TITLE) . my_html($enreg['Titre']) . '</td></tr>' . "\n";
-
-	$liste_crit = explode($separ, $enreg['Criteres']);
-	$nb_crit = count($liste_crit);
-	if ($nb_crit > 0) {
-		for ($nb = 0; $nb < $nb_crit - 1; $nb++) {
-			$exp_crit = explode('=', $liste_crit[$nb]);
-			echo colonne_titre_tab(trim($exp_crit[0])) . my_html(trim($exp_crit[1])) . '</td></tr>' . "\n";
-		}
+$liste_crit = explode($separ, $enreg['Criteres']);
+$nb_crit = count($liste_crit);
+if ($nb_crit > 0) {
+	for ($nb = 0; $nb < $nb_crit - 1; $nb++) {
+		$exp_crit = explode('=', $liste_crit[$nb]);
+		echo colonne_titre_tab(trim($exp_crit[0])) . my_html(trim($exp_crit[1])) . '</td></tr>' . "\n";
 	}
-
-	echo colonne_titre_tab(LG_QUERY_CODE) . $enreg['Code_SQL'] . '</td></tr>' . "\n";
-	echo '</table>' . "\n";
-
-	// Formulaire pour le bouton retour
-	Bouton_Retour($lib_Retour, '?' . Query_Str());
 }
+
+echo colonne_titre_tab(LG_QUERY_CODE) . $enreg['Code_SQL'] . '</td></tr>' . "\n";
+echo '</table>' . "\n";
+
+// Formulaire pour le bouton retour
+Bouton_Retour($lib_Retour, '?' . Query_Str());
+
 echo '<br />' . "\n";
 Insere_Bas($compl);
 ?>

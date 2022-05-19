@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Retourne vrai si le nom de la table correspond
 function est_table($nom_compar, $table_name)
@@ -47,35 +49,30 @@ $tab_variables = array(
 	's_dates_recentes', 'pivot',
 	'Horigine'
 );
+
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) {
 		$$nom_variables = $_POST[$nom_variables];
 	} else $$nom_variables = '';
 }
-$ok       = Secur_Variable_Post($ok, strlen($lib_ok), 'S');
+
+$ok       = Secur_Variable_Post($ok, strlen($lib_ok), 'S');// Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_an), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
-
-// On retravaille éventuellement les boutons pour avoir un comportement standard
-if ($annuler == $lib_an) $annuler = 'Annuler';
-if ($ok == $lib_ok) $ok = 'OK';
-
-// Gestion standard des pages
-$acces = 'L';                  	// Type d'accès de la page : (M)ise à jour, (L)ecture
-$titre = 'Export';             	// Titre pour META
-$niv_requis = 'G';				// Page réservée au gestionnaire
-$x = Lit_Env();
-include('Gestion_Pages.php');
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
-
-// Sécurisation des variables postées
 $type_export      = Secur_Variable_Post($type_export, 15, 'S');
 $ut_suf           = Secur_Variable_Post($ut_suf, 1, 'S');
 $suffixe          = Secur_Variable_Post($suffixe, 20, 'S');
 $s_dates_recentes = Secur_Variable_Post($s_dates_recentes, 2, 'S');
 $pivot            = Secur_Variable_Post($pivot, 3, 'N');
+
+if ($ok == $lib_ok) $ok = 'OK';
+if ($annuler == $lib_an) $annuler = 'Annuler';// On retravaille éventuellement les boutons pour avoir un comportement standard
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
+
+$acces = 'L';                  	// Type d'accès de la page : (M)ise à jour, (L)ecture
+$titre = 'Export';             	// Titre pour META
+$niv_requis = 'G';				// Page réservée au gestionnaire
+$x = Lit_Env();
 
 $sans_dates_recentes = ($s_dates_recentes == 'on') ? true : false;
 

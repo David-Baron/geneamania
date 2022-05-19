@@ -2,8 +2,8 @@
 /* Step 1: Save this first part to a file named captcha_image.php*/
 session_start();
 
-include_once('fonctions.php');
-include_once('parametres.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/config/parametres.php';
 
 $rand1 = rand(1, 9);
 $rand2 = rand(1, 9);

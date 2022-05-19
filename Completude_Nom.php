@@ -4,7 +4,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Name_Is_Complete']; 		// Titre pour META
 
@@ -22,7 +25,6 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
 $niv_requis = 'P';				// Page accessible à partir du niveau privilégié
-include('Gestion_Pages.php');
 
 // Verrouillage de la gestion des documents sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();

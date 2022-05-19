@@ -1,3 +1,8 @@
+<?php 
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+
+?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -37,9 +42,6 @@
 		}
 		return $res_memo;
 	}
-
-	// A retirer lors de l'intégration dans la page d'install
-	include_once('fonctions.php');
 
 	$lib_bt_OK = 'METTRE A JOUR';
 

@@ -8,8 +8,9 @@
 
 session_start();
 
-// Gestion standard des pages
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';									// Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Patronymic_List'];		// Titre pour META
 $x = Lit_Env();
@@ -23,10 +24,8 @@ if ((!$SiteGratuit) or ($Premium)) {
 	if ($sortie_pdf) $no_entete = true;
 }
 
-include('Gestion_Pages.php');
 
-// Recup de la variable passée dans l'URL : texte ou non
-$texte = Dem_Texte();
+$texte = Dem_Texte();// Recup de la variable passée dans l'URL : texte ou non
 
 $limiter = 0;
 if (isset($_POST['limiter'])) $limiter = 1;

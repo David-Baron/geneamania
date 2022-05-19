@@ -5,7 +5,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 function Liste_Noms_Images($chemin)
 {
@@ -194,7 +195,6 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 $niv_requis = 'G';
 $titre = 'Graphisme du site';
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) {
@@ -310,7 +310,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 	$aff_infos = ($debug) ? 'text' : 'hidden';
 
 	$all = true;
-	include_once('Degrades_inc.php');
+	include_once __DIR__ .'/fonctions/degrades.php';
 
 	$nb_cases_fonds = 4;
 	$nb_cases_barres = 4;

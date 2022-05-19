@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['County_List'];               // Titre pour META
 $x = Lit_Env();
@@ -19,8 +21,6 @@ if ((!$SiteGratuit) or ($Premium)) {
 	if ($s_pdf == 'O') $sortie_pdf = true;
 	if ($sortie_pdf) $no_entete = true;						// Pas d'entête HTML sinon le PDF ne s'affichera pas
 }
-
-include('Gestion_Pages.php');
 
 $Depart = -1;
 if (isset($_POST['Depart'])) $Depart = $_POST['Depart'];

@@ -7,17 +7,14 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 // On simule le bouton OK pour ne pas écrire l'entête de la page
 $ok = 'OK';
-
-// Gestion standard des pages
-include('fonctions.php');
-
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Vue personnalisée rapide';	// Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
-
 $Refer = Recup_Variable('Refer', 'N');
 
 $ref_decujus = -1;

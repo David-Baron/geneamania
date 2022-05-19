@@ -5,8 +5,10 @@
 
 session_start();
 
-include('fonctions.php');
-include('Commun_Gedcom.php');		// Appel des fonctions communes Gedcom
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+include_once __DIR__ .'/fonctions/gedcom.php';
+
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Exp_Ged_Pers'];		// Titre pour META
 $x = Lit_Env();
@@ -24,8 +26,6 @@ $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 
 // On retravaille le libellé du bouton pour effectuer le retour...
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
-
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

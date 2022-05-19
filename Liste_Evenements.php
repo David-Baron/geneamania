@@ -3,9 +3,11 @@
 //  Affichage de la liste des évènements éventuellement par type
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';						  // Type d'accès de la page : (M)ise à jour, (L)ecture
 
 $actu = Recup_Variable('actu', 'C', 'xo');
@@ -19,8 +21,6 @@ if ($professions) $titre = $LG_Menu_Title['Jobs_List'];
 
 $x = Lit_Env();
 $niv_requis = 'P';						// Page réservée au profil privilégié
-include('Gestion_Pages.php');		  // Appel de la gestion standard des pages
-
 $compl = Ajoute_Page_Info(600, 200);
 Insere_Haut(my_html($titre), $compl, 'Liste_Evenements', '');
 

@@ -3,15 +3,15 @@
 //  Affichage de la liste des actualités (évènements spécialisés)
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Liste des actualités';       // Titre pour META
 $x = Lit_Env();
 $niv_requis = 'I';
-include('Gestion_Pages.php');
-
 $t = $titre;
 $compl = Ajoute_Page_Info(600, 150);
 

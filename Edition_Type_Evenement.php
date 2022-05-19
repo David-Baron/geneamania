@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');              // Appel des fonctions générales
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -25,12 +27,8 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
-
-// Recup de la variable passée dans l'URL : type d'évènement
-$Code = Recup_Variable('code', 'A');
+$Code = Recup_Variable('code', 'A');// Recup de la variable passée dans l'URL : type d'évènement
 if ($Code == '-----') $Creation = true;
 else                  $Creation = false;
 
@@ -38,8 +36,7 @@ else                  $Creation = false;
 if ($Creation) $titre = $LG_Menu_Title['Event_Type_Add'];
 else $titre = $LG_Menu_Title['Event_Type_Edit'];
 
-$x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');
+$x = Lit_Env(); // Lecture de l'indicateur d'environnement
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

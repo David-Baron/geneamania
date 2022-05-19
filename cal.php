@@ -1,14 +1,18 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php 
+//=====================================================================
+// Formulaire de saisie de date
+//=====================================================================
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+
+?>
+<!DOCTYPE html>
 <html>
 
 <head>
 
     <?php
-    //=====================================================================
-    // Formulaire de saisie de date
-    //=====================================================================
 
-    include('fonctions.php');
     $aff_req = false;
     $x = Lit_Env();
     Ecrit_Meta(LG_CAL_TITLE, 'Choix date', '');

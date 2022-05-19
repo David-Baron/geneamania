@@ -5,12 +5,13 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Documents_List'];        // Titre pour META
 $x = Lit_Env();
 $niv_requis = 'I';					   // Page réservée à partir du profil invité
-include('Gestion_Pages.php');
 
 // Verrouillage de la gestion des documents sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();

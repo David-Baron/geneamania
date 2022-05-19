@@ -6,7 +6,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -30,8 +31,6 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 $acces = 'L';
 $titre = $LG_Menu_Title['Galery_Branch'];		// Titre pour META
 $x = Lit_Env();
-
-include('Gestion_Pages.php');
 
 // Ecran interdit sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) $bt_An = true;

@@ -6,6 +6,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('ok', 'annuler', 'S_Int', 'idNom');
@@ -15,28 +18,19 @@ foreach ($tab_variables as $nom_variables) {
 	else $$nom_variables = '';
 }
 
-include('fonctions.php');
-
 // Sécurisation des variables postées
 $ok  = Secur_Variable_Post($ok, strlen($lib_Supprimer), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
 
-// Gestion standard des pages
 $acces = 'M';                          		// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Name_Not_Used']; 	// Titre pour META
 $niv_requis = 'C';					   		// Page réservée à partir du profil contributeur
 $x = Lit_Env();
 
-include('Gestion_Pages.php');
-
-// Verrouillage de la gestion des documents sur les gratuits non Premium
-if (($SiteGratuit) and (!$Premium)) Retour_Ar();
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Verrouillage de la gestion des documents sur les gratuits non Premium
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $compl = Ajoute_Page_Info(600, 200);
 

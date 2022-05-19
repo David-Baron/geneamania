@@ -2,6 +2,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('annuler', 'Horigine');
 
@@ -10,20 +13,16 @@ foreach ($tab_variables as $nom_variables) {
 	else $$nom_variables = '';
 }
 
-include('fonctions.php');
-
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
 // On retravaille le libellé du bouton pour effectuer le retour...
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
-// Gestion standard des pages
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Check_Pers'];	// Titre pour META
 $x = Lit_Env();
 $niv_requis = 'C';						// Il faut un niveau contributeur pour accéder à la page
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

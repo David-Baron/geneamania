@@ -4,14 +4,14 @@
 //	paramètre : refDoc = référence du document à afficher
 //=====================================================================
 
-// Gestion standard des pages
-session_start();                       // Démarrage de la session
+session_start();
 
-include('fonctions.php');              // Appel des fonctions générales
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Voir un document'; 		   // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('Horigine');

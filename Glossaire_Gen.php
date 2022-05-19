@@ -6,12 +6,12 @@
 
 session_start();
 
-// Gestion standard des pages
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Glossary'];       // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Entête sur changement d'initiale
 function Lettre($lettre)

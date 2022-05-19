@@ -5,13 +5,14 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
-
-include('fonctions.php');
 
 // Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
@@ -25,10 +26,7 @@ $acces = 'L';											// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Most_Used_jobs']; // Titre pour META
 $x = Lit_Env();
 
-include('Gestion_Pages.php');
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $compl = Ajoute_Page_Info(600, 300);
 

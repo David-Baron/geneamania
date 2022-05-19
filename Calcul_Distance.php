@@ -1,11 +1,12 @@
 <?php
-session_start();
-
 //=====================================================================
 // Calcul de distance entre 2 villes
 //=====================================================================
 
-include('fonctions.php');
+session_start();
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -27,7 +28,6 @@ if ($ok == $lib_Calculer) $ok = 'OK';
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Calculate_Distance'];          // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Verrouillage sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();

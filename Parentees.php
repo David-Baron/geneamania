@@ -4,6 +4,11 @@
 // Affichage des oncles et tantes ou cousins
 //=====================================================================
 
+session_start();
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 function add_pers($enreg)
 {
 	global $refs, $noms, $prenoms;
@@ -19,8 +24,7 @@ function affiche_pers($nb)
 	echo ' <a ' . Ins_Edt_Pers($refs[$nb]) . '>' . $echo_modif;
 }
 
-session_start();
-include('fonctions.php');
+
 $acces = 'L';
 
 $tab_variables = array('annuler');
@@ -62,12 +66,8 @@ $n_personnes = nom_table('personnes');
 
 $req_sel = 'select Nom, Prenoms, Diff_Internet from ' . $n_personnes . ' where Reference = ' . $Refer . ' limit 1';
 
-include('Gestion_Pages.php');
 
-//var_dump($bt_An);
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 else {
 

@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include_once __DIR__ .'/fonctions.php';
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -30,12 +32,8 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
-
-// Recup de la variable passée dans l'URL : référence de l'évènement, actualité o/n
-$refPar = Recup_Variable('refPar', 'N');
+$refPar = Recup_Variable('refPar', 'N'); // Recup de la variable passée dans l'URL : référence de l'évènement, actualité o/n
 $actu = Recup_Variable('actu', 'C', 'xo');
 $actualite = ($actu === 'o' ? true : false);
 
@@ -51,10 +49,7 @@ if ($actualite) {
 }
 
 $x = Lit_Env();
-include_once __DIR__ .'/Gestion_Pages.php';
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $refPar        = Secur_Variable_Post($refPar, 1, 'N');
 $idZoneAnc     = Secur_Variable_Post($idZoneAnc, 1, 'N');

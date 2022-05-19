@@ -7,29 +7,27 @@
 
 session_start();
 
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
 
-include('fonctions.php');              // Appel des fonctions générales
-
 // Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
 
 // Gestion standard des pages
 $acces = 'L';										// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Children_Per_Mother'];		// Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 
 $compl = Ajoute_Page_Info(600, 220);
 

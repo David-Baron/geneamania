@@ -5,7 +5,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Event_Type'];       // Titre pour META
 $niv_requis = 'P';
@@ -27,8 +30,6 @@ $x = Lit_Env();
 $Code = Recup_Variable('code', 'A');
 
 $req_sel = 'select * from ' . nom_table('types_evenement') . ' where Code_Type = \'' . $Code . '\' limit 1';
-
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

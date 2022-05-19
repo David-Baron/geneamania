@@ -5,11 +5,13 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';          // Type d'accès de la page : (L)ecture
 $titre = 'Aide Généamania';
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 function Affiche_Image_Aide($nom_image, $texte_image, $explications)
 {

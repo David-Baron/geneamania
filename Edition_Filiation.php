@@ -3,8 +3,10 @@
 // Edition d'une fiche filiation
 //=====================================================================
 
-session_start();                       // Démarrage de la session
-include('fonctions.php');              // Appel des fonctions générales
+session_start();
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -28,15 +30,10 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Recup de la variable passée dans l'URL : référence de la personne
-$Refer = Recup_Variable('Refer', 'N');
-
-// Gestion standard des pages
+$Refer = Recup_Variable('Refer', 'N');// Recup de la variable passée dans l'URL : référence de la personne
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Fiche filiation';            // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

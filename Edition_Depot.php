@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');              // Appel des fonctions générales
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -24,12 +26,8 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
-
-// Recup de la variable passée dans l'URL : identifiant du dépôt
-$Ident = Recup_Variable('ident', 'N');
+$Ident = Recup_Variable('ident', 'N');// Recup de la variable passée dans l'URL : identifiant du dépôt
 
 if ($Ident == -1) $Creation = true;
 else $Creation = false;
@@ -41,7 +39,6 @@ else
 	$titre = $LG_Menu_Title['Repo_Sources_Add'];
 
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

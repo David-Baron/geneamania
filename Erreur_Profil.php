@@ -5,10 +5,11 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $titre = $LG_function_noavailable_profile;        // Titre pour META
 $acces = 'L';                                    // Type d'accès de la page : (M)ise à jour, (L)ecture
-include('Gestion_Pages.php');
 $x = Lit_Env();
 
 Insere_Haut($titre, '', 'Erreur_Profil', '');

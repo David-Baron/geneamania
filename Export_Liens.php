@@ -4,7 +4,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';
 
 $tab_variables = array('annuler', 'Horigine');
@@ -16,27 +19,15 @@ foreach ($tab_variables as $nom_variables) {
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
-
-// Recup des variables passées dans l'URL :
-$Categ = Recup_Variable('Categ', 'S');               // Catégorie des liens à extraire
+$Categ = Recup_Variable('Categ', 'S');// Recup des variables passées dans l'URL : // Catégorie des liens à extraire
 
 $titre = LG_LINKS_EXTRACT . ' ' . stripcslashes($Categ);     // Titre pour META
 $x = Lit_Env();
 $niv_requis = 'G';
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
-
-// Appel de la gestion standard des pages
-include('Gestion_Pages.php');
-
-// Page interdite sur les gratuits non Premium
-if (($SiteGratuit) and (!$Premium)) Retour_Ar();
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler; // On retravaille le libellé du bouton pour effectuer le retour...
+if (($SiteGratuit) and (!$Premium)) Retour_Ar(); // Page interdite sur les gratuits non Premium
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut(my_html($titre), $compl, 'Export_Liens', $Categ);
@@ -44,7 +35,6 @@ Insere_Haut(my_html($titre), $compl, 'Export_Liens', $Categ);
 $req = 'select type_lien, description, URL from ' . nom_table('liens') . ' where type_lien="' . $Categ . '" order by description';
 $res = lect_sql($req);
 $nb_enr = $res->RowCount();
-
 $plu = pluriel($nb_enr);
 echo '<br />' . $nb_enr . my_html(' ' . LG_LINKS_EXTRACT_RES1 . $plu . ' ' . LG_LINKS_EXTRACT_RES2 . $plu) . '<br />';
 

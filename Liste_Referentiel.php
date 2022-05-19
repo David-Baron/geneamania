@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Recup de la variable passée dans l'URL : type de liste
 $Type_Liste = Recup_Variable('Type_Liste', 'C', 'RTDCQOS');
@@ -33,12 +35,10 @@ switch ($Type_Liste) {
     break;
 }
 
-// Gestion standard des pages
 $acces = 'L';            // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $entete;          // Titre pour META
 $niv_requis = 'P';          // Page réservée au profil privilégié
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Verrouillage de la gestion des documents et des sources sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium) and ($Type_Liste == 'D')) Retour_Ar();

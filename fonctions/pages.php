@@ -96,7 +96,7 @@ if (isset($Environnement)) {
 	  else {
 		$avec_js = true;
 		Ecrit_Entete_Page($titre,$contenu,$mots,$index_follow);
-		echo '<script src="jscripts/edition_geneamania.js"></script>';
+		echo '<script src="../jscripts/edition_geneamania.js"></script>';
 	  }
 	}
 

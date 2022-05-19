@@ -5,6 +5,11 @@
 // En effet, un seul commentaire est autorisé par évènement
 //=====================================================================
 
+session_start();
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 function aff_nb_enr($lib1, $accord)
 {
 	global $simulation, $nb_enr, $premier_lib, $tab, $h_LG_EVT_MERGE_ACTION, $lg_evt_participation, $lg_evt_participations, $lg_evt_image, $lg_evt_images, $lg_evt_document, $lg_evt_documents, $lg_evt_done;
@@ -27,10 +32,6 @@ function aff_nb_enr($lib1, $accord)
 		}
 	}
 }
-
-// Gestion standard des pages
-session_start();
-include('fonctions.php');
 
 $simulation = -1;
 
@@ -58,7 +59,6 @@ if ($simulation == -1) $simulation = false;
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Event_Merging'];       // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 $compl = Ajoute_Page_Info(600, 250);
 Insere_Haut(my_html($titre), $compl, 'Fusion_Evenements', '');

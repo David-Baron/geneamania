@@ -9,7 +9,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -30,7 +32,7 @@ $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = LG_LINK_EVT_TITLE;      // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
+
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

@@ -9,6 +9,9 @@
 
 session_start();
 
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
 	'ok', 'annuler',
@@ -41,7 +44,6 @@ $tab_variables = array(
 	'Auto_Sosa', 'NSosa', 'Horigine'
 );
 
-include('fonctions.php');
 
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
@@ -68,7 +70,6 @@ $NSosa     = Secur_Variable_Post($NSosa, 20, 'S');
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Ajout rapide';               // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

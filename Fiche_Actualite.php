@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['New'];		// Titre pour META
 
@@ -17,20 +19,11 @@ foreach ($tab_variables as $nom_variables) {
 }
 // Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
-
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
-
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 $x = Lit_Env();
-include('Gestion_Pages.php');
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
-
-// Recup de la variable passée dans l'URL : référence de l'actualité
-$refPar = Recup_Variable('refPar', 'N');
-
-// Pour les sites gratuits non Premium, 	 actualités sont centralisées
-$centralise = false;
+$refPar = Recup_Variable('refPar', 'N');// Recup de la variable passée dans l'URL : référence de l'actualité
+$centralise = false;// Pour les sites gratuits non Premium, 	 actualités sont centralisées
 if (($SiteGratuit) and (!$Premium)) $centralise = true;
 
 $compl = Ajoute_Page_Info(600, 150);

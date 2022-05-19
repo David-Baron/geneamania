@@ -5,7 +5,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération de la liste des tables dans un tableau
 function recup_liste_tables()
@@ -59,7 +61,7 @@ $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Tables_Admin'];
 $niv_requis = 'G';						// Page réservée au gestionnaire
 $x = Lit_Env();							// Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');
+
 
 // Verrouillage de la page sur les gratuits
 if ($SiteGratuit) Retour_Ar();

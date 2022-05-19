@@ -3,6 +3,11 @@
 // Fiche couple au format texte ou pdf
 //=====================================================================
 
+session_start();
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 function fin_fs()
 {
 	global $sortie_pdf;
@@ -136,9 +141,7 @@ function aff_enf_frat($typo)
 	} else HTML_ou_PDF('<br />' . "\n", $sortie);
 }
 
-// Gestion standard des pages
-session_start();
-include('fonctions.php');
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Indiv_Text_Report']; // Titre pour META
 $niv_requis = 'P';                     // Page accessible uniquement aux privilégiés
@@ -158,8 +161,6 @@ $x = Lit_Env();							// Lecture de l'indicateur d'environnement
 $Reference = Recup_Variable('Reference', 'N');
 // Récupération des informations concernant la personne
 $req_sel = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Reference . ' limit 1';
-
-include('Gestion_Pages.php');
 
 // Dans le cas de la sortie pdf, l'accès n'est pas réalisé dans Gestion_Pages...
 if ($sortie_pdf) {

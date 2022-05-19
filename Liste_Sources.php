@@ -3,17 +3,17 @@
 //  Affichage de la liste des sources éventuellement par dépôt
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Source_List'];			// Titre pour META
 $x = Lit_Env();
 $niv_requis = 'C';						// Page réservée au profil contributeur
-include('Gestion_Pages.php');
 
-// Verrouillage sur les gratuits non Premium
-if (($SiteGratuit) and (!$Premium)) Retour_Ar();
+if (($SiteGratuit) and (!$Premium)) Retour_Ar(); // Verrouillage sur les gratuits non Premium
 
 $t = $titre;
 $compl = Ajoute_Page_Info(600, 150);

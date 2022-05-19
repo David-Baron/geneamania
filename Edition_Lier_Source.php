@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 //=====================================================================
 // Lien d'un objet à une source
 // Parametres à renseigner :
@@ -9,6 +7,11 @@ session_start();
 //               V => ville
 // - refSrc : référence de la source (-1 pour la création du lien)
 //=====================================================================
+
+session_start();
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 function Lire_Nom_Prenoms_Unions($refUnion)
 {
@@ -54,7 +57,7 @@ function lire_Evenement($refEvt)
 	}
 }
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -70,7 +73,6 @@ foreach ($tab_variables as $nom_variables) {
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Edition liaison source';   // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Sécurisation des variables postées
 $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');

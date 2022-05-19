@@ -3,9 +3,11 @@
 // Affichage d'un rôle
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';            // Type d'accès de la page : (M)ise à jour, (L)ecture
 $niv_requis = 'P';
 $titre = $LG_Menu_Title['Role'];    // Titre pour META
@@ -27,13 +29,9 @@ $x = Lit_Env();
 $Code = Recup_Variable('code', 'A');
 $req_sel = 'select * from ' . nom_table('roles') . ' where Code_Role = "' . $Code . '" limit 1';
 
-include('Gestion_Pages.php');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
-
-// Rôle inconnu, retour...
-if (!$enreg_sel) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
+if (!$enreg_sel) Retour_Ar();// Rôle inconnu, retour...
 
 $enreg2 = $enreg_sel;
 Champ_car($enreg2, 'Libelle_Role');

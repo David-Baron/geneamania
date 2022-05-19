@@ -2,7 +2,7 @@
 
 // appelé en ajax pour avoir les personnes correspondant à un nom 
 
-include_once('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
 
 $debug = false;
 

@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include_once __DIR__ .'/fonctions.php';
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -38,7 +40,6 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 if ($Creation) $titre = $LG_Menu_Title['Name_Add'];
 else $titre = $LG_Menu_Title['Name_Edit'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour arrière sur une demande d'annulation
 if ($bt_An) Retour_Ar();
@@ -81,9 +82,9 @@ if ($bt_Sup) {
 	Retour_Ar();
 }
 
-include_once __DIR__ .'/phonetique.php';
+include_once __DIR__ .'/classes/Phonetique.php';
 //	Initialisation d'un objet de la classe
-$objetCodePho = new phonetique();
+$objetCodePho = new Phonetique();
 
 function celBouton($lettre, $numAide)
 {

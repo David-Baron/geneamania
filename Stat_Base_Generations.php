@@ -4,7 +4,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';				// Type d'accès de la page
 
 $tab_variables = array('annuler', 'Horigine', 'Gen_D', 'Gen_F');
@@ -26,7 +29,6 @@ $Gen_F = Secur_Variable_Post($Gen_F, 1, 'N');
 $titre = $LG_Menu_Title['Gen_Is_Complete'];    // Titre pour META
 $x = Lit_Env();
 $niv_requis = 'P';				// Page accessible à partir du niveau privilégié
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

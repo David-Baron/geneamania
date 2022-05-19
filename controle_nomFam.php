@@ -1,8 +1,7 @@
 <?php
 //=====================================================================
-//	Vérification si un nom de famille existe ou non dans la base
-//		utilisé dans Edition_NomFam.php
-//=====================================================================
+// Vérification si un nom de famille existe ou non dans la base
+// utilisé dans Edition_NomFam.php
 //	Retourne :
 //		Erreur si les paramètres sont mal passés
 //		L'identifiant si le nom de famille existe
@@ -10,7 +9,8 @@
 //=====================================================================
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+
 $x = Lit_Env();
 
 //	Récupération du nom

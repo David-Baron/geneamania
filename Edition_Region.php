@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');              // Appel des fonctions g�n�rales
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // R�cup�ration des variables de l'affichage pr�c�dent
 $tab_variables = array(
@@ -25,12 +27,9 @@ foreach ($tab_variables as $nom_variables) {
 $ok       = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Edition région';             // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['User'];
 
@@ -27,8 +29,6 @@ $niv_requis = 'G';
 // Recup de la variable passée dans l'URL : référence de l'utilisateur
 $code = Recup_Variable('code', 'N');
 $req_sel = 'select * from ' . nom_table('utilisateurs') . " where idUtil = $code limit 1";
-
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

@@ -1,13 +1,13 @@
 <?php
-session_start();
-
 //=====================================================================
 // Frise Chronologique
 // Pour les évènements de la personne et les dates de naissance des enfants
 //=====================================================================
 
-// Gestion standard des pages
-include('fonctions.php');
+session_start();
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 function Lien_vers_Pers()
 {
@@ -64,8 +64,6 @@ if ((!$SiteGratuit) or ($Premium)) {
 	if ($sortie_pdf) $no_entete = true;
 }
 
-include('Gestion_Pages.php');
-
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 
@@ -91,7 +89,7 @@ if (!$texte) Insere_Haut($titre, $compl, 'appelle_chronologie_personne', $Refer)
 else {
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
+		include_once __DIR__ .'/html2pdfb.php';
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		$font_pdf = 'LibreBaskerville';

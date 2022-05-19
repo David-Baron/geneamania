@@ -5,9 +5,8 @@
 
 session_start();
 
-// $test = true;
-
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -24,10 +23,9 @@ $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour
 $titre = $LG_Menu_Title['Decujus_And_Family'];
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $n_unions = nom_table('unions');
 $n_filiations = nom_table('filiations');

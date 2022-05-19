@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Fiche d\'un type de document';	// Titre pour META
 
@@ -15,25 +17,18 @@ foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
-// Sécurisation des variables postées
-$annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
+$annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');// Sécurisation des variables postées
 
-$niv_requis = 'G';		// Fonction réservée au gestionnaire
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
+
+$niv_requis = 'G'; // Fonction réservée au gestionnaire
 $x = Lit_Env();
-
-// Recup de la variable passée dans l'URL : type de document
-$Code = Recup_Variable('code', 'N');
+$Code = Recup_Variable('code', 'N');// Recup de la variable passée dans l'URL : type de document
 
 $req_sel = 'select * from ' . nom_table('types_doc') . ' where Id_Type_Document = \'' . $Code . '\' limit 1';
 
-include('Gestion_Pages.php');
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
-
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 else {
 
 	// type inconnu, retour...

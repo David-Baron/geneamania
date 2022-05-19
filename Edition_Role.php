@@ -5,7 +5,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -25,8 +26,6 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
 // Recup de la variable passée dans l'URL : rôle
@@ -37,9 +36,7 @@ if ($Creation) $titre = $LG_Menu_Title['Role_Add'];
 else $titre = $LG_Menu_Title['Role_Edit'];
 
 $n_roles = nom_table('roles');
-
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

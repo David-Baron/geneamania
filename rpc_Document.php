@@ -2,7 +2,7 @@
 
 // appelé en ajax pour avoir les documents correspondant à un type
 
-include_once('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
 
 $debug = false;
 

@@ -10,7 +10,9 @@
 // - scale : essai pour anti-aliasing ; plutôt bien sur les cercles, KO sur le reste
 //=====================================================================
 
-include_once('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/degrades.php';
+
 $x = Lit_Env();
 
 $debug = false;
@@ -59,7 +61,7 @@ if ($Zooming_Trick)
 	imagesetthickness($image, $scale);
 
 // Allocation des couleurs en fonction du dégradé du site
-include_once('Degrades_inc.php');
+
 $la_couleur = '';
 $couleurs = '';
 $la_couleur = Charge_Couleur($couleur);

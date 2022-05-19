@@ -1,6 +1,7 @@
 <html>
 
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title>Color Picker</title>
 	<style type="text/css">
 		body {
@@ -24,7 +25,7 @@
 			border-color: #000000;
 		}
 	</style>
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	
 	<script type="text/javascript">
 		// Déposé par Frosty sur www.toutjavascript.com
 		// 27/5/2003 - Ajout compatibilité IE5 sur MacOS

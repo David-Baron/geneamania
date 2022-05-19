@@ -5,7 +5,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');              // Appel des fonctions générales
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -24,15 +26,11 @@ $annuler        = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $Remplacer      = Secur_Variable_Post($Remplacer, 1, 'S');
 //$nom_du_fichier = Secur_Variable_Post($nom_du_fichier,80,'S');
 $Horigine       = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Import_Docs'];                // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $n_images = nom_table('images');
 $n_documents = nom_table('documents');

@@ -7,12 +7,15 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+include_once __DIR__ .'/fonctions/arbre.php';
+
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Nuclear_Family'];			// Titre pour META
 $x = Lit_Env();
 $index_follow = 'IN';				// NOFOLLOW demandé pour les moteurs
-include('Gestion_Pages.php');
 
 // Recup de la variable passée dans l'URL : référence de l'union
 $Reference = Recup_Variable('Reference', 'N');
@@ -25,8 +28,6 @@ if ($res = lect_sql($sql)) {
 		$ref_2 = $enr_union[1];
 	}
 }
-
-include('Commun_Arbre.php');
 
 // Coordonnée gauche par génération
 $Coord_X = array(40, 260, 480, 700);

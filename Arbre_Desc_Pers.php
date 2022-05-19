@@ -6,12 +6,14 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';					// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_desc_tree;			// Titre pour META
 $x = Lit_Env();
 $index_follow = 'IN';			// NOFOLLOW demandé pour les moteurs
-include('Gestion_Pages.php');
 
 $n_personnes = nom_table('personnes');
 $n_unions = nom_table('unions');

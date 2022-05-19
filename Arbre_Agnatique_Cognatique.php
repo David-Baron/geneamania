@@ -5,8 +5,11 @@
 //=====================================================================
 
 session_start();
-// Gestion standard des pages
-include('fonctions.php');              // Appel des fonctions générales
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+include_once __DIR__ .'/fonctions/arbre.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
 // Recup de la variable passée dans l'URL : type d'arbre : "A"gnatique / "C"ognatique
@@ -20,16 +23,12 @@ if ($cognatique) $titre = $LG_Tree_Women_Asc;
 
 $x = Lit_Env();
 $index_follow = 'IN';					// NOFOLLOW demandé pour les moteurs
-include('Gestion_Pages.php');
 
 // Recup de la variable passée dans l'URL : texte ou non
 $texte = Dem_Texte();
 
 // Recup de la variable passée dans l'URL : référence de la personne
 $Refer = Recup_Variable('Refer', 'N');
-
-include('Commun_Arbre.php');
-
 
 $imp_mar = 0;
 $ref_top = 0;

@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
 $tab_variables = array('annuler', 'Horigine');
@@ -23,7 +25,6 @@ if ($annuler == $lib_Retour) $annuler = 'Annuler';
 
 $titre = $LG_Menu_Title['Image_List'];		// Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

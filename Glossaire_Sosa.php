@@ -6,11 +6,12 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Sosa'];       // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');
 
 ?>
 <style type="text/css">

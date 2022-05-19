@@ -5,7 +5,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';
 $titre = LG_FFAM_OBJECT;		// Titre pour META
 $x = Lit_Env();
@@ -14,8 +16,6 @@ $index_follow = 'IN';			// NOFOLLOW demandé pour les moteurs
 
 $Refer = Recup_Variable('Refer', 'N');
 $req_sel = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Refer . ' limit 1';
-
-include('Gestion_Pages.php');
 
 // Affiche un div pour les notes
 function Div_Note_Old($nom_image, $nom_div, $texte)

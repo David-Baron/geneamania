@@ -7,13 +7,14 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $tab_variables = array('cache', 'annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
 }
-
-include('fonctions.php');
 
 // Sécurisation des variables postées
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
@@ -30,7 +31,6 @@ $Fin = Recup_Variable('Fin', 'N');
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = LG_CH_HISTO_DEATH_TITLE . $Debut . '-' . $Fin;      // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

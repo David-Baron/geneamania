@@ -3,9 +3,11 @@
 // Affichage d'un dépôt
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $niv_requis = 'P';
 $titre = $LG_Menu_Title['Repo_Sources'];		// Titre pour META
@@ -26,8 +28,6 @@ $x = Lit_Env();
 // Recup de la variable passée dans l'URL : dépôt
 $Ident = Recup_Variable('ident', 'N');
 $req_sel = 'select * from ' . nom_table('depots') . ' where Ident = ' . $Ident . ' limit 1';
-
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

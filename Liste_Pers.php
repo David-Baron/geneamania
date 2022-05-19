@@ -4,7 +4,10 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';				// Type d'accès de la page : (M)ise à jour, (L)ecture M pour avoir le getXMLHttpRequest 
 
 // Recup de la variable passée dans l'URL : type de liste, texte ou non
@@ -49,9 +52,6 @@ if ((!$SiteGratuit) or ($Premium)) {
 	if ($s_pdf == 'O') $sortie_pdf = true;
 	if ($sortie_pdf) $no_entete = true;
 }
-
-// Appel de la gestion standard des pages
-include('Gestion_Pages.php');
 
 function Aff_Ne_Dec($row)
 {

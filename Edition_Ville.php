@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include_once __DIR__ .'/fonctions.php';
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -28,16 +30,13 @@ foreach ($tab_variables as $nom_variables) {
 $ok       = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Recup des variables passées dans l'URL : Identifiant de la ville
-$Ident = Recup_Variable('Ident', 'N');
+$Ident = Recup_Variable('Ident', 'N');// Recup des variables passées dans l'URL : Identifiant de la ville
 
 // Gestion standard des pages
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 if ($Ident != -1) $titre = $LG_Menu_Title['Town_Edit'];
 else $titre = $LG_Menu_Title['Town_Add'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

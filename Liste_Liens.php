@@ -7,6 +7,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('ok', 'annuler', 'supprimer', 'S_Sup', 'idLien');
 foreach ($tab_variables as $nom_variables) {
@@ -14,16 +17,11 @@ foreach ($tab_variables as $nom_variables) {
 	else $$nom_variables = '';
 }
 
-include('fonctions.php');
 $acces = 'M';
 $titre = $LG_Menu_Title['Links'];            // Titre pour META
 $x = Lit_Env();
-
 $lib_sup = my_html(LG_LINKS_DEL);
-
 $niv_requis = 'I';
-include('Gestion_Pages.php');
-
 $compl = Ajoute_Page_Info(600, 150);
 
 // Le gestionnaire a la colonne de modification en plus

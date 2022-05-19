@@ -6,6 +6,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
 	'ok', 'annuler', 'modif',
@@ -16,8 +19,6 @@ foreach ($tab_variables as $nom_variables) {
 	else $$nom_variables = '';
 }
 
-// Gestion standard des pages
-include('fonctions.php');
 
 // Sécurisation des variables postées
 $ok       = Secur_Variable_Post($ok, strlen($lib_Rectifier), 'S');
@@ -31,7 +32,6 @@ $acces = 'M';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $niv_requis = 'G';							// Niveau gestionnaire requis
 $titre = $LG_Menu_Title['Delete_Sosa'];	// Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

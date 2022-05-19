@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -16,6 +18,7 @@ $tab_variables = array(
 	'Diff_Internet_Image', 'ADiff_Internet_Image',
 	'Horigine'
 );
+
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';
@@ -26,15 +29,10 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Gestion standard des pages
 $acces = 'M';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Ch_Image_Script_Title;		// Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 // Recup des variables passées dans l'URL : identifiant, référence et type de référence
 $Type_Ref    = Recup_Variable('Type_Ref', 'C', 'PVULE');

@@ -4,12 +4,14 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Namesake_Cheking']; // Titre pour META
 $niv_requis = 'C';
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 $D_Nais = false;
 if (isset($_POST['D_Nais'])) $D_Nais = true;

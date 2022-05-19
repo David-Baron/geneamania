@@ -1,5 +1,8 @@
 <?php
+
 session_start();
+
+include_once __DIR__ . '/fonctions/fonctions.php';
 
 $imp_mar = 1;
 $Larg_Cellule = 140;
@@ -34,10 +37,7 @@ $VER_Coord_Y = array(
 
 header("Content-type: image/png");
 
-include_once('fonctions.php');
-
-// Recup de la variable passée dans l'URL : référence de la personne
-$Refer = Recup_Variable('Refer', 'N');
+$Refer = Recup_Variable('Refer', 'N');// Recup de la variable passée dans l'URL : référence de la personne
 
 function imagestringcutted($img, $font, $y, $x1, $x2, $text, $color, $align = 'center')
 {
@@ -207,7 +207,6 @@ $composantes = explode('_', $enreg['Image_Arbre_Asc']);
 $Type_Arbre_Asc = strtoupper($composantes[2]);
 $Coord_X = ${$Type_Arbre_Asc . '_Coord_X'};
 $Coord_Y = ${$Type_Arbre_Asc . '_Coord_Y'};
-
 
 $Affiche_Mar_Arbre_Asc = $enreg['Affiche_Mar_Arbre_Asc'];
 

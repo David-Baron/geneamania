@@ -1,11 +1,13 @@
 <?php
-session_start();
-
 //=====================================================================
 // Affichage d'un arbre en PDF
 //=====================================================================
 
-include('fonctions.php');
+session_start();
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';				// Type d'accès de la page : (M)ise à jour, (L)ecture
 $x = Lit_Env();
 
@@ -85,7 +87,7 @@ $est_cnx = ($_SESSION['estCnx'] === true ? true : false);
 //$x = Get_Nom_Prenoms($Refer,$Nom,$Prenoms);
 $Diff_Internet_P = 'O';
 if ($Diff_Internet_P == 'O' or $_SESSION['estPrivilegie']) {
-	include("phpToPDF.php");
+	include_once __DIR__ .'/phpToPDF.php';
 	$PDF = new phpToPDF();
 	$PDF->AddPage('P', 'A4', 0);
 	$PDF->SetMargins(0, 0, 0);
@@ -176,7 +178,6 @@ if ($Diff_Internet_P == 'O' or $_SESSION['estPrivilegie']) {
 // Erreur si la personne n'a pas les autorisations
 else {
 	$index_follow = 'IN';					// NOFOLLOW demandé pour les moteurs en cas d'erreur
-	include('Gestion_Pages.php');
 	Insere_Haut('Arbre ascendant', '', 'Arbre_Asc_PDF', $Refer);
 	echo Affiche_Stop($LG_Data_noavailable_profile);
 }

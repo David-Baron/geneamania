@@ -6,13 +6,14 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $x = Lit_Env();
 $objet = $LG_Menu_Title['Convert_Roman_To_Arabic'];
 $titre = $objet;
 $mots = 'convertisseur';
-include('Gestion_Pages.php');
 
 ?>
 <script type="text/javascript">

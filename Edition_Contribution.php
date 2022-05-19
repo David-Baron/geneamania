@@ -5,7 +5,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -91,8 +92,6 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 $titre = LG_CONTRIB_EDIT_TITLE;
 
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-//	Gestion des droits
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

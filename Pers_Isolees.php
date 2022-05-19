@@ -7,6 +7,9 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 function affiche($req, $sexe)
 {
       global $echo_modif;
@@ -39,18 +42,14 @@ function affiche($req, $sexe)
       }
 }
 
-include('fonctions.php');
 $acces = 'L';                          // Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Non_Linked_Pers']; // Titre pour META
 $x = Lit_Env();
 $niv_requis = 'C';                                    // Page acessible au gestionnaire uniquement
-include('Gestion_Pages.php');
-
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut($titre, $compl, 'Pers_Isolees', '');
 
 $a = microtime_float();
-
 
 $n_personnes = nom_table('personnes');
 $n_filiations = nom_table('filiations');

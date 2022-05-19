@@ -4,14 +4,15 @@
 // L'identifiant est alors à null
 //=====================================================================
 
-// Gestion standard des pages
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Init_Names'];
 $x = Lit_Env();
 $niv_requis = 'G';					   // Page réservée au profil gestionnaire
-include('Gestion_Pages.php');
 
 $n_personnes     = nom_table('personnes');
 $n_noms          = nom_table('noms_famille');

@@ -8,7 +8,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -24,7 +26,6 @@ foreach ($tab_variables as $nom_variables) {
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Alt_Name'];   // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
 // Sécurisation des variables postées
 $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');

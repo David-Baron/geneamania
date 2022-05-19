@@ -5,7 +5,8 @@
 
 session_start();
 
-include_once __DIR__ .'/fonctions.php';
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -44,7 +45,6 @@ $acces = 'M';                          					// Type d'accès de la page : (M)ise
 if ($Modif) $titre = $LG_Menu_Title['Person_Modify'];	// Titre pour META
 else $titre = $LG_Menu_Title['Person_Add'];
 $x = Lit_Env();
-include_once __DIR__ .'/Gestion_Pages.php';
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

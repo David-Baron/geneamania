@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';
 $titre = $LG_Menu_Title['Pers_Gen'];		// Titre pour META
 $x = Lit_Env();
@@ -20,8 +22,6 @@ if ((!$SiteGratuit) or ($Premium)) {
 	// Pas d'entête HTML sinon le PDF ne s'affichera pas
 	if ($sortie_pdf) $no_entete = true;
 }
-
-include('Gestion_Pages.php');
 
 // Recup de la variable passée dans l'URL : texte ou non
 $texte = Dem_Texte();

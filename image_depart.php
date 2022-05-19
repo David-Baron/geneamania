@@ -5,6 +5,10 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/degrades.php';
+include_once __DIR__ . '/France_Dep_inc.php';
+
 function calc_indice($pour)
 {
   if ($pour == 0) return 0;
@@ -28,15 +32,9 @@ function colorie_depart_code2($code, $couleur, $indice)
   colorie_depart($x, $y, $indice, $couleur);
 }
 
-include_once('fonctions.php');
 $all = true;
-include_once('Degrades_inc.php');
-include_once('France_Dep_inc.php');
-
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
-// Recup de la variable passée dans l'URL : type de liste
-$Type_Liste = Recup_Variable('Type_Liste', 'C', 'NMD');
+$Type_Liste = Recup_Variable('Type_Liste', 'C', 'NMD');// Recup de la variable passée dans l'URL : type de liste
 
 header("Content-type: image/png");
 $imagesource = "Images/cartes/france_depart.png";

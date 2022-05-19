@@ -9,7 +9,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -36,7 +37,6 @@ $acces = 'L';									// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Search_Comment'];		// Titre pour META
 $niv_requis = 'C';
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

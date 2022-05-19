@@ -4,7 +4,9 @@
 //=====================================================================
 
 session_start();
-include('fonctions.php');
+
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -33,19 +35,14 @@ $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');
 $Horigine  = Secur_Variable_Post($Horigine, 100, 'S');
-
-// Recup des variables passées dans l'URL
-$Personne = Recup_Variable('Personne', 'N');
+$Personne = Recup_Variable('Personne', 'N');// Recup des variables passées dans l'URL
 $Ref_Union = Recup_Variable('Reference', 'N');
 $Uni_Sexe = Recup_Variable('us', 'C', 'onx'); // Union Unisexe ?
 $Uni_Sexe = ($Uni_Sexe == 'o') ? true : false;
-
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour
 if ($Ref_Union == -1) $titre = LG_UNION_ADD;
 else $titre = LG_UNION_EDIT;
-
 $x = Lit_Env();
-include('Gestion_Pages.php');
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();

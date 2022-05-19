@@ -6,6 +6,10 @@
 
 session_start();
 
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ . '/fonctions/rectif_utf8.php';
+
 function suppression($lib, $n_table, $genre, $where, $affichage = true)
 {
 	global $enr_mod;
@@ -26,11 +30,6 @@ function suppression($lib, $n_table, $genre, $where, $affichage = true)
 	}
 }
 
-include('fonctions.php');
-
-// Fonction de recctification UTF8
-include('Rectif_Utf8_Commun.php');
-
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
 	'ok', 'annuler',
@@ -49,15 +48,12 @@ foreach ($tab_variables as $nom_variables) {
 $ok       = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
-
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Import GEDCOM';              // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
 $niv_requis = 'G';						// Page accessible au gestionnaire
-include('Gestion_Pages.php');          // Appel de la gestion standard des pages
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 // Sécurisation des variables postées - phase 2
 $nom_du_fichier     = Secur_Variable_Post($nom_du_fichier, 100, 'S');

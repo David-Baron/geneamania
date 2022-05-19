@@ -6,21 +6,22 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ .'/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Pers_Tree'];          // Titre pour META
 $x = Lit_Env();
-include('Gestion_Pages.php');
-//
+
 //	Lecture des paramètres passés
 //	Si Refer = 0 => appel direct de la page, sans avoir beson de la calculer
 $nomArbre = Recup_Variable('nomArbre', 'S');
 $reference = Recup_Variable('Refer', 'S');
-//
+
 if ($nomArbre != '') {
 	$nomArbre = rawurldecode($nomArbre);
 }
-//
+
 // Vérification s'il n'y a pas de personnes non diffusables sur Internet
 $sql = 'SELECT COUNT(*) AS nbPers FROM ' . nom_table('arbrepers') . ' AS ap, ' .
 	nom_table('personnes') . ' AS p, ' .

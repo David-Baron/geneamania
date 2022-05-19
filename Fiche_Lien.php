@@ -5,7 +5,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Link'];	// Titre pour META
 $x = Lit_Env();
@@ -26,14 +28,8 @@ $Ref = Recup_Variable('Ref', 'N');
 
 $req_sel = 'select * from ' . nom_table('liens') . ' where Ref_Lien = ' . $Ref . ' limit 1';
 
-include('Gestion_Pages.php');
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
-else {
-	// lien inconnu, circulez...
-	if (!$enreg_sel) Retour_Ar();
-}
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
+if (!$enreg_sel) Retour_Ar();// lien inconnu, circulez...
 
 if ($enreg_sel) {
 	Champ_car($enreg_sel, 'type_lien');

@@ -5,7 +5,8 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 $tab_variables = array('annuler');
 foreach ($tab_variables as $nom_variables) {
@@ -23,7 +24,6 @@ $acces = 'L';
 $titre = $LG_Menu_Title['Connections'];
 $x = Lit_Env();
 $niv_requis = 'G';
-include('Gestion_Pages.php');
 
 // Sortie dans un fichier CSV ?
 $csv_dem = Recup_Variable('csv', 'C', 'ce');

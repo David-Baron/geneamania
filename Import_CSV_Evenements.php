@@ -6,7 +6,9 @@
 
 session_start();
 
-include('fonctions.php');
+include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/fonctions_maj.php';
+include_once __DIR__ . '/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -22,19 +24,13 @@ foreach ($tab_variables as $nom_variables) {
 $ok       = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
-
-include('fonctions_maj.php');
 $acces = 'L';
 $titre = $LG_Menu_Title['Imp_CSV_Events'];
 $x = Lit_Env();
 $niv_requis = 'G';
-include('Gestion_Pages.php');
 
-// Page interdite sur les gratuits non Premium
-if (($SiteGratuit) and (!$Premium)) Retour_Ar();
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Page interdite sur les gratuits non Premium
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 // $champ_table  : champ dans la table à charger
 // $champ_lib    : libellé du champ

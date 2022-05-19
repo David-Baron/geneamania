@@ -1,6 +1,6 @@
 <?php
 
-include_once('parametres.php');
+include_once __DIR__ .'/../config/parametres.php';
 
 // On est sur une page d'information, les fichiers de langues et autres sont dans un répertoire parallèle
 $deb = '';
@@ -11,13 +11,13 @@ if (strpos(my_self(),$suffixe_info) !== false) {
 */
 $langue = 'FR';
 $fic_lang = $deb . $rep_lang . '/lang_' . $langue . '.php';
-if (file_exists($fic_lang)) include($fic_lang);
+if (file_exists($fic_lang)) include_once __DIR__ .'/../'. $fic_lang;
 $fic_lang_part = $deb . $rep_lang . '/lang_' . $langue . '_part.php';
-if (file_exists($fic_lang_part)) include($fic_lang_part);
+if (file_exists($fic_lang_part)) include_once __DIR__ .'/../'. $fic_lang_part;
 
 $is_windows = substr(php_uname(), 0, 7) == "Windows" ? true : false;
 
-include_once($fic_icones);
+include_once __DIR__ .'/../'. $fic_icones;
 
 $ListeMoisRev = array(
 	"vendémiaire",     //1
@@ -329,7 +329,7 @@ function Retourne_Date_CSV($la_date)
 				$pre = 'avant le';
 				break;
 			case 'P':
-				$pre = 'apr�s le';
+				$pre = 'après le';
 				break;
 			default:
 				$pre = '';
@@ -358,7 +358,7 @@ function Lit_Env()
 		$Base_Vide,
 		$connexion, $def_enc;
 	$Acces = 0;
-	include __DIR__ .'/config/database.php';
+	include __DIR__ .'/../config/database.php';
 	if ($ndb != '') {
 		$db      = $ndb;
 		$util    = $nutil;
@@ -611,7 +611,7 @@ function Ecrit_meta($titre, $cont, $mots, $index_follow = 'IF')
 		echo '<meta name="robots" content="' . $p1 . 'INDEX, ' . $p2 . 'FOLLOW"/>' . "\n";
 	}
 	echo '<meta name="REVISIT-AFTER" content="7 days"/>' . "\n";
-	include('divers_styles.css');
+	include_once __DIR__ .'/../divers_styles.css';
 
 	if (isset($_SERVER['HTTP_REFERER']))
 		$HTTP_REFERER = $_SERVER['HTTP_REFERER'];
@@ -628,7 +628,7 @@ function Ecrit_meta($titre, $cont, $mots, $index_follow = 'IF')
 		//if (strpos(my_self(),$suffixe_info) !== false) {
 		$avec_js = false;
 	}
-	if ($avec_js) include('monSSG.js');
+	// if ($avec_js) include('monSSG.js');
 	return 0;
 }
 
@@ -3248,4 +3248,4 @@ function appelle_carte_osm()
 
 
 // header('content-type: text/html; charset=' . $def_enc);
-header('content-type: text/html; charset=utf-8');
+header('content-type: text/html; charset=UTF-8');

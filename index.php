@@ -1,5 +1,9 @@
 <?php
 
+session_start();
+
+include_once __DIR__ . '/fonctions/fonctions.php';
+
 // Initilisation des infirmations de connexion
 function Init_infos_cnx()
 {
@@ -13,9 +17,6 @@ function Init_infos_cnx()
 	$_SESSION['estCnx'] = false;
 	$est_cnx = false;
 }
-
-session_start();
-include('fonctions.php');
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('NomU', 'motPasse', 'geneGraphe', 'ok', 'sortir');
@@ -64,13 +65,14 @@ if (!isset($_SESSION['mem_pers'])) {
 	}
 }
 
-// Possibilité d'afficher un message de maintenance sur présence d'un fichier
-$maintenance = false;
-if (file_exists('maintenance.php')) $maintenance = true;
+$maintenance = false; // Possibilité d'afficher un message de maintenance sur présence d'un fichier
+$verrou = false;// Possibilité de bloquer la connexion ==> verrouillage du site
 
-// Possibilité de bloquer la connexion ==> verrouillage du site
-$verrou = false;
+if (file_exists('maintenance.php')) $maintenance = true;
 if (file_exists('verrou.php')) $verrou = true;
+
+
+
 
 function cryptmail($addmail)
 {

@@ -154,7 +154,7 @@ if (!$texte) Insere_Haut($titre, $compl, 'Liste_Patro', '');
 else {
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
+		require_once __DIR__ .'/fonctions/html2pdfb.php';
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		$pdf->SetFont($font_pdf, '', 12);
@@ -442,7 +442,7 @@ if ($decujus = get_decujus()) {
 	HTML_ou_PDF('</table>', $sortie);
 	if (!$texte) echo '</div>' . "\n";
 
-	if (!$texte) include('jscripts/Liste_Patro.js');
+	if (!$texte) echo '<script src="jscripts/Liste_Patro.js"></script>';
 } else $x = Erreur_DeCujus();
 
 if ($sortie_pdf) {

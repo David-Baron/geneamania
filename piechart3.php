@@ -22,7 +22,7 @@ function aff_degrade($datas, $labels, $couleur, $larg_image, $haut_image, $suffi
 	// Par défaut, on n'a que rouge et bleu pour limiter les calculs
 	
 	// Allocation des couleurs en fonction du dégradé du site
-	include_once('Degrades_inc.php');
+	include_once __DIR__ . '/fonctions/degrades.php';
 	
 	if ($debug) {
 		echo 'datas : '.$datas.'<br />';

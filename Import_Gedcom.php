@@ -7,6 +7,7 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/fonctions_maj.php';
 include_once __DIR__ . '/fonctions/pages.php';
 include_once __DIR__ . '/fonctions/rectif_utf8.php';
 
@@ -540,9 +541,6 @@ Insere_Haut($titre, $compl, 'Import_Gedcom', '');
 
 //Demande de chargement
 if ($ok == 'OK') {
-
-	include('fonctions_maj.php');
-
 	$temps = time();
 	$jour = date('j', $temps);  //format numerique : 1->31
 	$annee = date('Y', $temps); //format numerique : 4 chiffres

@@ -47,11 +47,10 @@ else {
 	if (!$bt_OK) {
 
 		// Affichage du formulaire de choix sur le 1er affichage
-		include('jscripts/edition_geneamania.js');
-		include('jscripts/Liste_Pers.js');
+		echo '<script src="jscripts/edition_geneamania.js"></script>';
+		echo '<script src="jscripts/Liste_Pers.js"></script>';
 
 		echo '<form id="saisie" method="post" action="' . my_self() . '">' . "\n";
-
 		echo '<input type="text" id="num_ref" name ="num_ref" value = "0" />';
 		echo '<input type="' . $hidden . '" id="page" value = "' . $_SERVER['SCRIPT_NAME'] . '" />';
 

@@ -9,6 +9,7 @@ session_start();
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
 include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ . '/fonctions/import_CSV.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -56,8 +57,6 @@ if ($bt_OK) Ecrit_Entete_Page($titre, '', '');
 
 $compl = Ajoute_Page_Info(600, 300);
 Insere_Haut($titre, $compl, 'Import_CSV_Evenements', '');
-
-include('Commun_Import_CSV.php');
 
 //Demande de chargement
 if ($ok == 'OK') {
@@ -179,7 +178,7 @@ if ($est_gestionnaire) {
 	// Première entrée : affichage pour saisie
 	if (($ok == '') && ($annuler == '')) {
 
-		include('jscripts/Edition_Evenement.js');
+		echo '<script src="jscripts/Edition_Evenement.js"></script>';
 
 		echo '<br />';
 		$idZoneLu = -1;

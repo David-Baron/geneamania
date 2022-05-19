@@ -57,8 +57,6 @@ function lire_Evenement($refEvt)
 	}
 }
 
-include_once __DIR__ .'/fonctions.php';
-
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
 	'ok', 'Horigine', 'supprimer', 'annuler',

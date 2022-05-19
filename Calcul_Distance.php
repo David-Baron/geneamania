@@ -29,11 +29,8 @@ $acces = 'L';                          // Type d'accès de la page : (M)ise à j
 $titre = $LG_Menu_Title['Calculate_Distance'];          // Titre pour META
 $x = Lit_Env();
 
-// Verrouillage sur les gratuits non Premium
-if (($SiteGratuit) and (!$Premium)) Retour_Ar();
-
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Verrouillage sur les gratuits non Premium
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $Ref_Ville1 = Secur_Variable_Post($Ref_Ville1, 1, 'N');
 $Ref_Ville2 = Secur_Variable_Post($Ref_Ville2, 1, 'N');

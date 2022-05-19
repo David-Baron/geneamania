@@ -50,7 +50,7 @@ else {
 
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
+		require_once __DIR__ .'/fonctions/html2pdfb.php';
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		$pdf->SetFont($font_pdf, '', 12);
@@ -66,8 +66,7 @@ else {
 		Insere_Haut_texte(my_html($le_titre));
 	}
 }
-if (!$texte)
-	include('jscripts/Liste_Patro.js');		// Même javascript que la liste patronymique
+if (!$texte) echo '<script src="jscripts/Liste_Patro.js"></script>';
 
 $style_fond = 'style="background-image:url(\'' . $chemin_images . 'bar_off.gif\');background-repeat:repeat-x;"';
 $ent_table = '<table width="95%" border="0" class="classic" cellspacing="1" cellpadding="3" align="center">';

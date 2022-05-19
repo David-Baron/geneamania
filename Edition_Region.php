@@ -217,7 +217,9 @@ $compl = '';
 // Première entrée : affichage pour saisie
 if (($ok == '') && ($annuler == '')) {
 
-	include('Insert_Tiny.js');
+	// tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 
 	$compl = Ajoute_Page_Info(600, 150);
 	Insere_Haut('Edition d\'une fiche région', $compl, 'Edition_Region', $Ident);
@@ -244,8 +246,7 @@ if (($ok == '') && ($annuler == '')) {
 	echo '</td></tr></table></div>' . "\n";
 
 	echo '</form>' . "\n";
-
-	include('gest_onglets.js');
+	echo '<script src="assets/js/gest_onglets.js"></script>';
 	//echo '<!-- On cache les div d\'ajout des villes et on positionne l\'onglet par défaut -->'."\n";
 	echo '<script type="text/javascript">' . "\n";
 	echo '	setupPanes("container1", "tab1", 40);' . "\n";

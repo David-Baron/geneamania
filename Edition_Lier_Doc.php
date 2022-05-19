@@ -166,7 +166,7 @@ if ($bt_OK) {
 if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 	$compl = Ajoute_Page_Info(600, 250);
 
-	include('jscripts/Edition_Lier_Doc.js');
+	echo '<script src="jscripts/Edition_Lier_Doc.js"></script>';
 
 	Insere_Haut($entete, $compl, 'Edition_Lier_Doc', $refObjet);
 	$ArefDoc = $refDoc;

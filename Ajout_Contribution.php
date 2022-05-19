@@ -526,7 +526,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 			$x = Aff_Donnees($Refer);
 
 			echo '</form>';
-			include('gest_onglets.js');
+			echo '<script src="assets/js/gest_onglets.js"></script>'; //include('gest_onglets.js');
 			echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
 			echo '<script type="text/javascript">' . "\n";
 			echo '  document.getElementById("bouton_ok").style.visibility = "hidden";' . "\n";

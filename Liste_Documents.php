@@ -6,6 +6,7 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
+include __DIR__ . '/fonctions/fonctions_maj.php';
 include_once __DIR__ . '/fonctions/pages.php';
 
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
@@ -22,7 +23,6 @@ Insere_Haut(my_html($titre), $compl, 'Liste_Documents', '');
 
 // Lien direct sur le dernier document saisi
 if ($_SESSION['estGestionnaire']) {
-	include('fonctions_maj.php');
 	$MaxRef = Nouvel_Identifiant('id_document', 'documents') - 1;
 }
 

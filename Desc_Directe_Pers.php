@@ -82,7 +82,7 @@ function Affiche_Pers($num)
 							echo ' x ' . $Conjs_Pers;
 					}
 				}
-			} else echo my_html($LG_Data_noavailable_profile);
+			} // else echo my_html($LG_Data_noavailable_profile); // TODO: undefined $LG_Data_noavailable_profile
 		}
 		echo '<br />' . "\n";
 	}

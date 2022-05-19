@@ -128,7 +128,10 @@ if ($bt_OK) {
 if (($ok == '') && ($annuler == '')) {
 	$compl = Ajoute_Page_Info(600, 300);
 	Insere_Haut(my_html($titre), $compl, 'Edition_Depart', $Ident);
-	include('Insert_Tiny.js');
+	// tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="asstes/js/tinymce.js"></script>'; //include('Insert_Tiny.js');
+
 	echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'Nom_Depart,Code_Depart\')" action="' . my_self() . '?Ident=' . $Ident . '">' . "\n";
 	echo '<input type="' . $hidden . '" name="Ident" value="' . $Ident . '"/>';
 
@@ -243,7 +246,7 @@ if (($ok == '') && ($annuler == '')) {
 
 	echo '</form>' . "\n";
 
-	include('gest_onglets.js');
+	echo '<script src="assets/js/gest_onglets.js"></script>'; //include('gest_onglets.js');
 	echo '<!-- On cache les div d\'ajout des villes et on positionne l\'onglet par défaut -->' . "\n";
 	echo '<script type="text/javascript">' . "\n";
 	echo '	setupPanes("container1", "tab1", 40);' . "\n";

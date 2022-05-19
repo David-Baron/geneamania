@@ -149,8 +149,7 @@ if (((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) || $mesErreur != '') {
 		$compl .= Affiche_Icone_Lien('href="Fiche_Utilisateur.php?code=' . $Code . '"', 'page', $LG_Menu_Title['User']) . ' ';
 
 	Insere_Haut($titre, $compl, 'Edition_Utilisateur', $Code);
-	include 'jscripts/ctrlMotPasse.js';
-
+	echo '<script src="jscripts/ctrlMotPasse.js"></script>';
 	echo '<form id="saisie" method="post" action="' . my_self() . '?' . Query_Str() . '">' . "\n";
 
 	aff_origine();

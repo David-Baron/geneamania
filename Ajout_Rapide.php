@@ -521,7 +521,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 
 	$largP = 25;
 
-	include('jscripts/Ajout_Rapide.js');
+	echo '<script src="jscripts/Ajout_Rapide.js"></script>';
 	$compl = '';
 
 	$Nom = '';
@@ -552,7 +552,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 
 		echo '</form>';
 
-		include('gest_onglets.js');
+		echo '<script src="assets/js/gest_onglets.js"></script>';
 		echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
 		echo '<script type="text/javascript">' . "\n";
 		echo '	cache_div("id_div_ajout_nomconj")' . "\n";

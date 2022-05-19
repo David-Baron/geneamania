@@ -8,6 +8,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ . '/html2pdfb.php';
 
 $acces = 'L';
 $titre = $LG_Menu_Title['Pers_Gen'];		// Titre pour META
@@ -291,7 +292,6 @@ else {
 
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		// $font_pdf = 'LibreBaskerville';
@@ -500,11 +500,11 @@ if($sortie_pdf) {
 					'<a href="Vue_Personnalisee.php">' . my_html($LG_LPersG_limited_max_gen_3) . '</a>' .
 					my_html($LG_LPersG_limited_max_gen_4) . "\n";
 			}
-			include('jscripts/Liste_Patro.js');		// Même javascript que la liste patronymique
+			echo '<script src="jscripts/Liste_Patro.js"></script>';
 		}
 	}
 } else {
-	if (!$CSV) include('jscripts/Liste_Patro.js');
+	if (!$CSV) echo '<script src="jscripts/Liste_Patro.js"></script>';
 	$erreur = Erreur_DeCujus();
 }
 

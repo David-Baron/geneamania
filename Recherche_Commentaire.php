@@ -60,7 +60,7 @@ if ($est_gestionnaire) {
 	//Demande de recherche
 	if ($bt_OK) {
 
-		include_once('Commun_Rech_Com_Util_Docs.php');
+		include_once __DIR__ .'/fonctions/rech_com_util_docs.php';
 
 		if ($Sortie == 'c') {
 			$gz = false;
@@ -231,7 +231,9 @@ if ($est_gestionnaire) {
 		echo '</table>' . "\n";
 		echo '</form>' . "\n";
 
-		include('Insert_Tiny.js');
+		// tinymce
+		echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+		echo '<script src="assets/js/tinymce.js"></script>';
 	}
 
 	if ($Sortie != 't') Insere_Bas($compl);

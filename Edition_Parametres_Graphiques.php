@@ -474,7 +474,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 
 	Insere_Bas($compl);
 
-	echo '<script src="gest_onglets.js"></script>'; //include('gest_onglets.js');
+	echo '<script src="assets/js/gest_onglets.js"></script>'; //include('gest_onglets.js');
 	echo '<script src="jscripts/Edition_Parametres_Graphiques.js"></script>'; //include('jscripts/Edition_Parametres_Graphiques.js');
 	//include('jscripts/jscolor.js');
 	echo '<script type="text/javascript" src="jscripts/jscolor.js"></script>';

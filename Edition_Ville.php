@@ -369,7 +369,7 @@ if (($ok == '') && ($annuler == '')) {
 	} else {
 		// Tinymce
 		echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
-		echo '<script src="Insert_Tiny.js"></script>';
+		echo '<script src="assets/js/tinymce.js"></script>';
 
 		echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'Nom_VilleV\')" action="' . my_self() . '?Ident=' . $Ident . '">' . "\n";
 		aff_origine();
@@ -387,7 +387,7 @@ if (($ok == '') && ($annuler == '')) {
 	}
 	Insere_Bas($compl);
 }
-echo '<script src="gest_onglets.js"></script>';
+echo '<script src="assets/js/gest_onglets.js"></script>';
 
 function champ_carte($libelle, $nom_champ, $valeur)
 {

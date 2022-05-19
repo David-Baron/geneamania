@@ -69,7 +69,7 @@ $Ind_Ref = 0;
 
 if ($bt_OK) {
 	Ecrit_Entete_Page(my_html($titre), $contenu, $mots);
-	include('monSSG.js');
+	echo '<script src="assets/js/function.js"></script>';
 }
 
 Insere_Haut(my_html($titre), $compl, 'Verif_Sosa', '');

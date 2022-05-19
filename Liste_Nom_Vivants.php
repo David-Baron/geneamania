@@ -8,6 +8,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
+require_once __DIR__ . '/html2pdfb.php';
 
 $acces = 'L';                          // Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Living_Pers'];
@@ -26,7 +27,7 @@ if ((!$SiteGratuit) or ($Premium)) {
 // Recup de la variable passée dans l'URL : texte ou non
 $texte = Dem_Texte();
 
-if (!$texte) include('jscripts/Liste_Patro.js');		// Même javascript que la liste patronymique
+if (!$texte) echo '<script src="jscripts/Liste_Patro.js"></script>';		// Même javascript que la liste patronymique
 
 $Nom = 0;
 // Récupération des variables de l'affichage précédent
@@ -70,7 +71,6 @@ if (!$texte) {
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
 		if ($debug) echo 'demande sortie pdf...<br />';
-		require('html2pdfb.php');
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		PDF_AddPolice($pdf);

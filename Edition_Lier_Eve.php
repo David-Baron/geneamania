@@ -193,8 +193,8 @@ if (($bt_Sup) or ($bt_OK)) {
 	//  =============================================================================================
 	//  Affichage pour saisie
 	//  =============================================================================================
-
-	include('jscripts/Edition_Lier_Eve.js');
+	
+	echo '<script src="jscripts/Edition_Lier_Eve.js"></script>';
 
 	$compl = Ajoute_Page_Info(600, 200);
 

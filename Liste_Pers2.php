@@ -110,7 +110,7 @@ if (!$texte) {
 } else {
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
+		require_once __DIR__ . '/html2pdfb.php';
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		$pdf->SetFont($font_pdf, '', 12);

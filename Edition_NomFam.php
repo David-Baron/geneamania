@@ -223,7 +223,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 
 	// Tinymce
 	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
-	echo '<script src="Insert_Tiny.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 	// echo '<script src="jscripts/Edition_NomFam.js"></script>'; // TODO: Don't use!!! php code inside!!!
 	?>
 <script>

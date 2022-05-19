@@ -42,7 +42,7 @@ Insere_Haut($titre, $compl, 'Import_Docs', '');
 if ($bt_OK) {
 
 	Ecrit_Entete_Page($titre, $contenu, $mots);
-	include('monSSG.js');
+	echo '<script src="assets/js/monSSG.js"></script>';
 
 	$nb_docs = count($_FILES["nom_du_fichier"]["name"]);
 

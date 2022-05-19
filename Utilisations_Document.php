@@ -8,6 +8,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ . '/fonctions/rech_com_util_docs.php';
 
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
@@ -30,8 +31,6 @@ $x = Lit_Env();
 
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
-
-include('Commun_Rech_Com_Util_Docs.php');
 
 // Recup des variables passées dans l'URL : référence du document
 $Reference = Recup_Variable('Doc', 'N');

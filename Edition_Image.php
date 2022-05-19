@@ -182,8 +182,10 @@ if ($bt_OK) {
 // Première entrée : affichage pour saisie
 if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 
-	include('Insert_Tiny.js');
-	//include('jscripts/Edition_Image.js');
+	// Tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
+	//echo '<script src="jscripts/Edition_Image.js"></script>';
 
 	$compl = Ajoute_Page_Info(650, 250);
 	Insere_Haut($titre, $compl, 'Edition_Image', $ident_image);

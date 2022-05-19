@@ -137,8 +137,10 @@ if ($bt_OK) {
 // Première entrée : affichage pour saisie
 if ((!$bt_OK) && (!$bt_An)) {
 
-	echo '<script src="jscripts/Edition_Parametres_Graphiques.js"></script>'; //include('jscripts/Edition_Parametres_Graphiques.js');
-	include('Insert_Tiny.js');
+	echo '<script src="jscripts/Edition_Parametres_Graphiques.js"></script>';
+	// tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 
 	$compl = Ajoute_Page_Info(600, 150);
 	Insere_Haut(my_html($titre), $compl, 'Edition_Parametres_Site', '');

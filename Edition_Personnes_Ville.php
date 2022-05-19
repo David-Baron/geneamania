@@ -180,7 +180,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 		echo '</td>' . "\n";
 		if ($Type_Liste == 'D') {
 			echo '<td class="' . $style . '">';
-			zone_date('Decede_leP_' . $nb, 'CDecede_leP_' . $nb, 'imgCal_Dec_' . $nb, 'Calendrier_Pers_D(' . $nb . ')');
+			zone_date2('Decede_leP_' . $nb, 'CDecede_leP_' . $nb, 'imgCal_Dec_' . $nb, 'Calendrier_Pers_D(' . $nb . ')');
 			echo '</td>' . "\n";
 		}
 		echo '<td class="' . $style . '"><input type="radio" name="SexeP_' . $nb . '" value="m"/>H';

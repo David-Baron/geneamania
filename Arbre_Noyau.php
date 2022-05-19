@@ -50,7 +50,7 @@ $existe_images = false;
 
 $img_asc = '<img src="' . $chemin_images . $Icones['arbre_asc'] . '" border="0" title="' . $LG_assc_tree . '" alt="' . $LG_assc_tree . '"/>';
 $img_desc = '<img src="' . $chemin_images . $Icones['arbre_desc'] . '" border="0" title="' . $LG_desc_tree . '" alt="' . $LG_desc_tree . '"/>';
-$img_image = '   <img src="' . $chemin_images . $Icones['images'] . '" border="0" ';
+$img_image = '<img src="' . $chemin_images . $Icones['images'] . '" border="0" ';
 
 if ($Comportement == 'C') $evenement = 'onclick';
 else $evenement = 'onmouseover';

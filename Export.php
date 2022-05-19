@@ -209,7 +209,7 @@ if ($bt_OK) {
 		// Tentative de création du fichier
 		$nom_fic_vers = 'version.txt';
 		$fps = fopen($nom_fic_vers, 'wb');
-		if (!$fps) die("Impossible de cr&eacute;er $nom_fic_vers.");
+		if (!$fps) die("Impossible de créer $nom_fic_vers.");
 		fwrite($fps, $Version);
 		fclose($fps);
 	}

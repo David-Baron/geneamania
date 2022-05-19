@@ -205,10 +205,10 @@ if (!$est_contributeur) {
 	return;
 } else {
 	echo '<script src="jscripts/Edition_Evenement.js"></script>';
-	echo '<script src="gest_onglets.js"></script>';
+	echo '<script src="assets/js/gest_onglets.js"></script>';
 	// Tinymce
 	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
-	echo '<script src="Insert_Tiny.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 
 	//  == Affiche les données propres à l'enregistrement de la fiche ==
 	$requete = 'SELECT * FROM ' . nom_table('evenements') . ' e, ' . nom_table('types_evenement') . ' t' .
@@ -502,7 +502,7 @@ if (!$est_contributeur) {
 		echo '<hr/>';
 		$x = Aff_Sources_Objet($refPar, 'E', 'N');
 		// Possibilité de lier un document pour l'évènement
-		echo '<br /> Lier une source existante à l\'&eacute;v&egrave;nement : ' .
+		echo '<br /> Lier une source existante à l\'évènement : ' .
 			Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet=' . $refPar . '&amp;typeObjet=E&amp;refSrc=-1"', 'ajout', 'Ajout d\'une source') . "\n";
 	}
 	echo '</div>' . "\n";

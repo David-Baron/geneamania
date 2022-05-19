@@ -8,7 +8,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
-
+include_once __DIR__ . '/classes/Phonetique.php';
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Init_Names'];
 $x = Lit_Env();
@@ -24,10 +24,7 @@ function Creation_Noms()
 	global $idNom, $Init, $existe_null,
 		$n_personnes, $n_noms, $n_liens_noms;
 
-	//    Appel du fichier contenant la classe
-	include 'phonetique.php';
-	//    Initialisation d'un objet de la classe
-	$codePho = new phonetique();
+	$codePho = new Phonetique();
 
 	$Anom = '';
 	$idNom = Nouvel_Identifiant('idNomFam', 'noms_famille') - 1;

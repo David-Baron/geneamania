@@ -349,7 +349,9 @@ if ($bt_OK) {
 // Première entrée : affichage pour saisie
 if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 
-	include('Insert_Tiny.js');
+	// Tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 
 	$compl = Ajoute_Page_Info(600, 150);
 	// Lien vers la fiche uniquement en modification
@@ -377,7 +379,7 @@ if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
 	$x = Aff_Lien($enreg2);
 
 	echo '</form>';
-	include('gest_onglets.js');
+	echo '<script src="assets/js/gest_onglets.js"></script>';
 	echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
 	echo '<script type="text/javascript">' . "\n";
 	echo '	setupPanes("container1", "tab1", 40);' . "\n";

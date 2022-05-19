@@ -9,6 +9,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ .'/piechart3.php';
 
 $tab_variables = array('cache', 'annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
@@ -126,7 +127,7 @@ $largeur = 300;
 $hauteur = 250;
 $largeur_labels = 180;
 
-include('piechart3.php');
+
 echo '<br />';
 echo '<table align="center" border="0">';
 echo '<tr>';

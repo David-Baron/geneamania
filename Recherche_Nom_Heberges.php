@@ -49,7 +49,7 @@ if ($linkid) {
 $compl = Ajoute_Page_Info(600, 300);
 Insere_Haut($titre, $compl, 'Recherche_Nom_Heberges', $NomL);
 
-echo '<br /><br />R&eacute;sultat pour le nom : ' . stripslashes($NomL) . '<br /><br />';
+echo '<br /><br />Résultat pour le nom : ' . stripslashes($NomL) . '<br /><br />';
 
 $req2 = ' where Reference <> 0 and Diff_Internet = \'O\'' .
 	' and upper(Nom) = "' . $NomL . '" order by Nom, Prenoms';

@@ -39,7 +39,7 @@ $NomL  = Recup_Variable('Nom', 'S');               // Nom de ville
 $NomL = str_replace(' ', '-', $NomL);
 $NomL = strtoupper($NomL);
 
-// On repasse sur l'utilisateur g�n�rique...
+// On repasse sur l'utilisateur générique...
 include('../connexion_inc.php');
 
 $linkid = mysql_connect($nserveur, $nutil, $nmdp);

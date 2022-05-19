@@ -6,6 +6,7 @@
 session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
+include_once __DIR__ . '/fonctions/fonctions_maj.php';
 include_once __DIR__ .'/fonctions/pages.php';
 
 // Récupération des variables de l'affichage précédent
@@ -46,8 +47,8 @@ if ($Modif) $titre = $LG_Menu_Title['Person_Modify'];	// Titre pour META
 else $titre = $LG_Menu_Title['Person_Add'];
 $x = Lit_Env();
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+
+if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 
 $Existe_Union = false;
 
@@ -820,7 +821,7 @@ function removeRowFromTable() {
 	<?php
 	// Tinymce
 	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
-	echo '<script src="Insert_Tiny.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 
 	// Récupération des données de la personne
 	$sql = 'select * from ' . nom_table('personnes') . ' where Reference = ' . $Refer . ' limit 1';
@@ -888,7 +889,7 @@ function removeRowFromTable() {
 	echo "<body bgcolor=\"#FFFFFF\">";
 }
 
-echo '<script src="gest_onglets.js"></script>';
+echo '<script src="assets/js/gest_onglets.js"></script>';
 ?>
 
 <!-- On cache les div d'ajout des villes et du nom et on positionne l'onglet par défaut -->

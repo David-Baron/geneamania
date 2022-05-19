@@ -80,7 +80,7 @@ if (!$texte) Insere_Haut(my_html($objet), $compl, 'Liste_Pers', $Type_Liste);
 
 $sortie = 'H';
 
-if (!$texte) include('jscripts/edition_geneamania.js');
+if (!$texte) echo '<script src="jscripts/edition_geneamania.js"></script>'; // include('jscripts/edition_geneamania.js');
 
 // Préparation sur la clause de diffusabilité
 $p_diff_int = '';
@@ -199,7 +199,7 @@ if (!$texte) {
 	// Sur les sites hébergés, uniquement pour les Premium
 	if ((!$SiteGratuit) or ($Premium)) {
 		if ((!$texte) and ($Type_Liste == 'P')) {
-			include('jscripts/Liste_Pers.js');
+			echo '<script src="jscripts/Liste_Pers.js"></script>'; // include('jscripts/Liste_Pers.js');
 			$self = my_self();
 			echo '<form id="saisieP" method="post" action="' . $self . '?' . Query_Str() . '">' . "\n";
 			echo '<input type="' . $hidden . '" id="page" value = "' . $self . '" />';
@@ -332,7 +332,7 @@ if (!$texte) {
 else {
 	// Sortie dans un PDF
 	if ($sortie_pdf) {
-		require('html2pdfb.php');
+		require_once __DIR__ . '/html2pdfb.php';
 		$sortie = 'P';
 		$pdf = new PDF_HTML();
 		$pdf->SetFont($font_pdf, '', 12);

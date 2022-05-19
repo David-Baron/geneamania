@@ -305,7 +305,7 @@ function Aff_Filiation($enreg)
 	echo '<hr/>';
 	$x = Aff_Sources_Objet($Refer, 'F', 'N');
 	// Possibilité de lier une source pour la filiation
-	echo '<br /> Lier une nouvelle source &agrave; la filiation : ' .
+	echo '<br /> Lier une nouvelle source à la filiation : ' .
 		Affiche_Icone_Lien('href="Edition_Lier_Source.php?refObjet=' . $Refer . '&amp;typeObjet=F&amp;refSrc=-1"', 'ajout', 'Ajout d\'une source') . "\n";
 	echo '</div>' . "\n";
 
@@ -438,9 +438,11 @@ if ((!$bt_OK) && (!$bt_An)) {
 	// Récupération de la liste des types
 	Recup_Types_Evt('F');
 
-	include('jscripts/Edition_Filiation.js');
-	include('jscripts/Ajout_Evenement.js');
-	include('Insert_Tiny.js');
+	echo '<script src="jscripts/Edition_Filiation.js"></script>';
+	echo '<script src="jscripts/Ajout_Evenement.js"></script>';
+	// Tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>';
 	$compl = '';
 
 	$sql = 'select Nom, Prenoms, Sexe, Ne_le, Decede_Le from ' . nom_table('personnes') . ' where reference = ' . $Refer . ' limit 1';
@@ -465,7 +467,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 	$x = Aff_Filiation($enreg);
 
 	echo '</form>';
-	include('gest_onglets.js');
+	echo '<script src="assets/js/gest_onglets.js"></script>';
 	echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
 	echo '<script type="text/javascript">' . "\n";
 	echo '	setupPanes("container1", "tab1", 40);' . "\n";

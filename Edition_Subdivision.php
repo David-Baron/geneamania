@@ -330,8 +330,10 @@ if (($ok == '') && ($annuler == '')) {
 		echo '<br/ >Subdivision supprim&eacutee<br/ >';
 		echo '<a href="Liste_Villes.php?Type_Liste=S">' . my_html(LG_SUBDIV_LIST) . '</a>';
 	} else {
-		include('Insert_Tiny.js');
-		include('jscripts/Edition_Ville.js');
+		// tinymce
+		echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+		echo '<script src="Insert_Tiny.js"></script>';
+		echo '<script src="jscripts/Edition_Ville.js"></script>';
 
 		echo '<form id="saisie" method="post" onsubmit="return verification_form(this,\'Nom_SubDiv\')" action="' . my_self() . '?Ident=' . $Ident . '">' . "\n";
 		aff_origine();
@@ -349,7 +351,7 @@ if (($ok == '') && ($annuler == '')) {
 	}
 	Insere_Bas($compl);
 }
-include('gest_onglets.js');
+echo '<script src="assets/js/gest_onglets.js"></script>';
 
 function champ_carte($libelle, $nom_champ, $valeur)
 {

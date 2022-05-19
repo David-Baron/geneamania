@@ -7,7 +7,8 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
-include_once __DIR__ . '/classes/Phonetique.php';		//	Traitements phonétiques
+include_once __DIR__ . '/classes/Phonetique.php';
+
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 
 // Recup de la variable passée dans l'URL : texte ou non

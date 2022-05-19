@@ -43,6 +43,7 @@ $tab_variables = array(
 	'type_action', 'n_table',
 	'Horigine'
 );
+
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];
 	else $$nom_variables = '';

@@ -171,9 +171,9 @@ function Traite_nom_Ins(&$nom_traite, $indic_maj, $ANom = '')
 				// Initialisation technique des noms
 				if ($premier_nom) {
 					// Appel du fichier contenant la classe
-					include 'phonetique.php';
+					include_once __DIR__ . '/classes/Phonetique.php';
 					// Initialisation d'un objet de la classe
-					$codePho = new phonetique();
+					$codePho = new Phonetique();
 					$idNom = Nouvel_Identifiant('idNomFam', 'noms_famille') - 1;
 					$premier_nom = false;
 				}
@@ -511,7 +511,7 @@ function Aff_Pers2($suffixe, $donnees_ini, $donnees_prop)
 				$sql = $sql . 'Mere = ' . $Reference_Personne;
 				break;
 			default:
-				$sql = $sql . 'Pere = ' . $Reference_Personne . ' or Mere =' . $reference;
+				$sql = $sql . 'Pere = ' . $Reference_Personne . ' or Mere =' . $Reference_Personne;
 				break;
 		}
 		//    tri des enfants par rang
@@ -1481,7 +1481,7 @@ if ((!$bt_OK) && (!$bt_An)) {
 				echo '</td></tr></table></div>' . "\n";
 
 				echo '</form>';
-				include('gest_onglets.js');
+				echo '<script src="assets/js/gest_onglets.js"></script>'; //include('gest_onglets.js');
 				echo '<!-- On positionne l\'onglet par défaut -->' . "\n";
 				echo '<script type="text/javascript">' . "\n";
 				echo '	setupPanes("container1", "tab1",0);' . "\n";

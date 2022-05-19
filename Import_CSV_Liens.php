@@ -9,6 +9,7 @@ session_start();
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
 include_once __DIR__ . '/fonctions/pages.php';
+include_once __DIR__ . '/fonctions/import_CSV.php';
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -55,8 +56,6 @@ if ($bt_OK) Ecrit_Entete_Page($titre, '', '');
 
 $compl = Ajoute_Page_Info(600, 300);
 Insere_Haut($titre, $compl, 'Import_Gedcom', '');
-
-include('Commun_Import_CSV.php');
 
 //Demande de chargement
 if ($ok == 'OK') {

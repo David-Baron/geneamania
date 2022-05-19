@@ -7,6 +7,7 @@ session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/pages.php';
+
 $acces = 'L';                          // Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Contribs_List'];    // Titre pour META
 $x = Lit_Env();

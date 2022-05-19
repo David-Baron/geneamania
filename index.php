@@ -71,9 +71,6 @@ $verrou = false;// Possibilité de bloquer la connexion ==> verrouillage du site
 if (file_exists('maintenance.php')) $maintenance = true;
 if (file_exists('verrou.php')) $verrou = true;
 
-
-
-
 function cryptmail($addmail)
 {
 	$addmailcode = '';
@@ -616,8 +613,10 @@ for ($nb=0;$nb<count($_SESSION['pages']);$nb++) echo 'Page '.$nb.' : '.$_SESSION
 */
 
 // @Deprecated Don't use sha encryption anymore!
-include 'jscripts/ctrlMotPasse.js';
+// include 'jscripts/ctrlMotPasse.js';
 ?>
+
+<script src="jscripts/ctrlMotPasse.js"></script>
 </body>
 
 </html>

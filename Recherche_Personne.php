@@ -289,7 +289,7 @@ if ($bt_OK) {
 		}
 		// L'utilisateur a demandé à mémoriser la requête
 		if ($Memo_Req == 'O') {
-			include('fonctions_maj.php');
+			include_once __DIR__ . '/fonctions/fonctions_maj.php';
 			echo my_html(LG_PERS_REQ_SAVE) . LGSEMIC . $TitreReq . '<br />';
 			$req_memo = '';
 			Ins_Zone_Req($TitreReq, 'A', $req_memo);

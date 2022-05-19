@@ -241,8 +241,11 @@ if ($bt_OK) {
 
 // Première entrée : affichage pour saisie
 if ((!$bt_OK) && (!$bt_An) && (!$bt_Sup)) {
-	include('Insert_Tiny.js');
-	include('jscripts/Edition_Document.js');
+
+	// tinymce
+	echo '<script src="libs/tiny_mce/tiny_mce.js"></script>';
+	echo '<script src="assets/js/tinymce.js"></script>'; //include('Insert_Tiny.js');
+	echo '<script src="jscripts/Edition_Document.js"></script>'; //include('jscripts/Edition_Document.js');
 
 	$compl = Ajoute_Page_Info(600, 20);
 

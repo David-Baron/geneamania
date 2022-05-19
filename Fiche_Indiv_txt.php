@@ -185,7 +185,7 @@ $gen = Calc_Gener($enr_pers['Numero']);
 
 // Sortie dans un PDF
 if ($sortie_pdf) {
-	require('html2pdfb.php');
+	require_once __DIR__ . '/fonctions/html2pdfb.php';
 	$sortie = 'P';
 	$pdf = new PDF_HTML();
 	PDF_AddPolice($pdf);

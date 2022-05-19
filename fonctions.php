@@ -73,7 +73,7 @@ $Natures_Docs = array(
 function is_info()
 {
 	global $suffixe_info;
-	if (strpos(my_self(), $suffixe_info) !== false)
+	if ($suffixe_info && strpos(my_self(), $suffixe_info) !== false)
 		return true;
 	else
 		return false;

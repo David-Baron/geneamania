@@ -592,14 +592,16 @@ function Ecrit_meta($titre, $cont, $mots, $index_follow = 'IF')
 		$Coul_Lib, $Coul_Val, $Coul_Bord, $Coul_Paires, $Coul_Impaires, $coul_fond_table;
 	echo '<title>' . my_html($titre) . '</title>' . "\n";
 	echo '<meta name="description" content="' . $cont . '"/>' . "\n";
-	echo '<meta name="keywords" content="Généalogie, Genealogy, Généalogie, gratuit, logiciel, Geneamania, Généamania, Généamania';
+	//echo '<meta name="keywords" content="Généalogie, Genealogy, Généalogie, gratuit, logiciel, Geneamania, Généamania, Généamania';
 	if ($mots != '') echo ', ' . $mots;
-	echo '"/>' . "\n";
-	echo '<meta name="owner" content="support@geneamania.net"/>' . "\n";
-	echo '<meta name="author" content="Jean-Luc Servin"/>' . "\n";
-	echo '<meta http-equiv="content-LANGUAGE" content="French"/>' . "\n";
+	//echo '"/>' . "\n";
+	//echo '<meta name="owner" content="support@geneamania.net"/>' . "\n";
+	//echo '<meta name="author" content="Jean-Luc Servin"/>' . "\n";
+	//echo '<meta http-equiv="content-LANGUAGE" content="French"/>' . "\n";
 	// echo '<meta http-equiv="content-TYPE" content="text/html; charset=iso-8859-1"/>' . "\n";
-	echo '<meta http-equiv="content-TYPE" content="text/html; charset=UTF-8"/>' . "\n";
+	//echo '<meta http-equiv="content-TYPE" content="text/html; charset=UTF-8"/>' . "\n";
+	echo '<meta charset="UTF-8"/>' . "\n";
+
 	// Balises index et follow pour restreindre les robots ==> NOINDEX, NOFOLLOW
 	if ($index_follow != 'IF') {
 		$p1 = '';
@@ -1056,7 +1058,7 @@ function UnPrenom($LesPrenoms)
 // Validation, création, modification ; fs : affichage dans un fieldset
 function Affiche_Fiche($enreg, $fs = 0)
 {
-	$Statut_Fiche = $enreg['Statut_Fiche'];
+	$Statut_Fiche = $enreg['Statut_Fiche'] ?? null;
 	if ($fs == 0) {
 		echo '<table width="85%" border="1">' . "\n";
 		echo '<tr>' . "\n";
@@ -1085,8 +1087,8 @@ function Affiche_Fiche($enreg, $fs = 0)
 		echo '</fieldset>' . "\n";
 		echo '<fieldset>' . "\n";
 		echo '<legend>Tra&ccedil;abilité</legend>' . "\n";
-		echo 'Création : ' . DateTime_Fr($enreg['Date_Creation']) . '<br />' . "\n";
-		echo 'Modification : ' . DateTime_Fr($enreg['Date_Modification']) . "\n";
+		echo 'Création : ' . DateTime_Fr($enreg['Date_Creation'] ?? '') . '<br />' . "\n";
+		echo 'Modification : ' . DateTime_Fr($enreg['Date_Modification'] ?? '') . "\n";
 		echo '</fieldset>' . "\n";
 	}
 }
@@ -1137,13 +1139,14 @@ function Rech_Commentaire(int $Reference, string $Type_Objet)
 	$Diffusion_Commentaire_Internet = 'N';
 	$Reference++; // Sinon, si la référence vaut 0, la requête n'est pas appelée :-(
 	if ($Reference) {
-		$sqlN = 'SELECT Note, Diff_Internet_Note FROM ' . nom_table('commentaires') .
+		$sql = 'SELECT Note, Diff_Internet_Note FROM ' . nom_table('commentaires') .
 			' WHERE Reference_Objet = ' . $Reference . ' AND Type_Objet = \'' . $Type_Objet . '\' LIMIT 1';
-		if ($resN = lect_sql($sqlN)) {
-			$comment = $resN->fetch();
-			$Commentaire = $comment[0];
-			$Diffusion_Commentaire_Internet = $comment[1];
-			if ($Commentaire != '') $Result = true;
+		$stmt = lect_sql($sql);
+		$result = $stmt->fetch(PDO::FETCH_NUM);
+		if ($result) {
+			$Commentaire = $result[0];
+			$Diffusion_Commentaire_Internet = $result[1];
+			$Result = true;
 		}
 	}
 	return $Result;
@@ -1971,7 +1974,7 @@ function Aff_Comment_Fiche($divers, $diff)
 {
 	global $est_privilegie, $def_enc;
 	if (($divers != '') and (($est_privilegie) or ($diff == 'O'))) {
-		echo '<fieldset><legend>Note</legend>' . html_entity_decode(my_html($divers), ENT_QUOTES, $def_enc) . '</fieldset><br />' . "\n";
+		echo '<fieldset><legend>Note</legend>' . html_entity_decode(my_html($divers), ENT_QUOTES) . '</fieldset><br />' . "\n";
 	}
 }
 
@@ -3026,13 +3029,11 @@ function Query_Str()
 // Appel de my_html// Appel de htmlentities
 function my_html($chaine)
 {
-	global $def_enc;
-	return htmlentities($chaine, ENT_QUOTES, $def_enc);
+	return htmlentities($chaine, ENT_QUOTES);
 }
 function my_html_inv($chaine)
 {
-	global $def_enc;
-	return html_entity_decode($chaine, ENT_QUOTES, $def_enc);
+	return html_entity_decode($chaine, ENT_QUOTES);
 }
 
 // Récupère la liste des champs d'une requête SQL
@@ -3246,4 +3247,4 @@ function appelle_carte_osm()
 
 
 // header('content-type: text/html; charset=' . $def_enc);
-// header('content-type: text/html; charset=UTF-8');
+header('content-type: text/html; charset=UTF-8');

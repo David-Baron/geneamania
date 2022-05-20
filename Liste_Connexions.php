@@ -6,7 +6,7 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $tab_variables = array('annuler');
 foreach ($tab_variables as $nom_variables) {
@@ -23,6 +23,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 $acces = 'L';
 $titre = $LG_Menu_Title['Connections'];
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $niv_requis = 'G';
 
 // Sortie dans un fichier CSV ?

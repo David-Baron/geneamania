@@ -6,7 +6,7 @@
 session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 function Liste_Noms_Images($chemin)
 {
@@ -195,7 +195,7 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 $niv_requis = 'G';
 $titre = 'Graphisme du site';
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) {
 	Retour_Ar();

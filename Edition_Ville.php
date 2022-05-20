@@ -6,7 +6,7 @@
 session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -37,7 +37,7 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 if ($Ident != -1) $titre = $LG_Menu_Title['Town_Edit'];
 else $titre = $LG_Menu_Title['Town_Add'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 
@@ -107,8 +107,8 @@ function Aff_Ville($enreg2)
 {
 	global $chemin_images, $Images, $Ident, $Environnement, $Commentaire, $Diffusion_Commentaire_Internet, $enreg, $est_gestionnaire, $id_image, $largP, $debug, $lib_Okay, $lib_Annuler, $lib_Supprimer;
 
-	$n_ville = $enreg['Nom_Ville'];
-	$n_ville_html = $enreg2['Nom_Ville'];
+	$n_ville = $enreg['Nom_Ville'] ?? null;
+	$n_ville_html = $enreg2['Nom_Ville'] ?? null;
 	$n_ville_aff = stripslashes($n_ville);
 
 	$largP = 20;
@@ -145,8 +145,9 @@ function Aff_Ville($enreg2)
 	Img_Zone_Oblig('imgObligNom');
 	echo '<input type="hidden" name="ANom_VilleV" value="' . $n_ville_html . '"/></td></tr>' . "\n";
 	col_titre_tab_noClass(LG_ICSV_TOWN_ZIP_CODE, $largP);
-	echo '<td><input type="text" size="10" name="Code_PostalV" value="' . $enreg2["Code_Postal"] . '"/>' . "\n";
-	echo '<input type="hidden" name="ACode_PostalV" value="' . $enreg2["Code_Postal"] . '"/></td></tr>' . "\n";
+	$cp = $enreg2["Code_Postal"] ?? '';
+	echo '<td><input type="text" size="10" name="Code_PostalV" value="' . $cp . '"/>' . "\n";
+	echo '<input type="hidden" name="ACode_PostalV" value="' . $cp . '"/></td></tr>' . "\n";
 	col_titre_tab_noClass(LG_COUNTY, $largP);
 	echo "<td><select name='Zone_MereV'>\n";
 	$sql = 'select Identifiant_zone, Nom_Depart_Min from ' . nom_table('departements') . ' order by Nom_Depart_Min';
@@ -170,9 +171,11 @@ function Aff_Ville($enreg2)
 	echo '<fieldset>' . "\n";
 	aff_legend(LG_ICSV_TOWN_GEO_COORDS);
 	echo '<table width="100%" border="0">' . "\n";
-	champ_carte(LG_ICSV_TOWN_ZIP_LATITUDE, 'Latitude', $enreg2['Latitude']);
+	$lat = $enreg2['Latitude'] ?? null;
+	$long = $enreg2['Longitude'] ?? null;
+	champ_carte(LG_ICSV_TOWN_ZIP_LATITUDE, 'Latitude', $lat);
 	echo '</td></tr>' . "\n";
-	champ_carte(LG_ICSV_TOWN_ZIP_LONGITUDE, 'Longitude', $enreg2['Longitude']);
+	champ_carte(LG_ICSV_TOWN_ZIP_LONGITUDE, 'Longitude', $long);
 	$id_image = 'carte_osm';
 	echo ' ' . Affiche_Icone_Clic("map_go", "apelle_carte('Latitude','Longitude')", LG_CALL_OPENSTREETMAP) . "\n";
 	echo "</td></tr>\n";

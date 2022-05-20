@@ -11,7 +11,7 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -37,7 +37,7 @@ $acces = 'L';
 $titre = $LG_Menu_Title['Find_Doc'];		// Titre pour META
 $niv_requis = 'C';							// Page pour contributeur minimum
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Verrouillage de la gestion des documents sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();
 

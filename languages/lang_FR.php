@@ -14,7 +14,7 @@ if ($pos !== false) $nom_page = substr($nom_page,$pos+1);
 // Spécifique index
 if ($nom_page == 'index.php') {
 //if (strpos($_SERVER['PHP_SELF'],'index.php') !== false) {
-	$LG_index_welcome = 'Bienvenue sur le site de généalogie de';
+	$LG_index_welcome = 'Bienvenue dans la généalogie de';
 	$LG_index_responsability = 'Les données sont publiées sous la responsabilité du titulaire du site';
 	$LG_index_connexion_error = 'Erreur de code utilisateur et/ou mot de passe';
 	$LG_index_title = 'Généalogie';

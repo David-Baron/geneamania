@@ -6,7 +6,7 @@
 session_start();
 
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -49,6 +49,7 @@ if ($actualite) {
 }
 
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $refPar        = Secur_Variable_Post($refPar, 1, 'N');
@@ -219,14 +220,14 @@ if (!$est_contributeur) {
 	$enreg2 = $enreg;
 
 	//  Mise en place des donnees
-	$idZoneLu     = $enreg['Identifiant_zone'];
-	$idNiveauLu   = $enreg['Identifiant_Niveau'];
-	$codeTypeLu   = $enreg['Code_Type'];
-	$titreLu      = $enreg['Titre'];
-	$dDebLu       = $enreg['Debut'];
-	$dFinLu       = $enreg['Fin'];
-	$statutLu     = $enreg['Statut_Fiche'];
-	$objetCibleLu = $enreg['Objet_Cible'];
+	$idZoneLu     = $enreg['Identifiant_zone'] ?? null;
+	$idNiveauLu   = $enreg['Identifiant_Niveau'] ?? null;
+	$codeTypeLu   = $enreg['Code_Type'] ?? null;
+	$titreLu      = $enreg['Titre'] ?? null;
+	$dDebLu       = $enreg['Debut'] ?? null;
+	$dFinLu       = $enreg['Fin'] ?? null;
+	$statutLu     = $enreg['Statut_Fiche'] ?? null;
+	$objetCibleLu = $enreg['Objet_Cible'] ?? null;
 	//  Recherche si l'evenement est lie a une personne, a une filiation ou a une union
 	$nbLiens = 0;
 	if ($refPar != -1) {

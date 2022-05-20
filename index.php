@@ -35,7 +35,7 @@ $util_defaut = 'Anonyme';
 $is_windows = (substr(php_uname(), 0, 7) == "Windows") ? true : false;
 
 // Demande de lancement de GénéGraphe
-if ($geneGraphe == 'exec') {
+/* if ($geneGraphe == 'exec') {
 	$cmd = 'GeneGraphe.jar';
 	if ($is_windows) {
 		pclose(popen("start /B " . $cmd, "r"));
@@ -43,14 +43,14 @@ if ($geneGraphe == 'exec') {
 		$cmd = getcwd() . "/" . $cmd;
 		exec("DISPLAY=:0.0 " . $cmd . " > /dev/null &");
 	}
-}
+} */
 
 $_SESSION['sens'] = '>';
 
 /* echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"' . "\n" .
 	'"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'; */
 echo '<!DOCTYPE html>';
-echo '<html>' . "\n";
+echo '<html lang="fr">' . "\n";
 echo '<head>' . "\n";
 echo '<meta charset=UTF-8"/>' . "\n";
 // On vide l'empilement des pages
@@ -200,6 +200,7 @@ if ($NomU != '') {
 if (!isset($_SESSION['nomUtilisateur'])) $_SESSION['nomUtilisateur'] = $util_defaut;
 
 Ecrit_Meta($LG_index_title . ' ' . $Nom, $LG_index_desc . ' ' . $Nom, '');
+
 echo '</head>' . "\n";
 
 // Affichage de l'image de fond
@@ -252,7 +253,7 @@ echo '</table>' . "\n";
 //echo '<a href="Demarrage_Rapide.php">Demarrage_Rapide</a>';
 
 // Menus...
-if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
+if (($vers_fic == $Version) && (!$maintenance) && (!$verrou)) {
 
 	// TODO: ERR:1 cause break in front
 	/* $Existe_Commentaire = false;
@@ -331,7 +332,7 @@ if (($vers_fic == $Version) and (!$maintenance)  and (!$verrou)) {
 	echo '</div>';
 	echo '</form>' . "\n";
 
-	//$Base_Vide = true;
+	// $Base_Vide = true;
 	if (!$Base_Vide) {
 		echo '<table width="60%" align="center" border="0">';
 		//echo '<table width="80%" align="center" border="0" class="tab_bord_bas">';

@@ -151,7 +151,7 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	echo '</td></tr>' . "\n";
 
 	// Prénoms
-	$c_zone = $enreg2['Prenoms'] ?? null;
+	$c_zone = $enreg2['Prenoms'] ?? '';
 	col_titre_tab_noClass(LG_PERS_FIRST_NAME, $largP);
 	echo '<td colspan="2"><input type="text" size="50" name="PrenomsP" id="PrenomsP" value="' . $c_zone . '" class="oblig"/> ' . "\n";
 	Img_Zone_Oblig('imgObligPrenom');
@@ -159,35 +159,36 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	echo '</td></tr>' . "\n";
 
 	// Surnom
-	$c_zone = $enreg2['Surnom'] ?? null;
+	$c_zone = $enreg2['Surnom'] ?? '';
 	col_titre_tab_noClass(LG_PERS_SURNAME, $largP);
 	echo '<td colspan="2"><input type="text" size="50" name="SurnomP" id="SurnomP" value="' . $c_zone . '"/>' . "\n";
 	echo '<input type="hidden" name="ASurnomP" value="' . $c_zone . '"/>' . "\n";
 	echo '</td></tr>' . "\n";
 
 	//Sexe
-	$SexePers = $enreg2['Sexe'] ?? null;
+	$SexePers = $enreg2['Sexe'] ?? '';
 	col_titre_tab_noClass(LG_SEXE, $largP);
 	echo '<td colspan="2"><input type="radio" name="SexeP" id="SexeM" value="m"';
-	if ($enreg2['Sexe'] == 'm') echo ' checked="checked"';
+	if ($SexePers && $SexePers == 'm') echo ' checked="checked"';
 	echo ' />' . my_html(LG_SEXE_MAN) . " \n";
 	echo '<input type="radio" name="SexeP" id="SexeF" value="f"';
-	if ($enreg2['Sexe'] == 'f') echo ' checked="checked"';
+	if ($SexePers && $SexePers == 'f') echo ' checked="checked"';
 	echo ' />' . my_html(LG_SEXE_WOMAN) . "\n";
 	echo '<input type="hidden" name="ASexeP" value="' . $SexePers . '"/></td>' . "\n";
 	echo "</tr>\n";
 	//Naissance
 	col_titre_tab_noClass(LG_PERS_BORN, $largP);
 	echo '<td colspan="2">';
-	zone_date2('ANe_leP', 'Ne_leP', 'CNe_leP', $enreg2['Ne_le']);
+	zone_date2('ANe_leP', 'Ne_leP', 'CNe_leP', $enreg2['Ne_le'] ?? '');
 	echo ' ' . my_html($LG_at) . ' ';
+	$villeN = $enreg2['Ville_Naissance'] ?? null;
 	aff_liste_villes(
 		'Ville_NaissanceP',
 		1,                  // C'est la première fois que l'on appelle la fonction dans la page
 		0,                  // On est susceptible de rappeler la fonction
-		$enreg2['Ville_Naissance']
+		$villeN
 	); // Clé de sélection de la ligne
-	echo '<input type="hidden" name="AVille_NaissanceP" value="' . $enreg2['Ville_Naissance'] . '"/>' . "\n";
+	echo '<input type="hidden" name="AVille_NaissanceP" value="' . $villeN . '"/>' . "\n";
 	// Possibilité d'ajouter une ville
 	echo '<img id="ajout1" src="' . $chemin_images . $Icones['ajout'] . '" alt="' . LG_ADD_TOWN . '" title="' . LG_ADD_TOWN . '"' .
 		' onclick="inverse_div(\'id_div_ajout1\');document.getElementById(\'nouvelle_ville1\').focus();"/>' . "\n";
@@ -204,15 +205,16 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	//Décès
 	col_titre_tab_noClass(LG_PERS_DEAD, $largP);
 	echo '<td colspan="2">';
-	zone_date2('ADecede_LeP', 'Decede_LeP', 'CDecede_LeP', $enreg2['Decede_Le']);
+	zone_date2('ADecede_LeP', 'Decede_LeP', 'CDecede_LeP', $enreg2['Decede_Le'] ?? 0);
 	echo ' ' . my_html($LG_at) . ' ';
+	$villeD = $enreg2['Ville_Deces'] ?? null;
 	aff_liste_villes(
 		'Ville_DecesP',
 		0,                  // Ce n'est pas la première fois que l'on appelle la fonction dans la page
 		1,                  // On n'est pas susceptible de rappeler la fonction
-		$enreg2['Ville_Deces']
+		$villeD
 	); // Clé de sélection de la ligne
-	echo '<input type="hidden" name="AVille_DecesP" value="' . $enreg2['Ville_Deces'] . '"/>';
+	echo '<input type="hidden" name="AVille_DecesP" value="' . $villeD . '"/>';
 	// Possibilité d'ajouter une ville
 	echo '<img id="ajout2" src="' . $chemin_images . $Icones['ajout'] . '" alt="' . LG_ADD_TOWN . '" title="' . LG_ADD_TOWN . '"' .
 		'onclick="inverse_div(\'id_div_ajout2\');document.getElementById(\'nouvelle_ville2\').focus();"/>' . "\n";
@@ -232,7 +234,7 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	echo '<fieldset>' . "\n";
 	aff_legend(LG_PERS_NUMBER);
 	echo '<table width="95%" border="0">' . "\n";
-	$c_zone = $enreg2['Numero'];
+	$c_zone = $enreg2['Numero'] ?? null;
 	col_titre_tab_noClass(LG_PERS_NUMBER, $largP);
 	echo '<td><input type="text" size="20" name="NumeroP" id="NumeroP" value="' . $c_zone . '"/>' . "\n";
 	// Calculette pour étendre le numéro Sosa
@@ -269,7 +271,7 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 
 	// Données de la fiche
 	echo '<div id="pnlFile">' . "\n";
-	$c_zone = $enreg2["Diff_Internet"];
+	$c_zone = $enreg2["Diff_Internet"] ?? null;
 	echo '<fieldset>' . "\n";
 	aff_legend(LG_PERS_VISIBILITY);
 	echo '<table width="95%" border="0">' . "\n";
@@ -288,7 +290,7 @@ function Aff_PersonneI($enreg2, $Personne, $Decalage)
 	// Affichage des tags
 	echo '<fieldset>' . "\n";
 	aff_legend(LG_PERS_CATEGORY);
-	$categ_Fiche = $enreg2['Categorie'];
+	$categ_Fiche = $enreg2['Categorie'] ?? null;
 	$sql_cat = 'select Identifiant, Image, Titre from ' . nom_table('categories') . ' order by Ordre_Tri';
 	$res_cat = lect_sql($sql_cat);
 	while ($enr_cat = $res_cat->fetch(PDO::FETCH_NUM)) {
@@ -904,10 +906,10 @@ echo '<script src="assets/js/gest_onglets.js"></script>';
 	e.setAttribute("disabled","disabled");
 	e.setAttribute("title","Non modifiable, présence d\'une union");';
 	?>
-	cache_div("id_div_ajout1");
+	/* cache_div("id_div_ajout1");
 	cache_div("id_div_ajout2");
 	cache_div("id_div_ajout_nom");
-	setupPanes("container1", "tab1", 50);
+	setupPanes("container1", "tab1", 50); */
 </script>
 
 </body>

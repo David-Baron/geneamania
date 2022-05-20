@@ -8,7 +8,7 @@
 session_start();
 
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $lib_ref = 'Défaut	';
 
@@ -29,6 +29,7 @@ $annuler = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Custom_View'];          // Titre pour META
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $index_follow = 'NN';					// NOINDEX NOFOLLOW demandé pour les moteurs
 
 // Retour sur demande d'annulation

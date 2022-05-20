@@ -4,10 +4,9 @@
 // Envoi d'un mail aux utilisateurs du site
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $max_emails = 49;
 // Réduction du nombre d'emails autorisés sur le site de test
@@ -37,7 +36,7 @@ $acces = 'M';						// Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Envoi d\'un mail';		// Titre pour META
 $x = Lit_Env();						// Lecture de l'indicateur d'environnement
 $niv_requis = 'G';					// Les contributions sont ouvertes à tout le monde
-
+include_once __DIR__ . '/fonctions/pages.php';
 if (($SiteGratuit) and (!$Premium)) Retour_Ar(); // Interdit sur les gratuits non Premium
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 

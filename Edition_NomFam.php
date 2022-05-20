@@ -3,10 +3,9 @@
 // Edition d'un nom de famille
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -40,7 +39,7 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 if ($Creation) $titre = $LG_Menu_Title['Name_Add'];
 else $titre = $LG_Menu_Title['Name_Edit'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour arrière sur une demande d'annulation
 if ($bt_An) Retour_Ar();
 

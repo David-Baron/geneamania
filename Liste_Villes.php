@@ -4,10 +4,9 @@
 // Liste des zones géographiques
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
@@ -35,7 +34,7 @@ switch ($Type_Liste) {
 }
 $titre = $objet;                       // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Sortie dans un fichier CSV ?
 $csv_dem = Recup_Variable('csv', 'C', 'ce');
 $CSV = false;

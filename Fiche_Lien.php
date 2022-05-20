@@ -3,15 +3,14 @@
 // Affichage d'un lien
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Link'];	// Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('annuler');
 foreach ($tab_variables as $nom_variables) {

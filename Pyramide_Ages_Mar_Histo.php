@@ -6,10 +6,9 @@
 // en fonction de l'année de naissance
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
@@ -43,7 +42,7 @@ switch ($Type_Histo) {
 		break;
 }
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

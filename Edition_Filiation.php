@@ -3,10 +3,9 @@
 // Edition d'une fiche filiation
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -34,7 +33,7 @@ $Refer = Recup_Variable('Refer', 'N');// Recup de la variable passée dans l'URL
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Fiche filiation';            // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

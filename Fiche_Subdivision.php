@@ -3,10 +3,9 @@
 // Fiche d'une Subdivison
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Subdiv'];	// Titre pour META
@@ -30,7 +29,7 @@ $req_sel = 'SELECT s.*, v.Nom_Ville, v.Identifiant_zone as id_Ville FROM ' . nom
 	' AND v.Identifiant_zone = s.Zone_Mere limit 1';
 
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 else {
 

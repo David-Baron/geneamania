@@ -4,16 +4,15 @@
 // L'identifiant est alors à null
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/classes/Phonetique.php';
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Init_Names'];
 $x = Lit_Env();
 $niv_requis = 'G';					   // Page réservée au profil gestionnaire
-
+include_once __DIR__ . '/fonctions/pages.php';
 $n_personnes     = nom_table('personnes');
 $n_noms          = nom_table('noms_famille');
 $n_liens_noms    = nom_table('noms_personnes');

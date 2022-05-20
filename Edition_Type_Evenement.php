@@ -3,10 +3,9 @@
 // Edition d'un type d'évènement
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -37,7 +36,7 @@ if ($Creation) $titre = $LG_Menu_Title['Event_Type_Add'];
 else $titre = $LG_Menu_Title['Event_Type_Edit'];
 
 $x = Lit_Env(); // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

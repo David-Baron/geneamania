@@ -3,8 +3,7 @@
 // Saisie du de cujus et de son noyau
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 
 

@@ -5,8 +5,7 @@
 // de la base à partir de la fiche d'une personne
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 
 
@@ -20,8 +19,6 @@ $Refer = Recup_Variable('Refer', 'N');
 
 $ref_decujus = -1;
 $sql = 'select Reference from ' . nom_table('personnes') . ' where Numero = "1" limit 1';
-
-
 
 if ($Res = lect_sql($sql)) {
 	if ($pers = $Res->fetch(PDO::FETCH_NUM)) {

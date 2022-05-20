@@ -6,16 +6,15 @@
 // - Calcul de la date de Pâques et des dates associées
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';                // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Calcul conversion calendriers';  // Titre pour META
 $mots = 'Calendriers, Républicain, Jour, Semaine, Pâques';
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 ?>
 <script type="text/javascript">
     function aj_car(chaine) {

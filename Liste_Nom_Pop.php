@@ -3,10 +3,9 @@
 // Liste des noms les plus portés dans la base
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
@@ -25,7 +24,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libell
 $acces = 'L';                          			// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Most_Used_Names']; 	// Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

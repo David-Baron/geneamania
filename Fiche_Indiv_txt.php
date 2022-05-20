@@ -3,10 +3,9 @@
 // Fiche couple au format texte ou pdf
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function fin_fs()
 {
@@ -156,7 +155,7 @@ if ((!$SiteGratuit) or ($Premium)) {
 
 if ($sortie_pdf) $no_entete = true;		// Pas d'entête HTML sinon le PDF ne s'affichera pas
 $x = Lit_Env();							// Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Recup de la variable passée dans l'URL : référence de la personne, et pdf o ?
 $Reference = Recup_Variable('Reference', 'N');
 // Récupération des informations concernant la personne

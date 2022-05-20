@@ -4,10 +4,9 @@
 // Affichage des oncles et tantes ou cousins
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function add_pers($enreg)
 {
@@ -39,7 +38,7 @@ $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 $Refer = Recup_Variable('Refer', 'N');
 $T_Parente = Recup_Variable('TP', 'S');
 if (strlen($T_Parente) > 2)

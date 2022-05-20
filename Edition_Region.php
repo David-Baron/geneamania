@@ -3,12 +3,11 @@
 // Edition d'une région
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
 
-// R�cup�ration des variables de l'affichage pr�c�dent
+
+// Récupération des variables de l'affichage pr�c�dent
 $tab_variables = array(
 	'ok', 'annuler',
 	'Nom_Region', 'ANom_Region',
@@ -30,7 +29,7 @@ $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 $acces = 'M';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Edition région';             // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

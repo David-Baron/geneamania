@@ -4,15 +4,15 @@
 // Aide générale de Généamania
 //=====================================================================
 
-session_start();
+require __DIR__ . '/src/bootstrap.php';
 
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';          // Type d'accès de la page : (L)ecture
 $titre = 'Aide Généamania';
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 function Affiche_Image_Aide($nom_image, $texte_image, $explications)
 {
     global $def_enc;

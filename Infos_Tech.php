@@ -4,10 +4,9 @@
 // Affichage des informations techniques
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function affiche($indice)
 {
@@ -22,7 +21,7 @@ $acces = 'L';
 $titre = $LG_Menu_Title['Tech_Info'];
 $niv_requis = 'G';
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut($titre, $compl, 'Infos_Tech', '');
 

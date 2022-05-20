@@ -3,10 +3,9 @@
 // FIche d'un document
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Document'];	// Titre pour META
@@ -29,7 +28,7 @@ $req_sel = 'SELECT * FROM ' . nom_table('documents') . ' d, ' . nom_table('types
 	' AND d.Id_Type_Document = t.Id_Type_Document limit 1';
 
 $x = Lit_Env();					// Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 // 2 solutions en cas d'absence :
 // - l'utilisateur a saisi un code absent dans l'URL ; le code ne doit pas être saisi dans l'URL, donc tant pis pour lui...
 // - on revient de la mpage de modification et on a demandé la suppression ; donc on renvoye sur la page précédente, à priori la liste

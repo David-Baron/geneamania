@@ -3,15 +3,15 @@
 // Exportation au format Gedcom d'une personne
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 include_once __DIR__ .'/fonctions/gedcom.php';
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Exp_Ged_Pers'];		// Titre pour META
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $niv_requis = 'P';						// L'export est ouvert à partir du profil privilégié
 
 // Récupération des variables de l'affichage précédent

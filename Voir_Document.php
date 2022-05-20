@@ -4,15 +4,14 @@
 //	paramètre : refDoc = référence du document à afficher
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Voir un document'; 		   // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('Horigine');
 foreach ($tab_variables as $nom_variables) {

@@ -8,8 +8,7 @@
 //   - au format csv pour un import dans un tableur
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 
 

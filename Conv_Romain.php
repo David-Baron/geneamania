@@ -4,13 +4,13 @@
 // Converstisseur de nombres romains dans les 2 sens
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $objet = $LG_Menu_Title['Convert_Roman_To_Arabic'];
 $titre = $objet;
 $mots = 'convertisseur';

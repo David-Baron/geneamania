@@ -5,10 +5,9 @@
 // en fonction de l'année de naissance
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ .'/piechart3.php';
 
 $tab_variables = array('cache', 'annuler', 'Horigine');
@@ -32,7 +31,7 @@ $Fin = Recup_Variable('Fin', 'N');
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = LG_CH_HISTO_DEATH_TITLE . $Debut . '-' . $Fin;      // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

@@ -4,10 +4,9 @@
 // Galerie d'image d'un type donné : signatures, portraits...
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';					// Type d'accès de la page : (M)ise à jour, (L)ecture
 
@@ -30,7 +29,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $titre = $LG_Menu_Title['Galery'];     // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

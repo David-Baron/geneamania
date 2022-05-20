@@ -5,10 +5,9 @@
 // en fonction de l'année de naissance
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/piechart3.php';
 
 $tab_variables = array('cache', 'annuler', 'Horigine');
@@ -46,7 +45,7 @@ switch ($Type_Histo) {
 }
 $titre .= ' ' . $Debut . '-' . $Fin;
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $compl = Ajoute_Page_Info(600, 180);

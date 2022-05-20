@@ -4,10 +4,9 @@
 //   Affichage de deux personnes
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -44,7 +43,7 @@ $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler; // On retravaille le libellé du bouton pour effectuer le retour...
 if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Recup de la variable passée dans l'URL : référence des deux personnes
 $ref1 = Recup_Variable('ref1', 'N');
 $ref2 = Recup_Variable('ref2', 'N');

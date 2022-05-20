@@ -3,10 +3,9 @@
 // Liste des personnes écran 2/2
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 
@@ -71,7 +70,7 @@ $objet_pdf = $objet . ' ' . $_SESSION['NomP'];
 
 $titre = $objet;     // Titre pour META
 $x = Lit_Env();      // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Déclenchement entête sur les prénoms
 $decl_ent = 20;
 

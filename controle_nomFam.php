@@ -7,8 +7,7 @@
 //		L'identifiant si le nom de famille existe
 //		OK si le nom de famille n'existe pas
 //=====================================================================
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
 
 $x = Lit_Env();

@@ -5,10 +5,8 @@
 // Pour cela, il choisit le de cujus sui peut être différent de celui prévu par le gestionnaire du site
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-
 
 $lib_ref = 'Défaut	';
 

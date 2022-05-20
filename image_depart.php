@@ -3,8 +3,7 @@
 // Génération de l'image pour la carte
 // Appelé par appelle_image_france_dep.php
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/degrades.php';
 include_once __DIR__ . '/France_Dep_inc.php';

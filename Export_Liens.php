@@ -3,10 +3,9 @@
 // Export des liens d'une catégorie
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';
 
@@ -23,6 +22,7 @@ $Categ = Recup_Variable('Categ', 'S');// Recup des variables passées dans l'URL
 
 $titre = LG_LINKS_EXTRACT . ' ' . stripcslashes($Categ);     // Titre pour META
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $niv_requis = 'G';
 
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler; // On retravaille le libellé du bouton pour effectuer le retour...

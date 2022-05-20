@@ -5,10 +5,9 @@
 // La profondeur de recherche est paramétrable $max_gen_int/$max_gen_loc
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -32,7 +31,7 @@ if ($ok == $lib_Rechercher) $ok = 'OK';
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Search_Related'];          // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

@@ -6,15 +6,14 @@
 // pour chaque patronyme, on affiche les unions en descendant vers le de cujus
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';									// Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Patronymic_List'];		// Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Sortie en pdf ?
 $sortie_pdf = false;
 if ((!$SiteGratuit) or ($Premium)) {

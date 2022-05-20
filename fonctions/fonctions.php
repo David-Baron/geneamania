@@ -376,7 +376,7 @@ function Lit_Env()
 			//$con = mysql_connect('localhost', 'user', 'pass');
 			//mysql_select_db('encoding_test', $con);
 			//mysql_set_charset('utf8', $con);			$connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  // Affiche les erreurs ...
-			if ($res = lect_sql('select * from ' . nom_table('general'))) {
+			if ($res = lect_sql('SELECT * from ' . nom_table('general'))) {
 				if ($enreg = $res->fetch(PDO::FETCH_ASSOC)) {
 					$Acces = 1;
 					$Lettre_B = $enreg['Lettre_B'];

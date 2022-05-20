@@ -1,9 +1,8 @@
 <?php
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('annuler', 'Horigine');
@@ -16,16 +15,16 @@ foreach ($tab_variables as $nom_variables) {
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 
-// On retravaille le libellé du bouton pour effectuer le retour...
-if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
+
+if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libellé du bouton pour effectuer le retour...
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Check_Pers'];	// Titre pour META
 $x = Lit_Env();
 $niv_requis = 'C';						// Il faut un niveau contributeur pour accéder à la page
+include_once __DIR__ . '/fonctions/pages.php';
 
-// Retour sur demande d'annulation
-if ($bt_An) Retour_Ar();
+if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 //  Fonctions ==============================================================================================
 
@@ -151,7 +150,9 @@ function ajout9mois($laDate)
 	return $an . zerofill2($mois) . substr($laDate, 6);
 }
 
-//  Affichage du message s'il n'y a pas d'erreur
+/**
+ * Affichage du message s'il n'y a pas d'erreur
+ */
 function pasErreur()
 {
 	global $nbErreurs;
@@ -161,6 +162,9 @@ function pasErreur()
 	$nbErreurs = 0;
 }
 
+/**
+ * 
+ */
 function titre_blocs($lib_bloc)
 {
 	echo '<p><strong>' . my_html($lib_bloc) . '</strong></p>' . "\n";

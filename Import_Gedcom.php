@@ -4,11 +4,10 @@
 // Import ou lecture d'un fichier Gedcom
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/fonctions/rectif_utf8.php';
 
 function suppression($lib, $n_table, $genre, $where, $affichage = true)
@@ -53,7 +52,7 @@ $acces = 'L';                          // Type d'accès de la page : (M)ise à j
 $titre = 'Import GEDCOM';              // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
 $niv_requis = 'G';						// Page accessible au gestionnaire
-
+include_once __DIR__ . '/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 // Sécurisation des variables postées - phase 2

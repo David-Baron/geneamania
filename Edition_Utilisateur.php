@@ -3,10 +3,9 @@
 // Edition d'un utilisateur
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Affiche une option pour le niveau d'autorisation
 function aff_option_niveau($niv_option)
@@ -50,7 +49,7 @@ $niv_requis = 'G';						// Page accessible pour les gestionnaires uniquement
 if (!$Creation) $titre = $LG_Menu_Title['User_Edit'];
 else $titre = $LG_Menu_Title['User_Add'];
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

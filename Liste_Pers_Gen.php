@@ -4,16 +4,15 @@
 // Liste des personnes par génération
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/html2pdfb.php';
 
 $acces = 'L';
 $titre = $LG_Menu_Title['Pers_Gen'];		// Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Sortie en pdf ?
 $sortie_pdf = false;
 if ((!$SiteGratuit) or ($Premium)) {

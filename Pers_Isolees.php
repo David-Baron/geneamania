@@ -5,10 +5,9 @@
 // c'est à dire non référencées dans les unions, filiations ou liens personnes
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function affiche($req, $sexe)
 {
@@ -45,6 +44,7 @@ function affiche($req, $sexe)
 $acces = 'L';                          // Type d'accès de la page : (L)ecture
 $titre = $LG_Menu_Title['Non_Linked_Pers']; // Titre pour META
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $niv_requis = 'C';                                    // Page acessible au gestionnaire uniquement
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut($titre, $compl, 'Pers_Isolees', '');

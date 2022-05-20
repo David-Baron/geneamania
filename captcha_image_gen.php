@@ -1,6 +1,6 @@
 <?php
 /* Step 1: Save this first part to a file named captcha_image.php*/
-session_start();
+require __DIR__ . '/src/bootstrap.php';
 
 include_once __DIR__ .'/fonctions/fonctions.php';
 include_once __DIR__ .'/config/parametres.php';

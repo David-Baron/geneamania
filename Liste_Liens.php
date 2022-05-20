@@ -5,10 +5,9 @@
 // Une image éventuelle est associée à chaque lien
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('ok', 'annuler', 'supprimer', 'S_Sup', 'idLien');
@@ -20,6 +19,7 @@ foreach ($tab_variables as $nom_variables) {
 $acces = 'M';
 $titre = $LG_Menu_Title['Links'];            // Titre pour META
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $lib_sup = my_html(LG_LINKS_DEL);
 $niv_requis = 'I';
 $compl = Ajoute_Page_Info(600, 150);

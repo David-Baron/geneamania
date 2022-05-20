@@ -3,10 +3,9 @@
 // Edition d'un lieu-dit (subdivision)
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -29,7 +28,7 @@ $acces = 'M';                          // Type d'accès de la page : (M)ise à j
 if ($Ident != -1) $titre = $LG_Menu_Title['Subdiv_Edit'];
 else $titre = $LG_Menu_Title['Subdiv_Add'];
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

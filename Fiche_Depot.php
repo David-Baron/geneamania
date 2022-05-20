@@ -3,10 +3,9 @@
 // Affichage d'un dépôt
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $niv_requis = 'P';
@@ -24,7 +23,7 @@ $annuler = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Recup de la variable passée dans l'URL : dépôt
 $Ident = Recup_Variable('ident', 'N');
 $req_sel = 'select * from ' . nom_table('depots') . ' where Ident = ' . $Ident . ' limit 1';

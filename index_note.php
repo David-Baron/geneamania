@@ -1,5 +1,6 @@
-<?php session_start();
+<?php 
 
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 
 ?>

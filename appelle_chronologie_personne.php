@@ -4,10 +4,9 @@
 // Pour les évènements de la personne et les dates de naissance des enfants
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 function Lien_vers_Pers()
 {
@@ -53,7 +52,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Chronology;
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Sortie en pdf ?
 $sortie_pdf = false;
 if ((!$SiteGratuit) or ($Premium)) {

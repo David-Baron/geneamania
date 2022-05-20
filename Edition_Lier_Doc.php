@@ -9,10 +9,9 @@
 // - refDoc : référence du document (-1 pour la création du lien)
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 function Lire_Nom_Prenoms_Unions($refUnion)
 {
@@ -73,6 +72,7 @@ foreach ($tab_variables as $nom_variables) {
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Edition liaison document';   // Titre pour META
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $ok        = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');// Sécurisation des variables postées
 $annuler   = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
 $supprimer = Secur_Variable_Post($supprimer, strlen($lib_Supprimer), 'S');

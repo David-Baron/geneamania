@@ -5,10 +5,9 @@
 // UTF-8
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Town'];	// Titre pour META
@@ -32,7 +31,7 @@ $req_sel = 'SELECT v.*, d.Nom_Depart_Min FROM ' . nom_table('villes') . ' v, ' .
 	' AND d.Identifiant_zone = v.Zone_Mere limit 1';
 
 $x = Lit_Env();					// Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

@@ -4,11 +4,10 @@
 // Import ou lecture d'un fichier csv
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/fonctions/import_CSV.php';
 
 // Récupération des variables de l'affichage précédent
@@ -21,6 +20,7 @@ foreach ($tab_variables as $nom_variables) {
 	else $$nom_variables = '';
 }
 
+$niv_requis = 'G';
 // Sécurisation des variables postées - phase 1
 $ok       = Secur_Variable_Post($ok, strlen($lib_Okay), 'S');
 $annuler  = Secur_Variable_Post($annuler, strlen($lib_Annuler), 'S');
@@ -28,7 +28,8 @@ $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Import CSV';              // Titre pour META
 $x = Lit_Env();
-$niv_requis = 'G';						// Page accessible au gestionnaire
+include_once __DIR__ . '/fonctions/pages.php';
+						// Page accessible au gestionnaire
 
 
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Page interdite sur les gratuits non Premium

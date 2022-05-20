@@ -4,10 +4,9 @@
 // Statistiques de naissance, mariage et décès par ville
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $tab_variables = array('annuler', 'Horigine');
 foreach ($tab_variables as $nom_variables) {
@@ -24,7 +23,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libell
 $acces = 'L';                          // Page en lecture
 $titre = $LG_Menu_Title['BDM_Per_Town'];
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 function Rupt_Ville()

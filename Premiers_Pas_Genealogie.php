@@ -4,14 +4,14 @@
 // Notions de base de la généalogie
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Start'];         // Titre pour META
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
+include_once __DIR__ . '/fonctions/pages.php';
 $compl = Ajoute_Page_Info(600, 150);
 Insere_Haut($titre, $compl, 'Premiers_Pas_Genealogie', '');
 ?>

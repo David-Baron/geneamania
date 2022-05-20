@@ -4,11 +4,10 @@
 // Import ou lecture d'un fichier csv avec des liens
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
 include_once __DIR__ . '/fonctions/fonctions_maj.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/fonctions/import_CSV.php';
 
 // Récupération des variables de l'affichage précédent
@@ -28,6 +27,7 @@ $Horigine = Secur_Variable_Post($Horigine, 100, 'S');
 $acces = 'L';
 $titre = $LG_Menu_Title['Imp_CSV_Links'];
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $niv_requis = 'G';
 
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Page interdite sur les gratuits non Premium

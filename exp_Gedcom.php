@@ -4,17 +4,16 @@
 // Exportation au format Gedcom
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 include_once __DIR__ .'/fonctions/gedcom.php';
 
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Exp_Ged'];			// Titre pour META
 $niv_requis = 'G';					// Disponible pour le gestionnaire
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 
 // Recup de la variable passée dans l'URL : export léger O/N
 $leger = Recup_Variable('leger', 'C', 'no');

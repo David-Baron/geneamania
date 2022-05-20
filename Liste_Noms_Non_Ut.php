@@ -4,10 +4,9 @@
 // Liste des noms non utilisés par des personnes
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 
 // Récupération des variables de l'affichage précédent
@@ -28,7 +27,7 @@ $acces = 'M';                          		// Type d'accès de la page : (M)ise à
 $titre = $LG_Menu_Title['Name_Not_Used']; 	// Titre pour META
 $niv_requis = 'C';					   		// Page réservée à partir du profil contributeur
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();// Verrouillage de la gestion des documents sur les gratuits non Premium
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 

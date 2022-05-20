@@ -3,10 +3,9 @@
 // Recherche d'une ville sur les sites hébergés
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = 'Recherche d\'une ville sur les sites hébergés'; // Titre pour META
@@ -25,7 +24,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
 $niv_requis = 'P';						// Page accessible à partir du niveau privilégié
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Verrouillage de la recherche sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();
 // Valable uniquement pour les sites hébergés

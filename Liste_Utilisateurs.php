@@ -3,10 +3,9 @@
 // Liste des utilisateurs
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function aff_option_niveau($niv_option)
 {
@@ -20,7 +19,7 @@ $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Users_List'];		// Titre pour META
 $x = Lit_Env();
 $niv_requis = 'G';						// réservé aux gestionnaires
-
+include_once __DIR__ . '/fonctions/pages.php';
 Insere_Haut($titre, '', 'Liste_utilisateurs', '');
 
 // Possibilité d'insérer un utilisateur

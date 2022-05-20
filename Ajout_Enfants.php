@@ -3,10 +3,9 @@
 // Ajout rapide d'enfants pour un couple
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array('ok', 'annuler', 'Nom_Defaut', 'Horigine');
@@ -27,7 +26,7 @@ if (!$Reference) $Reference = -1;
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = LG_PERS_CHILDREN_ADD;
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Page interdite sur les gratuits non Premium
 if (($SiteGratuit) and (!$Premium)) Retour_Ar();
 

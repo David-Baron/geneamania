@@ -3,11 +3,8 @@
 // Edition d'une personne
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/fonctions_maj.php';
-
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(

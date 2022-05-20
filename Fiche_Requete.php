@@ -4,16 +4,15 @@
 // Affichage d'une requête
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Request'];       // Titre pour META
 $niv_requis = 'P';
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 $tab_variables = array('annuler');
 foreach ($tab_variables as $nom_variables) {
 	if (isset($_POST[$nom_variables])) $$nom_variables = $_POST[$nom_variables];

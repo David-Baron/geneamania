@@ -1,16 +1,15 @@
 <?php
 // Appel de l'image générée pour un arbre ascendant
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';                    // Type d'accés de la page : (M)ise à jour, (L)ecture
 $titre = $LG_assc_tree;            // Titre pour META
 $x = Lit_Env();
 $compl = '';
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Recup de la variable passée dans l'URL : référence de la personne
 $Refer = Recup_Variable('Refer', 'N');
 

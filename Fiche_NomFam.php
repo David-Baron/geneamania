@@ -3,10 +3,9 @@
 // Fiche d'un nom de famille
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/classes/Phonetique.php';
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
@@ -31,7 +30,7 @@ $idNomFam = Recup_Variable('idNom', 'N');
 $req_sel = 'SELECT * FROM ' . nom_table('noms_famille') . ' WHERE idNomFam =' . $idNomFam . ' limit 1';
 
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
-
+include_once __DIR__ . '/fonctions/pages.php';
 if ($bt_An) Retour_Ar(); // Retour sur demande d'annulation
 if ((!$enreg_sel) or ($idNomFam == -1)) Retour_Ar();
 

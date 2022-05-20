@@ -3,10 +3,9 @@
 // Edition d'un lien
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -41,7 +40,7 @@ if ($Ref != -1) $titre = $LG_Menu_Title['Link_Edit'];
 else $titre = $LG_Menu_Title['Link_Add'];
 $x = Lit_Env();
 $Type_Ref = 'L';						// Type de référence pour les commentaires
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

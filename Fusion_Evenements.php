@@ -5,10 +5,9 @@
 // En effet, un seul commentaire est autorisé par évènement
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 function aff_nb_enr($lib1, $accord)
 {
@@ -59,7 +58,7 @@ if ($simulation == -1) $simulation = false;
 $acces = 'M';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Event_Merging'];       // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 $compl = Ajoute_Page_Info(600, 250);
 Insere_Haut(my_html($titre), $compl, 'Fusion_Evenements', '');
 

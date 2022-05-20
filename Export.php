@@ -3,10 +3,9 @@
 // Exportation
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Retourne vrai si le nom de la table correspond
 function est_table($nom_compar, $table_name)
@@ -73,7 +72,7 @@ $acces = 'L';                  	// Type d'accès de la page : (M)ise à jour, (L
 $titre = 'Export';             	// Titre pour META
 $niv_requis = 'G';				// Page réservée au gestionnaire
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 $sans_dates_recentes = ($s_dates_recentes == 'on') ? true : false;
 
 if ($sans_dates_recentes) {

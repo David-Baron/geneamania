@@ -3,15 +3,15 @@
 // Arbre ascendant d'une personne
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 include_once __DIR__ .'/fonctions/arbre.php';
 
 $acces = 'L';						// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_assc_tree;
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $index_follow = 'IN';				// NOFOLLOW demandé pour les moteurs
 
 function Retourne_Pers($Num)

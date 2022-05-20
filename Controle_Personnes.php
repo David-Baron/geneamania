@@ -4,10 +4,9 @@
 // Contrôle des personnes
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Check_Pers']; // Titre pour META
@@ -29,6 +28,7 @@ else $Ignore = false;
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $niv_requis = 'P';				// Page accessible à partir du niveau privilégié
 
 // Verrouillage sur les gratuits non Premium

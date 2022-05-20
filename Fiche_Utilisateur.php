@@ -4,10 +4,9 @@
 // Affichage d'un utilisateur
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['User'];
@@ -24,6 +23,7 @@ $annuler = Secur_Variable_Post($annuler, strlen($lib_Retour), 'S');
 if ($annuler == $lib_Retour) $annuler = $lib_Annuler;
 
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $niv_requis = 'G';
 
 // Recup de la variable passée dans l'URL : référence de l'utilisateur

@@ -4,10 +4,9 @@
 // Affichage d'un type de document 
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = 'Fiche d\'un type de document';	// Titre pour META
@@ -24,6 +23,7 @@ if ($annuler == $lib_Retour) $annuler = $lib_Annuler;// On retravaille le libell
 
 $niv_requis = 'G'; // Fonction réservée au gestionnaire
 $x = Lit_Env();
+include_once __DIR__ . '/fonctions/pages.php';
 $Code = Recup_Variable('code', 'N');// Recup de la variable passée dans l'URL : type de document
 
 $req_sel = 'select * from ' . nom_table('types_doc') . ' where Id_Type_Document = \'' . $Code . '\' limit 1';

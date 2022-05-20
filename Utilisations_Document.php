@@ -4,10 +4,9 @@
 // Liste des utilisations d'un document
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 include_once __DIR__ . '/fonctions/rech_com_util_docs.php';
 
 $tab_variables = array('annuler', 'Horigine');
@@ -28,7 +27,7 @@ $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Document_Utils'];	// Titre pour META
 $niv_requis = 'G';							// Page accessible uniquement au gestionnaire
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

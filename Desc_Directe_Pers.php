@@ -5,14 +5,14 @@
 // La sortie peut s'effectuer au format HTML ou au format texte
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';								// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Direct_Desc'];		// Titre pour META
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $index_follow = 'IN';						// NOFOLLOW demandé pour les moteurs
 $n_filiations = nom_table('filiations');
 $n_personnes = nom_table('personnes');

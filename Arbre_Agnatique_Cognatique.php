@@ -3,11 +3,9 @@
 //=====================================================================
 // Arbre agnatique (par les hommes) / cognatique (par les femmes)
 //=====================================================================
-
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 include_once __DIR__ .'/fonctions/arbre.php';
 
 $acces = 'L';                          // Type d'accès de la page : (M)ise à jour, (L)ecture
@@ -22,6 +20,7 @@ if ($agnatique) $titre = $LG_Tree_Men_Asc;
 if ($cognatique) $titre = $LG_Tree_Women_Asc;
 
 $x = Lit_Env();
+include_once __DIR__ .'/fonctions/pages.php';
 $index_follow = 'IN';					// NOFOLLOW demandé pour les moteurs
 
 // Recup de la variable passée dans l'URL : texte ou non

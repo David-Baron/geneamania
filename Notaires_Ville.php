@@ -3,10 +3,9 @@
 // Notaires dans les unions sur la ville
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ . '/fonctions/fonctions.php';
-include_once __DIR__ . '/fonctions/pages.php';
+
 
 $acces = 'L';
 
@@ -31,7 +30,7 @@ $objet = stripcslashes(LG_NOTARY_TITLE . $NomL);
 
 $titre = $objet;     // Titre pour META
 $x = Lit_Env();
-
+include_once __DIR__ . '/fonctions/pages.php';
 // Sortie en pdf ?
 $sortie_pdf = false;
 

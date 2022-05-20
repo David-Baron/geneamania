@@ -3,10 +3,9 @@
 // Edition d'un type de document
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -36,7 +35,7 @@ else                     $Creation = false;
 if ($Creation) $titre = $LG_Menu_Title['Doc_Type_Add'];
 else $titre = $LG_Menu_Title['Doc_Type_Edit'];
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 // Retour sur demande d'annulation
 if ($bt_An) Retour_Ar();
 

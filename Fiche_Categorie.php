@@ -4,10 +4,9 @@
 // Affichage d'une catégorie
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 $acces = 'L';							// Type d'accès de la page : (M)ise à jour, (L)ecture
 $titre = $LG_Menu_Title['Category'];	// Titre pour META
@@ -25,6 +24,7 @@ if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $niv_requis = 'P';
 $x = Lit_Env();                        // Lecture de l'indicateur d'environnement
+include_once __DIR__ .'/fonctions/pages.php';
 $Categ = Recup_Variable('categ', 'N');// Recup de la variable passée dans l'URL : catégorie
 $compl = Ajoute_Page_Info(600, 150);
 

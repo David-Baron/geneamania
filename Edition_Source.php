@@ -3,10 +3,9 @@
 // Creation et modification d'une source
 //=====================================================================
 
-session_start();
-
+require __DIR__ . '/src/bootstrap.php';
 include_once __DIR__ .'/fonctions/fonctions.php';
-include_once __DIR__ .'/fonctions/pages.php';
+
 
 // Récupération des variables de l'affichage précédent
 $tab_variables = array(
@@ -45,7 +44,7 @@ else
 	$titre = $LG_Menu_Title['Source_Add'];
 
 $x = Lit_Env();
-
+include_once __DIR__ .'/fonctions/pages.php';
 if ($bt_An) Retour_Ar();// Retour sur demande d'annulation
 
 $Type_Ref = 'S';// Type d'objet des sources
